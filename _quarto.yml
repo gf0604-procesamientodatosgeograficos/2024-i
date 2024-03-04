@@ -1,0 +1,17 @@
+project:
+  type: book
+  output-dir: docs
+
+book:
+  title: "GF0604 Procesamiento de datos geográficos 2024-I"
+  author: "Manuel Vargas"
+  date: "2024-03-03"
+  chapters:
+    - index.qmd
+
+bibliography: referencias.bib
+
+format:
+  html:
+    lang: es
+    theme: cosmo
