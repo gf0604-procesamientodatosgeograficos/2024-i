@@ -8,6 +8,7 @@ book:
   date: "2024-03-03"
   chapters:
     - index.qmd
+    - programa_curso.qmd
 
 bibliography: referencias.bib
 
