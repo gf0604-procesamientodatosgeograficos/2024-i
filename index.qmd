@@ -4,3 +4,37 @@ Este es un curso introductorio a la programación de computadoras y al procesami
 El enfoque del curso es teórico-práctico, con lecciones teóricas combinadas con ejercicios de programación en los cuales los estudiantes aplican en diversos escenarios de procesamiento de datos los conocimientos y habilidades aprendidas. No se requiere de experiencia previa en programación de computadoras. Es recomendable contar con conocimentos básicos de datos geoespaciales y sistemas de información geográfica.
 
 Tanto las lecciones teóricas como las prácticas se imparten de manera presencial, con apoyo de medios virtuales. Los contenidos del curso y los recursos relacionados se comparten en el sitio web [https://gf0604-procesamientodatosgeograficos.github.io/2024-i/](https://gf0604-procesamientodatosgeograficos.github.io/2024-i/) y en la plataforma [Mediación Virtual](https://mediacionvirtual.ucr.ac.cr/) de la Universidad de Costa Rica. 
+
+# Objetivos del curso {.unnumbered}
+1. Aplicar el pensamiento computacional para resolver problemas mediante el lenguaje de programación R.
+2. Utilizar un enfoque de ciencia de datos para la importación, transformación y visualización de datos.
+3. Desarrollar soluciones reproducibles a problemas computacionales.
+4. Elaborar gráficos estadísticos con paquetes de R.
+5. Procesar datos geográficos con paquetes de R.
+6. Desarrollar aplicaciones interactivas que incluyan visualizaciones como tablas, gráficos estadísticos y mapas, entre otras.
+
+# Programa del curso {.unnumbered}
+Los siguientes documentos contienen el programa del curso, para los grupos 001 y 002, según el formato definido por la Escuela de Geografía de la Universidad de Costa Rica.
+
+- [Grupo 001](gf0604-procesamientodatosgeograficos-g001-2024-i.pdf)
+- [Grupo 002](gf0604-procesamientodatosgeograficos-g002-2024-i.pdf)
+
+# Versiones anteriores del curso {.unnumbered}
+Este sitio web corresponde al curso impartido durante el primer lectivo de 2024. Para consultar las versiones de otros años y ciclos lectivos, puede visitar:
+
+- [2023-I](https://gf0604-procesamientodatosgeograficos.github.io/2023-i/)
+- [2022-I](https://gf0604-procesamientodatosgeograficos.github.io/2022-i/)
+- [2021-I](https://gf0604-procesamientodatosgeograficos.github.io/2021i/)
+- [2020-I](https://geoprocesamiento-2020i.github.io/)
+
+# Información de contacto {.unnumbered}
+Si tiene alguna pregunta o comentario sobre este curso, por favor contacte a:
+
+> Manuel Vargas - manuel.vargas_d\@ucr.ac.cr\
+> Profesor\
+> Universidad de Costa Rica,\
+> Ciudad Universitaria Rodrigo Facio,\
+> San Pedro de Montes de Oca,\
+> Costa Rica.
+
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" alt="Licencia de Creative Commons" style="border-width:0"/></a><br />Los contenidos de este curso, a menos que se especifique de otra forma, se comparten mediante una <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">licencia de Creative Commons Reconocimiento-CompartirIgual 4.0 Internacional</a>.
