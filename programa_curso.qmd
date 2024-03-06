@@ -1,4 +1,6 @@
 # Programa del curso {.unnumbered}
 
+Programa del curso en el formato especificado por la Comisión de Docencia de la Escuela de Geografía:
+
 [Grupo 001](gf0604-procesamientodatosgeograficos-g001-2024-i.pdf)  
 [Grupo 002](gf0604-procesamientodatosgeograficos-g002-2024-i.pdf)  
