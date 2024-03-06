@@ -5,7 +5,9 @@ El enfoque del curso es teórico-práctico, con lecciones teóricas combinadas c
 
 Tanto las lecciones teóricas como las prácticas se imparten de manera presencial, con apoyo de medios virtuales. Los contenidos del curso y los recursos relacionados se comparten en el sitio web [https://gf0604-procesamientodatosgeograficos.github.io/2024-i/](https://gf0604-procesamientodatosgeograficos.github.io/2024-i/) y en la plataforma [Mediación Virtual](https://mediacionvirtual.ucr.ac.cr/) de la Universidad de Costa Rica. 
 
-# Objetivos del curso {.unnumbered}
+# Objetivos {.unnumbered}
+Al finalizar el curso, el estudiantado será capaz de:
+
 1. Aplicar el pensamiento computacional para resolver problemas mediante el lenguaje de programación R.
 2. Utilizar un enfoque de ciencia de datos para la importación, transformación y visualización de datos.
 3. Desarrollar soluciones reproducibles a problemas computacionales.
@@ -13,13 +15,13 @@ Tanto las lecciones teóricas como las prácticas se imparten de manera presenci
 5. Procesar datos geográficos con paquetes de R.
 6. Desarrollar aplicaciones interactivas que incluyan visualizaciones como tablas, gráficos estadísticos y mapas, entre otras.
 
-# Programa del curso {.unnumbered}
+# Programa {.unnumbered}
 Los siguientes documentos contienen el programa del curso, para los grupos 001 y 002, según el formato definido por la Escuela de Geografía de la Universidad de Costa Rica.
 
 - [Grupo 001](gf0604-procesamientodatosgeograficos-g001-2024-i.pdf)
 - [Grupo 002](gf0604-procesamientodatosgeograficos-g002-2024-i.pdf)
 
-# Versiones anteriores del curso {.unnumbered}
+# Ciclos anteriores {.unnumbered}
 Este sitio web corresponde al curso impartido durante el primer lectivo de 2024. Para consultar las versiones de otros años y ciclos lectivos, puede visitar:
 
 - [2023-I](https://gf0604-procesamientodatosgeograficos.github.io/2023-i/)
