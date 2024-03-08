@@ -9,6 +9,7 @@ book:
   chapters:
     - index.qmd
     - programa_curso.qmd
+    - part: parte-i-introduccion-programacion_computadoras_ciencia_datos.qmd
 
 bibliography: referencias.bib
 
