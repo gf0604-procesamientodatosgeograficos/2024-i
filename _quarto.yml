@@ -10,6 +10,8 @@ book:
     - index.qmd
     - programa_curso.qmd
     - part: parte-i-introduccion-programacion_computadoras_ciencia_datos.qmd
+      chapters:
+        - 01-arquitectura_computadoras-lenguajes_programacion-pensamiento_computacional.qmd
 
 bibliography: referencias.bib
 

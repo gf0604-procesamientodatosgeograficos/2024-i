@@ -1,0 +1,1243 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.551">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>GF0604 Procesamiento de datos geográficos 2024-I - 1&nbsp; Arquitectura de computadoras, lenguajes de programación y pensamiento computacional</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./parte-i-introduccion-programacion_computadoras_ciencia_datos.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Sin resultados",
+    "search-matching-documents-text": "documentos encontrados",
+    "search-copy-link-title": "Copiar el enlace en la búsqueda",
+    "search-hide-matches-text": "Ocultar resultados adicionales",
+    "search-more-match-text": "resultado adicional en este documento",
+    "search-more-matches-text": "resultados adicionales en este documento",
+    "search-clear-button-title": "Borrar",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar",
+    "search-label": "Buscar"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./parte-i-introduccion-programacion_computadoras_ciencia_datos.html">I - Introducción a la programación de computadoras y a la ciencia de datos</a></li><li class="breadcrumb-item"><a href="./01-arquitectura_computadoras-lenguajes_programacion-pensamiento_computacional.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Arquitectura de computadoras, lenguajes de programación y pensamiento computacional</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">GF0604 Procesamiento de datos geográficos 2024-I</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Buscar"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bienvenida</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./programa_curso.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Programa del curso</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./parte-i-introduccion-programacion_computadoras_ciencia_datos.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">I - Introducción a la programación de computadoras y a la ciencia de datos</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-arquitectura_computadoras-lenguajes_programacion-pensamiento_computacional.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Arquitectura de computadoras, lenguajes de programación y pensamiento computacional</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Tabla de contenidos</h2>
+   
+  <ul>
+  <li><a href="#resumen" id="toc-resumen" class="nav-link active" data-scroll-target="#resumen"><span class="header-section-number">1.1</span> Resumen</a></li>
+  <li><a href="#trabajo-previo" id="toc-trabajo-previo" class="nav-link" data-scroll-target="#trabajo-previo"><span class="header-section-number">1.2</span> Trabajo previo</a>
+  <ul class="collapse">
+  <li><a href="#lecturas-y-videos" id="toc-lecturas-y-videos" class="nav-link" data-scroll-target="#lecturas-y-videos"><span class="header-section-number">1.2.1</span> Lecturas y videos</a></li>
+  </ul></li>
+  <li><a href="#conceptos-fundamentales-sobre-programación-de-computadoras" id="toc-conceptos-fundamentales-sobre-programación-de-computadoras" class="nav-link" data-scroll-target="#conceptos-fundamentales-sobre-programación-de-computadoras"><span class="header-section-number">1.3</span> Conceptos fundamentales sobre programación de computadoras</a>
+  <ul class="collapse">
+  <li><a href="#programabilidad" id="toc-programabilidad" class="nav-link" data-scroll-target="#programabilidad"><span class="header-section-number">1.3.1</span> Programabilidad</a></li>
+  <li><a href="#algoritmos" id="toc-algoritmos" class="nav-link" data-scroll-target="#algoritmos"><span class="header-section-number">1.3.2</span> Algoritmos</a></li>
+  <li><a href="#modelo-entrada---procesamiento---salida" id="toc-modelo-entrada---procesamiento---salida" class="nav-link" data-scroll-target="#modelo-entrada---procesamiento---salida"><span class="header-section-number">1.3.3</span> Modelo Entrada - Procesamiento - Salida</a></li>
+  <li><a href="#implementación-de-algoritmos-en-programas" id="toc-implementación-de-algoritmos-en-programas" class="nav-link" data-scroll-target="#implementación-de-algoritmos-en-programas"><span class="header-section-number">1.3.4</span> Implementación de algoritmos en programas</a></li>
+  </ul></li>
+  <li><a href="#arquitectura-de-computadoras" id="toc-arquitectura-de-computadoras" class="nav-link" data-scroll-target="#arquitectura-de-computadoras"><span class="header-section-number">1.4</span> Arquitectura de computadoras</a>
+  <ul class="collapse">
+  <li><a href="#evolución-histórica" id="toc-evolución-histórica" class="nav-link" data-scroll-target="#evolución-histórica"><span class="header-section-number">1.4.1</span> Evolución histórica</a></li>
+  <li><a href="#la-arquitectura-de-von-neumann" id="toc-la-arquitectura-de-von-neumann" class="nav-link" data-scroll-target="#la-arquitectura-de-von-neumann"><span class="header-section-number">1.4.2</span> La arquitectura de von Neumann</a></li>
+  <li><a href="#sistemas-binarios" id="toc-sistemas-binarios" class="nav-link" data-scroll-target="#sistemas-binarios"><span class="header-section-number">1.4.3</span> Sistemas binarios</a></li>
+  <li><a href="#lenguaje-máquina" id="toc-lenguaje-máquina" class="nav-link" data-scroll-target="#lenguaje-máquina"><span class="header-section-number">1.4.4</span> Lenguaje máquina</a></li>
+  </ul></li>
+  <li><a href="#lenguajes-de-programación" id="toc-lenguajes-de-programación" class="nav-link" data-scroll-target="#lenguajes-de-programación"><span class="header-section-number">1.5</span> Lenguajes de programación</a></li>
+  <li><a href="#pensamiento-computacional" id="toc-pensamiento-computacional" class="nav-link" data-scroll-target="#pensamiento-computacional"><span class="header-section-number">1.6</span> Pensamiento computacional</a>
+  <ul class="collapse">
+  <li><a href="#principios-fundamentales" id="toc-principios-fundamentales" class="nav-link" data-scroll-target="#principios-fundamentales"><span class="header-section-number">1.6.1</span> Principios fundamentales</a></li>
+  </ul></li>
+  <li><a href="#el-lenguaje-de-programación-scratch" id="toc-el-lenguaje-de-programación-scratch" class="nav-link" data-scroll-target="#el-lenguaje-de-programación-scratch"><span class="header-section-number">1.7</span> El lenguaje de programación Scratch</a>
+  <ul class="collapse">
+  <li><a href="#aplicación-de-los-principios-del-pensamiento-computacional" id="toc-aplicación-de-los-principios-del-pensamiento-computacional" class="nav-link" data-scroll-target="#aplicación-de-los-principios-del-pensamiento-computacional"><span class="header-section-number">1.7.1</span> Aplicación de los principios del pensamiento computacional</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./parte-i-introduccion-programacion_computadoras_ciencia_datos.html">I - Introducción a la programación de computadoras y a la ciencia de datos</a></li><li class="breadcrumb-item"><a href="./01-arquitectura_computadoras-lenguajes_programacion-pensamiento_computacional.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Arquitectura de computadoras, lenguajes de programación y pensamiento computacional</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span id="sec-pencom" class="quarto-section-identifier"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Arquitectura de computadoras, lenguajes de programación y pensamiento computacional</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>En este capítulo se explica la característica principal de las computadoras: su capacidad para ser programadas y así ayudar a resolver problemas. Se detallan los componentes físicos de la arquitectura que sustenta esta capacidad, la forma en que trabajan los lenguajes de programación, así como los principios del pensamiento computacional, un enfoque para la resolución de problemas basado en conceptos y métodos de las ciencias de la computación. Estos principios se ilustran con el lenguaje de programación Scratch.</p>
+<section id="resumen" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="resumen"><span class="header-section-number">1.1</span> Resumen</h2>
+<p>Una computadora es una máquina que ejecuta secuencias de instrucciones, llamadas programas. La capacidad que tienen las computadoras de ser programadas permite modificar sus funcionamiento sin necesidad de alterar sus componentes físicos, lo que permite que ayuden a resolver una gran cantidad de problemas. Las secuencias de pasos describen la solución a un problema se denominan algoritmos. En un algoritmo recibe datos de entrada, los procesa y genera salidas. Un algoritmo puede ser implementado en diferentes lenguajes de programación.</p>
+<p>Las computadoras modernas están construídas con base en circuitos integrados, también llamados <em>chips</em> o <em>microchips</em>. Los circuitos integrados procesan información digital (que usa valores discretos), la cual generalmente es binaria (i.e.&nbsp;de dos valores). Los circuitos integrados de una computadora procesan dos estados correspondientes a dos niveles de tensión eléctrica: alto y bajo. Estos estados se representan con 0 y 1. Esto facilita la aplicación de la teoría de la información y del álgebra <em>booleana</em>.</p>
+<p>Durante el período entre las guerras mundiales, Allan Turing desarrolló la máquina de Turing, un dispositivo teórico que manipula símbolos de una cinta de acuerdo con una tabla de reglas. La máquina de Turing simula el funcionamiento de un algoritmo y los conceptos de entrada, procesamiento y salida. En 1945, John von Neumann propuso un concepto conocido como programa almacenado, en el cual los datos y los programas se almacenan en una estructura llamada memoria, separada del hardware que ejecuta las instrucciones. Este esquema permite que las computadoras sean más fáciles de reprogramar y es conocido actualmente como arquitectura de von Neumann. Sus componentes principales son la memoria principal, la unidad central de procesamiento (CPU) y los sistemas de entrada y salida.</p>
+<p>El lenguaje máquina es un conjunto de instrucciones binarias interpretables por la CPU de una computadora. Un programa consiste de una secuencia de instrucciones en lenguaje máquina. Debido a que programar una computadora en lenguaje máquina es excesivamente lento y complicado, en la década de 1950 comenzaron a crearse lenguajes de programación que, en lugar de unos y ceros, consisten de instrucciones formadas por palabras, usualmente en idioma inglés. Existe una gran variedad de lenguajes de programación que han sido creados con diversos fines: científicos, comerciales, educacionales y otros.</p>
+<p>El pensamiento computacional es un enfoque para la resolución de problemas basado en conceptos y métodos de las ciencias de la computación. Sus principios fundamentales son:</p>
+<ul>
+<li><strong>Descomposición</strong>: división de un problema en subproblemas más pequeños.</li>
+<li><strong>Reconocimiento de patrones</strong>: búsqueda de similitudes en los problemas.</li>
+<li><strong>Abstracción</strong>: filtrado de la información que se necesita y de la que no se necesita para resolver un problema.</li>
+<li><strong>Algoritmos</strong>: descripción, paso por paso, de la solución a un problema.</li>
+</ul>
+<p>Scratch es un lenguaje de programación orientado a educación. Fue desarrollado en 2003 por el MIT Media Lab y es administrado por la Fundación Scratch, una organización sin fines de lucro que lo facilita de manera gratuita.</p>
+</section>
+<section id="trabajo-previo" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="trabajo-previo"><span class="header-section-number">1.2</span> Trabajo previo</h2>
+<section id="lecturas-y-videos" class="level3" data-number="1.2.1">
+<h3 data-number="1.2.1" class="anchored" data-anchor-id="lecturas-y-videos"><span class="header-section-number">1.2.1</span> Lecturas y videos</h3>
+<p>CS50 (Director). (2024). CS50x 2024—Lecture 0—Scratch. <a href="https://www.youtube.com/watch?v=3LPJfIKxwWc">https://www.youtube.com/watch?v=3LPJfIKxwWc</a></p>
+<p>Wing, J. M. (2006). Computational thinking. <em>Communications of the ACM, 49</em>(3), 33-35. <a href="https://doi.org/10.1145/1118178.1118215">https://doi.org/10.1145/1118178.1118215</a></p>
+</section>
+</section>
+<section id="conceptos-fundamentales-sobre-programación-de-computadoras" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="conceptos-fundamentales-sobre-programación-de-computadoras"><span class="header-section-number">1.3</span> Conceptos fundamentales sobre programación de computadoras</h2>
+<p>En esta sección, se detallan algunos conceptos básicos sobre programación de computadoras, incluyendo los algoritmos y el modelo <em>Entrada - Procesamiento - Salida</em>.</p>
+<section id="programabilidad" class="level3" data-number="1.3.1">
+<h3 data-number="1.3.1" class="anchored" data-anchor-id="programabilidad"><span class="header-section-number">1.3.1</span> Programabilidad</h3>
+<p>Una computadora es una máquina que ejecuta automáticamente secuencias de instrucciones llamadas programas. Las instrucciones de los programas realizan diversos tipos de operaciones entre los que, por ejemplo, pueden mencionarse:</p>
+<ul>
+<li><strong>Cálculos aritméticos</strong>: sumar, restar, multiplicar, dividir.</li>
+<li><strong>Procesamiento de texto</strong>: buscar, reemplazar, dividir y concatenar cadenas de texto.</li>
+<li><strong>Operaciones lógicas</strong>: determinar si un número es mayor que otro, si una hilera está contenida en otra hilera o si un elemento está en una lista.</li>
+<li><strong>Manipulación de datos</strong>: crear, leer, actualizar y eliminar datos en estructuras de datos (ej. listas, vectores, matrices) o en bases de datos.</li>
+<li><strong>Interacciones con el usuario</strong>: recibir entradas del usuario (ej. del teclado o del ratón) y mostrarle información (ej. en la pantalla o en la impresora).</li>
+<li><strong>Manejo de archivos</strong>: leer, escribir y modificar archivos.</li>
+<li><strong>Comunicaciones en red</strong>: enviar y recibir datos a través de una red local o de la Internet (ej. páginas web, corres electrónicos).</li>
+</ul>
+<p>La capacidad que tienen las computadoras de ser programadas, permite que su funcionamiento sea modificado sin necesidad de alterar sus componentes físicos, lo que las hace muy versátiles y aptas para ayudar a resolver una gran variedad de problemas, por lo que se dice que son de propósito general. Estas características las diferencian de otros tipos de máquinas, las cuales han sido construídas con fines específicos.</p>
+</section>
+<section id="algoritmos" class="level3" data-number="1.3.2">
+<h3 data-number="1.3.2" class="anchored" data-anchor-id="algoritmos"><span class="header-section-number">1.3.2</span> Algoritmos</h3>
+<p>Para que una computadora sea útil en la resolución de un problema, es necesario expresar esta solución en una secuencia de pasos claramente definidos. A estas secuencias se les denomina <a href="https://es.wikipedia.org/wiki/Algoritmo">algoritmos</a>. Más detalladamente, un algoritmo es un conjunto de instrucciones o reglas definidas y no ambiguas, ordenadas y finitas que permite solucionar un problema. Los algoritmos son fundamentales en ciencias de la computación, ya que son la base sobre la que se construyen los programas.</p>
+<p>Un algoritmo puede ser tan sencillo como una <a href="https://cookpad.com/cr/recetas/6014919-arroz-con-pollo-al-estilo-costarricense">receta de cocina</a> o tan complejo como los que se utilizan en <a href="https://link.springer.com/article/10.1023/A:1010933404324">aprendizaje automático</a> (<em>machine learning</em>).</p>
+<p>Un algoritmo debe cumplir con ciertas características básicas:</p>
+<ol type="1">
+<li><strong>Recibir entradas</strong>: datos con los que trabaja.</li>
+<li><strong>Generar salidas</strong>: resultados generados por las operaciones que ejecuta el algoritmo.</li>
+<li><strong>Cada paso debe ser claro</strong>: la definición de cada paso debe ser precisa y sin ambigüedades.</li>
+<li><strong>Debe ser finito</strong>: debe terminar después de un número finito de pasos.</li>
+</ol>
+<p>Hay varias formas de representar un algoritmo, entre las que están el <a href="https://es.wikipedia.org/wiki/Pseudoc%C3%B3digo">pseudocódigo</a>, un <a href="https://es.wikipedia.org/wiki/Diagrama_de_flujo">diagrama de flujo</a> o simplemente una descripción escrita. A manera de ejemplo, se presenta seguidamente la descripción de un algoritmo para obtener el valor máximo de una lista:</p>
+<pre><code>Algoritmo para obtener el valor máximo de una lista
+---------------------------------------------------
+
+1. Lea la lista (del teclado, de un archivo o de alguna otra fuente).
+2. Si la lista está vacía, despliegue la hilera de texto "Lista vacía" 
+   y concluya el algoritmo. Si no, continúe con el paso 3.
+3. Designe el primer elemento de la lista como "máximo actual".
+4. Recorra la lista y compare cada uno de los elementos con el máximo actual.
+   4.1. Si un elemento comparado es mayor que el máximo actual, 
+        entonces desígnelo como el nuevo máximo actual.
+5. Al finalizar el recorrido de la lista, imprima el máximo actual
+   como valor máximo de la lista.</code></pre>
+<p>Seguidamente, se muestra la aplicación de este algoritmo a una lista de ejemplo.</p>
+<ol type="1">
+<li><p>Lista leída: <strong>[29.6, -36.81, 31.85, 25.71, 90.2, 0.4]</strong></p></li>
+<li><p>La lista no está vacía, por lo que se continúa con el paso 3.</p></li>
+<li><p>Se designa al primer elemento de la lista, <strong>29.6</strong>, como el máximo actual.</p></li>
+<li><p>Se recorre la lista y se compara cada uno de los elementos con el máximo actual. 4.1. Si un elemento comparado es mayor que el máximo actual, entonces pasa a ser el nuevo máximo actual.</p></li>
+</ol>
+<p><strong>Elemento en negrita</strong> = máximo actual<br>
+<em>Elemento en itálica</em> = elemento que está siendo comparado</p>
+<p>[<strong>29.6</strong>, <em>-36.81</em>, 31.85, 25.71, 90.2, 0.4]</p>
+<p>[<strong>29.6</strong>, -36.81, <em>31.85</em>, 25.71, 90.2, 0.4]</p>
+<p>[29.6, -36.81, <strong>31.85</strong>, <em>25.71</em>, 90.2, 0.4]</p>
+<p>[29.6, -36.81, <strong>31.85</strong>, 25.71, <em>90.2</em>, 0.4]</p>
+<p>[29.6, -36.81, 31.85, 25.71, <strong>90.2</strong>, <em>0.4</em>]</p>
+<p>[29.6, -36.81, 31.85, 25.71, <strong>90.2</strong>, 0.4]</p>
+<ol start="6" type="1">
+<li>Al finalizar el recorrido de la lista, se imprime el máximo actual como valor máximo de la lista: <strong>90.2</strong></li>
+</ol>
+<p>Note que el algoritmo tiene claramente definido un inicio (la lectura de la lista) y establace cual es la condición que debe cumplirse para su finalización (que termine el recorrido de la lista). Asimismo, cada uno de los pasos intermedios está especificado con claridad, incluyendo las condiciones para que se ejecuten.</p>
+<p>Note además que el algoritmo incluye:</p>
+<ul>
+<li><strong>Lectura de entradas</strong>: la lista.<br>
+</li>
+<li><strong>Procesamiento de las entradas</strong>: recorrido de la lista y comparaciones entre sus elementos.<br>
+</li>
+<li><strong>Generación de salidas</strong>: el valor máximo de la lista.</li>
+</ul>
+</section>
+<section id="modelo-entrada---procesamiento---salida" class="level3" data-number="1.3.3">
+<h3 data-number="1.3.3" class="anchored" data-anchor-id="modelo-entrada---procesamiento---salida"><span class="header-section-number">1.3.3</span> Modelo Entrada - Procesamiento - Salida</h3>
+<p>El modelo <a href="https://en.wikipedia.org/wiki/IPO_model"><em>Entrada - Procesamiento - Salida</em></a> (<em>Input - Process - Output</em> o IPO) describe la estructura básica de un algoritmo o de un programa de cómputo. Es un concepto fundamental en computación que describe el flujo de trabajo básico que emplean los sistemas para procesar información o datos. De acuerdo con este modelo, un algoritmo o programa recibe entradas (ej. números), las procesa (realiza cálculos matemáticos) y genera salidas (resultados de los cálculos).</p>
+<p>El modelo <em>Entrada - Procesamiento - Salida</em> se esquematiza en la <a href="#fig-modelo-entrada-procesamiento-salida" class="quarto-xref">Figura&nbsp;<span>1.1</span></a>.</p>
+<div id="fig-modelo-entrada-procesamiento-salida" class="lightbox quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center" alt="Modelo Entrada - Procesamiento - Salida">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-modelo-entrada-procesamiento-salida-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="img/modelo-entrada-procesamiento-salida.png" class="lightbox" data-glightbox="description: .lightbox-desc-1" data-gallery="quarto-lightbox-gallery-1"><img src="img/modelo-entrada-procesamiento-salida.png" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="Modelo Entrada - Procesamiento - Salida"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-modelo-entrada-procesamiento-salida-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;1.1: Modelo <em>Entrada - Procesamiento - Salida</em>
+</figcaption>
+</figure>
+</div>
+<p>A continuación se describen los componentes del modelo:</p>
+<ul>
+<li><strong>Entrada (<em>Input</em>)</strong>: consiste de datos o información que recibe el sistema. Pueden venir en diversas formas, como señales electrónicas, datos tecleados por un usuario o archivos, entre otros. La calidad y precisión de la entrada pueden afectar significativamente el resultado final del proceso.</li>
+<li><strong>Procesamiento (<em>Process</em>)</strong>: Una vez que los datos de entrada son recibidos, el sistema los procesa de acuerdo con un conjunto de instrucciones o pasos. El procesamiento puede involucrar operaciones como cálculos matemáticos, operaciones lógicas, transformaciones o cualquier otra acción necesaria para generar la salida que se requiere. En este componente es usualmente donde se realiza el “trabajo” principal del sistema.</li>
+<li><strong>Salida (<em>Output</em>)</strong>: Una vez finalizado el procesamiento, el sistema genera una salida. La salida es el resultado del proceso y puede presentarse en varias formas, como una visualización en pantalla, un archivo o un documento impreso, entre otras posibilidades. La salida puede ser el final del algoritmo o programa o puede servir como entrada para otro algoritmo o programa.</li>
+</ul>
+<p>Para ilustrar el modelo <em>Entrada - Procesamiento - Salida</em>, se muestra su aplicación al cálculo del <a href="https://es.wikipedia.org/wiki/%C3%8Dndice_de_masa_corporal">índice de masa corporal (IMC)</a>, una razón matemática que clasifica el peso de las personas en categorías como bajo, normal y sobrepeso, con base en su masa y su estatura. El IMC necesita dos entradas: masa (en kilogramos) y estatura (en metros). El procesamiento se realiza mediante la fórmula: imc = imc = masa/estatura<sup>2</sup>.</p>
+<p>Entonces, un posible algoritmo para calcular el IMC de una persona es:</p>
+<ol type="1">
+<li>Lea la masa y la estatura de la persona.</li>
+<li>Calcule el imc mediante la fórmula: imc = masa/estatura<sup>2</sup>.</li>
+<li>Imprima el imc.</li>
+</ol>
+<p><strong>Ejercicios</strong><br>
+Calcule manualmente su IMC y verifique el resultado con esta <a href="https://www.nhlbi.nih.gov/health/educational/lose_wt/BMI/bmi-m_sp.htm">calculadora de IMC</a>.</p>
+</section>
+<section id="implementación-de-algoritmos-en-programas" class="level3" data-number="1.3.4">
+<h3 data-number="1.3.4" class="anchored" data-anchor-id="implementación-de-algoritmos-en-programas"><span class="header-section-number">1.3.4</span> Implementación de algoritmos en programas</h3>
+<p>El diseño de un algoritmo puede verse como un paso previo a la elaboración de un programa de cómputo. Un mismo algoritmo puede implementarse en diferentes lenguajes de programación. Seguidamente se presenta la implementación del algoritmo de obtención del valor máximo de una lista en los lenguajes de programación <a href="https://es.wikipedia.org/wiki/Python">Python</a> y <a href="https://es.wikipedia.org/wiki/R_(lenguaje_de_programaci%C3%B3n)">R</a>.</p>
+<div>
+
+</div>
+<div class="quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Python</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Obtención del valor máximo de una lista</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Entrada</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>lista <span class="op">=</span> [<span class="fl">29.6</span>, <span class="op">-</span><span class="fl">36.81</span>, <span class="fl">31.85</span>, <span class="fl">25.71</span>, <span class="fl">90.2</span>, <span class="fl">0.4</span>]</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Lista de entrada: "</span>, lista)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Procesamiento</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="bu">len</span>(lista) <span class="op">==</span> <span class="dv">0</span>):</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"La lista está vacía"</span>)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="bu">max</span> <span class="op">=</span> lista[<span class="dv">0</span>]</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    i <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> (i <span class="op">&lt;</span> <span class="bu">len</span>(lista)):</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> (lista[i] <span class="op">&gt;</span> <span class="bu">max</span>):</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>            <span class="bu">max</span> <span class="op">=</span> lista[i]</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>        i <span class="op">=</span> i <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Salida</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Valor máximo de la lista:"</span>, <span class="bu">max</span>) </span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># R</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Obtención del valor máximo de una lista</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Entrada</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>lista <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">29.6</span>, <span class="sc">-</span><span class="fl">36.81</span>, <span class="fl">31.85</span>, <span class="fl">25.71</span>, <span class="fl">90.2</span>, <span class="fl">0.4</span>)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Lista de entrada: "</span>, lista, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Procesamiento</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">length</span>(lista) <span class="sc">==</span> <span class="dv">0</span>) {</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"La lista está vacía"</span>, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  max <span class="ot">&lt;-</span> lista[<span class="dv">1</span>]</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  i <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>  <span class="cf">while</span> (i <span class="sc">&lt;=</span> <span class="fu">length</span>(lista)) {</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (lista[i] <span class="sc">&gt;</span> max) {</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>      max <span class="ot">&lt;-</span> lista[i]</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>    i <span class="ot">&lt;-</span> i <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Salida</span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"Valor máximo de la lista: "</span>, max, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+<p><strong>Ejercicios</strong></p>
+<ol type="1">
+<li>Ejecute los programas anteriores en R y Python en los siguientes ambientes de ejecución en línea. Solamente debe copiar cada programa en el espacio destinado para ese fin y presionar el botón <em>Run</em> (ejecutar, correr).
+<ul>
+<li><a href="https://www.mycompiler.io/new/python">Ambiente de ejecución en línea para Python</a></li>
+<li><a href="https://www.mycompiler.io/new/r">Ambiente de ejecución en línea para R</a></li>
+</ul></li>
+<li>Con base en la descripción del IMC brindada en la sección anterior, elabore una hoja electrónica que calcule el IMC para 10 personas. Considere como incluir los componentes de entrada, procesamiento y salida.</li>
+<li>Con base en el algoritmo descrito en la sección para el cálculo del IMC, elabore un programa en Python y otro programa en R que calculen el IMC de una persona.</li>
+</ol>
+</section>
+</section>
+<section id="arquitectura-de-computadoras" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="arquitectura-de-computadoras"><span class="header-section-number">1.4</span> Arquitectura de computadoras</h2>
+<p>En esta sección, se explican los principales componentes de las computadoras modernas. Se realiza un recorrido por algunos de los principales antecedentes históricos de su evolución y se detallan los componentes de la arquitectura de von Neumann, el modelo de arquitectura más utilizado en la actualidad.</p>
+<section id="evolución-histórica" class="level3" data-number="1.4.1">
+<h3 data-number="1.4.1" class="anchored" data-anchor-id="evolución-histórica"><span class="header-section-number">1.4.1</span> Evolución histórica</h3>
+<section id="calculadoras-mecánicas" class="level4" data-number="1.4.1.1">
+<h4 data-number="1.4.1.1" class="anchored" data-anchor-id="calculadoras-mecánicas"><span class="header-section-number">1.4.1.1</span> Calculadoras mecánicas</h4>
+<p>Durante el siglo XVII, varios matemáticos construyeron calculadoras mecánicas capaces de realizar operaciones aritméticas.</p>
+<p>Alrededor de 1645, el filósofo y matemático francés <a href="https://es.wikipedia.org/wiki/Blaise_Pascal">Blaise Pascal</a> (1623-1662) inventó la <a href="https://es.wikipedia.org/wiki/Pascalina">Pascalina</a>, una calculadora compuesta por ruedas y engranajes que podía sumar y restar. Pascal la creó con el propósito de ayudar a su padre, quien era contador en la Hacienda francesa y necesitaba una herramienta para realizar cálculos de aritmética comercial de manera más eficiente. La Pascalina podía sumar hasta tres partes en una sola operación, llegando al valor de 999 999.</p>
+<p>En 1672, el científico alemán <a href="https://es.wikipedia.org/wiki/Gottfried_Leibniz">Gottfried Leibniz</a> (1646 - 1716) extendió las ideas de Pascal e introdujo la <a href="https://en.wikipedia.org/wiki/Stepped_reckoner"><em>Stepped Reckoner</em> o máquina de Leibniz</a>, un dispositivo que, además de sumar y restar, podía multiplicar, dividir y calcular raíces cuadradas. La máquina de Leibniz estaba basada en un dispositivo llamado <a href="https://es.wikipedia.org/wiki/Rueda_de_Leibniz">rueda de Leibniz</a>, un tambor con forma de cilindro, con un conjunto de dientes de longitud incremental a la que se le acopla una rueda de conteo. La <a href="#fig-maquina-leibniz" class="quarto-xref">Figura&nbsp;<span>1.2</span></a> muestra una réplica de la máquina de Leibniz.</p>
+<div id="fig-maquina-leibniz" class="lightbox quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center" alt="Réplica de la máquina de Leibniz">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-maquina-leibniz-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="img/maquina-leibniz.jpg" class="lightbox" data-glightbox="description: .lightbox-desc-2" data-gallery="quarto-lightbox-gallery-2"><img src="img/maquina-leibniz.jpg" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="Réplica de la máquina de Leibniz"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-maquina-leibniz-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;1.2: Réplica de la máquina de Leibniz. Fuente: <a href="https://commons.wikimedia.org/wiki/User:Kolossos">Kolossos</a> a través de <a href="https://commons.wikimedia.org/wiki/File:Leibnitzrechenmaschine.jpg">Wikimedia Commons</a>.
+</figcaption>
+</figure>
+</div>
+<p>El objetivo de Leibniz era realizar cálculos de una manera “fácil, rápida y fiable”. También pretendía que los números calculados pudieran ser tan grandes como se deseara, si el tamaño de la máquina era ajustado. Sin embargo, las primeras versiones de la rueda de Leibniz no eran fiables debido a que tenían piezas mecánicas que tendían a trabarse y a fallar.</p>
+<p>Los derivados de las calculadoras mecánicas creadas por Pascal y Leibniz continuaron siendo producidos durante tres siglos, hasta que a principios de los años 1970 sus equivalentes electrónicos finalmente llegaron a ser fácilmente disponibles y baratos.</p>
+</section>
+<section id="la-máquina-analítica-de-babbage" class="level4" data-number="1.4.1.2">
+<h4 data-number="1.4.1.2" class="anchored" data-anchor-id="la-máquina-analítica-de-babbage"><span class="header-section-number">1.4.1.2</span> La máquina analítica de Babbage</h4>
+<p>En la primera mitad del siglo XIX, el matemático británico <a href="https://es.wikipedia.org/wiki/Charles_Babbage">Charles Babbage</a> (1791 - 1871) diseñó la <a href="https://es.wikipedia.org/wiki/M%C3%A1quina_anal%C3%ADtica">máquina analítica</a>, una computadora mecánica que incorporaba algunas características de las computadoras modernas. Fue inicialmente descrita en 1837, aunque Babbage continuó refinando el diseño hasta su muerte en 1871. Es considerada la primera computadora programable de la historia. La máquina analítica de Babbage se muestra en la <a href="#fig-maquina-analitica" class="quarto-xref">Figura&nbsp;<span>1.3</span></a>.</p>
+<div id="fig-maquina-analitica" class="lightbox quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center" alt="Máquina analítica de Babbage">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-maquina-analitica-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="img/maquina-analitica.jpg" class="lightbox" data-glightbox="description: .lightbox-desc-3" data-gallery="quarto-lightbox-gallery-3"><img src="img/maquina-analitica.jpg" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="Máquina analítica de Babbage"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-maquina-analitica-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;1.3: Máquina analítica de Babbage. Fuente: Bruno Barral a través de <a href="https://commons.wikimedia.org/wiki/File:AnalyticalMachine_Babbage_London.jpg">Wikimedia Commons</a>.
+</figcaption>
+</figure>
+</div>
+<p>Aunque nunca fue terminada debido a limitaciones técnicas y económicas, su diseño revolucionario permitía realizar cálculos complejos y programarla para diversas tareas. Utilizaba tarjetas perforadas para la entrada de datos, disponía de una unidad aritmética para realizar operaciones matemáticas y una memoria capaz de almacenar hasta 1000 números. El lenguaje de programación que sería utilizado era similar a los actuales <a href="https://es.wikipedia.org/wiki/Lenguaje_ensamblador">lenguajes ensambladores</a>. Era posible implementar ciclos y condicionales de manera que el lenguaje propuesto habría sido <a href="https://es.wikipedia.org/wiki/Turing_completo">Turing-completo</a>.</p>
+<p>En 1843, la matemática británica <a href="https://es.wikipedia.org/wiki/Ada_Lovelace">Ada Lovelace</a> (1815 - 1852) tradujo al inglés una descripción de la máquina analítica escrita en francés un año antes por el matemático italiano <a href="https://es.wikipedia.org/wiki/Luigi_Menabrea">Luigi Menabrea</a> (1809 - 1896). Entre las notas que acompañan la traducción, Lovelace incluyó el detalle de los pasos mediante los cuales la máquina podría calcular los <a href="https://es.wikipedia.org/wiki/N%C3%BAmero_de_Bernoulli">números de Bernoulli</a>, lo que se considera por algunos el primer programa de computadoras de la historia. El diagrama correspondiente a este algoritmo/programa se muestra en la <a href="#fig-programa-maquina-analitica" class="quarto-xref">Figura&nbsp;<span>1.4</span></a>.</p>
+<div id="fig-programa-maquina-analitica" class="lightbox quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center" alt="Diagrama de un algoritmo para el cálculo de los números de Bernoulli en la máquina analítica de Babbage">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-programa-maquina-analitica-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="img/programa-maquina-analitica.jpg" class="lightbox" data-glightbox="description: .lightbox-desc-4" data-gallery="quarto-lightbox-gallery-4"><img src="img/programa-maquina-analitica.jpg" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="Diagrama de un algoritmo para el cálculo de los números de Bernoulli en la máquina analítica de Babbage"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-programa-maquina-analitica-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;1.4: Diagrama de un algoritmo para el cálculo de los números de Bernoulli en la máquina analítica de Babbage. Fuente: Ada Lovelace a través de <a href="https://commons.wikimedia.org/wiki/File:Diagram_for_the_computation_of_Bernoulli_numbers.jpg">Wikimedia Commons</a>.
+</figcaption>
+</figure>
+</div>
+<p>Ahora se cree que el autor de este programa fue probablemente el mismo Charles Babbage, que ya había desarrollado trabajos similares entre seis y siete años antes de la publicación del artículo de Lovelace.</p>
+<p>El aporte de Ada Lovelace fue de suma importancia para la computación, ya que fue la primera en reconocer la capacidad de las máquinas para ir más allá de los simples cálculos de números. Acertadamente, anticipó que en el futuro podrían hacer muchas otras cosas, como componer música o generar gráficos. En sus notas, Lovelace enfatizó la diferencia entre la máquina analítica y las máquinas de cálculo previas, en particular su capacidad de ser programada para resolver problemas de mayor complejidad.</p>
+</section>
+<section id="la-máquina-de-turing" class="level4" data-number="1.4.1.3">
+<h4 data-number="1.4.1.3" class="anchored" data-anchor-id="la-máquina-de-turing"><span class="header-section-number">1.4.1.3</span> La máquina de Turing</h4>
+<p>En 1936, el matemático británico <a href="https://es.wikipedia.org/wiki/Alan_Turing">Allan Turing</a> (1912 - 1954) propuso la <a href="https://es.wikipedia.org/wiki/M%C3%A1quina_de_Turing">máquina de Turing</a>, un modelo matemático que manipula símbolos en una cinta según un conjunto de reglas. La <a href="#fig-maquina-turing" class="quarto-xref">Figura&nbsp;<span>1.5</span></a> muestra una representación artística de la máquina de Turing.</p>
+<div id="fig-maquina-turing" class="lightbox quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center" alt="Representación artística de la máquina de Turing">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-maquina-turing-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="img/maquina-turing.png" class="lightbox" data-glightbox="description: .lightbox-desc-5" data-gallery="quarto-lightbox-gallery-5"><img src="img/maquina-turing.png" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="Representación artística de la máquina de Turing"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-maquina-turing-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;1.5: Representación artística de la máquina de Turing. Fuente: <a href="https://commons.wikimedia.org/wiki/User:Porao">Porao</a> a través de <a href="https://commons.wikimedia.org/wiki/File:Turing_Machine.png">Wikimedia Commons</a>.
+</figcaption>
+</figure>
+</div>
+<p>Una máquina de Turing está compuesta por:</p>
+<ol type="1">
+<li><strong>Una cinta</strong>: actúa como memoria de la máquina. Se compone de celdas, cada una de las cuales puede contener un símbolo (ej. una letra, un número).</li>
+<li><strong>Una cabeza lectora/escritora</strong>: lee y escribe símbolos en la cinta.</li>
+<li><strong>Un conjunto de estados</strong>: entre los cuales la máquina puede cambiar en respuesta a lo que lee en la cinta. Hay un estado inicial desde el cual el funcionamiento de la máquina comienza, y uno o más estados de parada que indican que la máquina ha terminado su computación.</li>
+<li><strong>Una tabla de acciones</strong>: indica para combinación de estado actual y símbolo leído en la cinta, qué acción debe realizar la máquina. Estas acciones incluyen leer o escribir un símbolo en la cinta, mover la cabeza lectora/escritora a la izquierda o a la derecha sobre la cinta y cambiar a un nuevo estado.</li>
+</ol>
+<p>Con este esquema, una máquina de Turing puede ejecutar cualquier algoritmo. El modelo de Turing demostró que una máquina simple podía resolver cualquier problema computable, si cuenta con el tiempo y los recursos necesarios. Si un sistema (ej. una computadora, un lenguaje de programación) puede utilizarse para resolver cualquier problema de cómputo, se dice que es <a href="https://es.wikipedia.org/wiki/Turing_completo">Turing-completo</a>. No todos los sistemas o lenguajes de programación son Turing-completos, ya que algunos están diseñados para propósitos específicos y pueden tener restricciones que limitan su capacidad de cálculo.</p>
+<p>Allan Turing es considerado uno de los padres de la computación moderna. Sus contribuciones fueron fundamentales en el desarrollo de la <a href="https://es.wikipedia.org/wiki/Teor%C3%ADa_de_la_computaci%C3%B3n">teoría de la computación</a> y la <a href="https://es.wikipedia.org/wiki/Inteligencia_artificial">inteligencia artificial</a>. En esta última área, Turing propuso un experimento para determinar si una máquina puede exhibir inteligencia equivalente a la de un ser humano. Este experimento, conocido como <a href="https://es.wikipedia.org/wiki/Prueba_de_Turing">Prueba de Turing</a>, sigue siendo una referencia en el debate sobre la inteligencia artificial.</p>
+</section>
+<section id="primeras-computadoras-electrónicas" class="level4" data-number="1.4.1.4">
+<h4 data-number="1.4.1.4" class="anchored" data-anchor-id="primeras-computadoras-electrónicas"><span class="header-section-number">1.4.1.4</span> Primeras computadoras electrónicas</h4>
+<p>Con base en las ideas de Turing, las computadoras de tipo <a href="https://es.wikipedia.org/wiki/Bombe">Bombe</a> y <a href="https://es.wikipedia.org/wiki/Colossus">Colossus</a> fueron construídas durante la II Guerra Mundial (1939 - 1945) en el Reino Unido para descifrar mensajes codificados. A pesar de que se consideran de las primeras computadoras digitales electrónicas programables, su programación se realizaba a través de componentes de <em>hardware</em>, como interruptores y enchufes, y no con un <a href="https://es.wikipedia.org/wiki/Computador_de_programa_almacenado">programa almacenado en la memoria</a>. La <a href="#fig-colossus" class="quarto-xref">Figura&nbsp;<span>1.6</span></a> muestra una computadora Colossus.</p>
+<div id="fig-colossus" class="lightbox quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center" alt="Computadora Colossus operada por integrantes del Women's Royal Naval Service (WRNS)">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-colossus-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="img/colossus.jpg" class="lightbox" data-glightbox="description: .lightbox-desc-6" data-gallery="quarto-lightbox-gallery-6"><img src="img/colossus.jpg" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="Computadora Colossus operada por integrantes del Women's Royal Naval Service (WRNS)"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-colossus-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;1.6: Computadora Colossus operada por integrantes del Women’s Royal Naval Service (WRNS). Fuente: Fotografía de autor desconicido compartida a través de <a href="https://commons.wikimedia.org/wiki/File:Colossus.jpg">Wikimedia Commons</a>.
+</figcaption>
+</figure>
+</div>
+<p>También durante la II Guerra Mundial, el ejército de Estados Unidos de América construyó <a href="https://es.wikipedia.org/wiki/ENIAC">ENIAC (Electronic Numerical Integrator and Computer)</a> para calcular tablas de tiro de artillería. Es considerada por algunos como la primera computadora programable digital de propósito general. Era capaz de seguir el modelo de la máquina de Turing, por lo que era Turing-completa. La <a href="#fig-eniac" class="quarto-xref">Figura&nbsp;<span>1.7</span></a> presenta una imagen de ENIAC.</p>
+<div id="fig-eniac" class="lightbox quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center" alt="Computadora ENIAC en Filadelfia, EE UU">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-eniac-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="img/eniac.jpg" class="lightbox" data-glightbox="description: .lightbox-desc-7" data-gallery="quarto-lightbox-gallery-7"><img src="img/eniac.jpg" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="Computadora ENIAC en Filadelfia, EE UU"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-eniac-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;1.7: Computadora ENIAC en Filadelfia, EE UU. Fuente: Fotografía del Ejército de los Estados Unidos de América compartida a través de <a href="https://commons.wikimedia.org/wiki/File:Eniac.jpg">Wikimedia Commons</a>.
+</figcaption>
+</figure>
+</div>
+</section>
+</section>
+<section id="la-arquitectura-de-von-neumann" class="level3" data-number="1.4.2">
+<h3 data-number="1.4.2" class="anchored" data-anchor-id="la-arquitectura-de-von-neumann"><span class="header-section-number">1.4.2</span> La arquitectura de von Neumann</h3>
+<p>En 1945, el matemático húngaro - estadounidense <a href="https://es.wikipedia.org/wiki/John_von_Neumann">John von Neumann</a> (1903 - 1957) propuso un concepto conocido como <a href="https://es.wikipedia.org/wiki/Computador_de_programa_almacenado">programa almacenado</a> según el cual los datos y los programas de una computadora se almacenan en una estructura llamada memoria, separada de los componentes que ejecutan las instrucciones. Este modelo permite que las computadoras sean más fáciles de reprogramar y es conocido actualmente como <a href="https://es.wikipedia.org/wiki/Arquitectura_de_Von_Neumann">arquitectura de von Neumann</a>. Su esquema se muestra en la <a href="#fig-arquitectura-von-neumann" class="quarto-xref">Figura&nbsp;<span>1.8</span></a>.</p>
+<div id="fig-arquitectura-von-neumann" class="lightbox quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center" alt="Arquitectura de von Neumann">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-arquitectura-von-neumann-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="img/arquitectura-von-neumann.jpg" class="lightbox" data-glightbox="description: .lightbox-desc-8" data-gallery="quarto-lightbox-gallery-8"><img src="img/arquitectura-von-neumann.jpg" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="Arquitectura de von Neumann"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-arquitectura-von-neumann-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;1.8: Arquitectura de von Neumann. Imagen de David Strigoi compartida a través de <a href="https://commons.wikimedia.org/wiki/File:Arquitecturaneumann.jpg">Wikimedia Commons</a>.
+</figcaption>
+</figure>
+</div>
+<p>Los principales componentes de esta arquitectura son:</p>
+<ul>
+<li><p><strong>Memoria principal</strong>. Almacena las instrucciones de los programas y los datos que utilizan estos programas. Es común denominarla como <em>Random Access Memory</em> (Memoria de Acceso Aleatorio) o RAM, ya que toma el mismo tiempo acceder a cualquier posición de la memoria. Cada posición de memoria tiene una dirección a la que se hace referencia cuando se desea leer o escribir.</p></li>
+<li><p><strong>Unidad central de procesamiento</strong>. Llamada en inglés <em>Central Processing Unit</em> (CPU), se encarga de ejecutar las instrucciones de los programas. Contiene memorias temporales de alta velocidad y poca capacidad llamadas registros para almacenar los operandos y el resultado de las instrucciones. Está compuesta por dos partes principales:</p>
+<ul>
+<li><strong>Unidad de control</strong>. Determina cuál es la siguiente instrucción a ejecutar.</li>
+<li><strong>Unidad de aritmética y lógica</strong>. Llamada en inglés <em>Arithmetic and Logic Unit</em> (ALU), ejecuta las operaciones aritméticas y lógicas.</li>
+</ul></li>
+<li><p><strong>Sistemas de entrada y salida</strong>. Permiten que la computadora interactúe con el usuario y, en general, con el mundo exterior. Algunos ejemplos son el teclado y el ratón, como sistemas de entrada, y la pantalla y la impresora, como sistemas de salida.</p></li>
+</ul>
+</section>
+<section id="sistemas-binarios" class="level3" data-number="1.4.3">
+<h3 data-number="1.4.3" class="anchored" data-anchor-id="sistemas-binarios"><span class="header-section-number">1.4.3</span> Sistemas binarios</h3>
+<p>Las computadoras modernas están construídas con base en <a href="https://es.wikipedia.org/wiki/Circuito_integrado">circuitos integrados</a>, también llamados <em>chips</em> o <em>microchips</em>, como el que se muestra en la <a href="#fig-circuito-integrado" class="quarto-xref">Figura&nbsp;<span>1.9</span></a>.</p>
+<div id="fig-circuito-integrado" class="lightbox quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center" alt="Procesador Intel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-circuito-integrado-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="img/circuito-integrado.jpg" class="lightbox" data-glightbox="description: .lightbox-desc-9" data-gallery="quarto-lightbox-gallery-9"><img src="img/circuito-integrado.jpg" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="Procesador Intel"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-circuito-integrado-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;1.9: Procesador Intel. Imagen de <a href="https://unsplash.com/@slavudin?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Slejven Djurakovic</a> compartida a través de <a href="https://unsplash.com/s/photos/chip?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a>.
+</figcaption>
+</figure>
+</div>
+<p>Los circuitos integrados procesan información digital (que usa valores discretos), la cual generalmente es binaria, lo que significa que puede tener dos valores. Para representar estos dos valores internamente, las computadoras emplean dos niveles de tensión eléctrica: bajo (o ausencia de tensión) y alto (o presencia de tensión eléctrica). Estos estados se representan respectivamente con 0 y 1 (o viceversa). Este es un sistema binario y cada dígito binario se denomina <em>bit</em> (<em>binary digit</em>). Los <em>bits</em> se agrupan en grupos de ocho llamados <a href="https://es.wikipedia.org/wiki/Byte"><em>bytes</em></a>) para representar elementos de información más complejos, como números más grandes o carácteres de texto. Por ejemplo:</p>
+<ul>
+<li>El número decimal <code>14</code> se representa en binario como <code>1110</code>:<br>
+<code>1110</code> = <code>2^3*1 + 2^2*1 + 2^1*1 + 2^0*0</code> = <code>8 + 4 + 2 + 0</code> = <code>14</code></li>
+<li>La palabra <code>bit</code> se representa en <a href="https://es.wikipedia.org/wiki/ASCII">código ASCII</a> como:<br>
+<code>01100010 01101001 01110100</code> = <code>bit</code></li>
+</ul>
+<p>De manera similar, se pueden representar otras clases de información, como imágenes, sonidos o videos, mediante secuencias de dígitos binarios.</p>
+<section id="ventajas" class="level4" data-number="1.4.3.1">
+<h4 data-number="1.4.3.1" class="anchored" data-anchor-id="ventajas"><span class="header-section-number">1.4.3.1</span> Ventajas</h4>
+<p>El uso de dos estados (en lugar de diez, doce u otra cantidad) facilita la aplicación de la <a href="https://es.wikipedia.org/wiki/Teor%C3%ADa_de_la_informaci%C3%B3n">teoría de la información</a>, el estudio matemático de la cuantificación, almacenamiento y comunicación de la información, en el cual los <em>bits</em> son la unidad fundamental. La teoría de la información fue proṕuesta por el matemático estadounidense <a href="https://es.wikipedia.org/wiki/Claude_Shannon">Claude Shannon</a> (1916 - 2001) en la década de 1940.</p>
+<p>El <a href="https://es.wikipedia.org/wiki/%C3%81lgebra_de_Boole">álgebra <em>booleana</em></a>, un pilar fundamental en el campo del análisis y diseño de sistemas digitales, así como en la programación de computadoras, también utiliza dos posibles valores: verdadero (1) y falso (0). Fue introducida en 1847 por el matemático británico <a href="https://es.wikipedia.org/wiki/George_Boole">George Boole</a> (1815 - 1864). El álgebra <em>booleana</em> utiliza operaciones lógicas como <code>AND</code> (y), <code>OR</code> (o) y <code>NOT</code> (no) para combinar y transformar valores <em>booleanos</em> (verdaderos y falsos).</p>
+<p>Por otra parte, es más fácil diseñar y fabricar dispositivos electrónicos que solo necesitan reconocer dos estados. Por esta razón, los circuitos que manejan señales binarias pueden ser más simples, más confiables y menos costosos que aquellos que tendrían que manejar múltiples estados.</p>
+</section>
+</section>
+<section id="lenguaje-máquina" class="level3" data-number="1.4.4">
+<h3 data-number="1.4.4" class="anchored" data-anchor-id="lenguaje-máquina"><span class="header-section-number">1.4.4</span> Lenguaje máquina</h3>
+<p>El <a href="https://es.wikipedia.org/wiki/Lenguaje_de_m%C3%A1quina">lenguaje máquina</a> es un conjunto de instrucciones binarias (compuestas por unos y ceros) interpretables por un CPU. Un programa consiste de una secuencia de instrucciones en lenguaje máquina. Este es el único lenguaje que “entienden” directamente las computadoras.</p>
+<p>El lenguaje máquina, siendo el más bajo nivel de lenguaje de programación y directamente entendible por el hardware del procesador, incluye varios tipos de instrucciones esenciales para la operación de una computadora. Estas instrucciones varían según la arquitectura del procesador (ej. x86, ARM, MIPS), pero generalmente se pueden agrupar en categorías como, por ejemplo:</p>
+<ol type="1">
+<li><strong>Instrucciones de aritmética y lógica</strong>. Realizan operaciones matemáticas básicas como suma, resta, multiplicación y división, así como operaciones lógicas como <code>AND</code>, <code>OR</code> y <code>NOT</code>.</li>
+<li><strong>Instrucciones de manipulación de datos</strong>. Permiten el movimiento de datos dentro de la CPU o entre la CPU y la memoria. Ejemplos incluyen la carga (load) de datos desde la memoria al registro, almacenamiento (store) de datos del registro a la memoria, y transferencias de datos entre registros.</li>
+<li><strong>Instrucciones de entrada/salida</strong>. Facilitan la comunicación entre la CPU y los dispositivos de entrada/salida, como discos duros, teclados, pantallas y otros.</li>
+<li><strong>Instrucciones de comparación</strong>. Comparan valores y, a menudo, se usan junto con las instrucciones de control de flujo (ej. condicionales, ciclos) para tomar decisiones basadas en estas comparaciones.</li>
+<li><strong>Instrucciones de operación de punto flotante</strong>. Específicas para el procesamiento de números de <a href="https://es.wikipedia.org/wiki/Coma_flotante">punto flotante</a>, permiten realizar operaciones aritméticas sobre estos números, que son fundamentales para el cálculo científico y la ingeniería.</li>
+</ol>
+<p>Cada instrucción en el lenguaje máquina se representa como una secuencia de <em>bits</em>, y el conjunto específico de instrucciones que un procesador puede ejecutar se conoce como su conjunto de instrucciones o <a href="https://en.wikipedia.org/wiki/Instruction_set_architecture">Instruction Set Architecture (ISA)</a>.</p>
+<p>La <a href="#fig-lenguaje-maquina" class="quarto-xref">Figura&nbsp;<span>1.10</span></a> muestra una instrucción en lenguaje máquina que suma los contenidos de los registros 1 y 2 y almacena el resultado en el registro 6 de un CPU:</p>
+<div id="fig-lenguaje-maquina" class="lightbox quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center" alt="Instrucción en lenguaje máquina">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-lenguaje-maquina-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="img/lenguaje-maquina.png" class="lightbox" data-glightbox="description: .lightbox-desc-10" data-gallery="quarto-lightbox-gallery-10"><img src="img/lenguaje-maquina.png" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="Instrucción en lenguaje máquina"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-lenguaje-maquina-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;1.10: Instrucción en lenguaje máquina. Imagen de <a href="https://en.wikipedia.org/wiki/Machine_code">Wikipedia</a>.
+</figcaption>
+</figure>
+</div>
+<p>La <a href="#fig-lenguaje-maquina-hola-mundo" class="quarto-xref">Figura&nbsp;<span>1.11</span></a> muestra el programa <a href="https://es.wikipedia.org/wiki/Hola_mundo">Hola mundo (<em>Hello World</em>)</a> en lenguaje máquina. Este programa simplemente imprime la hilera de texto “Hola mundo”, usualmente en la pantalla, y suele ser usado como introducción al estudio de un lenguaje de programación, siendo un primer ejercicio típico.</p>
+<div id="fig-lenguaje-maquina-hola-mundo" class="lightbox quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center" alt="Programa 'Hola mundo' en lenguaje máquina">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-lenguaje-maquina-hola-mundo-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="img/lenguaje-maquina-hola-mundo.png" class="lightbox" data-glightbox="description: .lightbox-desc-11" data-gallery="quarto-lightbox-gallery-11"><img src="img/lenguaje-maquina-hola-mundo.png" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="Programa 'Hola mundo' en lenguaje máquina"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-lenguaje-maquina-hola-mundo-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;1.11: Programa <em>Hola mundo</em> en lenguaje máquina. Imagen de <a href="https://www.youtube.com/watch?v=3LPJfIKxwWc">CS50x 2024 - Lecture 0 - Scratch</a>.
+</figcaption>
+</figure>
+</div>
+</section>
+</section>
+<section id="lenguajes-de-programación" class="level2" data-number="1.5">
+<h2 data-number="1.5" class="anchored" data-anchor-id="lenguajes-de-programación"><span class="header-section-number">1.5</span> Lenguajes de programación</h2>
+<p>Debido a que programar una computadora en lenguaje máquina es excesivamente lento y complicado, en la década de 1950 comenzaron a crearse lenguajes de programación que, en lugar de unos y ceros, consisten de instrucciones formadas por palabras, usualmente en idioma inglés. A manera de ejemplo, seguidamente se muestra el programa “Hola mundo” en varios lenguajes de programación:</p>
+<p>Lenguaje <a href="https://en.wikipedia.org/wiki/C_(programming_language)">C</a></p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">/* Hola mundo en lenguaje C */</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>main<span class="op">()</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"Hola mundo</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Lenguaje <a href="https://en.wikipedia.org/wiki/Python_(programming_language)">Python</a></p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Hola mundo en lenguaje Python</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Hola mundo"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Lenguaje <a href="https://en.wikipedia.org/wiki/R_(programming_language)">R</a></p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Hola mundo en lenguaje R</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Hola mundo</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>El sitio web <a href="http://helloworldcollection.de/">The Hello World Collection</a> presenta el programa “Hola mundo” en más de 600 lenguajes de programación. Existe una gran <a href="https://en.wikipedia.org/wiki/List_of_programming_languages">variedad de lenguajes de programación</a> que han sido creados con diversos fines: científicos, comerciales, educacionales, etc.</p>
+</section>
+<section id="pensamiento-computacional" class="level2" data-number="1.6">
+<h2 data-number="1.6" class="anchored" data-anchor-id="pensamiento-computacional"><span class="header-section-number">1.6</span> Pensamiento computacional</h2>
+<p>Como se ha mencionado, utilizamos computadoras porque nos ayudan a resolver problemas. La forma de solucionar un problema debe expresarse de manera que pueda ser implementada en una computadora: mediante programación (vea la <a href="#fig-resolucion-problemas-computadoras" class="quarto-xref">Figura&nbsp;<span>1.12</span></a>).</p>
+<div id="fig-resolucion-problemas-computadoras" class="lightbox quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center" alt="Resolución de problemas mediante computadoras">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-resolucion-problemas-computadoras-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="img/resolucion-problemas-computadoras.png" class="lightbox" data-glightbox="description: .lightbox-desc-12" data-gallery="quarto-lightbox-gallery-12"><img src="img/resolucion-problemas-computadoras.png" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="Resolución de problemas mediante computadoras"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-resolucion-problemas-computadoras-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;1.12: Resolución de problemas mediante computadoras.
+</figcaption>
+</figure>
+</div>
+<p>El <a href="https://es.wikipedia.org/wiki/Pensamiento_computacional">pensamiento computacional</a> es un enfoque para la resolución de problemas basado en conceptos y métodos de las ciencias de la computación. Puede ser aplicado en otras áreas. Se considera una de las destrezas fundamentales del siglo XXI.</p>
+<section id="principios-fundamentales" class="level3" data-number="1.6.1">
+<h3 data-number="1.6.1" class="anchored" data-anchor-id="principios-fundamentales"><span class="header-section-number">1.6.1</span> Principios fundamentales</h3>
+<p>El pensamiento computacional tiene cuatro principios fundamentales:</p>
+<ul>
+<li><strong>Descomposición</strong>: división de un problema en subproblemas más pequeños.</li>
+<li><strong>Reconocimiento de patrones</strong>: búsqueda de similitudes de un problema a resolver, con problemas ya resueltos.</li>
+<li><strong>Abstracción</strong>: filtrado de la información que se necesita y de la que no se necesita para resolver un problema.</li>
+<li><strong>Algoritmos</strong>: descripción, paso por paso, de la solución a un problema.</li>
+</ul>
+</section>
+</section>
+<section id="el-lenguaje-de-programación-scratch" class="level2" data-number="1.7">
+<h2 data-number="1.7" class="anchored" data-anchor-id="el-lenguaje-de-programación-scratch"><span class="header-section-number">1.7</span> El lenguaje de programación Scratch</h2>
+<p><a href="https://scratch.mit.edu/">Scratch</a> es un lenguaje de programación orientado a educación. Su nombre proviene de la palabra en ingés <a href="https://en.wikipedia.org/wiki/Scratching"><em>scratching</em></a>. Fue desarrollado en 2003 por el <a href="https://www.media.mit.edu/">MIT Media Lab</a> y es administrado por la Fundación Scratch, una organización sin fines de lucro que lo facilita de manera gratuita. Es software libre que se comparte mediante una licencia <a href="https://es.wikipedia.org/wiki/GNU_General_Public_License">GPLv2</a>.</p>
+<section id="aplicación-de-los-principios-del-pensamiento-computacional" class="level3" data-number="1.7.1">
+<h3 data-number="1.7.1" class="anchored" data-anchor-id="aplicación-de-los-principios-del-pensamiento-computacional"><span class="header-section-number">1.7.1</span> Aplicación de los principios del pensamiento computacional</h3>
+<ol type="1">
+<li>Ingrese a la sitio web de Scratch en la dirección <a href="https://scratch.mit.edu/">https://scratch.mit.edu/</a> y presione el botón <em>Start Creating</em> o <em>Empiezo a crear</em> para iniciar un proyecto (para este curso, no es necesario crear un usuario en el sitio). Se desplegará el ambiente de programación de Scratch.</li>
+</ol>
+<div id="fig-scratch-ambiente-programacion" class="lightbox quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center" alt="Ambiente de programación de Scratch">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-scratch-ambiente-programacion-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="img/scratch-ambiente-programacion.png" class="lightbox" data-glightbox="description: .lightbox-desc-13" data-gallery="quarto-lightbox-gallery-13"><img src="img/scratch-ambiente-programacion.png" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="Ambiente de programación de Scratch"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-scratch-ambiente-programacion-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;1.13: Ambiente de programación de Scratch.
+</figcaption>
+</figure>
+</div>
+<p>El ambiente de programación de Scratch está compuesto por varias zonas. Seguidamente se describen algunas de las principales:</p>
+<ul>
+<li>Un área de bloques, a la izquierda de la pantalla, los cuales ejecutan tareas: <em>mover</em>, <em>girar</em>, <em>ir a</em>, etc. Estos bloques se agrupan en secciones: <em>Movimiento</em>, <em>Apariencia</em>, <em>Sonido</em>, etc.</li>
+<li>Un área en el centro de la pantalla al que pueden arrastrarse los bloques con el ratón para unirse y acoplarse.</li>
+<li>Un área en la parte superior derecha de la pantalla en la que se despliega el resultado de las tareas ejecutadas por los bloques.</li>
+<li>Un botón ubicado en la esquina inferior izquierda de la pantalla llamado <em>Agregar Extensión</em>. En el contexto de Scratch, una extensión es un grupo de tareas adicional a los bloques que se despliegan por defecto. Las extensiones pueden ser desarrolladas por programadores diferentes a los creadores de Scratch.</li>
+</ul>
+<p><strong>Nota</strong>: si lo desea, puede cambiar el idioma a español, u otro de su preferencia, con la opción de menú <em>Settings - Language</em>.</p>
+<ol start="2" type="1">
+<li>Con el bloque <em>decir</em> de la sección <em>Apariencia</em>, programe el programa “Hola Mundo” en Scratch. Utilice el evento <em>al presionar</em> de la sección <em>Eventos</em> para poder ejecutar el programa al presionar la bandera de salida.</li>
+</ol>
+<div id="fig-scratch-hola-mundo" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-scratch-hola-mundo-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-scratch-hola-mundo" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-scratch-codigo-hola-mundo" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-scratch-codigo-hola-mundo-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="img/scratch-bloques-hola-mundo.png" class="img-fluid figure-img" data-ref-parent="fig-scratch-hola-mundo">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-scratch-codigo-hola-mundo-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) Código fuente
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-scratch-hola-mundo" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-scratch-salida-hola-mundo" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-scratch-salida-hola-mundo-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="img/scratch-salida-hola-mundo.png" class="img-fluid figure-img" data-ref-parent="fig-scratch-hola-mundo">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-scratch-salida-hola-mundo-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b) Salida
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-scratch-hola-mundo-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;1.14: Programa “Hola mundo”
+</figcaption>
+</figure>
+</div>
+<p>Con la opción de menú <em>Archivo - Guardar en tu computador</em>, guarde el programa en un archivo. Puede cargarlo con la opción de menú <em>Archivo - Subir desde tu computador</em>.</p>
+<ol start="3" type="1">
+<li>Problema a resolver: dibujar un paisaje como el que se muestra en la figura de abajo.</li>
+</ol>
+<div id="fig-paisaje" class="lightbox quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center" alt="Paisaje">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-paisaje-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="img/paisaje.png" class="lightbox" data-glightbox="description: .lightbox-desc-14" data-gallery="quarto-lightbox-gallery-14"><img src="img/paisaje.png" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="Paisaje"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-paisaje-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;1.15: Paisaje.
+</figcaption>
+</figure>
+</div>
+<p>Para comenzar, dibuje un par de casas. Se sugiere agregar la extensión <em>Lápiz</em> y bloques como <em>bajar lápiz</em>, <em>subir lápiz</em>, <em>borrar todo</em>, <em>mover</em>, <em>girar</em>, <em>ir a</em>, <em>apuntar en dirección</em> y cualquier otro que le sea útil.</p>
+<section id="descomposición" class="level4" data-number="1.7.1.1">
+<h4 data-number="1.7.1.1" class="anchored" data-anchor-id="descomposición"><span class="header-section-number">1.7.1.1</span> Descomposición</h4>
+<p><em>División de un problema en subproblemas más pequeños</em></p>
+<ol start="4" type="1">
+<li><p>Identifique subproblemas en los que se pueda dividir el problema general (ej. figuras geométricas) y agrupe los bloques correspondientes a cada subproblema.</p></li>
+<li><p>Para cada subproblema, cree un bloque nuevo con <em>Crear un bloque</em> en la sección <em>Mis bloques</em>.</p></li>
+<li><p>Utilice estructuras de control como <em>repetir</em> en la sección <em>Control</em> para realizar tareas repetitivas.</p></li>
+</ol>
+</section>
+<section id="reconocimiento-de-patrones" class="level4" data-number="1.7.1.2">
+<h4 data-number="1.7.1.2" class="anchored" data-anchor-id="reconocimiento-de-patrones"><span class="header-section-number">1.7.1.2</span> Reconocimiento de patrones</h4>
+<p><em>Búsqueda de similitudes de un problema a resolver, con problemas ya resueltos</em></p>
+<ol start="7" type="1">
+<li>Busque problemas conocidos similares a los que está resolviendo (ej. dibujos de figuras geométricas) y aplique las soluciones.</li>
+</ol>
+</section>
+<section id="abstracción" class="level4" data-number="1.7.1.3">
+<h4 data-number="1.7.1.3" class="anchored" data-anchor-id="abstracción"><span class="header-section-number">1.7.1.3</span> Abstracción</h4>
+<p><em>Filtrado de la información que se necesita y de la que no se necesita para resolver un problema.</em></p>
+<ol start="8" type="1">
+<li>Identifique los elementos de información que necesita para resolver los subproblemas que ha identificado (ej. tamaños, ángulos). Trate de usarlos como entrada de los bloques que creó.</li>
+</ol>
+</section>
+<section id="algoritmos-1" class="level4" data-number="1.7.1.4">
+<h4 data-number="1.7.1.4" class="anchored" data-anchor-id="algoritmos-1"><span class="header-section-number">1.7.1.4</span> Algoritmos</h4>
+<p><em>Descripción, paso por paso, de la solución a un problema.</em></p>
+<ol start="9" type="1">
+<li>Describa un algoritmo para la solución al problema.</li>
+</ol>
+
+
+<div class="hidden" aria-hidden="true">
+<span class="glightbox-desc lightbox-desc-1">Figura&nbsp;1.1: Modelo <em>Entrada - Procesamiento - Salida</em></span>
+<span class="glightbox-desc lightbox-desc-2">Figura&nbsp;1.2: Réplica de la máquina de Leibniz. Fuente: <a href="https://commons.wikimedia.org/wiki/User:Kolossos">Kolossos</a> a través de <a href="https://commons.wikimedia.org/wiki/File:Leibnitzrechenmaschine.jpg">Wikimedia Commons</a>.</span>
+<span class="glightbox-desc lightbox-desc-3">Figura&nbsp;1.3: Máquina analítica de Babbage. Fuente: Bruno Barral a través de <a href="https://commons.wikimedia.org/wiki/File:AnalyticalMachine_Babbage_London.jpg">Wikimedia Commons</a>.</span>
+<span class="glightbox-desc lightbox-desc-4">Figura&nbsp;1.4: Diagrama de un algoritmo para el cálculo de los números de Bernoulli en la máquina analítica de Babbage. Fuente: Ada Lovelace a través de <a href="https://commons.wikimedia.org/wiki/File:Diagram_for_the_computation_of_Bernoulli_numbers.jpg">Wikimedia Commons</a>.</span>
+<span class="glightbox-desc lightbox-desc-5">Figura&nbsp;1.5: Representación artística de la máquina de Turing. Fuente: <a href="https://commons.wikimedia.org/wiki/User:Porao">Porao</a> a través de <a href="https://commons.wikimedia.org/wiki/File:Turing_Machine.png">Wikimedia Commons</a>.</span>
+<span class="glightbox-desc lightbox-desc-6">Figura&nbsp;1.6: Computadora Colossus operada por integrantes del Women’s Royal Naval Service (WRNS). Fuente: Fotografía de autor desconicido compartida a través de <a href="https://commons.wikimedia.org/wiki/File:Colossus.jpg">Wikimedia Commons</a>.</span>
+<span class="glightbox-desc lightbox-desc-7">Figura&nbsp;1.7: Computadora ENIAC en Filadelfia, EE UU. Fuente: Fotografía del Ejército de los Estados Unidos de América compartida a través de <a href="https://commons.wikimedia.org/wiki/File:Eniac.jpg">Wikimedia Commons</a>.</span>
+<span class="glightbox-desc lightbox-desc-8">Figura&nbsp;1.8: Arquitectura de von Neumann. Imagen de David Strigoi compartida a través de <a href="https://commons.wikimedia.org/wiki/File:Arquitecturaneumann.jpg">Wikimedia Commons</a>.</span>
+<span class="glightbox-desc lightbox-desc-9">Figura&nbsp;1.9: Procesador Intel. Imagen de <a href="https://unsplash.com/@slavudin?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Slejven Djurakovic</a> compartida a través de <a href="https://unsplash.com/s/photos/chip?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a>.</span>
+<span class="glightbox-desc lightbox-desc-10">Figura&nbsp;1.10: Instrucción en lenguaje máquina. Imagen de <a href="https://en.wikipedia.org/wiki/Machine_code">Wikipedia</a>.</span>
+<span class="glightbox-desc lightbox-desc-11">Figura&nbsp;1.11: Programa <em>Hola mundo</em> en lenguaje máquina. Imagen de <a href="https://www.youtube.com/watch?v=3LPJfIKxwWc">CS50x 2024 - Lecture 0 - Scratch</a>.</span>
+<span class="glightbox-desc lightbox-desc-12">Figura&nbsp;1.12: Resolución de problemas mediante computadoras.</span>
+<span class="glightbox-desc lightbox-desc-13">Figura&nbsp;1.13: Ambiente de programación de Scratch.</span>
+<span class="glightbox-desc lightbox-desc-14">Figura&nbsp;1.15: Paisaje.</span>
+</div>
+</section>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copiado");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copiado");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./parte-i-introduccion-programacion_computadoras_ciencia_datos.html" class="pagination-link" aria-label="I - Introducción a la programación de computadoras y a la ciencia de datos">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">I - Introducción a la programación de computadoras y a la ciencia de datos</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
+</div> <!-- /content -->
+<script>var lightboxQuarto = GLightbox({"loop":false,"descPosition":"bottom","selector":".lightbox","closeEffect":"zoom","openEffect":"zoom"});
+window.onload = () => {
+  lightboxQuarto.on('slide_before_load', (data) => {
+    const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+    const href = trigger.getAttribute('href');
+    if (href !== null) {
+      const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+      if (imgEl !== null) {
+        const srcAttr = imgEl.getAttribute("src");
+        if (srcAttr && srcAttr.startsWith("data:")) {
+          slideConfig.href = srcAttr;
+        }
+      }
+    } 
+  });
+
+  lightboxQuarto.on('slide_after_load', (data) => {
+    const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+    if (window.Quarto?.typesetMath) {
+      window.Quarto.typesetMath(slideNode);
+    }
+  });
+
+};
+          </script>
+
+
+
+
+</body></html>

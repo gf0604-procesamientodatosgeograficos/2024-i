@@ -1,0 +1,417 @@
+# Arquitectura de computadoras, lenguajes de programación y pensamiento computacional {#sec-pencom}
+En este capítulo se explica la característica principal de las computadoras: su capacidad para ser programadas y así ayudar a resolver problemas. Se detallan los componentes físicos de la arquitectura que sustenta esta capacidad, la forma en que trabajan los lenguajes de programación, así como los principios del pensamiento computacional, un enfoque para la resolución de problemas basado en conceptos y métodos de las ciencias de la computación. Estos principios se ilustran con el lenguaje de programación Scratch.
+
+## Resumen
+Una computadora es una máquina que ejecuta secuencias de instrucciones, llamadas programas. La capacidad que tienen las computadoras de ser programadas permite modificar sus funcionamiento sin necesidad de alterar sus componentes físicos, lo que permite que ayuden a resolver una gran cantidad de problemas. Las secuencias de pasos describen la solución a un problema se denominan algoritmos. En un algoritmo recibe datos de entrada, los procesa y genera salidas. Un algoritmo puede ser implementado en diferentes lenguajes de programación.
+
+Las computadoras modernas están construídas con base en circuitos integrados, también llamados *chips* o *microchips*. Los circuitos integrados procesan información digital (que usa valores discretos), la cual generalmente es binaria (i.e. de dos valores). Los circuitos integrados de una computadora procesan dos estados correspondientes a dos niveles de tensión eléctrica: alto y bajo. Estos estados se representan con 0 y 1. Esto facilita la aplicación de la teoría de la información y del álgebra *booleana*.
+
+Durante el período entre las guerras mundiales, Allan Turing desarrolló la máquina de Turing, un dispositivo teórico que manipula símbolos de una cinta de acuerdo con una tabla de reglas. La máquina de Turing simula el funcionamiento de un algoritmo y los conceptos de entrada, procesamiento y salida. En 1945, John von Neumann propuso un concepto conocido como programa almacenado, en el cual los datos y los programas se almacenan en una estructura llamada memoria, separada del hardware que ejecuta las instrucciones. Este esquema permite que las computadoras sean más fáciles de reprogramar y es conocido actualmente como arquitectura de von Neumann. Sus componentes principales son la memoria principal, la unidad central de procesamiento (CPU) y los sistemas de entrada y salida.
+
+El lenguaje máquina es un conjunto de instrucciones binarias interpretables por la CPU de una computadora. Un programa consiste de una secuencia de instrucciones en lenguaje máquina. Debido a que programar una computadora en lenguaje máquina es excesivamente lento y complicado, en la década de 1950 comenzaron a crearse lenguajes de programación que, en lugar de unos y ceros, consisten de instrucciones formadas por palabras, usualmente en idioma inglés. Existe una gran variedad de lenguajes de programación que han sido creados con diversos fines: científicos, comerciales, educacionales y otros.
+
+El pensamiento computacional es un enfoque para la resolución de problemas basado en conceptos y métodos de las ciencias de la computación. Sus principios fundamentales son:
+
+- **Descomposición**: división de un problema en subproblemas más pequeños.
+- **Reconocimiento de patrones**: búsqueda de similitudes en los problemas.
+- **Abstracción**: filtrado de la información que se necesita y de la que no se necesita para resolver un problema.
+- **Algoritmos**: descripción, paso por paso, de la solución a un problema.
+
+Scratch es un lenguaje de programación orientado a educación. Fue desarrollado en 2003 por el MIT Media Lab y es administrado por la Fundación Scratch, una organización sin fines de lucro que lo facilita de manera gratuita.
+
+## Trabajo previo
+
+### Lecturas y videos
+CS50 (Director). (2024). CS50x 2024—Lecture 0—Scratch. [https://www.youtube.com/watch?v=3LPJfIKxwWc](https://www.youtube.com/watch?v=3LPJfIKxwWc)
+
+Wing, J. M. (2006). Computational thinking. *Communications of the ACM, 49*(3), 33-35. [https://doi.org/10.1145/1118178.1118215](https://doi.org/10.1145/1118178.1118215)
+
+## Conceptos fundamentales sobre programación de computadoras
+En esta sección, se detallan algunos conceptos básicos sobre programación de computadoras, incluyendo los algoritmos y el modelo *Entrada - Procesamiento - Salida*.
+
+### Programabilidad
+Una computadora es una máquina que ejecuta automáticamente secuencias de instrucciones llamadas programas. Las instrucciones de los programas realizan diversos tipos de operaciones entre los que, por ejemplo, pueden mencionarse:
+
+- **Cálculos aritméticos**: sumar, restar, multiplicar, dividir.
+- **Procesamiento de texto**: buscar, reemplazar, dividir y concatenar cadenas de texto.
+- **Operaciones lógicas**: determinar si un número es mayor que otro, si una hilera está contenida en otra hilera o si un elemento está en una lista.
+- **Manipulación de datos**: crear, leer, actualizar y eliminar datos en estructuras de datos (ej. listas, vectores, matrices) o en bases de datos.
+- **Interacciones con el usuario**: recibir entradas del usuario (ej. del teclado o del ratón) y mostrarle información (ej. en la pantalla o en la impresora).
+- **Manejo de archivos**: leer, escribir y modificar archivos.
+- **Comunicaciones en red**: enviar y recibir datos a través de una red local o de la Internet (ej. páginas web, corres electrónicos).
+
+La capacidad que tienen las computadoras de ser programadas, permite que su funcionamiento sea modificado sin necesidad de alterar sus componentes físicos, lo que las hace muy versátiles y aptas para ayudar a resolver una gran variedad de problemas, por lo que se dice que son de propósito general. Estas características las diferencian de otros tipos de máquinas, las cuales han sido construídas con fines específicos.
+
+### Algoritmos
+Para que una computadora sea útil en la resolución de un problema, es necesario expresar esta solución en una secuencia de pasos claramente definidos. A estas secuencias se les denomina [algoritmos](https://es.wikipedia.org/wiki/Algoritmo). Más detalladamente, un algoritmo es un conjunto de instrucciones o reglas definidas y no ambiguas, ordenadas y finitas que permite solucionar un problema. Los algoritmos son fundamentales en ciencias de la computación, ya que son la base sobre la que se construyen los programas.
+
+Un algoritmo puede ser tan sencillo como una [receta de cocina](https://cookpad.com/cr/recetas/6014919-arroz-con-pollo-al-estilo-costarricense) o tan complejo como los que se utilizan en [aprendizaje automático](https://link.springer.com/article/10.1023/A:1010933404324) (*machine learning*).
+
+Un algoritmo debe cumplir con ciertas características básicas:
+
+1. **Recibir entradas**: datos con los que trabaja.
+2. **Generar salidas**: resultados generados por las operaciones que ejecuta el algoritmo.
+3. **Cada paso debe ser claro**: la definición de cada paso debe ser precisa y sin ambigüedades.
+4. **Debe ser finito**: debe terminar después de un número finito de pasos.
+
+Hay varias formas de representar un algoritmo, entre las que están el [pseudocódigo](https://es.wikipedia.org/wiki/Pseudoc%C3%B3digo), un [diagrama de flujo](https://es.wikipedia.org/wiki/Diagrama_de_flujo) o simplemente una descripción escrita. A manera de ejemplo, se presenta seguidamente la descripción de un algoritmo para obtener el valor máximo de una lista:
+
+```
+Algoritmo para obtener el valor máximo de una lista
+---------------------------------------------------
+
+1. Lea la lista (del teclado, de un archivo o de alguna otra fuente).
+2. Si la lista está vacía, despliegue la hilera de texto "Lista vacía" 
+   y concluya el algoritmo. Si no, continúe con el paso 3.
+3. Designe el primer elemento de la lista como "máximo actual".
+4. Recorra la lista y compare cada uno de los elementos con el máximo actual.
+   4.1. Si un elemento comparado es mayor que el máximo actual, 
+        entonces desígnelo como el nuevo máximo actual.
+5. Al finalizar el recorrido de la lista, imprima el máximo actual
+   como valor máximo de la lista.
+```
+
+Seguidamente, se muestra la aplicación de este algoritmo a una lista de ejemplo.
+
+1. Lista leída: **[29.6, -36.81, 31.85, 25.71, 90.2, 0.4]**
+2. La lista no está vacía, por lo que se continúa con el paso 3.
+3. Se designa al primer elemento de la lista, **29.6**, como el máximo actual.
+
+4. Se recorre la lista y se compara cada uno de los elementos con el máximo actual.
+   4.1. Si un elemento comparado es mayor que el máximo actual, entonces pasa a ser el nuevo máximo actual.
+
+**Elemento en negrita** = máximo actual  
+*Elemento en itálica*  = elemento que está siendo comparado
+
+[**29.6**, *-36.81*, 31.85, 25.71, 90.2, 0.4]
+
+[**29.6**, -36.81, *31.85*, 25.71, 90.2, 0.4]
+
+[29.6, -36.81, **31.85**, *25.71*, 90.2, 0.4]
+
+[29.6, -36.81, **31.85**, 25.71, *90.2*, 0.4]
+
+[29.6, -36.81, 31.85, 25.71, **90.2**, *0.4*]
+
+[29.6, -36.81, 31.85, 25.71, **90.2**, 0.4]
+
+6. Al finalizar el recorrido de la lista, se imprime el máximo actual como valor máximo de la lista: **90.2**
+
+Note que el algoritmo tiene claramente definido un inicio (la lectura de la lista) y establace cual es la condición que debe cumplirse para su finalización (que termine el recorrido de la lista). Asimismo, cada uno de los pasos intermedios está especificado con claridad, incluyendo las condiciones para que se ejecuten.
+
+Note además que el algoritmo incluye:
+
+- **Lectura de entradas**: la lista.  
+- **Procesamiento de las entradas**: recorrido de la lista y comparaciones entre sus elementos.  
+- **Generación de salidas**: el valor máximo de la lista.  
+
+### Modelo Entrada - Procesamiento - Salida
+El modelo [*Entrada - Procesamiento - Salida*](https://en.wikipedia.org/wiki/IPO_model) (*Input - Process - Output* o IPO) describe la estructura básica de un algoritmo o de un programa de cómputo. Es un concepto fundamental en computación que describe el flujo de trabajo básico que emplean los sistemas para procesar información o datos. De acuerdo con este modelo, un algoritmo o programa recibe entradas (ej. números), las procesa (realiza cálculos matemáticos) y genera salidas (resultados de los cálculos). 
+
+El modelo *Entrada - Procesamiento - Salida* se esquematiza en la @fig-modelo-entrada-procesamiento-salida.
+
+![Modelo *Entrada - Procesamiento - Salida*](img/modelo-entrada-procesamiento-salida.png){#fig-modelo-entrada-procesamiento-salida .lightbox fig-alt="Modelo Entrada - Procesamiento - Salida" fig-align="center"}
+
+A continuación se describen los componentes del modelo:
+
+- **Entrada (*Input*)**: consiste de datos o información que recibe el sistema. Pueden venir en diversas formas, como señales electrónicas, datos tecleados por un usuario o archivos, entre otros. La calidad y precisión de la entrada pueden afectar significativamente el resultado final del proceso.
+- **Procesamiento (*Process*)**: Una vez que los datos de entrada son recibidos, el sistema los procesa de acuerdo con un conjunto de instrucciones o pasos. El procesamiento puede involucrar operaciones como cálculos matemáticos, operaciones lógicas, transformaciones o cualquier otra acción necesaria para generar la salida que se requiere. En este componente es usualmente donde se realiza el "trabajo" principal del sistema.
+- **Salida (*Output*)**: Una vez finalizado el procesamiento, el sistema genera una salida. La salida es el resultado del proceso y puede presentarse en varias formas, como una visualización en pantalla, un archivo o un documento impreso, entre otras posibilidades. La salida puede ser el final del algoritmo o programa o puede servir como entrada para otro algoritmo o programa.
+
+Para ilustrar el modelo *Entrada - Procesamiento - Salida*, se muestra su aplicación al cálculo del [índice de masa corporal (IMC)](https://es.wikipedia.org/wiki/%C3%8Dndice_de_masa_corporal), una razón matemática que clasifica el peso de las personas en categorías como bajo, normal y sobrepeso, con base en su masa y su estatura. El IMC necesita dos entradas: masa (en kilogramos) y estatura (en metros). El procesamiento se realiza mediante la fórmula: imc = imc = masa/estatura^2^.
+
+Entonces, un posible algoritmo para calcular el IMC de una persona es:
+
+1. Lea la masa y la estatura de la persona.
+2. Calcule el imc mediante la fórmula: imc = masa/estatura^2^.
+3. Imprima el imc.
+
+**Ejercicios**  
+Calcule manualmente su IMC y verifique el resultado con esta [calculadora de IMC](https://www.nhlbi.nih.gov/health/educational/lose_wt/BMI/bmi-m_sp.htm).
+
+### Implementación de algoritmos en programas
+El diseño de un algoritmo puede verse como un paso previo a la elaboración de un programa de cómputo. Un mismo algoritmo puede implementarse en diferentes lenguajes de programación. Seguidamente se presenta la implementación del algoritmo de obtención del valor máximo de una lista en los lenguajes de programación [Python](https://es.wikipedia.org/wiki/Python) y [R](https://es.wikipedia.org/wiki/R_(lenguaje_de_programaci%C3%B3n)).
+
+::: {layout-ncol=2}
+
+```python
+# Python
+# Obtención del valor máximo de una lista
+
+# Entrada
+lista = [29.6, -36.81, 31.85, 25.71, 90.2, 0.4]
+print("Lista de entrada: ", lista)
+
+# Procesamiento
+if (len(lista) == 0):
+    print("La lista está vacía")
+else:
+    max = lista[0]
+    i = 0
+    while (i < len(lista)):
+        if (lista[i] > max):
+            max = lista[i]
+        i = i + 1
+        
+    # Salida
+    print("Valor máximo de la lista:", max) 
+```
+
+```r
+# R
+# Obtención del valor máximo de una lista
+
+# Entrada
+lista <- c(29.6, -36.81, 31.85, 25.71, 90.2, 0.4)
+cat("Lista de entrada: ", lista, "\n")
+
+# Procesamiento
+if (length(lista) == 0) {
+  cat("La lista está vacía", "\n")
+} else {
+  max <- lista[1]
+  i <- 1
+  while (i <= length(lista)) {
+    if (lista[i] > max) {
+      max <- lista[i]
+    }
+    i <- i + 1
+  }
+  
+  # Salida
+  cat("Valor máximo de la lista: ", max, "\n")
+}
+```
+
+:::
+
+**Ejercicios**  
+
+1. Ejecute los programas anteriores en R y Python en los siguientes ambientes de ejecución en línea. Solamente debe copiar cada programa en el espacio destinado para ese fin y presionar el botón *Run* (ejecutar, correr).
+    - [Ambiente de ejecución en línea para Python](https://www.mycompiler.io/new/python)
+    - [Ambiente de ejecución en línea para R](https://www.mycompiler.io/new/r)
+2. Con base en la descripción del IMC brindada en la sección anterior, elabore una hoja electrónica que calcule el IMC para 10 personas. Considere como incluir los componentes de entrada, procesamiento y salida.
+3. Con base en el algoritmo descrito en la sección para el cálculo del IMC, elabore un programa en Python y otro programa en R que calculen el IMC de una persona.
+
+## Arquitectura de computadoras
+En esta sección, se explican los principales componentes de las computadoras modernas. Se realiza un recorrido por algunos de los principales antecedentes históricos de su evolución y se detallan los componentes de la arquitectura de von Neumann, el modelo de arquitectura más utilizado en la actualidad.
+
+### Evolución histórica
+
+#### Calculadoras mecánicas
+Durante el siglo XVII, varios matemáticos construyeron calculadoras mecánicas capaces de realizar operaciones aritméticas. 
+
+Alrededor de 1645, el filósofo y matemático francés [Blaise Pascal](https://es.wikipedia.org/wiki/Blaise_Pascal) (1623-1662) inventó la [Pascalina](https://es.wikipedia.org/wiki/Pascalina), una calculadora compuesta por ruedas y engranajes que podía sumar y restar. Pascal la creó con el propósito de ayudar a su padre, quien era contador en la Hacienda francesa y necesitaba una herramienta para realizar cálculos de aritmética comercial de manera más eficiente. La Pascalina podía sumar hasta tres partes en una sola operación, llegando al valor de 999 999.
+
+En 1672, el científico alemán [Gottfried Leibniz](https://es.wikipedia.org/wiki/Gottfried_Leibniz) (1646 - 1716) extendió las ideas de Pascal e introdujo la [*Stepped Reckoner* o máquina de Leibniz](https://en.wikipedia.org/wiki/Stepped_reckoner), un dispositivo que, además de sumar y restar, podía multiplicar, dividir y calcular raíces cuadradas. La máquina de Leibniz estaba basada en un dispositivo llamado [rueda de Leibniz](https://es.wikipedia.org/wiki/Rueda_de_Leibniz), un tambor con forma de cilindro, con un conjunto de dientes de longitud incremental a la que se le acopla una rueda de conteo. La @fig-maquina-leibniz muestra una réplica de la máquina de Leibniz.
+
+![Réplica de la máquina de Leibniz. Fuente: [Kolossos](https://commons.wikimedia.org/wiki/User:Kolossos) a través de [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Leibnitzrechenmaschine.jpg).](img/maquina-leibniz.jpg){#fig-maquina-leibniz .lightbox fig-alt="Réplica de la máquina de Leibniz" fig-align="center"}
+
+El objetivo de Leibniz era realizar cálculos de una manera "fácil, rápida y fiable". También pretendía que los números calculados pudieran ser tan grandes como se deseara, si el tamaño de la máquina era ajustado. Sin embargo, las primeras versiones de la rueda de Leibniz no eran fiables debido a que tenían piezas mecánicas que tendían a trabarse y a fallar.
+
+Los derivados de las calculadoras mecánicas creadas por Pascal y Leibniz continuaron siendo producidos durante tres siglos, hasta que a principios de los años 1970 sus equivalentes electrónicos finalmente llegaron a ser fácilmente disponibles y baratos. 
+
+#### La máquina analítica de Babbage
+En la primera mitad del siglo XIX, el matemático británico [Charles Babbage](https://es.wikipedia.org/wiki/Charles_Babbage) (1791 - 1871) diseñó la [máquina analítica](https://es.wikipedia.org/wiki/M%C3%A1quina_anal%C3%ADtica), una computadora mecánica que incorporaba algunas características de las computadoras modernas. Fue inicialmente descrita en 1837, aunque Babbage continuó refinando el diseño hasta su muerte en 1871. Es considerada la primera computadora programable de la historia. La máquina analítica de Babbage se muestra en la @fig-maquina-analitica.
+
+![Máquina analítica de Babbage. Fuente: Bruno Barral a través de [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:AnalyticalMachine_Babbage_London.jpg).](img/maquina-analitica.jpg){#fig-maquina-analitica .lightbox fig-alt="Máquina analítica de Babbage" fig-align="center"}
+
+Aunque nunca fue terminada debido a limitaciones técnicas y económicas, su diseño revolucionario permitía realizar cálculos complejos y programarla para diversas tareas. Utilizaba tarjetas perforadas para la entrada de datos, disponía de una unidad aritmética para realizar operaciones matemáticas y una memoria capaz de almacenar hasta 1000 números. El lenguaje de programación que sería utilizado era similar a los actuales [lenguajes ensambladores](https://es.wikipedia.org/wiki/Lenguaje_ensamblador). Era posible implementar ciclos y condicionales de manera que el lenguaje propuesto habría sido [Turing-completo](https://es.wikipedia.org/wiki/Turing_completo). 
+
+En 1843, la matemática británica [Ada Lovelace](https://es.wikipedia.org/wiki/Ada_Lovelace) (1815 - 1852) tradujo al inglés una descripción de la máquina analítica escrita en francés un año antes por el matemático italiano [Luigi Menabrea](https://es.wikipedia.org/wiki/Luigi_Menabrea) (1809 - 1896). Entre las notas que acompañan la traducción, Lovelace incluyó el detalle de los pasos mediante los cuales la máquina podría calcular los [números de Bernoulli](https://es.wikipedia.org/wiki/N%C3%BAmero_de_Bernoulli), lo que se considera por algunos el primer programa de computadoras de la historia. El diagrama correspondiente a este algoritmo/programa se muestra en la @fig-programa-maquina-analitica.
+
+![Diagrama de un algoritmo para el cálculo de los números de Bernoulli en la máquina analítica de Babbage. Fuente: Ada Lovelace a través de [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Diagram_for_the_computation_of_Bernoulli_numbers.jpg).](img/programa-maquina-analitica.jpg){#fig-programa-maquina-analitica .lightbox fig-alt="Diagrama de un algoritmo para el cálculo de los números de Bernoulli en la máquina analítica de Babbage" fig-align="center"}
+
+Ahora se cree que el autor de este programa fue probablemente el mismo Charles Babbage, que ya había desarrollado trabajos similares entre seis y siete años antes de la publicación del artículo de Lovelace. 
+
+El aporte de Ada Lovelace fue de suma importancia para la computación, ya que fue la primera en reconocer la capacidad de las máquinas para ir más allá de los simples cálculos de números. Acertadamente, anticipó que en el futuro podrían hacer muchas otras cosas, como componer música o generar gráficos. En sus notas, Lovelace enfatizó la diferencia entre la máquina analítica y las máquinas de cálculo previas, en particular su capacidad de ser programada para resolver problemas de mayor complejidad.
+
+#### La máquina de Turing
+En 1936, el matemático británico [Allan Turing](https://es.wikipedia.org/wiki/Alan_Turing) (1912 - 1954) propuso la [máquina de Turing](https://es.wikipedia.org/wiki/M%C3%A1quina_de_Turing), un modelo matemático que manipula símbolos en una cinta según un conjunto de reglas. La @fig-maquina-turing muestra una representación artística de la máquina de Turing.
+
+![Representación artística de la máquina de Turing. Fuente: [Porao](https://commons.wikimedia.org/wiki/User:Porao) a través de [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Turing_Machine.png).](img/maquina-turing.png){#fig-maquina-turing .lightbox fig-alt="Representación artística de la máquina de Turing" fig-align="center"}
+
+Una máquina de Turing está compuesta por:
+
+1. **Una cinta**: actúa como memoria de la máquina. Se compone de celdas, cada una de las cuales puede contener un símbolo (ej. una letra, un número).
+2. **Una cabeza lectora/escritora**: lee y escribe símbolos en la cinta.
+3. **Un conjunto de estados**: entre los cuales la máquina puede cambiar en respuesta a lo que lee en la cinta. Hay un estado inicial desde el cual el funcionamiento de la máquina comienza, y uno o más estados de parada que indican que la máquina ha terminado su computación.
+4. **Una tabla de acciones**: indica para combinación de estado actual y símbolo leído en la cinta, qué acción debe realizar la máquina. Estas acciones incluyen leer o escribir un símbolo en la cinta, mover la cabeza lectora/escritora a la izquierda o a la derecha sobre la cinta y cambiar a un nuevo estado.
+
+Con este esquema, una máquina de Turing puede ejecutar cualquier algoritmo. El modelo de Turing demostró que una máquina simple podía resolver cualquier problema computable, si cuenta con el tiempo y los recursos necesarios. Si un sistema (ej. una computadora, un lenguaje de programación) puede utilizarse para resolver cualquier problema de cómputo, se dice que es [Turing-completo](https://es.wikipedia.org/wiki/Turing_completo). No todos los sistemas o lenguajes de programación son Turing-completos, ya que algunos están diseñados para propósitos específicos y pueden tener restricciones que limitan su capacidad de cálculo.
+
+Allan Turing es considerado uno de los padres de la computación moderna. Sus contribuciones fueron fundamentales en el desarrollo de la [teoría de la computación](https://es.wikipedia.org/wiki/Teor%C3%ADa_de_la_computaci%C3%B3n) y la [inteligencia artificial](https://es.wikipedia.org/wiki/Inteligencia_artificial). En esta última área, Turing propuso un experimento para determinar si una máquina puede exhibir inteligencia equivalente a la de un ser humano. Este experimento, conocido como [Prueba de Turing](https://es.wikipedia.org/wiki/Prueba_de_Turing), sigue siendo una referencia en el debate sobre la inteligencia artificial.
+
+#### Primeras computadoras electrónicas
+Con base en las ideas de Turing, las computadoras de tipo [Bombe](https://es.wikipedia.org/wiki/Bombe) y [Colossus](https://es.wikipedia.org/wiki/Colossus) fueron construídas durante la II Guerra Mundial (1939 - 1945) en el Reino Unido para descifrar mensajes codificados. A pesar de que se consideran de las primeras computadoras digitales electrónicas programables, su programación se realizaba a través de componentes de *hardware*, como interruptores y enchufes, y no con un [programa almacenado en la memoria](https://es.wikipedia.org/wiki/Computador_de_programa_almacenado). La @fig-colossus muestra una computadora Colossus.
+
+![Computadora Colossus operada por integrantes del Women's Royal Naval Service (WRNS). Fuente: Fotografía de autor desconicido compartida a través de [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Colossus.jpg).](img/colossus.jpg){#fig-colossus .lightbox fig-alt="Computadora Colossus operada por integrantes del Women's Royal Naval Service (WRNS)" fig-align="center"}
+
+También durante la II Guerra Mundial, el ejército de Estados Unidos de América construyó [ENIAC (Electronic Numerical Integrator and Computer)](https://es.wikipedia.org/wiki/ENIAC) para calcular tablas de tiro de artillería. Es considerada por algunos como la primera computadora programable digital de propósito general. Era capaz de seguir el modelo de la máquina de Turing, por lo que era Turing-completa. La @fig-eniac presenta una imagen de ENIAC.
+
+![Computadora ENIAC en Filadelfia, EE UU. Fuente: Fotografía del Ejército de los Estados Unidos de América compartida a través de [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Eniac.jpg).](img/eniac.jpg){#fig-eniac .lightbox fig-alt="Computadora ENIAC en Filadelfia, EE UU" fig-align="center"}
+
+### La arquitectura de von Neumann
+En 1945, el matemático húngaro - estadounidense [John von Neumann](https://es.wikipedia.org/wiki/John_von_Neumann) (1903 - 1957) propuso un concepto conocido como [programa almacenado](https://es.wikipedia.org/wiki/Computador_de_programa_almacenado) según el cual los datos y los programas de una computadora se almacenan en una estructura llamada memoria, separada de los componentes que ejecutan las instrucciones. Este modelo permite que las computadoras sean más fáciles de reprogramar y es conocido actualmente como [arquitectura de von Neumann](https://es.wikipedia.org/wiki/Arquitectura_de_Von_Neumann). Su esquema se muestra en la @fig-arquitectura-von-neumann.
+
+![Arquitectura de von Neumann. Imagen de David Strigoi compartida a través de [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Arquitecturaneumann.jpg).](img/arquitectura-von-neumann.jpg){#fig-arquitectura-von-neumann .lightbox fig-alt="Arquitectura de von Neumann" fig-align="center"}
+
+Los principales componentes de esta arquitectura son:
+
+- **Memoria principal**. Almacena las instrucciones de los programas y los datos que utilizan estos programas. Es común denominarla como *Random Access Memory* (Memoria de Acceso Aleatorio) o RAM, ya que toma el mismo tiempo acceder a cualquier posición de la memoria. Cada posición de memoria tiene una dirección a la que se hace referencia cuando se desea leer o escribir.
+
+- **Unidad central de procesamiento**. Llamada en inglés *Central Processing Unit* (CPU), se encarga de ejecutar las instrucciones de los programas. Contiene memorias temporales de alta velocidad y poca capacidad llamadas registros para almacenar los operandos y el resultado de las instrucciones. Está compuesta por dos partes principales:
+
+    - **Unidad de control**. Determina cuál es la siguiente instrucción a ejecutar. 
+    - **Unidad de aritmética y lógica**. Llamada en inglés *Arithmetic and Logic Unit* (ALU), ejecuta las operaciones aritméticas y lógicas. 
+    
+- **Sistemas de entrada y salida**. Permiten que la computadora interactúe con el usuario y, en general, con el mundo exterior. Algunos ejemplos son el teclado y el ratón, como sistemas de entrada, y la pantalla y la impresora, como sistemas de salida.
+
+### Sistemas binarios
+Las computadoras modernas están construídas con base en [circuitos integrados](https://es.wikipedia.org/wiki/Circuito_integrado), también llamados *chips* o *microchips*, como el que se muestra en la @fig-circuito-integrado.
+
+![Procesador Intel. Imagen de [Slejven Djurakovic](https://unsplash.com/@slavudin?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) compartida a través de [Unsplash](https://unsplash.com/s/photos/chip?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText).](img/circuito-integrado.jpg){#fig-circuito-integrado .lightbox fig-alt="Procesador Intel" fig-align="center"}
+
+Los circuitos integrados procesan información digital (que usa valores discretos), la cual generalmente es binaria, lo que significa que puede tener dos valores. Para representar estos dos valores internamente, las computadoras emplean dos niveles de tensión eléctrica: bajo (o ausencia de tensión) y alto (o presencia de tensión eléctrica). Estos estados se representan respectivamente con 0 y 1 (o viceversa). Este es un sistema binario y cada dígito binario se denomina *bit* (*binary digit*). Los *bits* se agrupan en grupos de ocho llamados [*bytes*](https://es.wikipedia.org/wiki/Byte)) para representar elementos de información más complejos, como números más grandes o carácteres de texto. Por ejemplo:
+
+- El número decimal ```14``` se representa en binario como ```1110```:  
+```1110``` = ```2^3*1 + 2^2*1 + 2^1*1 + 2^0*0``` = ```8 + 4 + 2 + 0``` = ```14```
+- La palabra ```bit``` se representa en [código ASCII](https://es.wikipedia.org/wiki/ASCII) como:  
+```01100010 01101001 01110100``` = ```bit```
+
+De manera similar, se pueden representar otras clases de información, como imágenes, sonidos o videos, mediante secuencias de dígitos binarios.
+
+#### Ventajas
+El uso de dos estados (en lugar de diez, doce u otra cantidad) facilita la aplicación de la [teoría de la información](https://es.wikipedia.org/wiki/Teor%C3%ADa_de_la_informaci%C3%B3n), el estudio matemático de la cuantificación, almacenamiento y comunicación de la información, en el cual los *bits* son la unidad fundamental. La teoría de la información fue proṕuesta por el matemático estadounidense [Claude Shannon](https://es.wikipedia.org/wiki/Claude_Shannon) (1916 - 2001) en la década de 1940. 
+
+El [álgebra *booleana*](https://es.wikipedia.org/wiki/%C3%81lgebra_de_Boole), un pilar fundamental en el campo del análisis y diseño de sistemas digitales, así como en la programación de computadoras, también utiliza dos posibles valores: verdadero (1) y falso (0). Fue introducida en 1847 por el matemático británico [George Boole](https://es.wikipedia.org/wiki/George_Boole) (1815 - 1864). El álgebra *booleana* utiliza operaciones lógicas como `AND` (y), `OR` (o) y `NOT` (no) para combinar y transformar valores *booleanos* (verdaderos y falsos).
+
+Por otra parte, es más fácil diseñar y fabricar dispositivos electrónicos que solo necesitan reconocer dos estados. Por esta razón, los circuitos que manejan señales binarias pueden ser más simples, más confiables y menos costosos que aquellos que tendrían que manejar múltiples estados.
+
+### Lenguaje máquina
+El [lenguaje máquina](https://es.wikipedia.org/wiki/Lenguaje_de_m%C3%A1quina) es un conjunto de instrucciones binarias (compuestas por unos y ceros) interpretables por un CPU. Un programa consiste de una secuencia de instrucciones en lenguaje máquina. Este es el único lenguaje que "entienden" directamente las computadoras.
+
+El lenguaje máquina, siendo el más bajo nivel de lenguaje de programación y directamente entendible por el hardware del procesador, incluye varios tipos de instrucciones esenciales para la operación de una computadora. Estas instrucciones varían según la arquitectura del procesador (ej. x86, ARM, MIPS), pero generalmente se pueden agrupar en categorías como, por ejemplo:
+
+1. **Instrucciones de aritmética y lógica**. Realizan operaciones matemáticas básicas como suma, resta, multiplicación y división, así como operaciones lógicas como `AND`, `OR` y `NOT`.
+2. **Instrucciones de manipulación de datos**. Permiten el movimiento de datos dentro de la CPU o entre la CPU y la memoria. Ejemplos incluyen la carga (load) de datos desde la memoria al registro, almacenamiento (store) de datos del registro a la memoria, y transferencias de datos entre registros.
+3. **Instrucciones de entrada/salida**. Facilitan la comunicación entre la CPU y los dispositivos de entrada/salida, como discos duros, teclados, pantallas y otros.
+4. **Instrucciones de comparación**. Comparan valores y, a menudo, se usan junto con las instrucciones de control de flujo (ej. condicionales, ciclos) para tomar decisiones basadas en estas comparaciones.
+5. **Instrucciones de operación de punto flotante**. Específicas para el procesamiento de números de [punto flotante](https://es.wikipedia.org/wiki/Coma_flotante), permiten realizar operaciones aritméticas sobre estos números, que son fundamentales para el cálculo científico y la ingeniería.
+
+Cada instrucción en el lenguaje máquina se representa como una secuencia de *bits*, y el conjunto específico de instrucciones que un procesador puede ejecutar se conoce como su conjunto de instrucciones o [Instruction Set Architecture (ISA)](https://en.wikipedia.org/wiki/Instruction_set_architecture).
+
+La @fig-lenguaje-maquina muestra una instrucción en lenguaje máquina que suma los contenidos de los registros 1 y 2 y almacena el resultado en el registro 6 de un CPU:
+
+![Instrucción en lenguaje máquina. Imagen de [Wikipedia](https://en.wikipedia.org/wiki/Machine_code).](img/lenguaje-maquina.png){#fig-lenguaje-maquina .lightbox fig-alt="Instrucción en lenguaje máquina" fig-align="center"}
+
+La @fig-lenguaje-maquina-hola-mundo muestra el programa [Hola mundo (*Hello World*)](https://es.wikipedia.org/wiki/Hola_mundo) en lenguaje máquina. Este programa simplemente imprime la hilera de texto "Hola mundo", usualmente en la pantalla, y suele ser usado como introducción al estudio de un lenguaje de programación, siendo un primer ejercicio típico.
+
+![Programa *Hola mundo* en lenguaje máquina. Imagen de [CS50x 2024 - Lecture 0 - Scratch](https://www.youtube.com/watch?v=3LPJfIKxwWc).](img/lenguaje-maquina-hola-mundo.png){#fig-lenguaje-maquina-hola-mundo .lightbox fig-alt="Programa 'Hola mundo' en lenguaje máquina" fig-align="center"}
+
+## Lenguajes de programación
+Debido a que programar una computadora en lenguaje máquina es excesivamente lento y complicado, en la década de 1950 comenzaron a crearse lenguajes de programación que, en lugar de unos y ceros, consisten de instrucciones formadas por palabras, usualmente en idioma inglés. A manera de ejemplo, seguidamente se muestra el programa "Hola mundo" en varios lenguajes de programación:
+
+Lenguaje [C](https://en.wikipedia.org/wiki/C_(programming_language))  
+```c
+/* Hola mundo en lenguaje C */
+
+#include <stdio.h>
+
+main()
+{
+    printf("Hola mundo\n");
+}
+```
+
+Lenguaje [Python](https://en.wikipedia.org/wiki/Python_(programming_language))  
+```python
+# Hola mundo en lenguaje Python
+
+print("Hola mundo")
+```
+
+Lenguaje [R](https://en.wikipedia.org/wiki/R_(programming_language))  
+```r
+# Hola mundo en lenguaje R
+
+cat("Hola mundo\n")
+```
+
+El sitio web [The Hello World Collection](http://helloworldcollection.de/) presenta el programa "Hola mundo" en más de 600 lenguajes de programación. Existe una gran [variedad de lenguajes de programación](https://en.wikipedia.org/wiki/List_of_programming_languages) que han sido creados con diversos fines: científicos, comerciales, educacionales, etc.
+
+## Pensamiento computacional
+Como se ha mencionado, utilizamos computadoras porque nos ayudan a resolver problemas. La forma de solucionar un problema debe expresarse de manera que pueda ser implementada en una computadora: mediante programación (vea la @fig-resolucion-problemas-computadoras).
+
+![Resolución de problemas mediante computadoras.](img/resolucion-problemas-computadoras.png){#fig-resolucion-problemas-computadoras .lightbox fig-alt="Resolución de problemas mediante computadoras" fig-align="center"}
+
+El [pensamiento computacional](https://es.wikipedia.org/wiki/Pensamiento_computacional) es un enfoque para la resolución de problemas basado en conceptos y métodos de las ciencias de la computación. Puede ser aplicado en otras áreas. Se considera una de las destrezas fundamentales del siglo XXI.
+
+### Principios fundamentales
+El pensamiento computacional tiene cuatro principios fundamentales:
+
+- **Descomposición**: división de un problema en subproblemas más pequeños.
+- **Reconocimiento de patrones**: búsqueda de similitudes de un problema a resolver, con problemas ya resueltos.
+- **Abstracción**: filtrado de la información que se necesita y de la que no se necesita para resolver un problema.
+- **Algoritmos**: descripción, paso por paso, de la solución a un problema.
+
+## El lenguaje de programación Scratch
+[Scratch](https://scratch.mit.edu/) es un lenguaje de programación orientado a educación. Su nombre proviene de la palabra en ingés [*scratching*](https://en.wikipedia.org/wiki/Scratching). Fue desarrollado en 2003 por el [MIT Media Lab](https://www.media.mit.edu/) y es administrado por la Fundación Scratch, una organización sin fines de lucro que lo facilita de manera gratuita. Es software libre que se comparte mediante una licencia [GPLv2](https://es.wikipedia.org/wiki/GNU_General_Public_License).
+
+### Aplicación de los principios del pensamiento computacional
+
+1. Ingrese a la sitio web de Scratch en la dirección [https://scratch.mit.edu/](https://scratch.mit.edu/) y presione el botón *Start Creating* o *Empiezo a crear* para iniciar un proyecto (para este curso, no es necesario crear un usuario en el sitio). Se desplegará el ambiente de programación de Scratch.
+
+![Ambiente de programación de Scratch.](img/scratch-ambiente-programacion.png){#fig-scratch-ambiente-programacion .lightbox fig-alt="Ambiente de programación de Scratch" fig-align="center"}
+
+El ambiente de programación de Scratch está compuesto por varias zonas. Seguidamente se describen algunas de las principales:
+
+- Un área de bloques, a la izquierda de la pantalla, los cuales ejecutan tareas: *mover*, *girar*, *ir a*, etc. Estos bloques se agrupan en secciones: *Movimiento*, *Apariencia*, *Sonido*, etc.
+- Un área en el centro de la pantalla al que pueden arrastrarse los bloques con el ratón para unirse y acoplarse.
+- Un área en la parte superior derecha de la pantalla en la que se despliega el resultado de las tareas ejecutadas por los bloques.
+- Un botón ubicado en la esquina inferior izquierda de la pantalla llamado *Agregar Extensión*. En el contexto de Scratch, una extensión es un grupo de tareas adicional a los bloques que se despliegan por defecto. Las extensiones pueden ser desarrolladas por programadores diferentes a los creadores de Scratch.
+
+**Nota**: si lo desea, puede cambiar el idioma a español, u otro de su preferencia, con la opción de menú *Settings - Language*.
+
+2. Con el bloque *decir* de la sección *Apariencia*, programe el programa "Hola Mundo" en Scratch. Utilice el evento *al presionar* de la sección *Eventos* para poder ejecutar el programa al presionar la bandera de salida.
+
+::: {#fig-scratch-hola-mundo layout-ncol=2}
+
+![Código fuente](img/scratch-bloques-hola-mundo.png){#fig-scratch-codigo-hola-mundo}
+
+![Salida](img/scratch-salida-hola-mundo.png){#fig-scratch-salida-hola-mundo}
+
+Programa "Hola mundo"
+:::
+
+Con la opción de menú *Archivo - Guardar en tu computador*, guarde el programa en un archivo. Puede cargarlo con la opción de menú *Archivo - Subir desde tu computador*.
+
+3. Problema a resolver: dibujar un paisaje como el que se muestra en la figura de abajo.
+
+![Paisaje.](img/paisaje.png){#fig-paisaje .lightbox fig-alt="Paisaje" fig-align="center"}
+
+Para comenzar, dibuje un par de casas. Se sugiere agregar la extensión *Lápiz* y bloques como *bajar lápiz*, *subir lápiz*, *borrar todo*, *mover*, *girar*, *ir a*, *apuntar en dirección* y cualquier otro que le sea útil.
+
+#### Descomposición
+*División de un problema en subproblemas más pequeños*
+
+4. Identifique subproblemas en los que se pueda dividir el problema general (ej. figuras geométricas) y agrupe los bloques correspondientes a cada subproblema.
+
+5. Para cada subproblema, cree un bloque nuevo con *Crear un bloque* en la sección *Mis bloques*. 
+
+6. Utilice estructuras de control como *repetir* en la sección *Control* para realizar tareas repetitivas.
+
+#### Reconocimiento de patrones
+*Búsqueda de similitudes de un problema a resolver, con problemas ya resueltos*
+
+7. Busque problemas conocidos similares a los que está resolviendo (ej. dibujos de figuras geométricas) y aplique las soluciones.
+
+#### Abstracción
+*Filtrado de la información que se necesita y de la que no se necesita para resolver un problema.*
+
+8. Identifique los elementos de información que necesita para resolver los subproblemas que ha identificado (ej. tamaños, ángulos). Trate de usarlos como entrada de los bloques que creó.
+
+#### Algoritmos
+*Descripción, paso por paso, de la solución a un problema.*
+
+9. Describa un algoritmo para la solución al problema.
