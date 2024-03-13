@@ -24,7 +24,10 @@
     "href": "parte-i-introduccion-programacion_computadoras_ciencia_datos.html",
     "title": "I - Introducción a la programación de computadoras y a la ciencia de datos",
     "section": "",
-    "text": "1 Arquitectura de computadoras, pensamiento computacional y lenguajes de programación"
+    "text": "1 Arquitectura de computadoras, pensamiento computacional y lenguajes de programación",
+    "crumbs": [
+      "I - Introducción a la programación de computadoras y a la ciencia de datos"
+    ]
   },
   {
     "objectID": "01-arquitectura_computadoras-pensamiento_computacional-lenguajes_programacion.html#resumen",
