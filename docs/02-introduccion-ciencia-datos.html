@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>GF0604 Procesamiento de datos geográficos 2024-I - Programa del curso</title>
+<title>GF0604 Procesamiento de datos geográficos 2024-I - 2&nbsp; Introducción a la ciencia de datos</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,7 +20,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -30,8 +50,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./parte-i-introduccion-programacion_computadoras_ciencia_datos.html" rel="next">
-<link href="./index.html" rel="prev">
+<link href="./01-arquitectura_computadoras-lenguajes_programacion-pensamiento_computacional.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -41,6 +60,9 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -81,7 +103,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./programa_curso.html">Programa del curso</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./parte-i-introduccion-programacion_computadoras_ciencia_datos.html">I - Introducción a la programación de computadoras y a la ciencia de datos</a></li><li class="breadcrumb-item"><a href="./02-introduccion-ciencia-datos.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introducción a la ciencia de datos</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -114,7 +136,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./programa_curso.html" class="sidebar-item-text sidebar-link active">
+  <a href="./programa_curso.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Programa del curso</span></a>
   </div>
 </li>
@@ -135,7 +157,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./02-introduccion-ciencia-datos.html" class="sidebar-item-text sidebar-link">
+  <a href="./02-introduccion-ciencia-datos.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introducción a la ciencia de datos</span></span></a>
   </div>
 </li>
@@ -147,14 +169,31 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Tabla de contenidos</h2>
+   
+  <ul>
+  <li><a href="#resumen" id="toc-resumen" class="nav-link active" data-scroll-target="#resumen"><span class="header-section-number">2.1</span> Resumen</a></li>
+  <li><a href="#trabajo-previo" id="toc-trabajo-previo" class="nav-link" data-scroll-target="#trabajo-previo"><span class="header-section-number">2.2</span> Trabajo previo</a>
+  <ul class="collapse">
+  <li><a href="#lecturas" id="toc-lecturas" class="nav-link" data-scroll-target="#lecturas"><span class="header-section-number">2.2.1</span> Lecturas</a></li>
+  </ul></li>
+  <li><a href="#datos" id="toc-datos" class="nav-link" data-scroll-target="#datos"><span class="header-section-number">2.3</span> Datos</a>
+  <ul class="collapse">
+  <li><a href="#observaciones-y-variables" id="toc-observaciones-y-variables" class="nav-link" data-scroll-target="#observaciones-y-variables"><span class="header-section-number">2.3.1</span> Observaciones y variables</a></li>
+  <li><a href="#tipos-de-variables" id="toc-tipos-de-variables" class="nav-link" data-scroll-target="#tipos-de-variables"><span class="header-section-number">2.3.2</span> Tipos de variables</a></li>
+  </ul></li>
+  <li><a href="#ciencia-de-datos" id="toc-ciencia-de-datos" class="nav-link" data-scroll-target="#ciencia-de-datos"><span class="header-section-number">2.4</span> Ciencia de datos</a></li>
+  <li><a href="#referencias" id="toc-referencias" class="nav-link" data-scroll-target="#referencias"><span class="header-section-number">2.5</span> Referencias</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./parte-i-introduccion-programacion_computadoras_ciencia_datos.html">I - Introducción a la programación de computadoras y a la ciencia de datos</a></li><li class="breadcrumb-item"><a href="./02-introduccion-ciencia-datos.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introducción a la ciencia de datos</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Programa del curso</h1>
+<h1 class="title"><span id="sec-pencom" class="quarto-section-identifier"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introducción a la ciencia de datos</span></span></h1>
 </div>
 
 
@@ -171,11 +210,407 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Programa del curso en el formato especificado por la Comisión de Docencia de la Escuela de Geografía:</p>
-<p><a href="gf0604-procesamientodatosgeograficos-g001-2024-i.pdf">Grupo 001</a><br>
-<a href="gf0604-procesamientodatosgeograficos-g002-2024-i.pdf">Grupo 002</a></p>
+<p>En este capítulo se definen algunos conceptos fundamentales de estadística, como observaciones y variables. También se introduce el área de conocimiento denominada ciencia de datos.</p>
+<section id="resumen" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="resumen"><span class="header-section-number">2.1</span> Resumen</h2>
+<p>Una investigación estadística se basa en datos. Los datos acostumbran representarse en tablas, en las cuales cada fila es una observación y cada columna es una variable. Una observación corresponde a un elemento de datos que ha sido estudiado y cada variable a una característica de ese elemento de datos. Las variables pueden ser numéricas o categóricas. Las numéricas se subdividen en discretas y continuas y las categóricas en nominales y ordinales.</p>
+<p>La ciencia de datos es una disciplina que permite convertir datos “crudos” en comprensión y conocimiento. Incluye los procesos importar, ordenar, transformar, visualizar, modelar y comunicar.</p>
+</section>
+<section id="trabajo-previo" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="trabajo-previo"><span class="header-section-number">2.2</span> Trabajo previo</h2>
+<section id="lecturas" class="level3" data-number="2.2.1">
+<h3 data-number="2.2.1" class="anchored" data-anchor-id="lecturas"><span class="header-section-number">2.2.1</span> Lecturas</h3>
+<p>Çetinkaya-Rundel, Mine, &amp; Hardin, Johanna (2021). <em>Introduction to Modern Statistics</em> (1st ed.). OpenIntro, Inc.&nbsp;<a href="https://openintro-ims.netlify.app/">https://openintro-ims.netlify.app/</a> (capítulo 1)</p>
+<p>Wickham, Hadley; Çetinkaya-Rundel, Mirne; &amp; Grolemund, Garret (2023). <em>R for Data Science: Import, Tidy, Transform, Visualize, and Model Data</em> (2nd ed.). O’Reilly Media. <a href="https://r4ds.hadley.nz/">https://r4ds.hadley.nz/</a> (capítulo introductorio)</p>
+</section>
+</section>
+<section id="datos" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="datos"><span class="header-section-number">2.3</span> Datos</h2>
+<p>Los científicos tratan de responder preguntas mediante métodos rigurosos y observaciones cuidadosas. Estas observaciones, recopiladas de notas de campo, encuestas y experimentos, entre otras fuentes, forman la columna vertebral de una investigación estadística y se denominan <strong>datos</strong>. La presentación y descripción efectivas de los datos constituyen el primer paso en un análisis <span class="citation" data-cites="cetinkaya-rundel_introduction_2021">(<a href="02-introduccion-ciencia-datos.html#ref-cetinkaya-rundel_introduction_2021" role="doc-biblioref">Çetinkaya-Rundel &amp; Hardin, 2021</a>)</span>. Esta sección introduce una estructura para organizar los datos, así como alguna terminología que se utilizará a lo largo de este curso.</p>
+<section id="observaciones-y-variables" class="level3" data-number="2.3.1">
+<h3 data-number="2.3.1" class="anchored" data-anchor-id="observaciones-y-variables"><span class="header-section-number">2.3.1</span> Observaciones y variables</h3>
+<p>La tabla 2.1. contiene 10 filas de un <strong>conjunto de datos</strong>. Cada fila representa una persona. En términos estadísticos, cada fila corresponde a una <strong>observación</strong>. Las columnas representan características de las personas. Cada columna corresponde a una <strong>variable</strong>.</p>
+<table class="dataframe table table-sm table-striped small">
+<caption>
+<strong>Tabla 2.1.</strong>
+</caption>
+<thead>
+<tr>
+<th>
+id
+</th>
+<th>
+provincia
+</th>
+<th>
+equipo
+</th>
+<th>
+masa
+</th>
+<th>
+estatura
+</th>
+<th>
+sexo
+</th>
+<th>
+cantidad_hermanos
+</th>
+<th>
+nivel_guitarra
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+1
+</td>
+<td>
+Limón
+</td>
+<td>
+Saprissa
+</td>
+<td>
+51.0
+</td>
+<td>
+1.51
+</td>
+<td>
+otro
+</td>
+<td>
+0
+</td>
+<td>
+nulo
+</td>
+</tr>
+<tr>
+<td>
+2
+</td>
+<td>
+Heredia
+</td>
+<td>
+Herediano
+</td>
+<td>
+98.5
+</td>
+<td>
+1.87
+</td>
+<td>
+hombre
+</td>
+<td>
+1
+</td>
+<td>
+alto
+</td>
+</tr>
+<tr>
+<td>
+3
+</td>
+<td>
+Guanacaste
+</td>
+<td>
+Liberia
+</td>
+<td>
+91.6
+</td>
+<td>
+1.65
+</td>
+<td>
+mujer
+</td>
+<td>
+4
+</td>
+<td>
+bajo
+</td>
+</tr>
+<tr>
+<td>
+4
+</td>
+<td>
+Limón
+</td>
+<td>
+Liberia
+</td>
+<td>
+60.6
+</td>
+<td>
+1.68
+</td>
+<td>
+mujer
+</td>
+<td>
+1
+</td>
+<td>
+alto
+</td>
+</tr>
+<tr>
+<td>
+5
+</td>
+<td>
+Cartago
+</td>
+<td>
+Cartaginés
+</td>
+<td>
+59.1
+</td>
+<td>
+1.73
+</td>
+<td>
+mujer
+</td>
+<td>
+3
+</td>
+<td>
+bajo
+</td>
+</tr>
+<tr>
+<td>
+6
+</td>
+<td>
+otra
+</td>
+<td>
+San Carlos
+</td>
+<td>
+59.2
+</td>
+<td>
+1.89
+</td>
+<td>
+hombre
+</td>
+<td>
+3
+</td>
+<td>
+bajo
+</td>
+</tr>
+<tr>
+<td>
+7
+</td>
+<td>
+Guanacaste
+</td>
+<td>
+Cartaginés
+</td>
+<td>
+65.2
+</td>
+<td>
+1.70
+</td>
+<td>
+mujer
+</td>
+<td>
+3
+</td>
+<td>
+alto
+</td>
+</tr>
+<tr>
+<td>
+8
+</td>
+<td>
+Guanacaste
+</td>
+<td>
+Sporting
+</td>
+<td>
+76.2
+</td>
+<td>
+1.76
+</td>
+<td>
+hombre
+</td>
+<td>
+3
+</td>
+<td>
+experto
+</td>
+</tr>
+<tr>
+<td>
+9
+</td>
+<td>
+Limón
+</td>
+<td>
+Alajuelense
+</td>
+<td>
+71.6
+</td>
+<td>
+1.80
+</td>
+<td>
+hombre
+</td>
+<td>
+4
+</td>
+<td>
+bajo
+</td>
+</tr>
+<tr>
+<td>
+10
+</td>
+<td>
+Alajuela
+</td>
+<td>
+Alajuelense
+</td>
+<td>
+64.6
+</td>
+<td>
+1.52
+</td>
+<td>
+hombre
+</td>
+<td>
+2
+</td>
+<td>
+bajo
+</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="tipos-de-variables" class="level3" data-number="2.3.2">
+<h3 data-number="2.3.2" class="anchored" data-anchor-id="tipos-de-variables"><span class="header-section-number">2.3.2</span> Tipos de variables</h3>
+<p>Los datos de la tabla 2.1. son de varios tipos, cuya jerarquía se muestra en la <a href="#fig-tipos-variables-estadisticas" class="quarto-xref">Figura&nbsp;<span>2.1</span></a>.</p>
+<div id="fig-tipos-variables-estadisticas" class="lightbox quarto-figure quarto-figure-center quarto-float anchored" alt="Tipos de variables" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-tipos-variables-estadisticas-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="img/tipos-variables-estadisticas.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" data-glightbox="description: .lightbox-desc-1"><img src="img/tipos-variables-estadisticas.png" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="Tipos de variables"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-tipos-variables-estadisticas-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;2.1: Tipos de variables. Fuente: <a href="https://openintro-ims.netlify.app/">Introduction to Modern Statistics</a>.
+</figcaption>
+</figure>
+</div>
+<section id="numéricas" class="level4" data-number="2.3.2.1">
+<h4 data-number="2.3.2.1" class="anchored" data-anchor-id="numéricas"><span class="header-section-number">2.3.2.1</span> Numéricas</h4>
+<p>Corresponden a números a los cuales se les pueden aplicar operaciones como suma, resta, multiplicación, división y otras similares.</p>
+<section id="discretas" class="level5" data-number="2.3.2.1.1">
+<h5 data-number="2.3.2.1.1" class="anchored" data-anchor-id="discretas"><span class="header-section-number">2.3.2.1.1</span> Discretas</h5>
+<p>Toman valores específicos que se pueden contar. La variable <code>cantidad_hermanos</code> es discreta. Existe una separación clara entre sus posibles valores. Por ejemplo, es posible tener 1, 2 o 3 hermanos, pero no es posible tener 2.5 hermanos.</p>
+</section>
+<section id="continuas" class="level5" data-number="2.3.2.1.2">
+<h5 data-number="2.3.2.1.2" class="anchored" data-anchor-id="continuas"><span class="header-section-number">2.3.2.1.2</span> Continuas</h5>
+<p>Pueden tomar cualquier valor dentro de un intervalo o rango continuo. Estas variables se caracterizan por su capacidad para representar medidas precisas y pueden asumir un número infinito de valores, incluso dentro de un rango limitado (ej. entre 0 y 1). Las variables <code>masa</code> y <code>estatura</code> son continuas.</p>
+</section>
+</section>
+<section id="categóricas" class="level4" data-number="2.3.2.2">
+<h4 data-number="2.3.2.2" class="anchored" data-anchor-id="categóricas"><span class="header-section-number">2.3.2.2</span> Categóricas</h4>
+<p>Las variables categóricas (también llamadas cualitativas), son aquellas que describen una característica o cualidad de una observación y clasifican las observaciones en grupos o categorías. A diferencia de las variables numéricas, que expresan cantidades numéricas, las variables categóricas expresan atributos no numéricos.</p>
+<section id="nominales" class="level5" data-number="2.3.2.2.1">
+<h5 data-number="2.3.2.2.1" class="anchored" data-anchor-id="nominales"><span class="header-section-number">2.3.2.2.1</span> Nominales</h5>
+<p>No existe un orden inherente o jerarquía entre las categorías. Las variables <code>provincia</code>, <code>equipo</code> y <code>sexo</code> son nominales.</p>
+</section>
+<section id="ordinales" class="level5" data-number="2.3.2.2.2">
+<h5 data-number="2.3.2.2.2" class="anchored" data-anchor-id="ordinales"><span class="header-section-number">2.3.2.2.2</span> Ordinales</h5>
+<p>Hay un orden o jerarquía clara entre las categorías. La variable <code>nivel_guitarra</code> es categórica.</p>
+</section>
+</section>
+</section>
+</section>
+<section id="ciencia-de-datos" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="ciencia-de-datos"><span class="header-section-number">2.4</span> Ciencia de datos</h2>
+<p>La ciencia de datos es una disciplina que permite convertir datos “crudos” en comprensión y conocimiento <span class="citation" data-cites="wickham_r_2023">(<a href="02-introduccion-ciencia-datos.html#ref-wickham_r_2023" role="doc-biblioref">Wickham, Çetinkaya-Rundel, &amp; Grolemund, 2023</a>)</span>. Utiliza estadística y ciencias de la computación, entre otras disciplinas.</p>
+<p>La <a href="#fig-modelo-ciencia-datos" class="quarto-xref">Figura&nbsp;<span>2.2</span></a> ilustra el modelo de un proyecto típico de ciencia de datos, el cual incluye los procesos de importar, ordenar, transformar, visualizar, modelar y comunicar. Todos se articulan mediante <strong>programación</strong> de computadoras.</p>
+<div id="fig-modelo-ciencia-datos" class="lightbox quarto-figure quarto-figure-center quarto-float anchored" alt="Modelo de ciencia de datos" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-modelo-ciencia-datos-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="img/modelo-ciencia-datos.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-2" data-glightbox="description: .lightbox-desc-2"><img src="img/modelo-ciencia-datos.svg" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="Modelo de ciencia de datos"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-modelo-ciencia-datos-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;2.2: Modelo de ciencia de datos. Fuente: <a href="https://r4ds.had.co.nz/">R for Data Science</a>.
+</figcaption>
+</figure>
+</div>
+<ul>
+<li><p><strong>Importar</strong> los datos típicamente implica leerlos de un archivo, una base de datos o una interfaz de programación de aplicaciones (API) y cargarlos en un data frame.</p></li>
+<li><p><strong>Ordenar</strong> u organizar (<em>to tidy</em>) los datos significa colocarlos en estructuras rectangulares de filas y columnas, similares a tablas, de manera que cada fila sea una observación y cada columna una variable.</p></li>
+<li><p><strong>Transformar</strong> los datos implica la generación de algún subconjunto de filas y columnas, la creación de nuevas variables o el cálculo de estadísticas (ej. conteos, promedios, mínimos, máximos).</p></li>
+<li><p><strong>Visualizar</strong> los datos (en tablas, gráficos, mapas, etc.) permite encontrar patrones inesperados o formular nuevas preguntas.</p></li>
+<li><p><strong>Modelar</strong> es crear una representación abstracta y estructurada de los datos, con el fin de facilitar su análisis y realizar predicciones.</p></li>
+<li><p><strong>Comunicar</strong> es el último paso y es una actividad crítica de cualquier proyecto de análisis de datos o de ciencia en general.</p></li>
+</ul>
+</section>
+<section id="referencias" class="level2" data-number="2.5">
+<h2 data-number="2.5" class="anchored" data-anchor-id="referencias"><span class="header-section-number">2.5</span> Referencias</h2>
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
+<div id="ref-cetinkaya-rundel_introduction_2021" class="csl-entry" role="listitem">
+Çetinkaya-Rundel, M., &amp; Hardin, J. (2021). <em>Introduction to
+<span>Modern</span> <span>Statistics</span></em> (1st ed.). OpenIntro,
+Inc. Retrieved from <a href="https://openintro-ims.netlify.app/">https://openintro-ims.netlify.app/</a>
+</div>
+<div id="ref-wickham_r_2023" class="csl-entry" role="listitem">
+Wickham, H., Çetinkaya-Rundel, M., &amp; Grolemund, G. (2023). <em>R for
+<span>Data</span> <span>Science</span>: <span>Import</span>,
+<span>Tidy</span>, <span>Transform</span>, <span>Visualize</span>, and
+<span>Model</span> <span>Data</span></em> (2nd ed.). O’Reilly Media.
+Retrieved from <a href="https://r4ds.hadley.nz/">https://r4ds.hadley.nz/</a>
+</div>
+</div>
 
 
+<div class="hidden" aria-hidden="true">
+<span class="glightbox-desc lightbox-desc-1">Figura&nbsp;2.1: Tipos de variables. Fuente: <a href="https://openintro-ims.netlify.app/">Introduction to Modern Statistics</a>.</span>
+<span class="glightbox-desc lightbox-desc-2">Figura&nbsp;2.2: Modelo de ciencia de datos. Fuente: <a href="https://r4ds.had.co.nz/">R for Data Science</a>.</span>
+</div>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -589,17 +1024,39 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./index.html" class="pagination-link" aria-label="Bienvenida">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Bienvenida</span>
+      <a href="./01-arquitectura_computadoras-lenguajes_programacion-pensamiento_computacional.html" class="pagination-link" aria-label="Arquitectura de computadoras, lenguajes de programación y pensamiento computacional">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Arquitectura de computadoras, lenguajes de programación y pensamiento computacional</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./parte-i-introduccion-programacion_computadoras_ciencia_datos.html" class="pagination-link" aria-label="I - Introducción a la programación de computadoras y a la ciencia de datos">
-        <span class="nav-page-text">I - Introducción a la programación de computadoras y a la ciencia de datos</span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","selector":".lightbox","loop":false,"openEffect":"zoom","descPosition":"bottom"});
+window.onload = () => {
+  lightboxQuarto.on('slide_before_load', (data) => {
+    const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+    const href = trigger.getAttribute('href');
+    if (href !== null) {
+      const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+      if (imgEl !== null) {
+        const srcAttr = imgEl.getAttribute("src");
+        if (srcAttr && srcAttr.startsWith("data:")) {
+          slideConfig.href = srcAttr;
+        }
+      }
+    } 
+  });
+
+  lightboxQuarto.on('slide_after_load', (data) => {
+    const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+    if (window.Quarto?.typesetMath) {
+      window.Quarto.typesetMath(slideNode);
+    }
+  });
+
+};
+          </script>
 
 
 

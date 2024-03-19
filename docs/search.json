@@ -24,7 +24,7 @@
     "href": "parte-i-introduccion-programacion_computadoras_ciencia_datos.html",
     "title": "I - Introducción a la programación de computadoras y a la ciencia de datos",
     "section": "",
-    "text": "1 Arquitectura de computadoras, pensamiento computacional y lenguajes de programación",
+    "text": "1 Arquitectura de computadoras, pensamiento computacional y lenguajes de programación\n2 Introducción a la ciencia de datos",
     "crumbs": [
       "I - Introducción a la programación de computadoras y a la ciencia de datos"
     ]
@@ -243,6 +243,72 @@
     "crumbs": [
       "I - Introducción a la programación de computadoras y a la ciencia de datos",
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Arquitectura de computadoras, lenguajes de programación y pensamiento computacional</span>"
+    ]
+  },
+  {
+    "objectID": "02-introduccion-ciencia-datos.html",
+    "href": "02-introduccion-ciencia-datos.html",
+    "title": "2  Introducción a la ciencia de datos",
+    "section": "",
+    "text": "2.1 Resumen\nUna investigación estadística se basa en datos. Los datos acostumbran representarse en tablas, en las cuales cada fila es una observación y cada columna es una variable. Una observación corresponde a un elemento de datos que ha sido estudiado y cada variable a una característica de ese elemento de datos. Las variables pueden ser numéricas o categóricas. Las numéricas se subdividen en discretas y continuas y las categóricas en nominales y ordinales.\nLa ciencia de datos es una disciplina que permite convertir datos “crudos” en comprensión y conocimiento. Incluye los procesos importar, ordenar, transformar, visualizar, modelar y comunicar.",
+    "crumbs": [
+      "I - Introducción a la programación de computadoras y a la ciencia de datos",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Introducción a la ciencia de datos</span>"
+    ]
+  },
+  {
+    "objectID": "02-introduccion-ciencia-datos.html#trabajo-previo",
+    "href": "02-introduccion-ciencia-datos.html#trabajo-previo",
+    "title": "2  Introducción a la ciencia de datos",
+    "section": "2.2 Trabajo previo",
+    "text": "2.2 Trabajo previo\n\n2.2.1 Lecturas\nÇetinkaya-Rundel, Mine, & Hardin, Johanna (2021). Introduction to Modern Statistics (1st ed.). OpenIntro, Inc. https://openintro-ims.netlify.app/ (capítulo 1)\nWickham, Hadley; Çetinkaya-Rundel, Mirne; & Grolemund, Garret (2023). R for Data Science: Import, Tidy, Transform, Visualize, and Model Data (2nd ed.). O’Reilly Media. https://r4ds.hadley.nz/ (capítulo introductorio)",
+    "crumbs": [
+      "I - Introducción a la programación de computadoras y a la ciencia de datos",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Introducción a la ciencia de datos</span>"
+    ]
+  },
+  {
+    "objectID": "02-introduccion-ciencia-datos.html#estadística",
+    "href": "02-introduccion-ciencia-datos.html#estadística",
+    "title": "2  Introducción a la ciencia de datos",
+    "section": "2.3 Estadística",
+    "text": "2.3 Estadística\nLos científicos tratan de responder preguntas mediante métodos rigurosos y observaciones cuidadosas. Estas observaciones, recopiladas de notas de campo, encuestas y experimentos, entre otras fuentes, forman la columna vertebral de una investigación estadística y se denominan datos (Çetinkaya-Rundel & Hardin, 2021).\n\n2.3.1 Datos\nLa presentación y descripción efectivas de los datos es el primer paso en un análisis (Çetinkaya-Rundel & Hardin, 2021). Esta sección introduce una estructura para organizar los datos, así como alguna terminología que se utilizará a lo largo de este curso.\n\n2.3.1.1 Observaciones y variables\nLa tabla 2.1. contiene 10 filas de un conjunto de datos. Cada fila representa una persona. En términos estadísticos, cada fila corresponde a una observación. Las columnas representan características de las personas. Cada columna corresponde a una variable.\n\n\nTabla 2.1.\n\n\n\n\nid\n\n\nprovincia\n\n\nequipo\n\n\nmasa\n\n\nestatura\n\n\nsexo\n\n\ncantidad_hermanos\n\n\nnivel_guitarra\n\n\n\n\n\n\n1\n\n\nLimón\n\n\nSaprissa\n\n\n51.0\n\n\n1.51\n\n\notro\n\n\n0\n\n\nnulo\n\n\n\n\n2\n\n\nHeredia\n\n\nHerediano\n\n\n98.5\n\n\n1.87\n\n\nhombre\n\n\n1\n\n\nalto\n\n\n\n\n3\n\n\nGuanacaste\n\n\nLiberia\n\n\n91.6\n\n\n1.65\n\n\nmujer\n\n\n4\n\n\nbajo\n\n\n\n\n4\n\n\nLimón\n\n\nLiberia\n\n\n60.6\n\n\n1.68\n\n\nmujer\n\n\n1\n\n\nalto\n\n\n\n\n5\n\n\nCartago\n\n\nCartaginés\n\n\n59.1\n\n\n1.73\n\n\nmujer\n\n\n3\n\n\nbajo\n\n\n\n\n6\n\n\notra\n\n\nSan Carlos\n\n\n59.2\n\n\n1.89\n\n\nhombre\n\n\n3\n\n\nbajo\n\n\n\n\n7\n\n\nGuanacaste\n\n\nCartaginés\n\n\n65.2\n\n\n1.70\n\n\nmujer\n\n\n3\n\n\nalto\n\n\n\n\n8\n\n\nGuanacaste\n\n\nSporting\n\n\n76.2\n\n\n1.76\n\n\nhombre\n\n\n3\n\n\nexperto\n\n\n\n\n9\n\n\nLimón\n\n\nAlajuelense\n\n\n71.6\n\n\n1.80\n\n\nhombre\n\n\n4\n\n\nbajo\n\n\n\n\n10\n\n\nAlajuela\n\n\nAlajuelense\n\n\n64.6\n\n\n1.52\n\n\nhombre\n\n\n2\n\n\nbajo\n\n\n\n\n\n\n2.3.1.2 Tipos de variables\nLos datos de la tabla 2.1. son de varios tipos, cuya jerarquía se muestra en la Figura 2.1.\n\n\n\n\n\n\nFigura 2.1: Tipos de variables. Fuente: Introduction to Modern Statistics.\n\n\n\n\n2.3.1.2.1 Numéricas\nCorresponden a números a los cuales se les pueden aplicar operaciones como suma, resta, multiplicación, división y otras similares.\n\n2.3.1.2.1.1 Discretas\nToman valores específicos que se pueden contar. La variable cantidad_hermanos es discreta. Existe una separación clara entre sus posibles valores. Por ejemplo, es posible tener 1, 2 o 3 hermanos, pero no es posible tener 2.5 hermanos.\n\n\n2.3.1.2.1.2 Continuas\nPueden tomar cualquier valor dentro de un intervalo o rango continuo. Estas variables se caracterizan por su capacidad para representar medidas precisas y pueden asumir un número infinito de valores, incluso dentro de un rango limitado (ej. entre 0 y 1). Las variables masa y estatura son continuas.\n\n\n\n2.3.1.2.2 Categóricas\n\n2.3.1.2.2.1 Nominales\n\n\n2.3.1.2.2.2 Ordinales",
+    "crumbs": [
+      "I - Introducción a la programación de computadoras y a la ciencia de datos",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Introducción a la ciencia de datos</span>"
+    ]
+  },
+  {
+    "objectID": "02-introduccion-ciencia-datos.html#ciencia-de-datos",
+    "href": "02-introduccion-ciencia-datos.html#ciencia-de-datos",
+    "title": "2  Introducción a la ciencia de datos",
+    "section": "2.4 Ciencia de datos",
+    "text": "2.4 Ciencia de datos\nLa ciencia de datos es una disciplina que permite convertir datos “crudos” en comprensión y conocimiento (Wickham, Çetinkaya-Rundel, & Grolemund, 2023). Utiliza estadística y ciencias de la computación, entre otras disciplinas.\nLa Figura 2.2 ilustra el modelo de un proyecto típico de ciencia de datos, el cual incluye los procesos de importar, ordenar, transformar, visualizar, modelar y comunicar. Todos se articulan mediante programación de computadoras.\n\n\n\n\n\n\nFigura 2.2: Modelo de ciencia de datos. Fuente: R for Data Science.\n\n\n\n\nImportar los datos típicamente implica leerlos de un archivo, una base de datos o una interfaz de programación de aplicaciones (API) y cargarlos en un data frame.\nOrdenar u organizar (to tidy) los datos significa colocarlos en estructuras rectangulares de filas y columnas, similares a tablas, de manera que cada fila sea una observación y cada columna una variable.\nTransformar los datos implica la generación de algún subconjunto de filas y columnas, la creación de nuevas variables o el cálculo de estadísticas (ej. conteos, promedios, mínimos, máximos).\nVisualizar los datos (en tablas, gráficos, mapas, etc.) permite encontrar patrones inesperados o formular nuevas preguntas.\nModelar es crear una representación abstracta y estructurada de los datos, con el fin de facilitar su análisis y realizar predicciones.\nComunicar es el último paso y es una actividad crítica de cualquier proyecto de análisis de datos o de ciencia en general.",
+    "crumbs": [
+      "I - Introducción a la programación de computadoras y a la ciencia de datos",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Introducción a la ciencia de datos</span>"
+    ]
+  },
+  {
+    "objectID": "02-introduccion-ciencia-datos.html#referencias",
+    "href": "02-introduccion-ciencia-datos.html#referencias",
+    "title": "2  Introducción a la ciencia de datos",
+    "section": "2.5 Referencias",
+    "text": "2.5 Referencias\n\n\nÇetinkaya-Rundel, M., & Hardin, J. (2021). Introduction to\nModern Statistics (1st ed.). OpenIntro,\nInc. Retrieved from https://openintro-ims.netlify.app/\n\n\nWickham, H., Çetinkaya-Rundel, M., & Grolemund, G. (2023). R for\nData Science: Import,\nTidy, Transform, Visualize, and\nModel Data (2nd ed.). O’Reilly Media.\nRetrieved from https://r4ds.hadley.nz/\n\n\n\n\n\nFigura 2.1: Tipos de variables. Fuente: Introduction to Modern Statistics.\nFigura 2.2: Modelo de ciencia de datos. Fuente: R for Data Science.",
+    "crumbs": [
+      "I - Introducción a la programación de computadoras y a la ciencia de datos",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Introducción a la ciencia de datos</span>"
+    ]
+  },
+  {
+    "objectID": "02-introduccion-ciencia-datos.html#datos",
+    "href": "02-introduccion-ciencia-datos.html#datos",
+    "title": "2  Introducción a la ciencia de datos",
+    "section": "2.3 Datos",
+    "text": "2.3 Datos\nLos científicos tratan de responder preguntas mediante métodos rigurosos y observaciones cuidadosas. Estas observaciones, recopiladas de notas de campo, encuestas y experimentos, entre otras fuentes, forman la columna vertebral de una investigación estadística y se denominan datos. La presentación y descripción efectivas de los datos constituyen el primer paso en un análisis (Çetinkaya-Rundel & Hardin, 2021). Esta sección introduce una estructura para organizar los datos, así como alguna terminología que se utilizará a lo largo de este curso.\n\n2.3.1 Observaciones y variables\nLa tabla 2.1. contiene 10 filas de un conjunto de datos. Cada fila representa una persona. En términos estadísticos, cada fila corresponde a una observación. Las columnas representan características de las personas. Cada columna corresponde a una variable.\n\n\nTabla 2.1.\n\n\n\n\nid\n\n\nprovincia\n\n\nequipo\n\n\nmasa\n\n\nestatura\n\n\nsexo\n\n\ncantidad_hermanos\n\n\nnivel_guitarra\n\n\n\n\n\n\n1\n\n\nLimón\n\n\nSaprissa\n\n\n51.0\n\n\n1.51\n\n\notro\n\n\n0\n\n\nnulo\n\n\n\n\n2\n\n\nHeredia\n\n\nHerediano\n\n\n98.5\n\n\n1.87\n\n\nhombre\n\n\n1\n\n\nalto\n\n\n\n\n3\n\n\nGuanacaste\n\n\nLiberia\n\n\n91.6\n\n\n1.65\n\n\nmujer\n\n\n4\n\n\nbajo\n\n\n\n\n4\n\n\nLimón\n\n\nLiberia\n\n\n60.6\n\n\n1.68\n\n\nmujer\n\n\n1\n\n\nalto\n\n\n\n\n5\n\n\nCartago\n\n\nCartaginés\n\n\n59.1\n\n\n1.73\n\n\nmujer\n\n\n3\n\n\nbajo\n\n\n\n\n6\n\n\notra\n\n\nSan Carlos\n\n\n59.2\n\n\n1.89\n\n\nhombre\n\n\n3\n\n\nbajo\n\n\n\n\n7\n\n\nGuanacaste\n\n\nCartaginés\n\n\n65.2\n\n\n1.70\n\n\nmujer\n\n\n3\n\n\nalto\n\n\n\n\n8\n\n\nGuanacaste\n\n\nSporting\n\n\n76.2\n\n\n1.76\n\n\nhombre\n\n\n3\n\n\nexperto\n\n\n\n\n9\n\n\nLimón\n\n\nAlajuelense\n\n\n71.6\n\n\n1.80\n\n\nhombre\n\n\n4\n\n\nbajo\n\n\n\n\n10\n\n\nAlajuela\n\n\nAlajuelense\n\n\n64.6\n\n\n1.52\n\n\nhombre\n\n\n2\n\n\nbajo\n\n\n\n\n\n\n2.3.2 Tipos de variables\nLos datos de la tabla 2.1. son de varios tipos, cuya jerarquía se muestra en la Figura 2.1.\n\n\n\n\n\n\nFigura 2.1: Tipos de variables. Fuente: Introduction to Modern Statistics.\n\n\n\n\n2.3.2.1 Numéricas\nCorresponden a números a los cuales se les pueden aplicar operaciones como suma, resta, multiplicación, división y otras similares.\n\n2.3.2.1.1 Discretas\nToman valores específicos que se pueden contar. La variable cantidad_hermanos es discreta. Existe una separación clara entre sus posibles valores. Por ejemplo, es posible tener 1, 2 o 3 hermanos, pero no es posible tener 2.5 hermanos.\n\n\n2.3.2.1.2 Continuas\nPueden tomar cualquier valor dentro de un intervalo o rango continuo. Estas variables se caracterizan por su capacidad para representar medidas precisas y pueden asumir un número infinito de valores, incluso dentro de un rango limitado (ej. entre 0 y 1). Las variables masa y estatura son continuas.\n\n\n\n2.3.2.2 Categóricas\nLas variables categóricas (también llamadas cualitativas), son aquellas que describen una característica o cualidad de una observación y clasifican las observaciones en grupos o categorías. A diferencia de las variables numéricas, que expresan cantidades numéricas, las variables categóricas expresan atributos no numéricos.\n\n2.3.2.2.1 Nominales\nNo existe un orden inherente o jerarquía entre las categorías. Las variables provincia, equipo y sexo son nominales.\n\n\n2.3.2.2.2 Ordinales\nHay un orden o jerarquía clara entre las categorías. La variable nivel_guitarra es categórica.",
+    "crumbs": [
+      "I - Introducción a la programación de computadoras y a la ciencia de datos",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Introducción a la ciencia de datos</span>"
     ]
   }
 ]
