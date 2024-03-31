@@ -1,0 +1,142 @@
+# R - lenguaje de programación para análisis estadístico {#sec-pencom}
+En este capítulo, se introduce el lenguaje de programación R.
+
+## Resumen
+R es un lenguaje de programación y un entorno para graficación y análisis estadístico. Como lenguaje, es interpretado, multiplataforma, de tipado dinámico y multiparadigma. Es un proyecto de software libre que se comparte mediante una licencia GNU GPL.
+
+El código de R se estructura en funciones, las cuales se distribuyen en paquetes. Cada paquete contiene un conjunto de funciones relacionadas. Algunos paquetes están incorporados en la instalación base de R y otros deben instalarse separadamente.
+
+R puede manejar diversos tipos de datos básicos, como números, textos y valores lógicos, entre otros. También tipos de datos compuestos, como factores y data frames. Al igual que otros lenguajes de programación, cuenta con estructuras de control como condicionales y ciclos.
+
+## Trabajo previo
+
+### Lecturas
+Grolemund, G., & Wickham, H. (2014). *Hands-On Programming with R: Write Your Own Functions And Simulations* (capítulos 1 - 12). O'Reilly Media. <https://rstudio-education.github.io/hopr/>
+
+## Introducción
+[R](https://www.r-project.org/) es un lenguaje de programación y un entorno enfocado en graficación y en análisis estadístico. Fue creado por Ross Ihaka y Robert Gentleman en la Universidad de Auckland, Nueva Zelanda, en 1993. Es ampliamente utilizado en diversas áreas de investigación, entre las que pueden mencionarse [aprendizaje automático (*machine learning*)](https://es.wikipedia.org/wiki/Aprendizaje_autom%C3%A1tico), [ciencia de datos (*data science*)](https://es.wikipedia.org/wiki/Ciencia_de_datos) y [*big data*](https://es.wikipedia.org/wiki/Macrodatos), con aplicaciones en campos como agricultura, biomedicina, bioinformática, finanzas, hidrología, teledetección y geografía entre muchos otros. 
+
+Algunas de las principales características del lenguaje de programación R son:
+
+-   Es [interpretado](https://es.wikipedia.org/wiki/Int%C3%A9rprete_(inform%C3%A1tica)): las instrucciones se traducen una por una a [lenguaje máquina](https://es.wikipedia.org/wiki/Lenguaje_de_m%C3%A1quina), a diferencia de los [lenguajes compilados](https://es.wikipedia.org/wiki/Compilador), que traducen de manera conjunta las instrucciones de una unidad completa (ej. un programa o una biblioteca). Los lenguajes interpretados tienden a ser más lentos que los compilados, pero también son más flexibles.
+-   Es [multiplataforma](https://es.wikipedia.org/wiki/Multiplataforma): puede ejecutarse en los sistemas operativos más populares (ej. Microsoft Windows, macOS, Linux).
+-   Tiene un [sistema de tipos de datos dinámico](https://es.wikipedia.org/wiki/Tipado_din%C3%A1mico): las variables pueden tomar diferentes tipos de datos (ej. textuales, numéricos) durante la ejecución del programa, a diferencia del caso de un [sistema de tipos de datos estático](https://es.wikipedia.org/wiki/Sistema_de_tipos#Tipado_est%C3%A1tico), en el que las variables de un programa solo pueden tener un tipo de datos.
+-   Soporta varios [paradigmas de programación](https://es.wikipedia.org/wiki/Paradigma_de_programaci%C3%B3n): los paradigmas son estilos o enfoques teóricos de programación. R soporta los paradigmas de [programación funcional](https://es.wikipedia.org/wiki/Programaci%C3%B3n_funcional), [programación orientada a objetos](https://es.wikipedia.org/wiki/Programaci%C3%B3n_orientada_a_objetos), [programación imperativa](https://es.wikipedia.org/wiki/Programaci%C3%B3n_imperativa) y [programación procedimental](https://es.wikipedia.org/wiki/Programaci%C3%B3n_por_procedimientos).
+
+R es un proyecto de [software libre](https://es.wikipedia.org/wiki/Software_libre) que se comparte mediante una licencia [GNU General Public Licence (GNU GPL)](https://es.wikipedia.org/wiki/GNU_General_Public_License). Esta característica permite que la funcionalidad original de R pueda ser ampliada mediante bibliotecas o paquetes desarrollados por la comunidad de programadores.
+
+La [Comprehensive R Archive Network (CRAN)](https://cran.r-project.org/) es una red mundial distribuida de servidores que albergan el código y la documentación oficial de R y sus paquetes. Las [*tasks views*](https://cran.r-project.org/web/views/) de CRAN categorizan la funcionalidad de R de acuerdo con temáticas determinadas.
+
+Para programar en R, puede utilizarse una interfaz de línea de comandos, editores de texto (ej. [Visual Studio Code](https://code.visualstudio.com/), [Vim](https://www.vim.org/)) y también ambientes de desarrollo integrados (IDE, en inglés *Integrated Development Environment*) como [Jupyter](https://jupyter.org/) o [RStudio](https://rstudio.com/).
+
+## El ambiente de desarrollo integrado RStudio
+[RStudio](https://www.rstudio.com/) es el IDE más popular para el lenguaje R. Está disponible en una versión de escritorio (RStudio Desktop) y en una versión para servidor (RStudio Server). Esta última permite la conexión de varios usuarios a través de un navegador web. RStudio se ofrece también como un servicio en la nube, a través de [RStudio Cloud](https://www.rstudio.com/products/cloud/). La @fig-rstudio-interfaz muestra la interfaz de RStudio.
+
+![Interfaz del ambiente de desarrollo integrado RStudio.](img/rstudio-interfaz.png){#fig-rstudio-interfaz .lightbox fig-alt="Interfaz del ambiente de desarrollo integrado RStudio" fig-align="center"}
+
+Además de edición de código fuente, RStudio contiene capacidades para depurar código y visualizar datos en formatos tabulares, gráficos y de mapas.
+
+## Funciones
+
+### Concepto
+R, al igual que otros lenguajes de programación, estructura su funcionalidad en unidades de [código fuente](https://es.wikipedia.org/wiki/C%C3%B3digo_fuente) llamadas [funciones](https://cran.r-project.org/doc/manuals/r-release/R-lang.html#Functions). Cada función realiza una tarea específica como, por ejemplo, un cálculo matemático o el procesamiento de una hilera de texto.
+
+Una función tiene un nombre y, opcionalmente, un conjunto de argumentos que especifican los datos de entrada que procesa la función. Los argumentos se escriben entre paréntesis redondos (`()`) y estos siempre deben incluirse, aún en el caso de que la función no tenga ningún argumento. Si la función tiene varios argumentos, deben separarse mediante comas (`,`).  Por lo general, las funciones retornan un valor como salida. 
+
+### Ejemplos
+La función [print()](https://rdrr.io/r/base/print.html) recibe como argumento un valor (ej. un texto o un número) para imprimirlo en la pantalla. En el siguiente fragmento de código en R, se utiliza `print()` para imprimir la hilera ["Hola mundo"](https://es.wikipedia.org/wiki/Hola_mundo). Nótese el uso del símbolo `#` para comentarios (i.e. texto que no es código ejecutable).
+
+```{r}
+#| label: code-print
+
+# Impresión de una hilera de caracteres
+print("Hola mundo")
+```
+
+La función [mean()](https://rdrr.io/r/base/mean.html) retorna la media aritmética del argumento de entrada. En el siguiente ejemplo, se calcula la media de los números de un vector creado a su vez con la función [c()](https://rdrr.io/r/base/c.html).
+
+```{r}
+#| label: code-mean
+
+# Media aritmética
+mean(c(2, 4, 5, 9))
+```
+
+La función [getwd()](https://rdrr.io/r/base/getwd.html) (*get working directory*) retorna la ruta del directorio de trabajo de la sesión actual de R. Este es el directorio en el cual R espera encontrar, por ejemplo, archivos de datos.
+
+```{r}
+#| label: code-getwd
+
+# Impresión del directorio de trabajo
+getwd()
+```
+
+La función [setwd()](https://rdrr.io/r/base/getwd.html) (*set working directory*) establece la ruta del directorio de trabajo de la sesión actual de R. Como argumento, recibe una hilera de texto con la ruta.
+
+**Note las barras utilizadas para separar los subdirectorios: / (no \\)**
+
+```{r}
+#| label: code-setwd
+#| eval: false
+
+# Especificación del directorio de trabajo (la ruta debe existir)
+setwd("C:/Users/mfvargas")
+```
+
+**Ejercicios**  
+1.  Obtenga la ruta de su directorio de trabajo con la función `getwd()`.\
+2.  Si lo desea, cambie la ruta de su directorio de trabajo con la función `setwd()`. Verifique el cambio usando nuevamente `getwd()`.
+
+### Argumentos
+Los argumentos de las funciones tienen nombres que pueden especificarse, en caso de ser necesario, al llamar la función. En algunos casos, el orden y el tipo de datos de los argumentos permiten que el interpretador de R conozca cuál es cada uno, sin necesidad de escribir sus nombres.
+
+En el siguiente ejemplo, se utilizan los argumentos `x`, `xlab` y `ylab` de la función [plot()](https://rdrr.io/r/graphics/plot.default.html), para especificar la fuente de datos y las etiquetas de los ejes `x` e `y` de un [gráfico de dispersión](https://es.wikipedia.org/wiki/Diagrama_de_dispersi%C3%B3n).
+
+```{r}
+#| label: code-argumentos
+
+# Gráfico de dispersón del conjunto de datos "cars" con etiquetas en los ejes x e y
+plot(
+  x=cars$speed,
+  y=cars$dist,
+  xlab="Velocidad (mph)", 
+  ylab="Distancia requerida para frenar (pies)"
+)
+```
+
+**Ejercicios**  
+1.  Estudie la documentación de la función `plot()` y agregue al gráfico anterior:  
+    a.  Un título.  
+    b.  Un subtítulo.
+
+### Ayuda
+Para obtener ayuda sobre una función desde la línea de comandos de R, puede utilizarse un signo de pregunta (`?`) seguido del nombre de la función o bien la función [help()](https://rdrr.io/r/utils/help.html). Por ejemplo:
+
+```{r}
+#| label: code-ayuda
+#| eval: false
+
+# Ayuda de la función setwd()
+?setwd
+help(setwd)
+```
+
+También puede utilizarse la función [apropos()](https://rdrr.io/r/utils/apropos.html), para buscar funciones por palabras clave.
+
+```{r}
+#| label: code-apropos
+
+# Búsqueda, por palabras clave, de funciones relacionadas con "mean" (media aritmética). Note las comillas ("").
+apropos("mean")
+```
+
+La función [example()](https://rdrr.io/r/utils/example.html) presenta ejemplos sobre el uso de una función.
+
+```{r eval=TRUE}
+# Ejemplos de uso de la función mean()
+example("mean")
+```
+
+Por otra parte, el sitio [All R Documentation](https://rdrr.io/r/) reúne documentación de funciones de una gran cantidad de paquetes de R. 
+
+También puede obtenerse ayuda en buscadores de Internet, como [Google](https://www.google.com/), o en sitios de preguntas y respuestas para programadores, como [Stack Overflow](https://stackoverflow.com/).

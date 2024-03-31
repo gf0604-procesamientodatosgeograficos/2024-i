@@ -1,1 +1,3 @@
 # II - El lenguaje de programación R {.unnumbered}
+
+[3 R - lenguaje de programación para análisis estadístico](03-r.qmd)  

@@ -310,5 +310,103 @@
       "I - Introducción a la programación de computadoras y a la ciencia de datos",
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Introducción a la ciencia de datos</span>"
     ]
+  },
+  {
+    "objectID": "parte-ii-lenguaje-programacion-r.html",
+    "href": "parte-ii-lenguaje-programacion-r.html",
+    "title": "II - El lenguaje de programación R",
+    "section": "",
+    "text": "3 R - lenguaje de programación para análisis estadístico",
+    "crumbs": [
+      "II - El lenguaje de programación R"
+    ]
+  },
+  {
+    "objectID": "03-r.html",
+    "href": "03-r.html",
+    "title": "3  R - lenguaje de programación para análisis estadístico",
+    "section": "",
+    "text": "3.1 Resumen\nR es un lenguaje de programación y un entorno para graficación y análisis estadístico. Como lenguaje, es interpretado, multiplataforma, de tipado dinámico y multiparadigma. Es un proyecto de software libre que se comparte mediante una licencia GNU GPL.\nEl código de R se estructura en funciones, las cuales se distribuyen en paquetes. Cada paquete contiene un conjunto de funciones relacionadas. Algunos paquetes están incorporados en la instalación base de R y otros deben instalarse separadamente.\nR puede manejar diversos tipos de datos básicos, como números, textos y valores lógicos, entre otros. También tipos de datos compuestos, como factores y data frames. Al igual que otros lenguajes de programación, cuenta con estructuras de control como condicionales y ciclos.",
+    "crumbs": [
+      "II - El lenguaje de programación R",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>R - lenguaje de programación para análisis estadístico</span>"
+    ]
+  },
+  {
+    "objectID": "03-r.html#trabajo-previo",
+    "href": "03-r.html#trabajo-previo",
+    "title": "3  R - lenguaje de programación para análisis estadístico",
+    "section": "3.2 Trabajo previo",
+    "text": "3.2 Trabajo previo\n\n3.2.1 Lecturas\nGrolemund, G., & Wickham, H. (2014). Hands-On Programming with R: Write Your Own Functions And Simulations (capítulos 1 - 12). O’Reilly Media. https://rstudio-education.github.io/hopr/",
+    "crumbs": [
+      "II - El lenguaje de programación R",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>R - lenguaje de programación para análisis estadístico</span>"
+    ]
+  },
+  {
+    "objectID": "03-r.html#introducción",
+    "href": "03-r.html#introducción",
+    "title": "3  R - lenguaje de programación para análisis estadístico",
+    "section": "3.3 Introducción",
+    "text": "3.3 Introducción\nR es un lenguaje de programación y un entorno enfocado en graficación y en análisis estadístico. Fue creado por Ross Ihaka y Robert Gentleman en la Universidad de Auckland, Nueva Zelanda, en 1993. Es ampliamente utilizado en diversas áreas de investigación, entre las que pueden mencionarse aprendizaje automático (machine learning), ciencia de datos (data science) y big data, con aplicaciones en campos como agricultura, biomedicina, bioinformática, finanzas, hidrología, teledetección y geografía entre muchos otros.\nAlgunas de las principales características del lenguaje de programación R son:\n\nEs interpretado: las instrucciones se traducen una por una a lenguaje máquina, a diferencia de los lenguajes compilados, que traducen de manera conjunta las instrucciones de una unidad completa (ej. un programa o una biblioteca). Los lenguajes interpretados tienden a ser más lentos que los compilados, pero también son más flexibles.\nEs multiplataforma: puede ejecutarse en los sistemas operativos más populares (ej. Microsoft Windows, macOS, Linux).\nTiene un sistema de tipos de datos dinámico: las variables pueden tomar diferentes tipos de datos (ej. textuales, numéricos) durante la ejecución del programa, a diferencia del caso de un sistema de tipos de datos estático, en el que las variables de un programa solo pueden tener un tipo de datos.\nSoporta varios paradigmas de programación: los paradigmas son estilos o enfoques teóricos de programación. R soporta los paradigmas de programación funcional, programación orientada a objetos, programación imperativa y programación procedimental.\n\nR es un proyecto de software libre que se comparte mediante una licencia GNU General Public Licence (GNU GPL). Esta característica permite que la funcionalidad original de R pueda ser ampliada mediante bibliotecas o paquetes desarrollados por la comunidad de programadores.\nLa Comprehensive R Archive Network (CRAN) es una red mundial distribuida de servidores que albergan el código y la documentación oficial de R y sus paquetes. Las tasks views de CRAN categorizan la funcionalidad de R de acuerdo con temáticas determinadas.\nPara programar en R, puede utilizarse una interfaz de línea de comandos, editores de texto (ej. Visual Studio Code, Vim) y también ambientes de desarrollo integrados (IDE, en inglés Integrated Development Environment) como Jupyter o RStudio.",
+    "crumbs": [
+      "II - El lenguaje de programación R",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>R - lenguaje de programación para análisis estadístico</span>"
+    ]
+  },
+  {
+    "objectID": "03-r.html#el-ambiente-de-desarrollo-integrado-rstudio",
+    "href": "03-r.html#el-ambiente-de-desarrollo-integrado-rstudio",
+    "title": "3  R - lenguaje de programación para análisis estadístico",
+    "section": "3.4 El ambiente de desarrollo integrado RStudio",
+    "text": "3.4 El ambiente de desarrollo integrado RStudio\nRStudio es el IDE más popular para el lenguaje R. Está disponible en una versión de escritorio (RStudio Desktop) y en una versión para servidor (RStudio Server). Esta última permite la conexión de varios usuarios a través de un navegador web. RStudio se ofrece también como un servicio en la nube, a través de RStudio Cloud. La Figura 3.1 muestra la interfaz de RStudio.\n\n\n\n\n\n\nFigura 3.1: Interfaz del ambiente de desarrollo integrado RStudio.\n\n\n\nAdemás de edición de código fuente, RStudio contiene capacidades para depurar código y visualizar datos en formatos tabulares, gráficos y de mapas.",
+    "crumbs": [
+      "II - El lenguaje de programación R",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>R - lenguaje de programación para análisis estadístico</span>"
+    ]
+  },
+  {
+    "objectID": "03-r.html#conjuntos-de-datos-para-pruebas",
+    "href": "03-r.html#conjuntos-de-datos-para-pruebas",
+    "title": "3  R: lenguaje de programación para análisis estadístico",
+    "section": "3.5 Conjuntos de datos para pruebas",
+    "text": "3.5 Conjuntos de datos para pruebas\nPara efectos de pruebas y ejemplos, la distribución base de R incorpora varios conjuntos de datos que pueden listarse con la función data(). Para obtener información acerca de un conjunto de datos en particular, puede utilizarse el operador ?.\n\n# Información sobre todos los conjuntos de datos incorporados en la distribución base de R\ndata()\n\n# Información sobre el cojunto de datos \"cars\"\n?cars\n\n# Información sobre el cojunto de datos \"mtcars\"\n?mtcars\n\n# Información sobre el cojunto de datos \"Iris\"\n?iris\n\nAdemás, existen muchos sitios en Internet que brindan acceso a conjuntos de datos que pueden utilizarse para pruebas. Por ejemplo:\n\nKaggle - conjuntos de datos\nBanco Mundial - indicadores\nGapminder\nPapers with Code - conjuntos de datos",
+    "crumbs": [
+      "II - El lenguaje de programación R",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>R: lenguaje de programación para análisis estadístico</span>"
+    ]
+  },
+  {
+    "objectID": "03-r.html#funciones",
+    "href": "03-r.html#funciones",
+    "title": "3  R - lenguaje de programación para análisis estadístico",
+    "section": "3.5 Funciones",
+    "text": "3.5 Funciones\n\n3.5.1 Concepto\nR, al igual que otros lenguajes de programación, estructura su funcionalidad en unidades de código fuente llamadas funciones. Cada función realiza una tarea específica como, por ejemplo, un cálculo matemático o el procesamiento de una hilera de texto.\nUna función tiene un nombre y, opcionalmente, un conjunto de argumentos que especifican los datos de entrada que procesa la función. Los argumentos se escriben entre paréntesis redondos (()) y estos siempre deben incluirse, aún en el caso de que la función no tenga ningún argumento. Si la función tiene varios argumentos, deben separarse mediante comas (,). Por lo general, las funciones retornan un valor como salida.\n\n\n3.5.2 Ejemplos\nLa función print() recibe como argumento un valor (ej. un texto o un número) para imprimirlo en la pantalla. En el siguiente fragmento de código en R, se utiliza print() para imprimir la hilera “Hola mundo”. Nótese el uso del símbolo # para comentarios (i.e. texto que no es código ejecutable).\n\n# Impresión de una hilera de caracteres\nprint(\"Hola mundo\")\n\n[1] \"Hola mundo\"\n\n\nLa función mean() retorna la media aritmética del argumento de entrada. En el siguiente ejemplo, se calcula la media de los números de un vector creado a su vez con la función c().\n\n# Media aritmética\nmean(c(2, 4, 5, 9))\n\n[1] 5\n\n\nLa función getwd() (get working directory) retorna la ruta del directorio de trabajo de la sesión actual de R. Este es el directorio en el cual R espera encontrar, por ejemplo, archivos de datos.\n\n# Impresión del directorio de trabajo\ngetwd()\n\n[1] \"/home/rstudio/2024-i\"\n\n\nLa función setwd() (set working directory) establece la ruta del directorio de trabajo de la sesión actual de R. Como argumento, recibe una hilera de texto con la ruta.\nNote las barras utilizadas para separar los subdirectorios: / (no \\)\n\n# Especificación del directorio de trabajo (la ruta debe existir)\nsetwd(\"C:/Users/mfvargas\")\n\nEjercicios\n1. Obtenga la ruta de su directorio de trabajo con la función getwd().\n2. Si lo desea, cambie la ruta de su directorio de trabajo con la función setwd(). Verifique el cambio usando nuevamente getwd().\n\n\n3.5.3 Argumentos\nLos argumentos de las funciones tienen nombres que pueden especificarse, en caso de ser necesario, al llamar la función. En algunos casos, el orden y el tipo de datos de los argumentos permiten que el interpretador de R conozca cuál es cada uno, sin necesidad de escribir sus nombres.\nEn el siguiente ejemplo, se utilizan los argumentos x, xlab y ylab de la función plot(), para especificar la fuente de datos y las etiquetas de los ejes x e y de un gráfico de dispersión.\n\n# Gráfico de dispersón del conjunto de datos \"cars\" con etiquetas en los ejes x e y\nplot(\n  x=cars$speed,\n  y=cars$dist,\n  xlab=\"Velocidad (mph)\", \n  ylab=\"Distancia requerida para frenar (pies)\"\n)\n\n\n\n\n\n\n\n\nEjercicios\n1. Estudie la documentación de la función plot() y agregue al gráfico anterior:\na. Un título.\nb. Un subtítulo.\n\n\n3.5.4 Ayuda\nPara obtener ayuda sobre una función desde la línea de comandos de R, puede utilizarse un signo de pregunta (?) seguido del nombre de la función o bien la función help(). Por ejemplo:\n\n# Ayuda de la función setwd()\n?setwd\nhelp(setwd)\n\nTambién puede utilizarse la función apropos(), para buscar funciones por palabras clave.\n\n# Búsqueda, por palabras clave, de funciones relacionadas con \"mean\" (media aritmética). Note las comillas (\"\").\napropos(\"mean\")\n\n [1] \".colMeans\"     \".rowMeans\"     \"colMeans\"      \"kmeans\"       \n [5] \"mean\"          \"mean.Date\"     \"mean.default\"  \"mean.difftime\"\n [9] \"mean.POSIXct\"  \"mean.POSIXlt\"  \"rowMeans\"      \"weighted.mean\"\n\n\nLa función example() presenta ejemplos sobre el uso de una función.\n\n# Ejemplos de uso de la función mean()\nexample(\"mean\")\n\n\nmean&gt; x &lt;- c(0:10, 50)\n\nmean&gt; xm &lt;- mean(x)\n\nmean&gt; c(xm, mean(x, trim = 0.10))\n[1] 8.75 5.50\n\n\nPor otra parte, el sitio All R Documentation reúne documentación de funciones de una gran cantidad de paquetes de R.\nTambién puede obtenerse ayuda en buscadores de Internet, como Google, o en sitios de preguntas y respuestas para programadores, como Stack Overflow.\n\n\n\nFigura 3.1: Interfaz del ambiente de desarrollo integrado RStudio.",
+    "crumbs": [
+      "II - El lenguaje de programación R",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>R - lenguaje de programación para análisis estadístico</span>"
+    ]
+  },
+  {
+    "objectID": "03-r.html#paquetes",
+    "href": "03-r.html#paquetes",
+    "title": "3  R: lenguaje de programación para análisis estadístico",
+    "section": "3.7 Paquetes",
+    "text": "3.7 Paquetes\nLas funciones de R se distribuyen en paquetes. Cada paquete contiene un conjunto de funciones relacionadas. También hay paquetes que contienen datos (ej. los resultados de un censo).\nPara utilizar un paquete, primero debe cargarse (en la memoria del computador) con la función library().\n\n# Carga del paquete stats\nlibrary(stats)\n\nAlgunos paquetes están contenidos en la distribución base de R. Otros deben instalarse con la función install.packages().\n\n\n\nFigura 3.1: Interfaz del ambiente de desarrollo integrado RStudio.",
+    "crumbs": [
+      "II - El lenguaje de programación R",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>R: lenguaje de programación para análisis estadístico</span>"
+    ]
+  },
+  {
+    "objectID": "03-r.html#conjuntos-de-datos-para-ejemplos-y-pruebas",
+    "href": "03-r.html#conjuntos-de-datos-para-ejemplos-y-pruebas",
+    "title": "3  R - lenguaje de programación para análisis estadístico",
+    "section": "3.5 Conjuntos de datos para ejemplos y pruebas",
+    "text": "3.5 Conjuntos de datos para ejemplos y pruebas\nPara efectos de ejemplos y pruebas, la distribución base de R incorpora varios conjuntos de datos que pueden listarse con la función data(). Para obtener información acerca de un conjunto de datos en particular, puede utilizarse el operador ?.\n\n# Información sobre todos los conjuntos de datos incorporados en la distribución base de R\ndata()\n\n# Información sobre el cojunto de datos \"cars\"\n?cars\n\n# Información sobre el cojunto de datos \"mtcars\"\n?mtcars\n\n# Información sobre el cojunto de datos \"Iris\"\n?iris\n\nAdemás, existen muchos sitios en Internet que brindan acceso a conjuntos de datos que pueden utilizarse para pruebas. Por ejemplo:\n\nKaggle - conjuntos de datos\nBanco Mundial - indicadores\nGapminder\nPapers with Code - conjuntos de datos",
+    "crumbs": [
+      "II - El lenguaje de programación R",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>R - lenguaje de programación para análisis estadístico</span>"
+    ]
   }
 ]
