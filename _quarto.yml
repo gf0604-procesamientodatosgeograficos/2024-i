@@ -13,6 +13,7 @@ book:
       chapters:
         - 01-arquitectura_computadoras-lenguajes_programacion-pensamiento_computacional.qmd
         - 02-introduccion-ciencia-datos.qmd
+    - part: parte-ii-lenguaje-programacion-r.qmd        
 
 bibliography: referencias.bib
 csl: apa-6th-edition.csl
