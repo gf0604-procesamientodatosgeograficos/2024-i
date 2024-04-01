@@ -11,7 +11,7 @@ docker build -t gf0604-2024-i .
 # (el directorio local debe especificarse en la opción -v)
 docker run -d --name gf0604-2024-i \
   -p 8787:8787 \
-  -v /home/mfvargas/gf0604-desarrollosigweb/2024-i/github:/home/rstudio \
+  -v /home/mfvargas/gf0604-procesamientodatosgeograficos/2024-i/github:/home/rstudio \
   -e PASSWORD=gf0604 \
   gf0604-2024-i
 ```
