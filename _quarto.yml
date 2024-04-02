@@ -24,3 +24,4 @@ format:
   html:
     lang: es
     theme: cosmo
+    toc-expand: 5
