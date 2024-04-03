@@ -16,6 +16,7 @@ book:
     - part: parte-ii-lenguaje-programacion-r.qmd
       chapters:
         - 03-r.qmd
+    - part: parte-vii-evaluaciones.qmd
 
 bibliography: referencias.bib
 csl: apa-6th-edition.csl
