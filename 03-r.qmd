@@ -137,7 +137,7 @@ setwd("C:/Users/mfvargas")
 #### Argumentos
 Los argumentos de las funciones tienen nombres que pueden especificarse, en caso de ser necesario, al llamar la función. En algunos casos, el orden y el tipo de datos de los argumentos permiten que el interpretador de R conozca cuál es cada uno, sin necesidad de escribir sus nombres.
 
-En el siguiente ejemplo, se utilizan los argumentos `x`, `xlab` y `ylab` de la función [plot()](https://rdrr.io/r/graphics/plot.default.html), para especificar la fuente de datos y las etiquetas de los ejes `x` e `y` de un [gráfico de dispersión](https://es.wikipedia.org/wiki/Diagrama_de_dispersi%C3%B3n).
+En el siguiente ejemplo, se utilizan los argumentos `x`, `xlab` y `ylab` de la función [plot()](https://rdrr.io/r/graphics/plot.default.html), de la instalación básica de R, para especificar la fuente de datos y las etiquetas de los ejes `x` e `y` de un [gráfico de dispersión](https://es.wikipedia.org/wiki/Diagrama_de_dispersi%C3%B3n).
 
 ```{r}
 #| label: plot-cars
@@ -224,7 +224,9 @@ library(titanic)
 ```
 
 ### Visualización de datos
-El conjunto de datos `titanic_train` puede observarse, con sus observaciones y variables, con la función [View()](https://rdrr.io/r/utils/View.html). Este conjunto se utiliza para entrenar modelos de [aprendizaje automático (*machine learning*)](https://es.wikipedia.org/wiki/Aprendizaje_autom%C3%A1tico) para que realicen, por ejemplo, predicciones (ej. la supervivencia o muerte de un pasajero con base en variables como edad, clase, sexo y otras). Las predicciones del modelo se evalúan con `titanic_test`, el conjunto de datos de evaluación.
+
+#### La función `View()`
+El conjunto de datos `titanic_train` puede observarse, con sus observaciones y variables, con la función [View()](https://rdrr.io/r/utils/View.html), la cual permite visualizar un conjunto de datos en una tabla.
 
 ```{r}
 #| label: funcion-view
@@ -234,7 +236,15 @@ El conjunto de datos `titanic_train` puede observarse, con sus observaciones y v
 View(titanic_train)
 ```
 
-El siguiente [gráfico de barras](https://es.wikipedia.org/wiki/Diagrama_de_barras) muestra la distribución de pasajeros por clase en `titanic_train`, mediante la función [barplot()](https://rdrr.io/r/graphics/barplot.html), una de las funciones de [graficación básica de R](https://r-graph-gallery.com/base-R.html). Antes se utiliza la función [table()](https://rdrr.io/r/base/table.html) para generar una [tabla de contingencia](https://es.wikipedia.org/wiki/Tabla_de_contingencia) con las cantidades de pasajeros que viajaban en cada clase.
+Este conjunto de datos se utiliza para entrenar modelos de [aprendizaje automático (*machine learning*)](https://es.wikipedia.org/wiki/Aprendizaje_autom%C3%A1tico) para que realicen, por ejemplo, predicciones (ej. la supervivencia o muerte de un pasajero con base en variables como edad, clase, sexo y otras). Las predicciones del modelo se evalúan con `titanic_test`, el conjunto de datos de evaluación.
+
+#### Funciones básicas de graficación estadística
+La instalación básica de R, la cual incluye el paquete [base](https://rdrr.io/r/base/base-package.html) y el paquete [graphics](https://rdrr.io/r/graphics/graphics-package.html), ofrece una gran variedad de funciones para elaborar gráficos estadísticos. Esta funcionalidad se enriquece gracias al aporte de paquetes elaborados por terceros, los cuales se estudiarán posteriormente en este curso. Entre los tipos de gráficos que pueden elaborarse con la instalación básica de R están los gráficos de dispersión, los gráficos de barras, los gráficos de pastel y los histogramas.
+
+##### Gráficos de barras
+Un [gráfico de barras](https://es.wikipedia.org/wiki/Diagrama_de_barras) permite representar variables de un conjunto de datos mediante barras rectangulares de longitud proporcional a los valores representados. Los gráficos de barras se utilizan principalmente para representar datos que involucran variables categóricas. Permiten comparar fácilmente cantidades o números asociados a diferentes categorías. Por ejemplo, se puede usar un gráfico de barras para mostrar la cantidad de ventas de diferentes tipos de productos, la población en diferentes ciudades, o las puntuaciones obtenidas por estudiantes en diferentes materias.
+
+El siguiente gráfico de barras muestra la cantidad de pasajeros por clase en `titanic_train`, mediante la función [barplot()](https://rdrr.io/r/graphics/barplot.html), una de las funciones de [graficación básica de R](https://r-graph-gallery.com/base-R.html). Esta función recibe como argumento los valores que se desea representar en las barras, por lo que antes se utiliza la función [table()](https://rdrr.io/r/base/table.html) para generar una [tabla de contingencia](https://es.wikipedia.org/wiki/Tabla_de_contingencia) con las cantidades de pasajeros que viajaban en cada clase.
 
 ```{r}
 #| label: tabla-titanic-clase
@@ -253,27 +263,14 @@ pasajeros_por_clase
 
 # Gráfico de barras por clase de pasajero
 barplot(
-  height=pasajeros_por_clase,
-  main="Distribución de pasajeros del Titanic por clase",
+  height = pasajeros_por_clase,
+  main = "Cantidad de pasajeros por clase en el Titanic",
   xlab = "Clase",
   ylab = "Cantidad de pasajeros"  
 )
 ```
 
-La misma información puede presentarse también en un [gráfico de pastel](https://es.wikipedia.org/wiki/Gr%C3%A1fico_circular).
-
-```{r}
-#| label: pie-titanic-clase
-#| collapse: true
-
-# Gráfico de pastel por clase de pasajero
-pie(
-  pasajeros_por_clase, main = "Distribución de pasajeros del Titanic por clase",
-  labels = paste(names(pasajeros_por_clase), ":", pasajeros_por_clase)
-)
-```
-
-La distribución por cada clase puede subdividirse en fallecidos y sobrevivientes.
+La cantidad de pasajeros en cada clase puede subdividirse en fallecidos y sobrevivientes.
 
 ```{r}
 #| label: tabla-titanic-clase-sobrevivencia
@@ -288,7 +285,7 @@ pasajeros_por_clase_sobrevivencia <-
 pasajeros_por_clase_sobrevivencia
 ```
 
-El siguiente gráfico muestra en un gráfico de barras apiladas la distribución de pasajeros sobrevivientes y fallecidos en cada clase.
+El siguiente gráfico de barras apiladas muestra la distribución de pasajeros sobrevivientes y fallecidos en cada clase.
 
 ```{r}
 #| label: barplot-apilado-titanic-clase-sobrevivencia
@@ -297,7 +294,7 @@ El siguiente gráfico muestra en un gráfico de barras apiladas la distribución
 # Gráfico de barras apiladas
 barplot(
   height = pasajeros_por_clase_sobrevivencia,
-  main = "Distribución de pasajeros fallecidos y sobrevivientes por clase",
+  main = "Cantidad de pasajeros fallecidos y sobrevivientes por clase",
   xlab = "Clase",
   ylab = "Cantidad de pasajeros",
   col = topo.colors(2)
@@ -322,7 +319,7 @@ La misma información se muestra seguidamente en un gráfico de barras agrupadas
 # Gráfico de barras agrupadas
 barplot(
   height = pasajeros_por_clase_sobrevivencia,
-  main = "Distribución de pasajeros fallecidos y sobrevivientes por clase",
+  main = "Cantidad de pasajeros fallecidos y sobrevivientes por clase",
   xlab = "Clase",
   ylab = "Cantidad de pasajeros",  
   col = topo.colors(2),
@@ -339,9 +336,46 @@ legend(
 )
 ```
 
+##### Gráficos de pastel
+Los [gráficos de pastel](https://es.wikipedia.org/wiki/Gr%C3%A1fico_circular) se utilizan para mostrar proporciones o porcentajes, representando la composición de un todo. Son especialmente útiles para resaltar cómo se divide un conjunto en categorías, donde cada segmento del pastel (*slice* o "rebanada") representa la proporción o porcentaje de esa categoría dentro del total. Por lo tanto, son más adecuados para visualizar datos categóricos o cualitativos, no para datos numéricos continuos.
+
+La cantidad de pasajeros por clase en `titanic_train` también puede mostrarse en un gráfico de pastel, mediante la función [pie](https://rdrr.io/r/graphics/pie.html) de la instalación básica de R.
+
+```{r}
+#| label: pie-titanic-clase
+#| collapse: true
+
+# Gráfico de pastel por clase de pasajero
+pie(
+  x = pasajeros_por_clase, 
+  main = "Distribución de pasajeros por clase en el Titanic",
+  labels = paste(names(pasajeros_por_clase), ":", pasajeros_por_clase)
+)
+```
+
+##### Histogramas
+Un [histograma](https://es.wikipedia.org/wiki/Histograma) es una representación gráfica de la distribución de una variable numérica en forma de barras (en este caso, llamadas en inglés *bins*). La longitud de cada barra representa la frecuencia de un rango de valores de la variable.
+
+En la instalación básica de R, los histogramas se implementan mendiante la función [hist()](https://rdrr.io/r/graphics/hist.html).
+
+```{r}
+#| label: hist-titanic-edad
+#| collapse: true
+
+hist(
+  x = titanic_train$Age, 
+  breaks = 8,
+  main = "Distribución de la edad de los pasajeros del Titanic", 
+  xlab = "Edad", 
+  ylab = "Frecuencia"
+)
+```
+
 **Ejercicios**  
-1.  Muestre la distribución de pasajeros fallecidos y sobrevivientes por sexo en un gráfico de barras apiladas.  
-2.  Muestre la distribución de pasajeros fallecidos y sobrevivientes por sexo en un gráfico de barras agrupadas.
+
+1. Muestre la distribución de pasajeros fallecidos y sobrevivientes por sexo en un gráfico de barras apiladas.  
+2. Muestre la distribución de pasajeros fallecidos y sobrevivientes por sexo en un gráfico de barras agrupadas.
+3. Guarde los gráficos en un archivo PDF (puede consultar [Saving plots to a file with pdf(), jpeg() and png()](https://bookdown.org/ndphillips/YaRrr/saving-plots-to-a-file-with-pdf-jpeg-and-png.html)).
 
 ### Tipos de datos
 R puede trabajar con varios [tipos de datos básicos](https://cran.r-project.org/doc/manuals/r-release/R-lang.html#Basic-types), entre los que están números, caracteres (i.e. textos) y lógicos. También puede trabajar con [tipos compuestos](https://cran.r-project.org/doc/manuals/r-release/R-lang.html#Special-compound-objects), como factores y *data frames*.
