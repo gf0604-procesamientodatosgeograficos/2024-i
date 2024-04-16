@@ -1,3 +1,4 @@
 # II - El lenguaje de programación R {.unnumbered}
 
 [3 R - lenguaje de programación para análisis estadístico](03-r.qmd)  
+[4 Tidyverse - colección de paquetes para ciencia de datos](04-tidyverse.qmd)  

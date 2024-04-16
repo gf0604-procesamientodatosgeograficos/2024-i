@@ -16,6 +16,7 @@ book:
     - part: parte-ii-lenguaje-programacion-r.qmd
       chapters:
         - 03-r.qmd
+        - 04-tidyverse.qmd
     - part: parte-vii-evaluaciones.qmd
       chapters: 
         - examen-corto-01.qmd

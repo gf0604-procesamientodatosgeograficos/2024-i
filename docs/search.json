@@ -283,7 +283,7 @@
     "href": "02-introduccion-ciencia-datos.html#ciencia-de-datos",
     "title": "2  Introducción a la ciencia de datos",
     "section": "2.4 Ciencia de datos",
-    "text": "2.4 Ciencia de datos\nLa ciencia de datos es una disciplina que permite convertir datos “crudos” en comprensión y conocimiento (Wickham, Çetinkaya-Rundel, & Grolemund, 2023). Utiliza estadística y ciencias de la computación, entre otras disciplinas.\nLa Figura 2.2 ilustra el modelo de un proyecto típico de ciencia de datos, el cual incluye los procesos de importar, ordenar, transformar, visualizar, modelar y comunicar. Todos se articulan mediante programación de computadoras.\n\n\n\n\n\n\nFigura 2.2: Modelo de ciencia de datos. Fuente: R for Data Science.\n\n\n\n\nImportar los datos típicamente implica leerlos de un archivo, una base de datos o una interfaz de programación de aplicaciones (API) y cargarlos en un data frame.\nOrdenar u organizar (to tidy) los datos significa colocarlos en estructuras rectangulares de filas y columnas, similares a tablas, de manera que cada fila sea una observación y cada columna una variable.\nTransformar los datos implica la generación de algún subconjunto de filas y columnas, la creación de nuevas variables o el cálculo de estadísticas (ej. conteos, promedios, mínimos, máximos).\nVisualizar los datos (en tablas, gráficos, mapas, etc.) permite encontrar patrones inesperados o formular nuevas preguntas.\nModelar es crear una representación abstracta y estructurada de los datos, con el fin de facilitar su análisis y realizar predicciones.\nComunicar es el último paso y es una actividad crítica de cualquier proyecto de análisis de datos o de ciencia en general.",
+    "text": "2.4 Ciencia de datos\nLa ciencia de datos es una disciplina que permite convertir datos “crudos” en comprensión y conocimiento (Wickham, Çetinkaya-Rundel, & Grolemund, 2023). Utiliza estadística y ciencias de la computación, entre otras disciplinas.\nLa Figura 4.1 ilustra el modelo de un proyecto típico de ciencia de datos, el cual incluye los procesos de importar, ordenar, transformar, visualizar, modelar y comunicar. Todos se articulan mediante programación de computadoras.\n\n\n\n\n\n\nFigura 2.2: Modelo de ciencia de datos. Fuente: R for Data Science.\n\n\n\n\nImportar los datos típicamente implica leerlos de un archivo, una base de datos o una interfaz de programación de aplicaciones (API) y cargarlos en un data frame.\nOrdenar u organizar (to tidy) los datos significa colocarlos en estructuras rectangulares de filas y columnas, similares a tablas, de manera que cada fila sea una observación y cada columna una variable.\nTransformar los datos implica la generación de algún subconjunto de filas y columnas, la creación de nuevas variables o el cálculo de estadísticas (ej. conteos, promedios, mínimos, máximos).\nVisualizar los datos (en tablas, gráficos, mapas, etc.) permite encontrar patrones inesperados o formular nuevas preguntas.\nModelar es crear una representación abstracta y estructurada de los datos, con el fin de facilitar su análisis y realizar predicciones.\nComunicar es el último paso y es una actividad crítica de cualquier proyecto de análisis de datos o de ciencia en general.",
     "crumbs": [
       "I - Introducción a la programación de computadoras y a la ciencia de datos",
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Introducción a la ciencia de datos</span>"
@@ -316,7 +316,7 @@
     "href": "parte-ii-lenguaje-programacion-r.html",
     "title": "II - El lenguaje de programación R",
     "section": "",
-    "text": "3 R - lenguaje de programación para análisis estadístico",
+    "text": "3 R - lenguaje de programación para análisis estadístico\n4 Tidyverse - colección de paquetes para ciencia de datos",
     "crumbs": [
       "II - El lenguaje de programación R"
     ]
@@ -472,6 +472,116 @@
     "text": "Exámenes cortos\nExamen corto 1",
     "crumbs": [
       "Evaluaciones"
+    ]
+  },
+  {
+    "objectID": "04-tidyverse.html",
+    "href": "04-tidyverse.html",
+    "title": "4  Tidyverse - colección de paquetes para ciencia de datos",
+    "section": "",
+    "text": "4.1 Resumen\nTidyverse es una colección de paquetes de R orientados a ciencia de datos y que apoya los procesos de importación, organización, transformación, visualización, modelado y comunicación.\nLos paquetes de Tidyverse trabajan con datos tidy (i.e. ordenados, organizados), los cuales deben cumplir con tres características:\nLas funciones de Tidyverse pueden encadenarse a través del operador pipe (tubo), ya sea el del paquete magrittr (%&gt;%) o el del paquete base de R (|&gt;). Los procesos se enlazan con pipes para formar pipelines (tuberías). En este contexto, un pipeline consiste de una cadena de procesos conectados de forma tal que la salida de cada proceso de la cadena es la entrada del próximo. Esto permite la comunicación y sincronización entre los procesos y evita la anidación de funciones.",
+    "crumbs": [
+      "II - El lenguaje de programación R",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Tidyverse - colección de paquetes para ciencia de datos</span>"
+    ]
+  },
+  {
+    "objectID": "04-tidyverse.html#resumen",
+    "href": "04-tidyverse.html#resumen",
+    "title": "4  Tidyverse - colección de paquetes para ciencia de datos",
+    "section": "",
+    "text": "Cada variable debe tener su propia columna.\nCada observación debe tener su propia fila.\nCada valor debe tener su propia celda.",
+    "crumbs": [
+      "II - El lenguaje de programación R",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Tidyverse - colección de paquetes para ciencia de datos</span>"
+    ]
+  },
+  {
+    "objectID": "04-tidyverse.html#trabajo-previo",
+    "href": "04-tidyverse.html#trabajo-previo",
+    "title": "4  Tidyverse - colección de paquetes para ciencia de datos",
+    "section": "4.2 Trabajo previo",
+    "text": "4.2 Trabajo previo\n\n4.2.1 Lecturas\nWickham, H. (2014). Tidy Data. Journal of Statistical Software, 59(1), 1-23. https://doi.org/10.18637/jss.v059.i10\nWickham, Hadley; Çetinkaya-Rundel, Mirne; & Grolemund, Garret (2023). R for Data Science: Import, Tidy, Transform, Visualize, and Model Data (2nd ed.). O’Reilly Media. https://r4ds.hadley.nz/ (capítulos 1 -8, 25 - 27)",
+    "crumbs": [
+      "II - El lenguaje de programación R",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Tidyverse - colección de paquetes para ciencia de datos</span>"
+    ]
+  },
+  {
+    "objectID": "04-tidyverse.html#introducción",
+    "href": "04-tidyverse.html#introducción",
+    "title": "4  Tidyverse - colección de paquetes para ciencia de datos",
+    "section": "4.3 Introducción",
+    "text": "4.3 Introducción\nTidyverse es una colección de paquetes de R enfocados en ciencia de datos, una discipina que permite convertir datos no procesados en entendimiento, comprensión y conocimiento.\nLa Figura 4.1 ilustra el modelo de un proyecto típico de ciencia de datos, el cual incluye los procesos de importar, ordenar, transformar, visualizar, modelar y comunicar. Todos se articulan mediante programación de computadoras.\n\n\n\n\n\n\nFigura 4.1: Modelo de ciencia de datos. Fuente: R for Data Science.\n\n\n\n\nImportar los datos típicamente implica leerlos de un archivo, una base de datos o una interfaz de programación de aplicaciones (API) y cargarlos en un data frame.\nOrdenar u organizar (to tidy) los datos significa colocarlos en estructuras rectangulares de filas y columnas, similares a tablas, de manera que cada fila sea una observación y cada columna una variable.\nTransformar los datos implica la generación de algún subconjunto de filas y columnas, la creación de nuevas variables o el cálculo de estadísticas (ej. conteos, promedios, mínimos, máximos).\nVisualizar los datos (en tablas, gráficos, mapas, etc.) permite encontrar patrones inesperados o formular nuevas preguntas.\nModelar es crear una representación abstracta y estructurada de los datos, con el fin de facilitar su análisis y realizar predicciones.\nComunicar es el último paso y es una actividad crítica de cualquier proyecto de análisis de datos o de ciencia en general.\n\nLos paquetes de Tidyverse comparten filosofía de diseño, gramática y estructuras de datos para apoyar estos procesos del modelo de ciencia de datos. El concepto de Tidyverse fue introducido por Hadley Wickham, quien también ha programado varios de sus paquetes.",
+    "crumbs": [
+      "II - El lenguaje de programación R",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Tidyverse - colección de paquetes para ciencia de datos</span>"
+    ]
+  },
+  {
+    "objectID": "04-tidyverse.html#paquetes",
+    "href": "04-tidyverse.html#paquetes",
+    "title": "4  Tidyverse - colección de paquetes para ciencia de datos",
+    "section": "4.4 Paquetes",
+    "text": "4.4 Paquetes\nEl núcleo de Tidyverse está compuesto por ocho paquetes base, los cuales proveen las funcionalidades utilizadas más frecuentemente en análisis de datos:\n\ndplyr: gramática que proporciona un conjunto consistente de “verbos” que resuelven los retos más comunes de transformación de datos.\nggplot2: sistema para la creación declarativa de gráficos, basado en el libro The Grammar of Graphics, de Wilkinson et al..\ntidyr: conjunto de funciones para organizar (to tidy) datos, colocando las observaciones, variables y valores en filas, columnas y celdas de estructuras rectangulares.\nreadr: conjunto de funciones para cargar datos de estructuras rectangulares (ej. archivos CSV) en memoria.\npurr: conjunto de herramientas de programación funcional para trabajar con funciones y vectores.\ntibble: un tibble es una redefinición del concepto de data frame, para hacerlos más eficientes y fáciles de usar.\nstringr: colección de funciones para facilitar el trabajo con hileras de caracteres.\nforcats: colección de funciones para facilitar el trabajo con factores.\n\nHay otros paquetes para tareas más especifícas relacionadas con importación, limpieza y modelado de datos, entre otras. Los paquetes de Tidyverse son de los más descargados, entre la totalidad de paquetes del lenguaje de programación R.",
+    "crumbs": [
+      "II - El lenguaje de programación R",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Tidyverse - colección de paquetes para ciencia de datos</span>"
+    ]
+  },
+  {
+    "objectID": "04-tidyverse.html#instalación-y-carga",
+    "href": "04-tidyverse.html#instalación-y-carga",
+    "title": "4  Tidyverse - colección de paquetes para ciencia de datos",
+    "section": "4.5 Instalación y carga",
+    "text": "4.5 Instalación y carga\nLos paquetes de Tidyverse pueden instalarse con la función install.packages(), ya sea de manera conjunta (todos los paquetes básicos) o individualmente:\n\n# Instalación conjunta (toma más tiempo)\ninstall.packages(\"tidyverse\")\n\n# Instalación de paquetes individuales\ninstall.packages(\"ggplot2\")\ninstall.packages(\"dplyr\")\n\nUna vez instalados, los paquetes también pueden cargarse conjunta o separadamente con la función library():\n\n# Carga conjunta\nlibrary(tidyverse)\n\n# Carga de paquetes individuales\nlibrary(ggplot2)\nlibrary(dplyr)\n\nTambién es posible utilizar la notación paquete::funcion() para llamar una función sin necesidad de cargar todo el paquete (siempre y cuando este haya sido instalado):\n\n# Llamado a la función glimpse() del paquete dplyr\ndplyr::glimpse(iris)\n\nRows: 150\nColumns: 5\n$ Sepal.Length &lt;dbl&gt; 5.1, 4.9, 4.7, 4.6, 5.0, 5.4, 4.6, 5.0, 4.4, 4.9, 5.4, 4.…\n$ Sepal.Width  &lt;dbl&gt; 3.5, 3.0, 3.2, 3.1, 3.6, 3.9, 3.4, 3.4, 2.9, 3.1, 3.7, 3.…\n$ Petal.Length &lt;dbl&gt; 1.4, 1.4, 1.3, 1.5, 1.4, 1.7, 1.4, 1.5, 1.4, 1.5, 1.5, 1.…\n$ Petal.Width  &lt;dbl&gt; 0.2, 0.2, 0.2, 0.2, 0.2, 0.4, 0.3, 0.2, 0.2, 0.1, 0.2, 0.…\n$ Species      &lt;fct&gt; setosa, setosa, setosa, setosa, setosa, setosa, setosa, s…",
+    "crumbs": [
+      "II - El lenguaje de programación R",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Tidyverse - colección de paquetes para ciencia de datos</span>"
+    ]
+  },
+  {
+    "objectID": "04-tidyverse.html#el-conjunto-de-datos-palmerpenguins",
+    "href": "04-tidyverse.html#el-conjunto-de-datos-palmerpenguins",
+    "title": "4  Tidyverse - colección de paquetes para ciencia de datos",
+    "section": "4.6 El conjunto de datos palmerpenguins",
+    "text": "4.6 El conjunto de datos palmerpenguins\npalmerpenguins es un paquete de datos de R ampliamente utilizado para ejemplificar funciones de exploración y visualización, como las de Tidyverse. Es muy popular en ciencia de datos en general y también está disponible para otros lenguajes de programación (ej. Python, Julia). Se utiliza como una alternativa a otros conjuntos de datos usualmente usados para ejemplos como, por ejemplo, iris.\nLos datos de palmerpenguins fueron recolectados entre 2007 y 2009 por la Dr. Kristen Gorman y el Programa de Investigación Ecológica de Largo Plazo (LTER) de la Estación Palmer. Consisten de 344 observaciones de pingüinos de tres especies, las cuales habitan en tres islas del archipiélago Palmer, en la Antártida. Para cada individuo se registraron variables como especie, sexo, masa (peso), longitud de la aleta (flipper), longitud del pico (bill) y profundidad del pico, entre otras.\nEn R, el paquete puede instalarse con la función install.packages():\n\n# Instalación de palmerpenguins\ninstall.packages(\"palmerpenguins\")\n\nUna vez instalado, el paquete puede cargarse con la función library():\n\n# Carga de palmerpenguins\nlibrary(palmerpenguins)\n\nEl paquete contiene dos conjuntos de datos:\n\npenguins_raw: datos sin procesar.\npenguins: subconjunto curado de los datos sin procesar.\n\npalmerpinguins se utilizará en este capítulo, y en los siguientes, para ejemplificar varias de las funcionalidades de Tidyverse.\n\n4.6.1 Ejemplos de visualizaciones\nSeguidamente se muestran varios tipos de gráficos estadísticos generados con la función ggplot() del paquete ggplot2.\n\n4.6.1.1 Gráficos de dispersión\nEste tipo de gráficos muestra relaciones entre variables.\n\n# Gráfico de dispersión de longitud del pico vs masa (peso)\npenguins |&gt;\n  ggplot(aes(x = bill_length_mm, y = body_mass_g)) +\n  geom_point(size = 2) +\n  geom_smooth(method = \"lm\", se = FALSE) +\n  ggtitle(\"Longitud del pico vs. masa\") +\n  xlab(\"Longitud del pico (mm)\") +\n  ylab(\"Masa (g)\") +\n  labs(color = \"Especie\", shape = \"Especie\")\n\n\n\n\n\n\n\n\n\n# Gráfico de dispersión de longitud del pico vs masa (peso) por especie\npenguins |&gt;\n  ggplot(aes(x = bill_length_mm, y = body_mass_g)) +\n  geom_point(aes(color = species,\n                 shape = species),\n             size = 2) +\n  geom_smooth(method = \"lm\", se = FALSE, aes(color = species)) +\n  scale_color_manual(values = c(\"darkorange\", \"darkorchid\", \"cyan4\")) +\n  ggtitle(\"Longitud del pico vs. masa por especie\") +\n  xlab(\"Longitud del pico (mm)\") +\n  ylab(\"Masa (g)\") +\n  labs(color = \"Especie\", shape = \"Especie\")\n\n\n\n\n\n\n\n\n\n\n4.6.1.2 Histogramas\nEste tipo de gráficos muestra distribuciones de variables numéricas.\n\n# Distribución de la variable de masa (peso)\npenguins |&gt;\n  ggplot(aes(x = body_mass_g)) +\n  geom_histogram() +\n  ggtitle(\"Distribución de la variable masa (peso)\") +\n  xlab(\"Masa (g)\") +\n  ylab(\"n\")\n\n\n\n\n\n\n\n\n\n# Distribución de la variable de masa (peso) por especie\npenguins |&gt;\n  ggplot(aes(x = body_mass_g)) +\n  geom_histogram(aes(fill = species), alpha = 0.5, position = \"identity\") +\n  scale_fill_manual(values = c(\"darkorange\", \"darkorchid\", \"cyan4\")) +\n  ggtitle(\"Distribución de la variable masa (peso) por especie\") +\n  xlab(\"Masa (g)\") +\n  ylab(\"n\") +\n  labs(fill = \"Especie\")\n\n\n\n\n\n\n\n\n\n\n4.6.1.3 Diagramas de caja\nEste tipo de gráficos muestra datos a través de sus cuartiles.\n\n# Diagrama de caja de la variable masa (peso)\npenguins |&gt;\n  ggplot(aes(y = body_mass_g)) +\n  geom_boxplot() +\n  ylab(\"Masa (g)\")\n\n\n\n\n\n\n\n\n\n# Diagrama de caja de la variable masa (peso) por especie\npenguins |&gt;\n  ggplot(aes(x = species, y = body_mass_g)) +\n  geom_boxplot(aes(color = species), width = 0.3, show.legend = FALSE) +\n  scale_color_manual(values = c(\"darkorange\", \"purple\", \"cyan4\")) +\n  xlab(\"Especie\") +\n  ylab(\"Masa (g)\")",
+    "crumbs": [
+      "II - El lenguaje de programación R",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Tidyverse - colección de paquetes para ciencia de datos</span>"
+    ]
+  },
+  {
+    "objectID": "04-tidyverse.html#datos-tidy",
+    "href": "04-tidyverse.html#datos-tidy",
+    "title": "4  Tidyverse - colección de paquetes para ciencia de datos",
+    "section": "4.7 Datos tidy",
+    "text": "4.7 Datos tidy\nLos paquetes de Tidyverse trabajan con datos tidy (i.e. ordenados, organizados), un concepto también introducido por Hadley Wickham y que está relacionado con la organización de los datos en estructuras rectangulares de filas y columnas, similares a las tablas o matrices.\nSegún Wickham, los datos tidy deben cumplir con tres características:\n\nCada variable debe tener su propia columna.\nCada observación debe tener su propia fila.\nCada valor debe tener su propia celda.\n\nEstas características se ilustran en la Figura 4.2.\n\n\n\n\n\n\nFigura 4.2: Datos tidy. Fuente: R for Data Science.\n\n\n\nEl empleo de este modelo de datos es común en todos los paquetes de Tidyverse, lo que posibilita aprender y usar sus funciones con mayor facilidad. Además, permite invertir menos esfuerzo en lidiar con diferentes modelos de datos y así dedicar más tiempo y esfuerzo en los problemas de análisis a resolver.",
+    "crumbs": [
+      "II - El lenguaje de programación R",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Tidyverse - colección de paquetes para ciencia de datos</span>"
+    ]
+  },
+  {
+    "objectID": "04-tidyverse.html#pipes",
+    "href": "04-tidyverse.html#pipes",
+    "title": "4  Tidyverse - colección de paquetes para ciencia de datos",
+    "section": "4.8 Pipes",
+    "text": "4.8 Pipes\nLas funciones de Tidyverse pueden encadenarse a través del operador pipe (tubo), ya sea el del paquete magrittr (%&gt;%) o el del paquete base de R (|&gt;). Los procesos se enlazan con pipes para formar pipelines (tuberías). En este contexto, un pipeline consiste de una cadena de procesos conectados de forma tal que la salida de cada proceso de la cadena es la entrada del próximo. Esto permite la comunicación y sincronización entre los procesos y evita la anidación (nesting) de llamados a funciones.\nEl siguiente ejemplo implementa un pipeline de dos funciones de Tidyverse:\n\n# Cadena de \"pipes\" entre funciones de Tidyverse\npenguins |&gt;\n  dplyr::filter(species == \"Gentoo\") %&gt;% # subconjunto de observaciones\n  select(species, bill_length_mm, flipper_length_mm) # subconjunto de columnas\n\n# A tibble: 124 × 3\n   species bill_length_mm flipper_length_mm\n   &lt;fct&gt;            &lt;dbl&gt;             &lt;int&gt;\n 1 Gentoo            46.1               211\n 2 Gentoo            50                 230\n 3 Gentoo            48.7               210\n 4 Gentoo            50                 218\n 5 Gentoo            47.6               215\n 6 Gentoo            46.5               210\n 7 Gentoo            45.4               211\n 8 Gentoo            46.7               219\n 9 Gentoo            43.3               209\n10 Gentoo            46.8               215\n# ℹ 114 more rows\n\n\nUna alternativa a los pipes es la anidación de llamados a funciones:\n\n# Llamados anidados a funciones\nselect(filter(penguins, species == \"Gentoo\"),\n       species,\n       bill_length_mm,\n       flipper_length_mm)\n\n# A tibble: 124 × 3\n   species bill_length_mm flipper_length_mm\n   &lt;fct&gt;            &lt;dbl&gt;             &lt;int&gt;\n 1 Gentoo            46.1               211\n 2 Gentoo            50                 230\n 3 Gentoo            48.7               210\n 4 Gentoo            50                 218\n 5 Gentoo            47.6               215\n 6 Gentoo            46.5               210\n 7 Gentoo            45.4               211\n 8 Gentoo            46.7               219\n 9 Gentoo            43.3               209\n10 Gentoo            46.8               215\n# ℹ 114 more rows\n\n\nEl uso de pipes permite un funcionamiento homogéneo de las funciones de Tidyverse:\n\nEl primer argumento es un data frame. Puede omitirse si la función recibe el data frame a través del operador pipe.\nLos argumentos siguientes describen que hacer con el data frame, utilizando los nombres de las columnas (sin comillas).\n\nEl resultado es un nuevo data frame.",
+    "crumbs": [
+      "II - El lenguaje de programación R",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Tidyverse - colección de paquetes para ciencia de datos</span>"
+    ]
+  },
+  {
+    "objectID": "04-tidyverse.html#recursos-de-interés",
+    "href": "04-tidyverse.html#recursos-de-interés",
+    "title": "4  Tidyverse - colección de paquetes para ciencia de datos",
+    "section": "4.9 Recursos de interés",
+    "text": "4.9 Recursos de interés\nCanelón, S. (s.f.). Slides | Silvia Canelón—An Antarctic Tour of the Tidyverse. Recuperado 16 de octubre de 2022, de https://slides.silviacanelon.com/tour-of-the-tidyverse-v2/#/title-slide\n\n\n\nFigura 4.1: Modelo de ciencia de datos. Fuente: R for Data Science.\nFigura 4.2: Datos tidy. Fuente: R for Data Science.",
+    "crumbs": [
+      "II - El lenguaje de programación R",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Tidyverse - colección de paquetes para ciencia de datos</span>"
     ]
   }
 ]
