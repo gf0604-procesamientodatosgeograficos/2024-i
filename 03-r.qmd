@@ -1436,7 +1436,7 @@ vector_numeros
 **Ejercicios**  
 1. Utilice código vectorizado para implementar una función que reciba como argumento un vector de números y retorne el mismo vector con los elementos impares (solo los impares) elevados al cuadrado.
 
-## Ejemplo de programa que utiliza funciones, ciclos y condicionales
+### Ejemplo de programa que utiliza funciones, condicionales y ciclos
 El siguiente programa solicita al usuario diferentes datos de varias personas:
 
 - Nombre.
