@@ -35,6 +35,9 @@ RUN R -e "devtools::install_version('titanic', version = '0.1.0', repos = 'http:
 # Instalación del paquete paswr2 de R, versión 1.0.5
 RUN R -e "devtools::install_version('PASWR2', version = '1.0.5', repos = 'http://cran.us.r-project.org')"
 
+# Instalación del paquete palmerpenguins de R, versión 0.1.1
+RUN R -e "devtools::install_version('palmerpenguins', version = '0.1.1', repos = 'http://cran.us.r-project.org')"
+
 # Instalación del paquete crhexgrids de R (parece que no maneja versiones)
 RUN R -e "devtools::install_github('ManuelSpinola/crhexgrids')"
 
