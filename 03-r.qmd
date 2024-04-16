@@ -1436,6 +1436,80 @@ vector_numeros
 **Ejercicios**  
 1. Utilice código vectorizado para implementar una función que reciba como argumento un vector de números y retorne el mismo vector con los elementos impares (solo los impares) elevados al cuadrado.
 
+## Ejemplo de programa que utiliza funciones, ciclos y condicionales
+El siguiente programa solicita al usuario diferentes datos de varias personas:
+
+- Nombre.
+- Masa (kg).
+- Estatura (m).
+
+Esta entrada de datos se implementa a través de un ciclo, el cual finaliza cuando el usuario indica que no desea ingresar más datos.
+
+Por medio de funciones, se calcula el índice de masa corporal (IMC) de cada persona y la interpretación de si se considera bajo, normal o sobrepeso. 
+
+Al final, se imprime el promedio de los IMC calculados.
+
+```{r}
+#| label: programa-funciones-ciclos-condicionales
+#| eval: false
+
+# Función para calcular el IMC
+imc <- function(masa, estatura) {
+  return(masa / estatura^2)
+}
+
+# Función para interpretar el IMC
+imc_interpretacion <- function(imc) {
+  if (imc < 18.5) {
+    return("bajo")
+  } else if (imc < 25) {
+    return("normal")
+  } else {
+    return("sobrepeso")
+  }
+}
+
+# Vector para almacenar los IMC y luego calcular el promedio
+imcs <- c()
+
+# Variable para almacenar la respuesta del usuario a la pregunta
+# de si desea ingresar datos de otra persona
+respuesta <- "s"
+
+# Ciclo para solicitar datos
+while (respuesta == "s") {
+  nombre <- readline(prompt = "Nombre de la persona: ")
+  masa <- as.numeric(readline(prompt = "Masa (kg) de la persona: "))
+  estatura <- as.numeric(readline(prompt = "Estatura (m) de la persona: "))
+  
+  # Cálculo del IMC
+  valor_imc <- imc(masa, estatura)
+  interpretacion_imc <- imc_interpretacion(valor_imc)
+  
+  # Despliegue de resultados
+  print(
+    cat(
+      nombre, "tiene un IMC de", valor_imc, 
+      "lo cual es considerado", interpretacion_imc
+    )
+  )
+  
+  # Almacenamiento del valor del IMC
+  imcs <- c(imcs, valor_imc)
+  
+  # Preguntar si desea continuar
+  respuesta <- readline(prompt = "¿Desea calcular el IMC de otra persona? (s/n): ")
+}
+
+# Mostrar el promedio de los IMC calculados
+if (length(imcs) > 0) {
+  promedio_imc <- mean(imcs)
+  print(cat("El promedio de los IMC calculados es:", promedio_imc))
+} else {
+  print(cat("No se calcularon IMC"))
+}
+```
+
 ## Recursos de interés
 *Find Open Datasets and Machine Learning Projects | Kaggle*. (s. f.). Recuperado 24 de abril de 2022, de [https://www.kaggle.com/datasets](https://www.kaggle.com/datasets)
 
