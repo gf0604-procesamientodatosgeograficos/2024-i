@@ -11,7 +11,7 @@ Markdown puede emplearse junto con lenguajes de programación (ej. R, Python) pa
 *Quarto - Markdown Basics*. (s.f.). Quarto. Recuperado el 1 de marzo de 2024, de [https://quarto.org/docs/authoring/markdown-basics.html](https://quarto.org/docs/authoring/markdown-basics.html)
 
 ### Tutoriales
-*Markdown Tutorial*. (s.f.). Recuperado el 1 de marzo de 2024, de https://www.markdowntutorial.com/
+*Markdown Tutorial*. (s.f.). Recuperado el 1 de marzo de 2024, de [https://www.markdowntutorial.com/](https://www.markdowntutorial.com/)
 
 ## Introducción
 [Markdown](https://daringfireball.net/projects/markdown/) es un [lenguaje de marcado](https://es.wikipedia.org/wiki/Lenguaje_de_marcado), creado en 2004 por John Gruber y Aaron Swartz. Las "marcas" se utilizan para especificar aspectos de la estructura (ej. títulos, encabezados), estilo (ej. negritas, itálicas) y semántica de un documento. Markdown se caracteriza por ser más sencillo de leer y de usar que otros lenguajes de marcado (ej. [Lenguaje de Marcado de Hipertexto o HTML](https://es.wikipedia.org/wiki/HTML)), por lo que se considera un [lenguaje de marcado ligero](https://es.wikipedia.org/wiki/Lenguaje_de_marcas_ligero).

@@ -1,3 +1,4 @@
 # III - Herramientas para investigación reproducible y desarrollo colaborativo {.unnumbered}
 
 [5 Reproducibilidad](05-reproducibilidad.qmd)  
+[6 Markdown](06-markdown.qmd)  
