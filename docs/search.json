@@ -671,5 +671,93 @@
       "III - Herramientas para investigación reproducible y desarrollo colaborativo",
       "<span class='chapter-number'>5</span>  <span class='chapter-title'>Reproducibilidad</span>"
     ]
+  },
+  {
+    "objectID": "06-markdown.html",
+    "href": "06-markdown.html",
+    "title": "6  Markdown - lenguaje de marcado",
+    "section": "",
+    "text": "6.1 Resumen\nMarkdown es un lenguaje de marcado ligero ampliamente utilizado en comunicación científica, documentación de programas e investigación reproducible, entre otras aplicaciones. Incluye marcas para especificar aspectos de estructura, semántica y estilo de un documento. Se basa en texto simple y se convierte fácilmente a HTML, el lenguaje de marcado más utilizado en páginas web.\nMarkdown puede emplearse junto con lenguajes de programación (ej. R, Python) para así combinar texto con código fuente, el cual inserta en los documentos salidas como tablas, gráficos y mapas, entre otras. Esta forma de trabajo facilita la automatización y la reproducibilidad de una investigación.",
+    "crumbs": [
+      "III - Herramientas para investigación reproducible y desarrollo colaborativo",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Markdown - lenguaje de marcado</span>"
+    ]
+  },
+  {
+    "objectID": "06-markdown.html#trabajo-previo",
+    "href": "06-markdown.html#trabajo-previo",
+    "title": "6  Markdown - lenguaje de marcado",
+    "section": "6.2 Trabajo previo",
+    "text": "6.2 Trabajo previo\n\n6.2.1 Lecturas\nQuarto - Markdown Basics. (s.f.). Quarto. Recuperado el 1 de marzo de 2024, de https://quarto.org/docs/authoring/markdown-basics.html\n\n\n6.2.2 Tutoriales\nMarkdown Tutorial. (s.f.). Recuperado el 1 de marzo de 2024, de https://www.markdowntutorial.com/",
+    "crumbs": [
+      "III - Herramientas para investigación reproducible y desarrollo colaborativo",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Markdown - lenguaje de marcado</span>"
+    ]
+  },
+  {
+    "objectID": "06-markdown.html#introducción",
+    "href": "06-markdown.html#introducción",
+    "title": "6  Markdown - lenguaje de marcado",
+    "section": "6.3 Introducción",
+    "text": "6.3 Introducción\nMarkdown es un lenguaje de marcado, creado en 2004 por John Gruber y Aaron Swartz. Las “marcas” se utilizan para especificar aspectos de la estructura (ej. títulos, encabezados), estilo (ej. negritas, itálicas) y semántica de un documento. Markdown se caracteriza por ser más sencillo de leer y de usar que otros lenguajes de marcado (ej. Lenguaje de Marcado de Hipertexto o HTML), por lo que se considera un lenguaje de marcado ligero.\nLos documentos escritos en Markdown pueden exportarse a una gran variedad de formatos (ej. HTML, DOC, PDF, LaTex) para ser usados en libros, presentaciones o páginas web, entre otros fines.\nLas variaciones de Markdown, también llamadas flavors, son extensiones o modificaciones de la especificación original. Entre las más populares están:\n\nR Markdown: para el lenguaje R.\nQuarto: es la “siguiente generación” de R Markdown, con soporte para más lenguajes de programación (Python, Julia, Observable, R) y motores de procesamiento (Jupyter, Knitr), entre otras mejoras.\nPython Markdown: para el lenguaje Python.\nGitHub Flavored Markdown: para la plataforma GitHub.\nPandoc’s Markdown: para el programa Pandoc de conversión entre formatos.\nKramdown: para el lenguaje Ruby.\n\nPuede encontrarse una lista más extensa de variaciones de Markdown en Markdown Flavors.",
+    "crumbs": [
+      "III - Herramientas para investigación reproducible y desarrollo colaborativo",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Markdown - lenguaje de marcado</span>"
+    ]
+  },
+  {
+    "objectID": "06-markdown.html#ejemplo-de-documento",
+    "href": "06-markdown.html#ejemplo-de-documento",
+    "title": "6  Markdown - lenguaje de marcado",
+    "section": "6.4 Ejemplo de documento",
+    "text": "6.4 Ejemplo de documento\nEl siguiente es un ejemplo de la sintaxis de Markdown, con marcas para un encabezado, texto en negrita, texto en itálica, un hipervínculo y una imagen.\n\n### Los satélites galileanos\n\nSe llaman **satélites galileanos** los cuatro satélites\nde Júpiter descubiertos en 1610 por \n[Galileo Galilei](https://es.wikipedia.org/wiki/Galileo_Galilei): \n*Ío*, *Europa*, *Ganimedes* y *Calisto*. \nSon los más grandes de los satélites de Júpiter, \nsiendo visibles incluso con telescopios de baja potencia.\n\n![](https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Jupiter_and_the_Galilean_Satellites.jpg/168px-Jupiter_and_the_Galilean_Satellites.jpg)\n\n**Figura 1**. Los cuatro satélites galileanos, \nen una composición que compara sus tamaños con el tamaño de Júpiter. \nEn orden descendente, son *Ío*, *Europa*, *Ganimedes* y *Calisto*.\n\nY la siguiente es la manera en la que se visualiza el documento:\n\n\nLos satélites galileanos\nSe llaman satélites galileanos los cuatro satélites de Júpiter descubiertos en 1610 por Galileo Galilei: Ío, Europa, Ganimedes y Calisto. Son los más grandes de los satélites de Júpiter, siendo visibles incluso con telescopios de baja potencia.\n\nFigura 1. Los cuatro satélites galileanos, en una composición que compara sus tamaños con el tamaño de Júpiter. En orden descendente, son Ío, Europa, Ganimedes y Calisto.\n\nEl contenido de este ejemplo fue tomado de Satélite galileano - Wikipedia, la enciclopedia libre.",
+    "crumbs": [
+      "III - Herramientas para investigación reproducible y desarrollo colaborativo",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Markdown - lenguaje de marcado</span>"
+    ]
+  },
+  {
+    "objectID": "06-markdown.html#herramientas-para-escritura-de-documentos",
+    "href": "06-markdown.html#herramientas-para-escritura-de-documentos",
+    "title": "6  Markdown - lenguaje de marcado",
+    "section": "6.5 Herramientas para escritura de documentos",
+    "text": "6.5 Herramientas para escritura de documentos\nMarkdown se escribe en “texto simple o plano” (i.e. texto sin formato, compuesto únicamente por caracteres que son legibles por humanos), por lo que puede escribirse con cualquier editor de texto. Se recomienda el uso de editores orientados a programación, también llamados editores de código fuente, los cuales proporcionan facilidades para el programador, como coloración de palabras clave, sangrado y autocompletado, entre otras.\nTambién pueden utilizarse Entornos Integrados de Desarrollo o IDE, los cuales son aplicaciones informáticas que proporcionan servicios integrales para facilitarle al programador el desarrollo de software. Además de un editor de código fuente, un IDE incluye funciones para depuración (i.e. identificación de errores), interpretación y compilación de programas, entre otras.\nAlgunos de los editores de código fuente o IDE recomendados para Markdown son:\n\nVisual Studio Code: editor de código fuente muy popular y de código abierto. Puede editar código de múltiples lenguajes de programación y sintaxis asociadas\nRStudio: IDE para desarrollo en el lenguaje de programación R, el cual también puede manejar código en otros lenguajes de programación y sintaxis.\n\nNo se recomienda el uso de procesadores de texto (ej. Microsoft Word, Libre Office Writer), debido a que introducen caracteres especiales que no son reconocidos por Markdown.",
+    "crumbs": [
+      "III - Herramientas para investigación reproducible y desarrollo colaborativo",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Markdown - lenguaje de marcado</span>"
+    ]
+  },
+  {
+    "objectID": "06-markdown.html#sintaxis",
+    "href": "06-markdown.html#sintaxis",
+    "title": "6  Markdown - lenguaje de marcado",
+    "section": "6.6 Sintaxis",
+    "text": "6.6 Sintaxis\nEn esta sección, se muestran los principales elementos de sintaxis de Markdown y sus salidas.\n\n\n6.6.1 Encabezados\nHay seis niveles de encabezados en Markdown, siendo el nivel 1 el de letras más grandes y el 6 el de letras más pequeñas. Se especifican mediante símbolos de numeral (#) antes del texto del encabezado (note el espacio entre el último signo de numeral y el inicio del texto).\n\n\n\nSintaxis Markdown\n\n\nSalida\n\n\n\n\n# Encabezado de nivel 1\n\n\n\nEncabezado de nivel 1\n\n\n\n\n\n## Encabezado de nivel 2\n\n\n\nEncabezado de nivel 2\n\n\n\n\n\n### Encabezado de nivel 3\n\n\n\nEncabezado de nivel 3\n\n\n\n\n\n#### Encabezado de nivel 4\n\n\n\nEncabezado de nivel 4\n\n\n\n\n\n##### Encabezado de nivel 5\n\n\n\nEncabezado de nivel 5\n\n\n\n\n\n###### Encabezado de nivel 6\n\n\n\nEncabezado de nivel 6\n\n\n\n\nPara los encabezados de nivel 1 y nivel 2, existe una sintaxis alterna, con símbolos de igual (=====) o guiones (-----) bajo el texto del encabezado.\n\n\n\nSintaxis Markdown\n\n\nSalida\n\n\n\n\nOtro encabezado de nivel 1 ==========================\n\n\n\n\nOtro encabezado de nivel 1\n\n\n\n\n\nOtro encabezado de nivel 2 --------------------------\n\n\n\nOtro encabezado de nivel 2\n\n\n\n\n\n\n6.6.2 Párrafos\nLos párrafos deben separarse mediante (al menos) una línea en blanco. Un simple cambio de línea no generará un nuevo párrafo.\n\n\n\nSintaxis Markdown\n\n\nSalida\n\n\n\n\nEste es el texto que corresponde al primer párrafo de un documento.\nEste es el texto que corresponde al segundo párrafo de un documento.\n\n\nEste es el texto que corresponde al primer párrafo de un documento.\nEste es el texto que corresponde al segundo párrafo de un documento.\n\n\n\n\n\n6.6.3 Negrita\nHay dos sintaxis para especificar texto en negrita: con dos asteriscos (**) o con dos guiones bajos (__), antes y después del texto.\n\n\n\nSintaxis Markdown\n\n\nSalida\n\n\n\n\n**Texto en negrita**\n\n\nTexto en negrita\n\n\n\n\n__Otro texto en negrita__\n\n\nOtro texto en negrita\n\n\n\n\n\n6.6.4 Itálica\nHay dos sintaxis para especificar texto en itálica: con un asterisco (*) o con un guión bajo (_), antes y después del texto.\n\n\n\nSintaxis Markdown\n\n\nSalida\n\n\n\n\n*Texto en itálica*\n\n\nTexto en itálica\n\n\n\n\n_Otro texto en itálica_\n\n\nOtro texto en itálica\n\n\n\n\n\n6.6.5 Citas textuales\nSe especifican con un símbolo de “mayor que” (&gt;) antes de cada línea.\n\n\n\nSintaxis Markdown\n\n\nSalida\n\n\n\n\n&gt; *And on the pedestal these words appear:* &gt; *\"My name is Ozymandias, king of kings:* &gt; *Look on my works, ye Mighty, and despair!\"* *Percy Bysshe Shelley, \"Ozymandias\" (1818)*\n\n\n\n “And on the pedestal these words appear:”My name is Ozymandias, king of kings: Look on my works, ye Mighty, and despair!“ \n\nPercy Bysshe Shelley, “Ozymandias” (1818)\n\n\n\n\n\n6.6.6 Enlaces (hipervínculos)\nSe definen con paréntesis cuadrados ([]) seguidos de paréntesis redondos (()). En los paréntesis cuadrados se coloca (opcionalmente) el texto del enlace y en los redondos la dirección del documento al que conduce el enlace.\n\n\n\nSintaxis Markdown\n\n\nSalida\n\n\n\n\n[Proyecto Gutenberg](https://www.gutenberg.org/)\n\n\nProyecto Gutenberg\n\n\n\n\n\n6.6.7 Imágenes\nSe definen con un signo de admiración de cierre (!), paréntesis cuadrados ([]) y paréntesis redondos (()). En los paréntesis cuadrados se coloca (opcionalmente) un texto alternativo de la imagen y en los redondos la dirección de la imagen, ya sea local o remota.\n\n\n\nSintaxis Markdown\n\n\nSalida\n\n\n\n\n![Imagen local](img/Jupiter_and_the_Galilean_Satellites.jpg)\n\n\n\n\n\n\n\n![Imagen remota](https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Jupiter_and_the_Galilean_Satellites.jpg/168px-Jupiter_and_the_Galilean_Satellites.jpg)\n\n\n\n\n\n\n\n\n6.6.8 Listas numeradas\nSe definen con números (1. 2. 3. ...) antes de cada elemento.\n\n\n\nSintaxis Markdown\n\n\nSalida\n\n\n\n\n1. Primer elemento.\n2. Segundo elemento.\n3. Tercer elemento.\n\n\n\n\nPrimer elemento.\nSegundo elemento.\nTercer elemento.\n\n\n\n\n\n\n6.6.9 Listas no numeradas\nSe definen con guiones (-) o asteriscos (*) antes de cada elemento.\n\n\n\nSintaxis Markdown\n\n\nSalida\n\n\n\n\n- Un elemento.\n- Otro elemento.\n- Otro elemento más.\n\n\n\n\nUn elemento.\n\nOtro elemento.\n\nOtro elemento más.\n\n\n\n\n\n\n\n6.6.10 Notación matemática\nLas expresiones en notación matemática (ej. ecuaciones) se escriben con base en la sintaxis de LaTeX. Se delimitan (al inicio y al final) con:\n\nUn símbolo de dólar ($), para ecuaciones dentro de un renglón (inline math).\nDos símbolos de dólar ($$), para ecuaciones en su propio bloque (display math).\n\n\n\n\nSintaxis Markdown\n\n\nSalida\n\n\n\n\nEquivalencia entre masa y energía: $E = mc^{2}$\n\n\n\nEquivalencia entre masa y energía: \\(E = mc^{2}\\)\n\n\n\n\nEquivalencia entre masa y energía: $$E = mc^{2}$$\n\n\nEquivalencia entre masa y energía:\n\\[E = mc^{2}\\]\n\n\n\nPara más detalles sobre la sintaxis de las expresiones matemáticas, se recomienda consultar:\n\nWriting mathematical expressions - GitHub Docs\nLaTeX/Mathematics",
+    "crumbs": [
+      "III - Herramientas para investigación reproducible y desarrollo colaborativo",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Markdown - lenguaje de marcado</span>"
+    ]
+  },
+  {
+    "objectID": "06-markdown.html#ejercicios",
+    "href": "06-markdown.html#ejercicios",
+    "title": "6  Markdown - lenguaje de marcado",
+    "section": "6.7 Ejercicios",
+    "text": "6.7 Ejercicios\n\nCon RStudio, cree un documento Markdown llamado README.md y escriba en este un breve curriculum académico o profesional.\n\nIncluya información como: nombre, fotografía, datos de contacto, áreas de interés, carrera, cursos aprobados, publicaciones, etc.\nPuede usar información ficticia (no incluya datos confidenciales o sensibles).\nEspecifique la fuente de las imágenes (y de cualquier otra información para la que sea necesario) y no utilice imágenes para las que no tiene autorización. Considere utilizar sitios con imágenes con licencias abiertas (ej. Wikimedia Commons, Unsplash, FreeImages).\nAsegúrese de utilizar los siguientes elementos de sintaxis Markdown:\n\nEncabezados de varios niveles.\nNegritas e itálicas.\nListas.\nEnlaces a sitios web.\nImágenes (al menos una local y una remota).",
+    "crumbs": [
+      "III - Herramientas para investigación reproducible y desarrollo colaborativo",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Markdown - lenguaje de marcado</span>"
+    ]
+  },
+  {
+    "objectID": "06-markdown.html#recursos-de-interés",
+    "href": "06-markdown.html#recursos-de-interés",
+    "title": "6  Markdown - lenguaje de marcado",
+    "section": "6.8 Recursos de interés",
+    "text": "6.8 Recursos de interés\nDaring Fireball: Markdown. (s. f.). Recuperado 25 de marzo de 2023, de https://daringfireball.net/projects/markdown/\nLaTeX/Mathematics—Wikibooks, open books for an open world. (s. f.). Recuperado 25 de marzo de 2023, de https://en.wikibooks.org/wiki/LaTeX/Mathematics\nMarkdown Guide. (s. f.). Recuperado 10 de abril de 2022, de https://www.markdownguide.org/\nWriting mathematical expressions. (s. f.). GitHub Docs. Recuperado 25 de marzo de 2023, de https://ghdocs-prod.azurewebsites.net/en/get-started/writing-on-github/working-with-advanced-formatting/writing-mathematical-expressions",
+    "crumbs": [
+      "III - Herramientas para investigación reproducible y desarrollo colaborativo",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Markdown - lenguaje de marcado</span>"
+    ]
   }
 ]
