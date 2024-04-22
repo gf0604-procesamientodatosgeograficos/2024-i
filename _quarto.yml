@@ -17,7 +17,9 @@ book:
       chapters:
         - 03-r.qmd
         - 04-tidyverse.qmd
-    - part: parte-iii-herramientas-investigacion-reproducible-desarrollo-colaborativo.qmd        
+    - part: parte-iii-herramientas-investigacion-reproducible-desarrollo-colaborativo.qmd  
+      chapters:    
+        - 05-reproducibilidad.qmd    
     - part: parte-vii-evaluaciones.qmd
       chapters: 
         - examen-corto-01.qmd

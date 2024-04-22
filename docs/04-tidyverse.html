@@ -64,7 +64,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./parte-vii-evaluaciones.html" rel="next">
+<link href="./parte-iii-herramientas-investigacion-reproducible-desarrollo-colaborativo.html" rel="next">
 <link href="./03-r.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -203,13 +203,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./parte-vii-evaluaciones.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Evaluaciones</span></a>
+            <a href="./parte-iii-herramientas-investigacion-reproducible-desarrollo-colaborativo.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">III - Herramientas para investigación reproducible y desarrollo colaborativo</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Alternar sección">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-reproducibilidad.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Reproducibilidad</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./parte-vii-evaluaciones.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Evaluaciones</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./examen-corto-01.html" class="sidebar-item-text sidebar-link">
@@ -291,10 +308,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 data-number="4.3" class="anchored" data-anchor-id="introducción"><span class="header-section-number">4.3</span> Introducción</h2>
 <p><a href="https://www.tidyverse.org/">Tidyverse</a> es una colección de paquetes de R enfocados en <a href="https://es.wikipedia.org/wiki/Ciencia_de_datos">ciencia de datos</a>, una discipina que permite convertir datos no procesados en entendimiento, comprensión y conocimiento.</p>
 <p>La <a href="#fig-modelo-ciencia-datos" class="quarto-xref">Figura&nbsp;<span>4.1</span></a> ilustra el modelo de un proyecto típico de ciencia de datos, el cual incluye los procesos de importar, ordenar, transformar, visualizar, modelar y comunicar. Todos se articulan mediante <strong>programación</strong> de computadoras.</p>
-<div id="fig-modelo-ciencia-datos" class="lightbox quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center" alt="Modelo de ciencia de datos">
+<div id="fig-modelo-ciencia-datos" class="lightbox quarto-figure quarto-figure-center quarto-float anchored" alt="Modelo de ciencia de datos" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-modelo-ciencia-datos-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="img/modelo-ciencia-datos.svg" class="lightbox" data-glightbox="description: .lightbox-desc-1" data-gallery="quarto-lightbox-gallery-1"><img src="img/modelo-ciencia-datos.svg" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="Modelo de ciencia de datos"></a>
+<a href="img/modelo-ciencia-datos.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" data-glightbox="description: .lightbox-desc-1"><img src="img/modelo-ciencia-datos.svg" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="Modelo de ciencia de datos"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-modelo-ciencia-datos-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figura&nbsp;4.1: Modelo de ciencia de datos. Fuente: <a href="https://r4ds.had.co.nz/">R for Data Science</a>.
@@ -511,10 +528,10 @@ $ Species      &lt;fct&gt; setosa, setosa, setosa, setosa, setosa, setosa, setos
 <li>Cada valor debe tener su propia celda.</li>
 </ol>
 <p>Estas características se ilustran en la <a href="#fig-datos-tidy" class="quarto-xref">Figura&nbsp;<span>4.2</span></a>.</p>
-<div id="fig-datos-tidy" class="lightbox quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center" alt="Datos tidy">
+<div id="fig-datos-tidy" class="lightbox quarto-figure quarto-figure-center quarto-float anchored" alt="Datos tidy" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-datos-tidy-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="img/datos-tidy.svg" class="lightbox" data-glightbox="description: .lightbox-desc-2" data-gallery="quarto-lightbox-gallery-2"><img src="img/datos-tidy.svg" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="Datos tidy"></a>
+<a href="img/datos-tidy.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-2" data-glightbox="description: .lightbox-desc-2"><img src="img/datos-tidy.svg" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="Datos tidy"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-datos-tidy-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figura&nbsp;4.2: Datos <em>tidy</em>. Fuente: <a href="https://r4ds.had.co.nz/">R for Data Science</a>.
@@ -1009,13 +1026,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./parte-vii-evaluaciones.html" class="pagination-link" aria-label="Evaluaciones">
-        <span class="nav-page-text">Evaluaciones</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./parte-iii-herramientas-investigacion-reproducible-desarrollo-colaborativo.html" class="pagination-link" aria-label="III - Herramientas para investigación reproducible y desarrollo colaborativo">
+        <span class="nav-page-text">III - Herramientas para investigación reproducible y desarrollo colaborativo</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
 </div> <!-- /content -->
-<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","closeEffect":"zoom","selector":".lightbox","loop":false,"descPosition":"bottom"});
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","selector":".lightbox","descPosition":"bottom","openEffect":"zoom","loop":false});
 window.onload = () => {
   lightboxQuarto.on('slide_before_load', (data) => {
     const { slideIndex, slideNode, slideConfig, player, trigger } = data;
