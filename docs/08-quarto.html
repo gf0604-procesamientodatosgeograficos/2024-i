@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>GF0604 Procesamiento de datos geográficos 2024-I - Evaluaciones</title>
+<title>GF0604 Procesamiento de datos geográficos 2024-I - 8&nbsp; Quarto - sistema de publicación técnica y científica</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -30,8 +64,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./examen-corto-01.html" rel="next">
-<link href="./08-quarto.html" rel="prev">
+<link href="./parte-vii-evaluaciones.html" rel="next">
+<link href="./07-git.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -41,6 +75,9 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -81,7 +118,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./parte-vii-evaluaciones.html">Evaluaciones</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./parte-iii-herramientas-investigacion-reproducible-desarrollo-colaborativo.html">III - Herramientas para investigación reproducible y desarrollo colaborativo</a></li><li class="breadcrumb-item"><a href="./08-quarto.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Quarto - sistema de publicación técnica y científica</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -193,7 +230,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./08-quarto.html" class="sidebar-item-text sidebar-link">
+  <a href="./08-quarto.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Quarto - sistema de publicación técnica y científica</span></span></a>
   </div>
 </li>
@@ -201,7 +238,7 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./parte-vii-evaluaciones.html" class="sidebar-item-text sidebar-link active">
+            <a href="./parte-vii-evaluaciones.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Evaluaciones</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Alternar sección">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -226,16 +263,29 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Tabla de contenidos</h2>
    
   <ul>
-  <li><a href="#exámenes-cortos" id="toc-exámenes-cortos" class="nav-link active" data-scroll-target="#exámenes-cortos">Exámenes cortos</a></li>
+  <li><a href="#resumen" id="toc-resumen" class="nav-link active" data-scroll-target="#resumen"><span class="header-section-number">8.1</span> Resumen</a></li>
+  <li><a href="#trabajo-previo" id="toc-trabajo-previo" class="nav-link" data-scroll-target="#trabajo-previo"><span class="header-section-number">8.2</span> Trabajo previo</a>
+  <ul class="collapse">
+  <li><a href="#lecturas" id="toc-lecturas" class="nav-link" data-scroll-target="#lecturas"><span class="header-section-number">8.2.1</span> Lecturas</a></li>
+  </ul></li>
+  <li><a href="#introducción" id="toc-introducción" class="nav-link" data-scroll-target="#introducción"><span class="header-section-number">8.3</span> Introducción</a></li>
+  <li><a href="#anatomía-de-un-documento-quarto" id="toc-anatomía-de-un-documento-quarto" class="nav-link" data-scroll-target="#anatomía-de-un-documento-quarto"><span class="header-section-number">8.4</span> Anatomía de un documento Quarto</a>
+  <ul class="collapse">
+  <li><a href="#metadatos-en-yaml" id="toc-metadatos-en-yaml" class="nav-link" data-scroll-target="#metadatos-en-yaml"><span class="header-section-number">8.4.1</span> Metadatos en YAML</a></li>
+  <li><a href="#narrativa-en-markdown" id="toc-narrativa-en-markdown" class="nav-link" data-scroll-target="#narrativa-en-markdown"><span class="header-section-number">8.4.2</span> Narrativa en Markdown</a></li>
+  <li><a href="#bloques-de-código-fuente" id="toc-bloques-de-código-fuente" class="nav-link" data-scroll-target="#bloques-de-código-fuente"><span class="header-section-number">8.4.3</span> Bloques de código fuente</a></li>
+  </ul></li>
+  <li><a href="#cómo-funciona-quarto" id="toc-cómo-funciona-quarto" class="nav-link" data-scroll-target="#cómo-funciona-quarto"><span class="header-section-number">8.5</span> ¿Cómo funciona Quarto?</a></li>
+  <li><a href="#ejercicios" id="toc-ejercicios" class="nav-link" data-scroll-target="#ejercicios"><span class="header-section-number">8.6</span> Ejercicios</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./parte-iii-herramientas-investigacion-reproducible-desarrollo-colaborativo.html">III - Herramientas para investigación reproducible y desarrollo colaborativo</a></li><li class="breadcrumb-item"><a href="./08-quarto.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Quarto - sistema de publicación técnica y científica</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Evaluaciones</h1>
+<h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Quarto - sistema de publicación técnica y científica</span></h1>
 </div>
 
 
@@ -252,11 +302,152 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="exámenes-cortos" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="exámenes-cortos">Exámenes cortos</h2>
-<p><a href="./examen-corto-01.html">Examen corto 1</a></p>
+<section id="resumen" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="resumen"><span class="header-section-number">8.1</span> Resumen</h2>
+<p>Quarto es un sistema de publicación de documentos técnicos y científicos, basado en código abierto. Estos documentos combinan código en R, y sus salidas (ej. tablas, gráficos, mapas), con la sintaxis de Markdown.</p>
+</section>
+<section id="trabajo-previo" class="level2" data-number="8.2">
+<h2 data-number="8.2" class="anchored" data-anchor-id="trabajo-previo"><span class="header-section-number">8.2</span> Trabajo previo</h2>
+<section id="lecturas" class="level3" data-number="8.2.1">
+<h3 data-number="8.2.1" class="anchored" data-anchor-id="lecturas"><span class="header-section-number">8.2.1</span> Lecturas</h3>
+<p><em>Quarto - Tutorial: Hello, Quarto</em>. (s.f.). Quarto. Recuperado el 1 de marzo de 2024, de <a href="https://quarto.org/docs/get-started/hello/rstudio.html">https://quarto.org/docs/get-started/hello/rstudio.html</a></p>
+</section>
+</section>
+<section id="introducción" class="level2" data-number="8.3">
+<h2 data-number="8.3" class="anchored" data-anchor-id="introducción"><span class="header-section-number">8.3</span> Introducción</h2>
+<p><a href="https://quarto.org/">Quarto</a> es un sistema de publicación de documentos técnicos y científicos, basado en código abierto. Entre sus principales capacidades están:</p>
+<ul>
+<li>Crear contenido dinámico con los lenguajes <a href="https://www.r-project.org/">R</a>, <a href="https://www.python.org/">Python</a>, <a href="https://julialang.org/">Julia</a> y <a href="https://observablehq.com/@observablehq/observables-not-javascript">Observable</a>.</li>
+<li>Crear documentos Markdown de texto plano o <a href="https://jupyter.org/">cuadernos de notas de Jupyter</a>.</li>
+<li>Publicar artículos académicos, reportes, presentaciones, sitios web, <em>blogs</em> y libros en HTML, PDF, MS Word, ePub y otros formatos.</li>
+<li>Crear contenido científico, incluyendo ecuaciones, citas bibliográficas, referencias cruzadas, figuras y otros elementos.</li>
+</ul>
+<p>Quarto es la <a href="https://quarto.org/docs/faq/rmarkdown.html">siguiente generación</a> de <a href="https://rmarkdown.rstudio.com/">R Markdown</a>, un formato que permite insertar código en R, y sus salidas, en documentos escritos en Markdown. R Markdown fue introducido por Yihui Xie en 2012, junto con el paquete <a href="https://yihui.org/knitr/">knitr</a>, cuyo propósito es facilitar la investigación reproducible en R a través de la <a href="https://es.wikipedia.org/wiki/Programaci%C3%B3n_literaria">programación literaria (<em>literate programming</em>)</a>, un paradigma de programación propuesto por Donald Knuth en 1984.</p>
+<p>Los programas “literarios” (o “letrados”) están escritos como una exposición lógica en un lenguaje humano similar a la explicación de las fórmulas y ecuaciones empleadas para representar y resolver un problema en un texto de física o de matemáticas. En estos programas, se describe el análisis del problema, su solución y su implementación, intercalando código fuente entre los párrafos (y otros contenidos como imágenes, tablas, gráficos estadísticos y mapas), de forma similar a como en los textos de matemáticas se intercalan las fórmulas y las ecuaciones. La programación literaria puede mejorar enormemente un programa, ya que permite documentar ampliamente en qué consiste el problema a resolver, cómo se resuelve, cómo y por qué se adoptó cierto diseño, cómo se optimizó y cómo se implementó en un lenguaje de programación.</p>
+</section>
+<section id="anatomía-de-un-documento-quarto" class="level2" data-number="8.4">
+<h2 data-number="8.4" class="anchored" data-anchor-id="anatomía-de-un-documento-quarto"><span class="header-section-number">8.4</span> Anatomía de un documento Quarto</h2>
+<p>Un documento Quarto tiene tres tipos de contenido:</p>
+<ul>
+<li>Metadatos en YAML.</li>
+<li>Narrativa en Markdown.</li>
+<li>Bloques de código fuente.</li>
+</ul>
+<section id="metadatos-en-yaml" class="level3" data-number="8.4.1">
+<h3 data-number="8.4.1" class="anchored" data-anchor-id="metadatos-en-yaml"><span class="header-section-number">8.4.1</span> Metadatos en YAML</h3>
+<p>Todo documento Quarto inicia con un encabezado en la sintaxis <a href="https://es.wikipedia.org/wiki/YAML">YAML (YAML Ain’t Markup Language)</a>, el cual contiene metadatos del documento como el título, el autor, la fecha de creación, el formato de salida y la estructura de la tabla de contenidos, entre muchos otros.</p>
+<p>Un encabezado YAML comienza y termina con tres guiones (<code>---</code>) y contiene un conjunto de campos y valores de la forma:</p>
+<pre><code>---
+campo01: valor01
+campo02: valor02
+campo0n: valor0n
+---</code></pre>
+<p>Por ejemplo, un encabezado YAML típico puede ser el siguiente:</p>
+<pre><code>---
+title: Mi primer documento Quarto
+format:
+  html:
+    toc: true
+    toc_float: true
+---</code></pre>
+<p>Los campos del encabezado que dependen de otros campos se anidan con sangrías de dos espacios.</p>
+<p>Los elementos de metadatos que pueden especificarse en el encabezado, pueden variar de acuerdo al formato de salida, como puede verse en los siguientes enlaces:</p>
+<ul>
+<li><a href="https://quarto.org/docs/reference/formats/html.html">Elementos de metadatos para HTML</a></li>
+<li><a href="https://quarto.org/docs/reference/formats/pdf.html">Elementos de metadatos para PDF</a></li>
+<li><a href="https://quarto.org/docs/reference/formats/docx.html">Elementos metadatos para MS Word</a></li>
+</ul>
+<p>Existen elementos de metadatos para muchos otros formatos de salida (OpenOffice, ePub, presentaciones, wikis, etc.), como puede apreciarse en la <a href="https://quarto.org/docs/reference/">Referencia de Quarto</a>.</p>
+</section>
+<section id="narrativa-en-markdown" class="level3" data-number="8.4.2">
+<h3 data-number="8.4.2" class="anchored" data-anchor-id="narrativa-en-markdown"><span class="header-section-number">8.4.2</span> Narrativa en Markdown</h3>
+<p>La narrativa proporciona estructura y contenido al documento en la forma de encabezados, párrafos, enlaces y otros elementos de la sintaxis de <a href="https://daringfireball.net/projects/markdown/">Markdown</a>.</p>
+</section>
+<section id="bloques-de-código-fuente" class="level3" data-number="8.4.3">
+<h3 data-number="8.4.3" class="anchored" data-anchor-id="bloques-de-código-fuente"><span class="header-section-number">8.4.3</span> Bloques de código fuente</h3>
+<p>En Quarto, los bloques (<em>chunks</em>) de código fuente se delimitan con tres <a href="https://en.wikipedia.org/wiki/Backtick"><code>backticks</code></a>, tanto al inicio como al final del bloque. Los bloques de código en R se identifican con <code>{r}</code> y diferentes opciones identificadas con <code>#|</code>. Los bloques de otros lenguajes de programación se identifican con <code>{python}</code> y <code>{julia}</code>, por ejemplo.</p>
+<p>El siguiente es un ejemplo de bloque de código en R y su salida:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode md code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="in">#| label: graficacion-cars</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="in">#| include: true</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="in">#| echo: false</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="in">plot(</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="in">  x = cars$speed,</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="in">  y = cars$dist,</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="in">  main = "Velocidad vs distancia de frenado",</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="in">  xlab = "Velocidad (MPH)",</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="in">  ylab = "Distancia (pies)"</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="in">)</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="08-quarto_files/figure-html/graficacion-cars-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>La opción <code>label</code> se utiliza para etiquetar el bloque y la de <code>include</code> para especificar si se desea que el bloque y sus resultados se incluyan en el documento de salida.</p>
+</section>
+</section>
+<section id="cómo-funciona-quarto" class="level2" data-number="8.5">
+<h2 data-number="8.5" class="anchored" data-anchor-id="cómo-funciona-quarto"><span class="header-section-number">8.5</span> ¿Cómo funciona Quarto?</h2>
+<p>Quarto se apoya en <a href="https://yihui.org/knitr/">knitr</a> y en <a href="http://pandoc.org/">Pandoc</a>. knitr ejecuta el código en R (u otro lenguaje) y convierte los documentos a Markdown. Por su parte, Pandoc exporta los documentos Markdown al formato de salida deseado (ej. HTML, PDF, MS Word, MS PowerPoint). Este proceso se ilustra en la <a href="#fig-quarto-knitr-pandoc" class="quarto-xref">Figura&nbsp;<span>8.1</span></a>.</p>
+<div id="fig-quarto-knitr-pandoc" class="lightbox quarto-figure quarto-figure-center quarto-float anchored" alt="Conversión de un documento Quarto (.qmd) a su formato de salida" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-quarto-knitr-pandoc-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="img/rstudio-qmd-how-it-works.png" class="lightbox" data-glightbox="description: .lightbox-desc-1" data-gallery="quarto-lightbox-gallery-1"><img src="img/rstudio-qmd-how-it-works.png" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="Conversión de un documento Quarto (.qmd) a su formato de salida"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-quarto-knitr-pandoc-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;8.1: Conversión de un documento Quarto (.qmd) a su formato de salida. Imagen de <a href="https://quarto.org/">quarto.org</a>.
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="ejercicios" class="level2" data-number="8.6">
+<h2 data-number="8.6" class="anchored" data-anchor-id="ejercicios"><span class="header-section-number">8.6</span> Ejercicios</h2>
+<p>Con R y Quarto, cree un sitio web en GitHub Pages que contenga visualizaciones de los datos de homicidios ocurridos en Costa Rica en 2024, de acuerdo con las estadísticas publicadas en el <a href="https://sitiooij.poder-judicial.go.cr/index.php/ayuda/servicios-policiales/servicios-a-organizaciones/indice-de-transparencia-del-sector-publico-costarricense/datos-abiertos">sitio de datos abiertos del Organismo de Investigación Judicial (OIJ)</a>.</p>
+<p>Seguidamente, se sugiere una serie de pasos para elaborar el sitio.</p>
+<ol type="1">
+<li><p>Cree un repositorio vacío en su cuenta en GitHub (ej. <code>delitos-graficosbase</code>).</p></li>
+<li><p>Clone el nuevo repositorio en su computadora con la opción <em>File - New Project - Version Control - Git</em> de RStudio.</p></li>
+<li><p>Copie en el repositorio clonado el archivo CSV con los datos de delitos.</p></li>
+<li><p>Cree un nuevo documento Quarto con la opción <em>File - New File - Quarto Document</em> de RStudio. Llene los metadatos (título, autor, etc.). Elija HTML como formato de salida.</p></li>
+<li><p>Guarde el documento en el repositorio clonado, con el nombre <code>index.qmd</code> (RStudio asigna la extensión automáticamente).</p></li>
+<li><p>Al inicio del documento, agregue texto Markdown que explique su contenido, la fuente de los datos y la dirección del repositorio en GitHub con el código fuente.</p></li>
+<li><p>En un bloque de código en R, cargue el archivo CSV en un dataframe. Se recomienda asignar una etiqueta al bloque con la opción <code>#| label:</code>. Considere el uso de otras etiquetas Quarto para, por ejemplo, controlar el despliegue de las salidas y del código fuente. Despliegue una muestra de los datos en una tabla.</p></li>
+<li><p>Escriba bloques adicionales de código en R que generen los siguientes gráficos (en cada uno, agregue título, fuente y procure que luzca bien mediante colores, tamaños de letras y otros elementos estéticos):</p>
+<ol type="a">
+<li>Cantidad de delitos por provincia.
+<ul>
+<li>Gráfico de barras verticales.</li>
+<li>Gráfico de barras horizontales.</li>
+<li>Gráfico de pastel.</li>
+</ul></li>
+<li>Cantidad de delitos por cantón en los 20 cantones con más delitos - gráfico de barras (verticales u horizontales).</li>
+<li>Cantidad de delitos por edad de la víctima - gráfico de pastel.</li>
+<li>Cantidad de delitos por provincia y edad de la víctima (una barra por provincia con colores según las edades) - gráfico de barras apiladas.</li>
+<li>Cantidad de homicidios por provincia y edad de la víctima (una barra por provincia con colores según las edades) - gráfico de barras apiladas.</li>
+<li>Cantidad de homicidios por cantón y edad de la víctima en los 20 cantones con más homicidios (una barra por provincia con colores según las edades) - gráfico de barras apiladas.</li>
+</ol></li>
+<li><p>Presione el botón <em>Render</em> de RStudio para generar el archivo <code>index.html</code>. Este será el arhivo que se desplegará en GitHub Pages.</p></li>
+<li><p>Sincronice el repositorio local con el repositorio en GitHub, ya sea con comandos de Git o subiendo manualmente los archivos. Si lo hace manualmente, asegúrese de actualizar:</p>
+<ul>
+<li>El documento HTML (<code>index.html</code>).</li>
+<li>El documento Quarto (<code>index.qmd</code>).</li>
+<li>El archivo CSV (<code>estadisticaspoliciales2022.csv</code>).</li>
+<li>Archivos temporales (ej. directorio <code>index_files</code>).</li>
+</ul></li>
+<li><p>Genere el sitio en GitHub Pages con la opción <em>Settings - Pages</em> de GitHub.</p></li>
+<li><p>Repita los pasos del 8 al 10 para cada modificación que realice en el documento Quarto.</p></li>
+</ol>
 
 
+<div class="hidden" aria-hidden="true">
+<span class="glightbox-desc lightbox-desc-1">Figura&nbsp;8.1: Conversión de un documento Quarto (.qmd) a su formato de salida. Imagen de <a href="https://quarto.org/">quarto.org</a>.</span>
+</div>
 </section>
 
 </main> <!-- /main -->
@@ -671,17 +862,42 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./08-quarto.html" class="pagination-link" aria-label="Quarto - sistema de publicación técnica y científica">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Quarto - sistema de publicación técnica y científica</span></span>
+      <a href="./07-git.html" class="pagination-link" aria-label="Git - sistema de control de versiones">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Git - sistema de control de versiones</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./examen-corto-01.html" class="pagination-link" aria-label="Examen corto 1">
-        <span class="nav-page-text">Examen corto 1</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./parte-vii-evaluaciones.html" class="pagination-link" aria-label="Evaluaciones">
+        <span class="nav-page-text">Evaluaciones</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
 </div> <!-- /content -->
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","openEffect":"zoom","descPosition":"bottom","selector":".lightbox","loop":false});
+window.onload = () => {
+  lightboxQuarto.on('slide_before_load', (data) => {
+    const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+    const href = trigger.getAttribute('href');
+    if (href !== null) {
+      const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+      if (imgEl !== null) {
+        const srcAttr = imgEl.getAttribute("src");
+        if (srcAttr && srcAttr.startsWith("data:")) {
+          slideConfig.href = srcAttr;
+        }
+      }
+    } 
+  });
+
+  lightboxQuarto.on('slide_after_load', (data) => {
+    const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+    if (window.Quarto?.typesetMath) {
+      window.Quarto.typesetMath(slideNode);
+    }
+  });
+
+};
+          </script>
 
 
 

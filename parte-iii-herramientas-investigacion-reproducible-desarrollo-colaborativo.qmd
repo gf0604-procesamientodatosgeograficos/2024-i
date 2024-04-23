@@ -3,3 +3,4 @@
 [5 Reproducibilidad](05-reproducibilidad.qmd)  
 [6 Markdown - lenguaje de marcado](06-markdown.qmd)  
 [7 Git - sistema de control de versiones](07-git.qmd)  
+[8 Quarto - sistema de publicación técnica y científica](08-quarto.qmd)  
