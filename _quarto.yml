@@ -21,6 +21,7 @@ book:
       chapters:    
         - 05-reproducibilidad.qmd    
         - 06-markdown.qmd    
+        - 07-git.qmd    
     - part: parte-vii-evaluaciones.qmd
       chapters: 
         - examen-corto-01.qmd

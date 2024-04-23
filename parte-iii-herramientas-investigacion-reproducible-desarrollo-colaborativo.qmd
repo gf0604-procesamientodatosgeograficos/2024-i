@@ -1,4 +1,5 @@
 # III - Herramientas para investigación reproducible y desarrollo colaborativo {.unnumbered}
 
 [5 Reproducibilidad](05-reproducibilidad.qmd)  
-[6 Markdown](06-markdown.qmd)  
+[6 Markdown - lenguaje de marcado](06-markdown.qmd)  
+[7 Git - sistema de control de versiones](07-git.qmd)  
