@@ -238,7 +238,11 @@ ul.task-list li input[type="checkbox"] {
   </ul></li>
   <li><a href="#introducción" id="toc-introducción" class="nav-link" data-scroll-target="#introducción"><span class="header-section-number">7.3</span> Introducción</a></li>
   <li><a href="#funcionamiento-de-git" id="toc-funcionamiento-de-git" class="nav-link" data-scroll-target="#funcionamiento-de-git"><span class="header-section-number">7.4</span> Funcionamiento de Git</a></li>
-  <li><a href="#ejercicios" id="toc-ejercicios" class="nav-link" data-scroll-target="#ejercicios"><span class="header-section-number">7.5</span> Ejercicios</a></li>
+  <li><a href="#ejercicios" id="toc-ejercicios" class="nav-link" data-scroll-target="#ejercicios"><span class="header-section-number">7.5</span> Ejercicios</a>
+  <ul class="collapse">
+  <li><a href="#sitio-1" id="toc-sitio-1" class="nav-link" data-scroll-target="#sitio-1"><span class="header-section-number">7.5.1</span> Sitio 1</a></li>
+  <li><a href="#sitio-2" id="toc-sitio-2" class="nav-link" data-scroll-target="#sitio-2"><span class="header-section-number">7.5.2</span> Sitio 2</a></li>
+  </ul></li>
   <li><a href="#recursos-de-interés" id="toc-recursos-de-interés" class="nav-link" data-scroll-target="#recursos-de-interés"><span class="header-section-number">7.6</span> Recursos de interés</a></li>
   </ul>
 </nav>
@@ -358,6 +362,8 @@ Figura&nbsp;7.3: Operaciones de Git y compras en línea. Imagen de <a href="http
 </section>
 <section id="ejercicios" class="level2" data-number="7.5">
 <h2 data-number="7.5" class="anchored" data-anchor-id="ejercicios"><span class="header-section-number">7.5</span> Ejercicios</h2>
+<section id="sitio-1" class="level3" data-number="7.5.1">
+<h3 data-number="7.5.1" class="anchored" data-anchor-id="sitio-1"><span class="header-section-number">7.5.1</span> Sitio 1</h3>
 <ol type="1">
 <li>Cree un repositorio en GitHub (ej. <code>currículum</code>).</li>
 <li>Clone el nuevo repositorio a su computadora.</li>
@@ -366,6 +372,25 @@ Figura&nbsp;7.3: Operaciones de Git y compras en línea. Imagen de <a href="http
 <li>Publique su curriculum como un sitio web en <a href="https://pages.github.com/">GitHub Pages</a>, con la opción <em>Settings - Pages</em>. Elija la rama (<em>branch</em>) <code>main</code> y guarde los cambios. El sitio tomará algunos segundos para generarse.</li>
 <li>Realice cambios adicionales en su currículum y sincronícelos con el repositorio remoto.</li>
 </ol>
+</section>
+<section id="sitio-2" class="level3" data-number="7.5.2">
+<h3 data-number="7.5.2" class="anchored" data-anchor-id="sitio-2"><span class="header-section-number">7.5.2</span> Sitio 2</h3>
+<ol type="1">
+<li>Descargue las estadísticas sobre delitos cometidos en Costa Rica en 2023 y 2024 del <a href="https://sitiooij.poder-judicial.go.cr/index.php/ayuda/servicios-policiales/servicios-a-organizaciones/indice-de-transparencia-del-sector-publico-costarricense/datos-abiertos">sitio de datos abiertos del Organismo de Investigación Judicial (OIJ)</a>.</li>
+<li>Convierta los archivos a formato CSV.</li>
+<li>Con R, genere gráficos de barras de:
+<ul>
+<li>Cantidad de delitos por provincia en 2023 y en 2024 (en gráficos separados).</li>
+<li>Cantidad de homicidios por provincia en 2023 y en 2024 (en gráficos separados).</li>
+<li>Cantidad de delitos por cantón en 2023 y en 2024 (en gráficos separados).</li>
+<li>Cantidad de homicidios por cantón en 2023 y en 2024 (en gráficos separados).<br>
+</li>
+</ul></li>
+<li>Guarde los gráficos como archivos PNG.</li>
+<li>Elabore un documento Markdown que muestre los gráficos.</li>
+<li>Publique el documento en GitHub Pages.</li>
+</ol>
+</section>
 </section>
 <section id="recursos-de-interés" class="level2" data-number="7.6">
 <h2 data-number="7.6" class="anchored" data-anchor-id="recursos-de-interés"><span class="header-section-number">7.6</span> Recursos de interés</h2>
@@ -805,7 +830,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
 </nav>
 </div> <!-- /content -->
-<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","openEffect":"zoom","selector":".lightbox","loop":false});
+<script>var lightboxQuarto = GLightbox({"loop":false,"descPosition":"bottom","openEffect":"zoom","closeEffect":"zoom","selector":".lightbox"});
 window.onload = () => {
   lightboxQuarto.on('slide_before_load', (data) => {
     const { slideIndex, slideNode, slideConfig, player, trigger } = data;

@@ -68,12 +68,26 @@ Otras operaciones de Git de uso frecuente son:
 * [git reset](https://git-scm.com/docs/git-reset): para regresar al estado correspondiente a un _commit_ anterior.
 
 ## Ejercicios
+
+### Sitio 1
 1. Cree un repositorio en GitHub (ej. `currículum`).
 2. Clone el nuevo repositorio a su computadora.
 3. Copie al directorio del repositorio clonado el archivo `README.md` que creó en el capítulo anterior, con su currículum.
 4. Sincronice ambos repositorios.
 5. Publique su curriculum como un sitio web en [GitHub Pages](https://pages.github.com/), con la opción *Settings - Pages*. Elija la rama (*branch*) `main` y guarde los cambios. El sitio tomará algunos segundos para generarse.
 6. Realice cambios adicionales en su currículum y sincronícelos con el repositorio remoto. 
+
+### Sitio 2
+1. Descargue las estadísticas sobre delitos cometidos en Costa Rica en 2023 y 2024 del [sitio de datos abiertos del Organismo de Investigación Judicial (OIJ)](https://sitiooij.poder-judicial.go.cr/index.php/ayuda/servicios-policiales/servicios-a-organizaciones/indice-de-transparencia-del-sector-publico-costarricense/datos-abiertos). 
+2. Convierta los archivos a formato CSV.
+3. Con R, genere gráficos de barras de:
+    - Cantidad de delitos por provincia en 2023 y en 2024 (en gráficos separados).
+    - Cantidad de homicidios por provincia en 2023 y en 2024 (en gráficos separados).
+    - Cantidad de delitos por cantón en 2023 y en 2024 (en gráficos separados).
+    - Cantidad de homicidios por cantón en 2023 y en 2024 (en gráficos separados).    
+4. Guarde los gráficos como archivos PNG.
+5. Elabore un documento Markdown que muestre los gráficos.
+6. Publique el documento en GitHub Pages.
 
 ## Recursos de interés
 *Git*. (s. f.). Recuperado 28 de agosto de 2022, de [https://git-scm.com/](https://git-scm.com/)
