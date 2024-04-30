@@ -951,7 +951,7 @@
     "href": "examen-corto-02.html#temas-a-evaluar",
     "title": "Examen corto 2",
     "section": "Temas a evaluar",
-    "text": "Temas a evaluar\n3 R - lenguaje de programación para análisis estadístico desde la sección “3.5.5 Tipos de datos” (inclusive) hasta el final\n4 Tidyverse - colección de paquetes para ciencia de datos\n5 Reproducibilidad\n6 Markdown - lenguaje de marcado",
+    "text": "Temas a evaluar\n3 R - lenguaje de programación para análisis estadístico desde la sección “3.5.5 Tipos de datos” (inclusive) hasta el final\n4 Tidyverse - colección de paquetes para ciencia de datos\n5 Reproducibilidad\n6 Markdown - lenguaje de marcado\n7 Git - sistema de control de versiones",
     "crumbs": [
       "Evaluaciones",
       "Examen corto 2"

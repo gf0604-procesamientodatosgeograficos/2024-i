@@ -12,3 +12,5 @@
 [5 Reproducibilidad](https://gf0604-procesamientodatosgeograficos.github.io/2024-i/05-reproducibilidad.html)
 
 [6 Markdown - lenguaje de marcado](https://gf0604-procesamientodatosgeograficos.github.io/2024-i/06-markdown.html)
+
+[7 Git - sistema de control de versiones](https://gf0604-procesamientodatosgeograficos.github.io/2024-i/07-git.html)  
