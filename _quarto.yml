@@ -26,6 +26,7 @@ book:
     - part: parte-vii-evaluaciones.qmd
       chapters: 
         - examen-corto-01.qmd
+        - examen-corto-02.qmd
 
 bibliography: referencias.bib
 csl: apa-6th-edition.csl

@@ -469,7 +469,7 @@
     "href": "parte-vii-evaluaciones.html",
     "title": "Evaluaciones",
     "section": "",
-    "text": "Exámenes cortos\nExamen corto 1",
+    "text": "Exámenes cortos\nExamen corto 1\nExamen corto 2",
     "crumbs": [
       "Evaluaciones"
     ]
@@ -922,6 +922,39 @@
     "crumbs": [
       "III - Herramientas para investigación reproducible y desarrollo colaborativo",
       "<span class='chapter-number'>8</span>  <span class='chapter-title'>Quarto - sistema de publicación técnica y científica</span>"
+    ]
+  },
+  {
+    "objectID": "examen-corto-02.html",
+    "href": "examen-corto-02.html",
+    "title": "Examen corto 2",
+    "section": "",
+    "text": "Fecha",
+    "crumbs": [
+      "Evaluaciones",
+      "Examen corto 2"
+    ]
+  },
+  {
+    "objectID": "examen-corto-02.html#fecha",
+    "href": "examen-corto-02.html#fecha",
+    "title": "Examen corto 2",
+    "section": "",
+    "text": "Grupo 001: jueves 9 de mayo de 2024\nGrupo 002: miércoles 8 de mayo de 2024",
+    "crumbs": [
+      "Evaluaciones",
+      "Examen corto 2"
+    ]
+  },
+  {
+    "objectID": "examen-corto-02.html#temas-a-evaluar",
+    "href": "examen-corto-02.html#temas-a-evaluar",
+    "title": "Examen corto 2",
+    "section": "Temas a evaluar",
+    "text": "Temas a evaluar\n3 R - lenguaje de programación para análisis estadístico desde la sección “3.5.5 Tipos de datos” (inclusive) hasta el final\n4 Tidyverse - colección de paquetes para ciencia de datos\n5 Reproducibilidad\n6 Markdown - lenguaje de marcado",
+    "crumbs": [
+      "Evaluaciones",
+      "Examen corto 2"
     ]
   }
 ]

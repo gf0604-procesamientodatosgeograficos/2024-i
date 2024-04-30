@@ -1,0 +1,14 @@
+# Examen corto 2 {.unnumbered}
+
+## Fecha {.unnumbered}
+- **Grupo 001**: jueves 9 de mayo de 2024
+- **Grupo 002**: miércoles 8 de mayo de 2024
+
+## Temas a evaluar {.unnumbered}
+[3 R - lenguaje de programación para análisis estadístico](03-r.qmd)  desde la sección "3.5.5 Tipos de datos" (inclusive) hasta el final  
+
+[4 Tidyverse - colección de paquetes para ciencia de datos](https://gf0604-procesamientodatosgeograficos.github.io/2024-i/04-tidyverse.html)
+
+[5 Reproducibilidad](https://gf0604-procesamientodatosgeograficos.github.io/2024-i/05-reproducibilidad.html)
+
+[6 Markdown - lenguaje de marcado](https://gf0604-procesamientodatosgeograficos.github.io/2024-i/06-markdown.html)
