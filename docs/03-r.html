@@ -216,6 +216,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Reproducibilidad</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-markdown.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Markdown - lenguaje de marcado</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-git.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Git - sistema de control de versiones</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-quarto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Quarto - sistema de publicación técnica y científica</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -262,7 +280,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#definición-de-funciones" id="toc-definición-de-funciones" class="nav-link" data-scroll-target="#definición-de-funciones"><span class="header-section-number">3.5.6</span> Definición de funciones</a></li>
   <li><a href="#condicionales" id="toc-condicionales" class="nav-link" data-scroll-target="#condicionales"><span class="header-section-number">3.5.7</span> Condicionales</a></li>
   <li><a href="#ciclos" id="toc-ciclos" class="nav-link" data-scroll-target="#ciclos"><span class="header-section-number">3.5.8</span> Ciclos</a></li>
-  <li><a href="#ejemplo-de-programa-que-utiliza-funciones-condicionales-y-ciclos" id="toc-ejemplo-de-programa-que-utiliza-funciones-condicionales-y-ciclos" class="nav-link" data-scroll-target="#ejemplo-de-programa-que-utiliza-funciones-condicionales-y-ciclos"><span class="header-section-number">3.5.9</span> Ejemplo de programa que utiliza funciones, condicionales y ciclos</a></li>
   </ul></li>
   <li><a href="#recursos-de-interés" id="toc-recursos-de-interés" class="nav-link" data-scroll-target="#recursos-de-interés"><span class="header-section-number">3.6</span> Recursos de interés</a></li>
   </ul>
@@ -324,7 +341,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="fig-interfaz-rstudio" class="lightbox quarto-figure quarto-figure-center quarto-float anchored" alt="Interfaz del ambiente de desarrollo integrado RStudio" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-interfaz-rstudio-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="img/rstudio-interfaz.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" data-glightbox="description: .lightbox-desc-1"><img src="img/rstudio-interfaz.png" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="Interfaz del ambiente de desarrollo integrado RStudio"></a>
+<a href="img/rstudio-interfaz.png" class="lightbox" data-glightbox="description: .lightbox-desc-1" data-gallery="quarto-lightbox-gallery-1"><img src="img/rstudio-interfaz.png" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="Interfaz del ambiente de desarrollo integrado RStudio"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-interfaz-rstudio-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figura&nbsp;3.1: Interfaz del ambiente de desarrollo integrado RStudio.
@@ -1220,7 +1237,7 @@ mean&gt; c(xm, mean(x, trim = 0.10))
 <div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fecha actual</span></span>
 <span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>fecha_actual <span class="ot">&lt;-</span> <span class="fu">Sys.Date</span>()</span>
 <span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a>fecha_actual</span>
-<span id="cb59-4"><a href="#cb59-4" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] "2024-04-16"</span></span>
+<span id="cb59-4"><a href="#cb59-4" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] "2024-04-30"</span></span>
 <span id="cb59-5"><a href="#cb59-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb59-6"><a href="#cb59-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Tipo de datos</span></span>
 <span id="cb59-7"><a href="#cb59-7" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(fecha_actual)</span>
@@ -1485,136 +1502,213 @@ mean&gt; c(xm, mean(x, trim = 0.10))
 </div>
 <p><strong>Ejercicios</strong><br>
 1. Utilice un ciclo <code>while</code> para implementar el cálculo del promedio de los elementos de un vector. Sugerencia: utilice la función <a href="https://rdrr.io/r/base/length.html">length()</a> para obtener la longitud del vector y así saber cuando terminar de recorrerlo.</p>
-</section>
-<section id="la-sentencia-repeat" class="level4" data-number="3.5.8.3">
-<h4 data-number="3.5.8.3" class="anchored" data-anchor-id="la-sentencia-repeat"><span class="header-section-number">3.5.8.3</span> La sentencia <code>repeat</code></h4>
-<p>La sentencia <a href="https://cran.r-project.org/doc/manuals/r-devel/R-lang.html#repeat">repeat</a> implementa un ciclo que se repite indefinidamente. Puede interrumpirse con una sentencia <code>break</code>.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Sintaxis de la sentencia repeat</span></span>
-<span id="cb81-2"><a href="#cb81-2" aria-hidden="true" tabindex="-1"></a><span class="cf">repeat</span> {</span>
-<span id="cb81-3"><a href="#cb81-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># bloque de instrucciones </span></span>
-<span id="cb81-4"><a href="#cb81-4" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Los ciclos <code>repeat</code> tienen una estructura más sencilla que los <code>while</code>. Algo que los diferencia es que los bloques de los ciclos <code>repeat</code> se ejecutan al menos una vez.</p>
-<p>En el siguiente ejemplo, se utiliza un ciclo <code>repeat</code> para implementar la pregunta y lectura de la respuesta que anteriormente se implementó con un ciclo <code>while</code>.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb82"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Función para leer una respuesta desde la pantalla</span></span>
-<span id="cb82-2"><a href="#cb82-2" aria-hidden="true" tabindex="-1"></a>leer_respuesta <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
-<span id="cb82-3"><a href="#cb82-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">readline</span>(<span class="at">prompt=</span><span class="st">"¿Cual es la respuesta definitiva al sentido de la vida, el universo y todo lo demás? "</span>)</span>
-<span id="cb82-4"><a href="#cb82-4" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb82-5"><a href="#cb82-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb82-6"><a href="#cb82-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Ciclo para imprimir la pregunta y leer la respuesta hasta que esta sea correcta</span></span>
-<span id="cb82-7"><a href="#cb82-7" aria-hidden="true" tabindex="-1"></a><span class="cf">repeat</span> {</span>
-<span id="cb82-8"><a href="#cb82-8" aria-hidden="true" tabindex="-1"></a>  respuesta <span class="ot">&lt;-</span> <span class="fu">leer_respuesta</span>()</span>
-<span id="cb82-9"><a href="#cb82-9" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (respuesta <span class="sc">!=</span> <span class="st">"42"</span>) {</span>
-<span id="cb82-10"><a href="#cb82-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Respuesta incorrecta</span></span>
-<span id="cb82-11"><a href="#cb82-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="st">"¡Su respuesta es incorrecta!"</span>)</span>
-<span id="cb82-12"><a href="#cb82-12" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
-<span id="cb82-13"><a href="#cb82-13" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Respuesta correcta. Se interrumpe el ciclo.</span></span>
-<span id="cb82-14"><a href="#cb82-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">break</span></span>
-<span id="cb82-15"><a href="#cb82-15" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb82-16"><a href="#cb82-16" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="las-sentencias-break-y-next" class="level4" data-number="3.5.8.4">
-<h4 data-number="3.5.8.4" class="anchored" data-anchor-id="las-sentencias-break-y-next"><span class="header-section-number">3.5.8.4</span> Las sentencias <code>break</code> y <code>next</code></h4>
-<p>La sentencia <code>break</code> interrumpe un ciclo. La ejecución del programa continúa con la instrucción siguiente al bloque del ciclo.</p>
-<p>En el siguiente ciclo <code>for</code>, se suman uno a uno los números de un vector, pero se usa un <code>break</code> para interrumpir el ciclo cuando el acumulado es mayor que 100.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a>vector_numeros <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">17</span>, <span class="dv">23</span>, <span class="dv">37</span>, <span class="dv">41</span>, <span class="dv">52</span>, <span class="dv">64</span>, <span class="dv">75</span>)</span>
-<span id="cb83-2"><a href="#cb83-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb83-3"><a href="#cb83-3" aria-hidden="true" tabindex="-1"></a>acumulado <span class="ot">&lt;-</span> <span class="dv">0</span></span>
-<span id="cb83-4"><a href="#cb83-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb83-5"><a href="#cb83-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (x <span class="cf">in</span> vector_numeros) {</span>
-<span id="cb83-6"><a href="#cb83-6" aria-hidden="true" tabindex="-1"></a>  acumulado <span class="ot">&lt;-</span> acumulado <span class="sc">+</span> x</span>
-<span id="cb83-7"><a href="#cb83-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"Acumulado:"</span>, acumulado, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
-<span id="cb83-8"><a href="#cb83-8" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (acumulado <span class="sc">&gt;=</span> <span class="dv">100</span>) {</span>
-<span id="cb83-9"><a href="#cb83-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">cat</span>(<span class="st">"Se superó el límite de 100 en el acumulado"</span>)</span>
-<span id="cb83-10"><a href="#cb83-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">break</span></span>
-<span id="cb83-11"><a href="#cb83-11" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb83-12"><a href="#cb83-12" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb83-13"><a href="#cb83-13" aria-hidden="true" tabindex="-1"></a><span class="do">## Acumulado: 17 </span></span>
-<span id="cb83-14"><a href="#cb83-14" aria-hidden="true" tabindex="-1"></a><span class="do">## Acumulado: 40 </span></span>
-<span id="cb83-15"><a href="#cb83-15" aria-hidden="true" tabindex="-1"></a><span class="do">## Acumulado: 77 </span></span>
-<span id="cb83-16"><a href="#cb83-16" aria-hidden="true" tabindex="-1"></a><span class="do">## Acumulado: 118 </span></span>
-<span id="cb83-17"><a href="#cb83-17" aria-hidden="true" tabindex="-1"></a><span class="do">## Se superó el límite de 100 en el acumulado</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Por su parte, la sentencia <code>next</code> retorna el control al principio del bloque. Las instrucciones que hay después del <code>next</code> no se ejecutan. La siguiente iteración del ciclo (si la hay), se inicia entonces.</p>
-<p>El siguiente ciclo recorre un vector de números. Se utiliza la sentencia <code>next</code> para “saltar” los números impares y sumar solo los pares.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb84"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a>vector_numeros <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">17</span>, <span class="dv">23</span>, <span class="dv">37</span>, <span class="dv">41</span>, <span class="dv">52</span>, <span class="dv">64</span>, <span class="dv">75</span>)</span>
-<span id="cb84-2"><a href="#cb84-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb84-3"><a href="#cb84-3" aria-hidden="true" tabindex="-1"></a>suma_pares <span class="ot">&lt;-</span> <span class="dv">0</span></span>
-<span id="cb84-4"><a href="#cb84-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb84-5"><a href="#cb84-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (x <span class="cf">in</span> vector_numeros) {</span>
-<span id="cb84-6"><a href="#cb84-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (x <span class="sc">%%</span> <span class="dv">2</span> <span class="sc">==</span> <span class="dv">0</span>) {</span>
-<span id="cb84-7"><a href="#cb84-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Número par: se suma</span></span>
-<span id="cb84-8"><a href="#cb84-8" aria-hidden="true" tabindex="-1"></a>    suma_pares <span class="ot">&lt;-</span> suma_pares <span class="sc">+</span> x</span>
-<span id="cb84-9"><a href="#cb84-9" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
-<span id="cb84-10"><a href="#cb84-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Número impar: se "salta" al siguiente número</span></span>
-<span id="cb84-11"><a href="#cb84-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">next</span></span>
-<span id="cb84-12"><a href="#cb84-12" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb84-13"><a href="#cb84-13" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb84-14"><a href="#cb84-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb84-15"><a href="#cb84-15" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Suma de los números pares:"</span>, suma_pares)</span>
-<span id="cb84-16"><a href="#cb84-16" aria-hidden="true" tabindex="-1"></a><span class="do">## Suma de los números pares: 116</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="la-familia-de-funciones-apply" class="level4" data-number="3.5.8.5">
-<h4 data-number="3.5.8.5" class="anchored" data-anchor-id="la-familia-de-funciones-apply"><span class="header-section-number">3.5.8.5</span> La familia de funciones <code>apply()</code></h4>
-<p>Esta es una familia de funciones que manipulan subconjuntos de datos obtenidos a partir de matrices, listas y data frames, los cuales son recorridos de una forma repetitiva. Pueden funcionar como una alternativa a los ciclos y aplicar funciones en los subconjuntos de datos como, por ejemplo, funciones estadísticas en las columnas de una matriz o de un data frame. Su uso es muy recomendado por su eficiencia, flexibilidad y simplicidad.</p>
-<p>Entre estas funciones, pueden mencionarse <a href="https://rdrr.io/r/base/apply.html">apply()</a>, <a href="https://rdrr.io/r/base/lapply.html">lapply()</a>, <a href="https://rdrr.io/cran/functools/man/Sapply.html">sapply()</a>, <a href="https://rdrr.io/cran/functools/man/Vapply.html">vapply()</a>, <a href="https://rdrr.io/r/base/mapply.html">mapply()</a>, <a href="https://rdrr.io/r/base/rapply.html">rapply()</a> y <a href="https://rdrr.io/r/base/tapply.html">tapply()</a>.</p>
-<section id="la-función-apply" class="level5" data-number="3.5.8.5.1">
-<h5 data-number="3.5.8.5.1" class="anchored" data-anchor-id="la-función-apply"><span class="header-section-number">3.5.8.5.1</span> La función <code>apply()</code></h5>
-<p>La función <a href="https://rdrr.io/r/base/apply.html">apply()</a> toma como entrada un arreglo o una matriz y aplica alguna función sobre sus filas o columnas.</p>
-<p>La sintaxis de la función es:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb85"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Sintaxis de la función apply()</span></span>
-<span id="cb85-2"><a href="#cb85-2" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(X, MARGIN, FUN, ...)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>En donde:<br>
-- <code>X</code>: es un arreglo o matriz.<br>
-- <code>MARGIN</code>: <code>MARGIN = 1</code> significa que la función actúa en las filas, <code>MARGIN = 2</code> significa que la función actúa en las columnas y <code>MARGIN = c(1, 2)</code> significa que la función actúa en las filas y en las columnas.<br>
-- <code>FUN</code>: es la función que se aplicará a cada uno de los elementos de <code>X</code>.</p>
-<p>En el siguiente ejemplo, se utiliza la función <code>apply()</code> para sumar los elementos de las columnas de una matriz.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb86"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>, <span class="at">nrow=</span><span class="dv">3</span>, <span class="at">ncol=</span><span class="dv">4</span>)</span>
-<span id="cb86-2"><a href="#cb86-2" aria-hidden="true" tabindex="-1"></a>m</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>     [,1] [,2] [,3] [,4]
+<!--
+
+**ESTAS SECCIONES SE COLOCAN TEMPORALMENTE ENTRE COMENTARIOS**
+
+#### La sentencia `repeat`
+La sentencia [repeat](https://cran.r-project.org/doc/manuals/r-devel/R-lang.html#repeat) implementa un ciclo que se repite indefinidamente. Puede interrumpirse con una sentencia  `break`.
+
+
+::: {.cell}
+
+```{.r .cell-code}
+# Sintaxis de la sentencia repeat
+repeat {
+  # bloque de instrucciones 
+}
+```
+:::
+
+
+Los ciclos `repeat` tienen una estructura más sencilla que los `while`. Algo que los diferencia es que los bloques de los ciclos `repeat` se ejecutan al menos una vez.
+
+En el siguiente ejemplo, se utiliza un ciclo `repeat` para implementar la pregunta y lectura de la respuesta que anteriormente se implementó con un ciclo `while`.
+
+
+::: {.cell}
+
+```{.r .cell-code}
+# Función para leer una respuesta desde la pantalla
+leer_respuesta <- function() {
+  readline(prompt="¿Cual es la respuesta definitiva al sentido de la vida, el universo y todo lo demás? ")
+}
+
+# Ciclo para imprimir la pregunta y leer la respuesta hasta que esta sea correcta
+repeat {
+  respuesta <- leer_respuesta()
+  if (respuesta != "42") {
+    # Respuesta incorrecta
+    print("¡Su respuesta es incorrecta!")
+  } else {
+    # Respuesta correcta. Se interrumpe el ciclo.
+    break
+  }
+}
+```
+:::
+
+
+#### Las sentencias `break` y `next`
+La sentencia `break` interrumpe un ciclo. La ejecución del programa continúa con la instrucción siguiente al bloque del ciclo.
+
+En el siguiente ciclo `for`, se suman uno a uno los números de un vector, pero se usa un `break` para interrumpir el ciclo cuando el acumulado es mayor que 100.
+
+
+::: {.cell}
+
+```{.r .cell-code}
+vector_numeros <- c(17, 23, 37, 41, 52, 64, 75)
+
+acumulado <- 0
+
+for (x in vector_numeros) {
+  acumulado <- acumulado + x
+  cat("Acumulado:", acumulado, "\n")
+  if (acumulado >= 100) {
+    cat("Se superó el límite de 100 en el acumulado")
+    break
+  }
+}
+## Acumulado: 17 
+## Acumulado: 40 
+## Acumulado: 77 
+## Acumulado: 118 
+## Se superó el límite de 100 en el acumulado
+```
+:::
+
+
+Por su parte, la sentencia `next` retorna el control al principio del bloque.  Las instrucciones que hay después del `next` no se ejecutan. La siguiente iteración del ciclo (si la hay), se inicia entonces.
+
+El siguiente ciclo recorre un vector de números. Se utiliza la sentencia `next` para "saltar" los números impares y sumar solo los pares.
+
+
+::: {.cell}
+
+```{.r .cell-code}
+vector_numeros <- c(17, 23, 37, 41, 52, 64, 75)
+
+suma_pares <- 0
+
+for (x in vector_numeros) {
+  if (x %% 2 == 0) {
+    # Número par: se suma
+    suma_pares <- suma_pares + x
+  } else {
+    # Número impar: se "salta" al siguiente número
+    next
+  }
+}
+
+cat("Suma de los números pares:", suma_pares)
+## Suma de los números pares: 116
+```
+:::
+
+
+#### La familia de funciones `apply()`
+Esta es una familia de funciones que manipulan subconjuntos de datos obtenidos a partir de matrices, listas y data frames, los cuales son recorridos de una forma repetitiva. Pueden funcionar como una alternativa a los ciclos y aplicar funciones en los subconjuntos de datos como, por ejemplo, funciones estadísticas en las columnas de una matriz o de un data frame. Su uso es muy recomendado por su eficiencia, flexibilidad y simplicidad.
+
+Entre estas funciones, pueden mencionarse [apply()](https://rdrr.io/r/base/apply.html), [lapply()](https://rdrr.io/r/base/lapply.html), [sapply()](https://rdrr.io/cran/functools/man/Sapply.html), [vapply()](https://rdrr.io/cran/functools/man/Vapply.html), [mapply()](https://rdrr.io/r/base/mapply.html), [rapply()](https://rdrr.io/r/base/rapply.html) y [tapply()](https://rdrr.io/r/base/tapply.html).
+
+##### La función `apply()`
+La función [apply()](https://rdrr.io/r/base/apply.html) toma como entrada un arreglo o una matriz y aplica alguna función sobre sus filas o columnas.
+
+La sintaxis de la función es:
+
+
+::: {.cell}
+
+```{.r .cell-code}
+# Sintaxis de la función apply()
+apply(X, MARGIN, FUN, ...)
+```
+:::
+
+
+En donde:  
+- `X`: es un arreglo o matriz.  
+- `MARGIN`: `MARGIN = 1` significa que la función actúa en las filas, `MARGIN = 2` significa que la función actúa en las columnas y `MARGIN = c(1, 2)` significa que la función actúa en las filas y en las columnas.  
+- `FUN`: es la función que se aplicará a cada uno de los elementos de `X`.
+
+En el siguiente ejemplo, se utiliza la función `apply()` para sumar los elementos de las columnas de una matriz.
+
+
+::: {.cell}
+
+```{.r .cell-code}
+m <- matrix(1:12, nrow=3, ncol=4)
+m
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+     [,1] [,2] [,3] [,4]
 [1,]    1    4    7   10
 [2,]    2    5    8   11
-[3,]    3    6    9   12</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb88"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Suma de las columnas</span></span>
-<span id="cb88-2"><a href="#cb88-2" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(m, <span class="dv">2</span>, sum)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1]  6 15 24 33</code></pre>
-</div>
-</div>
-<p><strong>Ejercicios</strong><br>
-1. Utilice la función <code>apply()</code> para obtener el promedio de los elementos de cada columna de la matriz del ejemplo anterior.</p>
-</section>
-<section id="la-función-lapply" class="level5" data-number="3.5.8.5.2">
-<h5 data-number="3.5.8.5.2" class="anchored" data-anchor-id="la-función-lapply"><span class="header-section-number">3.5.8.5.2</span> La función <code>lapply()</code></h5>
-<p>La función <a href="https://rdrr.io/r/base/lapply.html">lapply()</a> toma como entrada un vector o lista y retorna una lista de la misma longitud en la que cada uno de sus elementos es el resultado de aplicar una función al vector o lista de entrada.</p>
-<p>La sintaxis de la función es:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb90"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Sintaxis de la función lapply()</span></span>
-<span id="cb90-2"><a href="#cb90-2" aria-hidden="true" tabindex="-1"></a><span class="fu">lapply</span>(X, FUN, ...)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>En donde:<br>
-- <code>X</code>: es un vector o lista.<br>
-- <code>FUN</code>: es la función que se aplicará a cada elemento de X. Algunas funciones predefinidas que pueden utilizarse incluyen <code>mean()</code>, <code>median()</code>, <code>sum()</code>, <code>min()</code> y <code>max()</code>. También pueden usarse funciones definidas por el usuario.</p>
-<p>En los siguientes ejemplos, se utiliza <code>lapply()</code> para aplicar diferentes funciones a un vector de nombres de personas.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb91"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a>nombres <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Andrés"</span>, <span class="st">"Beatriz"</span>, <span class="st">"Carlos"</span>, <span class="st">"Marta"</span>, <span class="st">"Pedro"</span>, <span class="st">"Sara"</span>)</span>
-<span id="cb91-2"><a href="#cb91-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb91-3"><a href="#cb91-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Los nombres de la lista se transforman a minúscula</span></span>
-<span id="cb91-4"><a href="#cb91-4" aria-hidden="true" tabindex="-1"></a>nombres_en_minuscula <span class="ot">&lt;-</span> <span class="fu">lapply</span>(nombres, tolower)</span>
-<span id="cb91-5"><a href="#cb91-5" aria-hidden="true" tabindex="-1"></a>nombres_en_minuscula</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[[1]]
+[3,]    3    6    9   12
+```
+
+
+:::
+
+```{.r .cell-code}
+# Suma de las columnas
+apply(m, 2, sum)
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+[1]  6 15 24 33
+```
+
+
+:::
+:::
+
+
+**Ejercicios**  
+1. Utilice la función `apply()` para obtener el promedio de los elementos de cada columna de la matriz del ejemplo anterior.
+
+##### La función `lapply()`
+La función [lapply()](https://rdrr.io/r/base/lapply.html) toma como entrada un vector o lista y retorna una lista de la misma longitud en la que cada uno de sus elementos es el resultado de aplicar una función al vector o lista de entrada.
+
+La sintaxis de la función es:
+
+
+::: {.cell}
+
+```{.r .cell-code}
+# Sintaxis de la función lapply()
+lapply(X, FUN, ...)
+```
+:::
+
+
+En donde:  
+- `X`: es un vector o lista.  
+- `FUN`: es la función que se aplicará a cada elemento de X. Algunas funciones predefinidas que pueden utilizarse incluyen `mean()`, `median()`, `sum()`, `min()` y `max()`. También pueden usarse funciones definidas por el usuario.
+
+En los siguientes ejemplos, se utiliza `lapply()` para aplicar diferentes funciones a un vector de nombres de personas.
+
+
+::: {.cell}
+
+```{.r .cell-code}
+nombres <- c("Andrés", "Beatriz", "Carlos", "Marta", "Pedro", "Sara")
+
+# Los nombres de la lista se transforman a minúscula
+nombres_en_minuscula <- lapply(nombres, tolower)
+nombres_en_minuscula
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+[[1]]
 [1] "andrés"
 
 [[2]]
@@ -1630,13 +1724,22 @@ mean&gt; c(xm, mean(x, trim = 0.10))
 [1] "pedro"
 
 [[6]]
-[1] "sara"</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb93"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Se genera un saludo para cada nombre</span></span>
-<span id="cb93-2"><a href="#cb93-2" aria-hidden="true" tabindex="-1"></a>nombres_con_saludo <span class="ot">&lt;-</span> <span class="fu">lapply</span>(nombres, <span class="cf">function</span>(arg1, arg2) <span class="fu">paste</span>(arg1, arg2), <span class="at">arg1=</span><span class="st">"Hola"</span>)</span>
-<span id="cb93-3"><a href="#cb93-3" aria-hidden="true" tabindex="-1"></a>nombres_con_saludo</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[[1]]
+[1] "sara"
+```
+
+
+:::
+
+```{.r .cell-code}
+# Se genera un saludo para cada nombre
+nombres_con_saludo <- lapply(nombres, function(arg1, arg2) paste(arg1, arg2), arg1="Hola")
+nombres_con_saludo
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+[[1]]
 [1] "Hola Andrés"
 
 [[2]]
@@ -1652,138 +1755,185 @@ mean&gt; c(xm, mean(x, trim = 0.10))
 [1] "Hola Pedro"
 
 [[6]]
-[1] "Hola Sara"</code></pre>
-</div>
-</div>
+[1] "Hola Sara"
+```
+
+
+:::
+:::
+
+
+##### La función `tapply()`  
+La función [tapply()](https://rdrr.io/r/base/tapply.html) aplica una función a cada nivel de un factor.
+
+La sintaxis de la función es:
+
+
+::: {.cell}
+
+```{.r .cell-code}
+# Sintaxis de la función tapply()
+tapply(X, INDEX, FUN)
+```
+:::
+
+
+En donde:  
+- `X`: es un objeto, tipicamente un vector.  
+- `INDEX`: es una lista que contiene un factor.  
+- `FUN`: es la función que se aplicará a cada elemento de `X`.
+
+En el siguiente ejemplo, se utiliza `tapply()` para calcular la mediana del ancho del sépalo para cada especie del conjunto de datos `iris`.
+
+
+::: {.cell}
+
+```{.r .cell-code}
+data(iris)
+tapply(iris$Sepal.Width, iris$Species, median)
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+    setosa versicolor  virginica 
+       3.4        2.8        3.0 
+```
+
+
+:::
+:::
+
+
+**Ejercicios**  
+1. Utilice la función `tapply()` para obtener el promedio de las longitudes de los pétalos para cada especie del conjunto de datos `iris`.
+
+#### Vectorización
+En R, muchas operaciones y funciones pueden ser vectorizadas, lo que significa que pueden aplicarse a los elementos de un vector sin necesidad de iterar uno por uno en estos. 
+
+Por ejemplo, considérese el siguiente fragmento de código no vectorizado, que utiliza un ciclo para convertir los números de un vector a sus valores absolutos:
+
+
+::: {.cell}
+
+```{.r .cell-code}
+vector_numeros <- c(23, -17, 34, 0, -12, 55)
+
+for (i in 1:length(vector_numeros)) {
+  if (vector_numeros[i] < 0) {
+    vector_numeros[i] <- -vector_numeros[i]
+  }
+}
+
+vector_numeros
+## [1] 23 17 34  0 12 55
+```
+:::
+
+
+El siguiente fragmento de código realiza la misma tarea, pero de forma vectorizada:
+
+
+::: {.cell}
+
+```{.r .cell-code}
+vector_numeros <- c(23, -17, 34, 0, -12, 55)
+
+# Se usa una expresión lógica para seleccionar los elementos del vector < 0
+negativos <- vector_numeros < 0
+negativos
+## [1] FALSE  TRUE FALSE FALSE  TRUE FALSE
+
+# Se cambian los elementos seleccionados en el paso anterior sin utilizar el for
+vector_numeros[negativos] <- vector_numeros[negativos] * -1
+
+vector_numeros
+## [1] 23 17 34  0 12 55
+```
+:::
+
+
+**Ejercicios**  
+1. Utilice código vectorizado para implementar una función que reciba como argumento un vector de números y retorne el mismo vector con los elementos impares (solo los impares) elevados al cuadrado.
+
+### Ejemplo de programa que utiliza funciones, condicionales y ciclos
+El siguiente programa solicita al usuario diferentes datos de varias personas:
+
+- Nombre.
+- Masa (kg).
+- Estatura (m).
+
+Esta entrada de datos se implementa a través de un ciclo, el cual finaliza cuando el usuario indica que no desea ingresar más datos.
+
+Por medio de funciones, se calcula el índice de masa corporal (IMC) de cada persona y la interpretación de si se considera bajo, normal o sobrepeso. 
+
+Al final, se imprime el promedio de los IMC calculados.
+
+
+::: {.cell}
+
+```{.r .cell-code}
+# Función para calcular el IMC
+imc <- function(masa, estatura) {
+  return(masa / estatura^2)
+}
+
+# Función para interpretar el IMC
+imc_interpretacion <- function(imc) {
+  if (imc < 18.5) {
+    return("bajo")
+  } else if (imc < 25) {
+    return("normal")
+  } else {
+    return("sobrepeso")
+  }
+}
+
+# Vector para almacenar los IMC y luego calcular el promedio
+imcs <- c()
+
+# Variable para almacenar la respuesta del usuario a la pregunta
+# de si desea ingresar datos de otra persona
+respuesta <- "s"
+
+# Ciclo para solicitar datos
+while (respuesta == "s") {
+  nombre <- readline(prompt = "Nombre de la persona: ")
+  masa <- as.numeric(readline(prompt = "Masa (kg) de la persona: "))
+  estatura <- as.numeric(readline(prompt = "Estatura (m) de la persona: "))
+  
+  # Cálculo del IMC
+  valor_imc <- imc(masa, estatura)
+  interpretacion_imc <- imc_interpretacion(valor_imc)
+  
+  # Despliegue de resultados
+  print(
+    cat(
+      nombre, "tiene un IMC de", valor_imc, 
+      "lo cual es considerado", interpretacion_imc
+    )
+  )
+  
+  # Almacenamiento del valor del IMC
+  imcs <- c(imcs, valor_imc)
+  
+  # Preguntar si desea continuar
+  respuesta <- readline(prompt = "¿Desea calcular el IMC de otra persona? (s/n): ")
+}
+
+# Mostrar el promedio de los IMC calculados
+if (length(imcs) > 0) {
+  promedio_imc <- mean(imcs)
+  print(cat("El promedio de los IMC calculados es:", promedio_imc))
+} else {
+  print(cat("No se calcularon IMC"))
+}
+```
+:::
+
+
+-->
 </section>
-<section id="la-función-tapply" class="level5" data-number="3.5.8.5.3">
-<h5 data-number="3.5.8.5.3" class="anchored" data-anchor-id="la-función-tapply"><span class="header-section-number">3.5.8.5.3</span> La función <code>tapply()</code></h5>
-<p>La función <a href="https://rdrr.io/r/base/tapply.html">tapply()</a> aplica una función a cada nivel de un factor.</p>
-<p>La sintaxis de la función es:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb95"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb95-1"><a href="#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Sintaxis de la función tapply()</span></span>
-<span id="cb95-2"><a href="#cb95-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tapply</span>(X, INDEX, FUN)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>En donde:<br>
-- <code>X</code>: es un objeto, tipicamente un vector.<br>
-- <code>INDEX</code>: es una lista que contiene un factor.<br>
-- <code>FUN</code>: es la función que se aplicará a cada elemento de <code>X</code>.</p>
-<p>En el siguiente ejemplo, se utiliza <code>tapply()</code> para calcular la mediana del ancho del sépalo para cada especie del conjunto de datos <code>iris</code>.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb96"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(iris)</span>
-<span id="cb96-2"><a href="#cb96-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tapply</span>(iris<span class="sc">$</span>Sepal.Width, iris<span class="sc">$</span>Species, median)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>    setosa versicolor  virginica 
-       3.4        2.8        3.0 </code></pre>
-</div>
-</div>
-<p><strong>Ejercicios</strong><br>
-1. Utilice la función <code>tapply()</code> para obtener el promedio de las longitudes de los pétalos para cada especie del conjunto de datos <code>iris</code>.</p>
-</section>
-</section>
-<section id="vectorización" class="level4" data-number="3.5.8.6">
-<h4 data-number="3.5.8.6" class="anchored" data-anchor-id="vectorización"><span class="header-section-number">3.5.8.6</span> Vectorización</h4>
-<p>En R, muchas operaciones y funciones pueden ser vectorizadas, lo que significa que pueden aplicarse a los elementos de un vector sin necesidad de iterar uno por uno en estos.</p>
-<p>Por ejemplo, considérese el siguiente fragmento de código no vectorizado, que utiliza un ciclo para convertir los números de un vector a sus valores absolutos:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb98"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb98-1"><a href="#cb98-1" aria-hidden="true" tabindex="-1"></a>vector_numeros <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">23</span>, <span class="sc">-</span><span class="dv">17</span>, <span class="dv">34</span>, <span class="dv">0</span>, <span class="sc">-</span><span class="dv">12</span>, <span class="dv">55</span>)</span>
-<span id="cb98-2"><a href="#cb98-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb98-3"><a href="#cb98-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(vector_numeros)) {</span>
-<span id="cb98-4"><a href="#cb98-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (vector_numeros[i] <span class="sc">&lt;</span> <span class="dv">0</span>) {</span>
-<span id="cb98-5"><a href="#cb98-5" aria-hidden="true" tabindex="-1"></a>    vector_numeros[i] <span class="ot">&lt;-</span> <span class="sc">-</span>vector_numeros[i]</span>
-<span id="cb98-6"><a href="#cb98-6" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb98-7"><a href="#cb98-7" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb98-8"><a href="#cb98-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb98-9"><a href="#cb98-9" aria-hidden="true" tabindex="-1"></a>vector_numeros</span>
-<span id="cb98-10"><a href="#cb98-10" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 23 17 34  0 12 55</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>El siguiente fragmento de código realiza la misma tarea, pero de forma vectorizada:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb99"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb99-1"><a href="#cb99-1" aria-hidden="true" tabindex="-1"></a>vector_numeros <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">23</span>, <span class="sc">-</span><span class="dv">17</span>, <span class="dv">34</span>, <span class="dv">0</span>, <span class="sc">-</span><span class="dv">12</span>, <span class="dv">55</span>)</span>
-<span id="cb99-2"><a href="#cb99-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-3"><a href="#cb99-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Se usa una expresión lógica para seleccionar los elementos del vector &lt; 0</span></span>
-<span id="cb99-4"><a href="#cb99-4" aria-hidden="true" tabindex="-1"></a>negativos <span class="ot">&lt;-</span> vector_numeros <span class="sc">&lt;</span> <span class="dv">0</span></span>
-<span id="cb99-5"><a href="#cb99-5" aria-hidden="true" tabindex="-1"></a>negativos</span>
-<span id="cb99-6"><a href="#cb99-6" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] FALSE  TRUE FALSE FALSE  TRUE FALSE</span></span>
-<span id="cb99-7"><a href="#cb99-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-8"><a href="#cb99-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Se cambian los elementos seleccionados en el paso anterior sin utilizar el for</span></span>
-<span id="cb99-9"><a href="#cb99-9" aria-hidden="true" tabindex="-1"></a>vector_numeros[negativos] <span class="ot">&lt;-</span> vector_numeros[negativos] <span class="sc">*</span> <span class="sc">-</span><span class="dv">1</span></span>
-<span id="cb99-10"><a href="#cb99-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-11"><a href="#cb99-11" aria-hidden="true" tabindex="-1"></a>vector_numeros</span>
-<span id="cb99-12"><a href="#cb99-12" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 23 17 34  0 12 55</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p><strong>Ejercicios</strong><br>
-1. Utilice código vectorizado para implementar una función que reciba como argumento un vector de números y retorne el mismo vector con los elementos impares (solo los impares) elevados al cuadrado.</p>
-</section>
-</section>
-<section id="ejemplo-de-programa-que-utiliza-funciones-condicionales-y-ciclos" class="level3" data-number="3.5.9">
-<h3 data-number="3.5.9" class="anchored" data-anchor-id="ejemplo-de-programa-que-utiliza-funciones-condicionales-y-ciclos"><span class="header-section-number">3.5.9</span> Ejemplo de programa que utiliza funciones, condicionales y ciclos</h3>
-<p>El siguiente programa solicita al usuario diferentes datos de varias personas:</p>
-<ul>
-<li>Nombre.</li>
-<li>Masa (kg).</li>
-<li>Estatura (m).</li>
-</ul>
-<p>Esta entrada de datos se implementa a través de un ciclo, el cual finaliza cuando el usuario indica que no desea ingresar más datos.</p>
-<p>Por medio de funciones, se calcula el índice de masa corporal (IMC) de cada persona y la interpretación de si se considera bajo, normal o sobrepeso.</p>
-<p>Al final, se imprime el promedio de los IMC calculados.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb100"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb100-1"><a href="#cb100-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Función para calcular el IMC</span></span>
-<span id="cb100-2"><a href="#cb100-2" aria-hidden="true" tabindex="-1"></a>imc <span class="ot">&lt;-</span> <span class="cf">function</span>(masa, estatura) {</span>
-<span id="cb100-3"><a href="#cb100-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(masa <span class="sc">/</span> estatura<span class="sc">^</span><span class="dv">2</span>)</span>
-<span id="cb100-4"><a href="#cb100-4" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb100-5"><a href="#cb100-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-6"><a href="#cb100-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Función para interpretar el IMC</span></span>
-<span id="cb100-7"><a href="#cb100-7" aria-hidden="true" tabindex="-1"></a>imc_interpretacion <span class="ot">&lt;-</span> <span class="cf">function</span>(imc) {</span>
-<span id="cb100-8"><a href="#cb100-8" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (imc <span class="sc">&lt;</span> <span class="fl">18.5</span>) {</span>
-<span id="cb100-9"><a href="#cb100-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(<span class="st">"bajo"</span>)</span>
-<span id="cb100-10"><a href="#cb100-10" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span> (imc <span class="sc">&lt;</span> <span class="dv">25</span>) {</span>
-<span id="cb100-11"><a href="#cb100-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(<span class="st">"normal"</span>)</span>
-<span id="cb100-12"><a href="#cb100-12" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
-<span id="cb100-13"><a href="#cb100-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(<span class="st">"sobrepeso"</span>)</span>
-<span id="cb100-14"><a href="#cb100-14" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb100-15"><a href="#cb100-15" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb100-16"><a href="#cb100-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-17"><a href="#cb100-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Vector para almacenar los IMC y luego calcular el promedio</span></span>
-<span id="cb100-18"><a href="#cb100-18" aria-hidden="true" tabindex="-1"></a>imcs <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
-<span id="cb100-19"><a href="#cb100-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-20"><a href="#cb100-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Variable para almacenar la respuesta del usuario a la pregunta</span></span>
-<span id="cb100-21"><a href="#cb100-21" aria-hidden="true" tabindex="-1"></a><span class="co"># de si desea ingresar datos de otra persona</span></span>
-<span id="cb100-22"><a href="#cb100-22" aria-hidden="true" tabindex="-1"></a>respuesta <span class="ot">&lt;-</span> <span class="st">"s"</span></span>
-<span id="cb100-23"><a href="#cb100-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-24"><a href="#cb100-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Ciclo para solicitar datos</span></span>
-<span id="cb100-25"><a href="#cb100-25" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> (respuesta <span class="sc">==</span> <span class="st">"s"</span>) {</span>
-<span id="cb100-26"><a href="#cb100-26" aria-hidden="true" tabindex="-1"></a>  nombre <span class="ot">&lt;-</span> <span class="fu">readline</span>(<span class="at">prompt =</span> <span class="st">"Nombre de la persona: "</span>)</span>
-<span id="cb100-27"><a href="#cb100-27" aria-hidden="true" tabindex="-1"></a>  masa <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">readline</span>(<span class="at">prompt =</span> <span class="st">"Masa (kg) de la persona: "</span>))</span>
-<span id="cb100-28"><a href="#cb100-28" aria-hidden="true" tabindex="-1"></a>  estatura <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">readline</span>(<span class="at">prompt =</span> <span class="st">"Estatura (m) de la persona: "</span>))</span>
-<span id="cb100-29"><a href="#cb100-29" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb100-30"><a href="#cb100-30" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Cálculo del IMC</span></span>
-<span id="cb100-31"><a href="#cb100-31" aria-hidden="true" tabindex="-1"></a>  valor_imc <span class="ot">&lt;-</span> <span class="fu">imc</span>(masa, estatura)</span>
-<span id="cb100-32"><a href="#cb100-32" aria-hidden="true" tabindex="-1"></a>  interpretacion_imc <span class="ot">&lt;-</span> <span class="fu">imc_interpretacion</span>(valor_imc)</span>
-<span id="cb100-33"><a href="#cb100-33" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb100-34"><a href="#cb100-34" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Despliegue de resultados</span></span>
-<span id="cb100-35"><a href="#cb100-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(</span>
-<span id="cb100-36"><a href="#cb100-36" aria-hidden="true" tabindex="-1"></a>    <span class="fu">cat</span>(</span>
-<span id="cb100-37"><a href="#cb100-37" aria-hidden="true" tabindex="-1"></a>      nombre, <span class="st">"tiene un IMC de"</span>, valor_imc, </span>
-<span id="cb100-38"><a href="#cb100-38" aria-hidden="true" tabindex="-1"></a>      <span class="st">"lo cual es considerado"</span>, interpretacion_imc</span>
-<span id="cb100-39"><a href="#cb100-39" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb100-40"><a href="#cb100-40" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb100-41"><a href="#cb100-41" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb100-42"><a href="#cb100-42" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Almacenamiento del valor del IMC</span></span>
-<span id="cb100-43"><a href="#cb100-43" aria-hidden="true" tabindex="-1"></a>  imcs <span class="ot">&lt;-</span> <span class="fu">c</span>(imcs, valor_imc)</span>
-<span id="cb100-44"><a href="#cb100-44" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb100-45"><a href="#cb100-45" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Preguntar si desea continuar</span></span>
-<span id="cb100-46"><a href="#cb100-46" aria-hidden="true" tabindex="-1"></a>  respuesta <span class="ot">&lt;-</span> <span class="fu">readline</span>(<span class="at">prompt =</span> <span class="st">"¿Desea calcular el IMC de otra persona? (s/n): "</span>)</span>
-<span id="cb100-47"><a href="#cb100-47" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb100-48"><a href="#cb100-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-49"><a href="#cb100-49" aria-hidden="true" tabindex="-1"></a><span class="co"># Mostrar el promedio de los IMC calculados</span></span>
-<span id="cb100-50"><a href="#cb100-50" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">length</span>(imcs) <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
-<span id="cb100-51"><a href="#cb100-51" aria-hidden="true" tabindex="-1"></a>  promedio_imc <span class="ot">&lt;-</span> <span class="fu">mean</span>(imcs)</span>
-<span id="cb100-52"><a href="#cb100-52" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">cat</span>(<span class="st">"El promedio de los IMC calculados es:"</span>, promedio_imc))</span>
-<span id="cb100-53"><a href="#cb100-53" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
-<span id="cb100-54"><a href="#cb100-54" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">cat</span>(<span class="st">"No se calcularon IMC"</span>))</span>
-<span id="cb100-55"><a href="#cb100-55" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
 </section>
 </section>
 <section id="recursos-de-interés" class="level2" data-number="3.6">
@@ -2224,7 +2374,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
 </nav>
 </div> <!-- /content -->
-<script>var lightboxQuarto = GLightbox({"selector":".lightbox","descPosition":"bottom","openEffect":"zoom","loop":false,"closeEffect":"zoom"});
+<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","closeEffect":"zoom","loop":false,"descPosition":"bottom","selector":".lightbox"});
 window.onload = () => {
   lightboxQuarto.on('slide_before_load', (data) => {
     const { slideIndex, slideNode, slideConfig, player, trigger } = data;

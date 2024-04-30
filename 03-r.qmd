@@ -1206,6 +1206,10 @@ while (leer_respuesta() != "42") {
 **Ejercicios**  
 1. Utilice un ciclo `while` para implementar el cálculo del promedio de los elementos de un vector. Sugerencia: utilice la función [length()](https://rdrr.io/r/base/length.html) para obtener la longitud del vector y así saber cuando terminar de recorrerlo.
 
+<!--
+
+**ESTAS SECCIONES SE COLOCAN TEMPORALMENTE ENTRE COMENTARIOS**
+
 #### La sentencia `repeat`
 La sentencia [repeat](https://cran.r-project.org/doc/manuals/r-devel/R-lang.html#repeat) implementa un ciclo que se repite indefinidamente. Puede interrumpirse con una sentencia  `break`.
 
@@ -1509,6 +1513,8 @@ if (length(imcs) > 0) {
   print(cat("No se calcularon IMC"))
 }
 ```
+
+-->
 
 ## Recursos de interés
 *Find Open Datasets and Machine Learning Projects | Kaggle*. (s. f.). Recuperado 24 de abril de 2022, de [https://www.kaggle.com/datasets](https://www.kaggle.com/datasets)
