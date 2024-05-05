@@ -23,6 +23,7 @@ book:
         - 06-markdown.qmd    
         - 07-git.qmd    
         - 08-quarto.qmd    
+    - part: parte-iv-graficacion-estadistica-r.qmd          
     - part: parte-vii-evaluaciones.qmd
       chapters: 
         - examen-corto-01.qmd
