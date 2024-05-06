@@ -1,0 +1,539 @@
+# dplyr - gramática para manipulación de datos
+
+## Resumen
+El paquete dplyr proporciona un conjunto de funciones que ayudan a solucionar las tareas de transformación de datos más comunes, entre las que están la selección de columnas, el ordenamiento de filas, el filtrado de filas, la creación o modificación de columnas y los cálculos en grupos de filas. Estas transformaciones son usualmente requeridas antes de la visualización y el modelado de los datos.
+
+## Trabajo previo
+
+### Lecturas
+Wickham, H., Çetinkaya-Rundel, M., & Grolemund, G. (s. f.). *R for Data Science (2nd ed.) Chapter 4 - Data transformation*. Recuperado 5 de mayo de 2024, de <https://r4ds.hadley.nz/data-transform.html>
+
+## Introducción
+El paquete [dplyr](https://dplyr.tidyverse.org/) de [Tidyverse](https://www.tidyverse.org/) es descrito como una *gramática para la manipulación de datos*, la cual proporciona un conjunto consistente de "verbos" que ayuda a solucionar los retos de procesamiento de datos más comunes. Los principales verbos (i.e. funciones) de esta gramática son:
+
+-   [select()](https://dplyr.tidyverse.org/reference/select.html): selecciona columnas con base en sus nombres.
+
+-   [filter()](https://dplyr.tidyverse.org/reference/filter.html): selecciona filas con base en sus valores.
+
+-   [arrange()](https://dplyr.tidyverse.org/reference/arrange.html): cambia el orden de las filas.
+
+-   [mutate()](https://dplyr.tidyverse.org/reference/mutate.html): crea nuevas columnas, las cuales se expresan como funciones de columnas existentes.
+
+-   [summarize()](https://dplyr.tidyverse.org/reference/summarise.html): agrupa y resume valores.
+
+Todas estas operaciones pueden combinarse con la función [group_by()](https://dplyr.tidyverse.org/reference/group_by.html), la cual ejecuta cualquiera de las operaciones anteriores "en grupo". Además, dplyr proporciona [funciones adicionales](https://dplyr.tidyverse.org/reference/index.html) para tareas más específicas.
+
+Las funciones de dplyr pueden encadenarse a través del operador *pipe* (tubo), ya sea el del paquete magrittr [(%\>%)](https://magrittr.tidyverse.org/reference/pipe.html) o el del paquete base de R [(\|\>)](https://michaelbarrowman.co.uk/post/the-new-base-pipe/). Los procesos se enlazan con *pipes* para formar *pipelines* (tuberías).
+
+Todas las funciones de dplyr trabajan de manera similar:
+
+1.  El primer argumento siempre es un data frame. Puede omitirse si la función recibe el data frame a través del operador *pipe*.
+2.  Los argumentos siguientes describen que hacer con el data frame, utilizando los nombres de las columnas (sin comillas).\
+3.  El resultado siempre es un nuevo data frame.
+
+Ya que cada función de dplyr se especializa en una sola tarea, usualmente es necesario encadenar funciones mediante *pipes* para lograr un objetivo de procesamiento de datos. Por ejemplo, el siguiente bloque de código usa tres verbos, o funciones, de dplyr para obtener la masa promedio de cada especie de pingüinos que habita en la isla Biscoe.
+
+```{r}
+#| label: ejemplo-pipes
+#| eval: false
+
+# Cálculo de la masa promedio para cada especie de pingüinos
+# que habita en la isla Biscoe
+penguins |>
+  filter(island == "Biscoe") |> 
+  group_by(species) |> 
+  summarize(
+    body_mass_g_mean = mean(body_mass_g, na.rm = TRUE)
+  )
+```
+
+```
+A tibble: 2 × 2
+species body_mass_g_mean
+<fct>              <dbl>
+Adelie          3710.659
+Gentoo          5076.016
+```
+
+## Instalación y carga
+El paquete dplyr puede instalarse junto con todos los demás paquete de Tidyverse o de manera individual:
+
+```{r}
+#| label: instalacion-dplyr
+#| eval: false
+
+# Instalación conjunta de Tidyverse
+install.packages("tidyverse")
+
+# Instalación individual
+install.packages("dplyr")
+```
+
+Una vez instalado, dplyr puede cargarse con la función `library()`:
+
+```{r}
+#| label: carga-dplyr
+#| message: false
+
+# Carga conjunta de Tidyverse
+library(tidyverse)
+
+# Carga individual
+library(dplyr)
+```
+
+Seguidamente, se cargan algunos paquetes adicionales que se utilizan en este capítulo.
+
+```{r}
+#| label: carga-otros
+#| message: false
+
+# Carga de readr, paquete para lectura de datos
+library(readr)
+
+# Carga de tidyr, paquete para creación de datos "tidy"
+library(tidyr)
+
+# Carga knitr, paquete para integrar salidas en R en documentos dinámicos (ej. Quarto)
+# En este capítulo se usa para generar tablas
+library(knitr)
+```
+
+## Conjuntos de datos para ejemplos
+En los ejemplos de este capítulo, se utilizan dos conjunto de datos:
+
+- `penguins`, contenido en el paquete [palmerpenguins](https://allisonhorst.github.io/palmerpenguins/).
+- [Estadísticas de delitos cometidos en 2023](https://sitiooij.poder-judicial.go.cr/phocadownload/Estadisticas/estadsticaspoliciales2023.xlsx), disponibles en el [sitio de datos abiertos del Organismo de Investigación Judicial (OIJ)](https://sitiooij.poder-judicial.go.cr/index.php/ayuda/servicios-policiales/servicios-a-organizaciones/indice-de-transparencia-del-sector-publico-costarricense/datos-abiertos).
+
+### penguins
+Para cargar el conjunto de datos `penguins`, basta con cargar el paquete `palmerpenguins`.
+
+```{r}
+#| label: carga-penguins
+#| message: false
+
+# Carga del paquete de datos palmerpenguins
+library(palmerpenguins)
+```
+
+La función [glimpse()](https://dplyr.tidyverse.org/reference/glimpse.html) despliega la estructura de un conjunto de datos, incluyendo los nombres de las columnas, sus tipos de datos y una muestra de estos:
+
+```{r}
+#| label: estructura-penguins
+
+# Estructura del conjunto de datos penguins
+glimpse(penguins)
+```
+
+Un conjunto de datos puede visualizarse al escribir su nombre en la consola de R o en un programa:
+
+```{r}
+#| label: vista-penguins
+#| eval: true
+
+# Despliegue de los datos de penguins
+penguins
+```
+
+`penguins` es un [tibble](https://tibble.tidyverse.org/), un tipo especial de data frame que se utiliza en Tidyverse. La diferencia más importante entre un tibble y un data frame es la manera en la que se imprimen: los tibbles están diseñados para conjuntos de datos grandes, por lo que solo muestran los primeros registros y las columnas que caben en la pantalla. Un data frame regular muestra todas sus columnas y muchos más registros, lo que dificulta su visualización. En general, un data frame regular y un tibble pueden tratarse indistintamente.
+
+Para generar una salida más estilizada, puede usarse la función [knitr::kable()](https://rdrr.io/cran/knitr/man/kable.html), la cual genera tablas para documentos web. En el siguiente ejemplo, se obtienen los primeros registros de penguins con la función [head()](https://rdrr.io/r/utils/head.html) y se despliegan en una tabla mediante `kable()`.
+
+```{r}
+#| label: penguins-kable
+#| eval: true
+
+# Despliegue de los datos de penguins en una tabla kable
+penguins |>
+  head(n = 10) |>
+  kable(format = "html")
+```
+
+### Estadísticas de delitos cometidos en 2023
+Se utiliza la función [readr::read_csv()](https://readr.tidyverse.org/reference/read_delim.html) para leer un archivo CSV almacenado en el repositorio GitHub de este curso, con los datos de las estadísticas policiales proporcionados por el OIJ en formato Excel. `readr::read_csv()` es más eficiente que `read.csv()` (del paquete base de R) y tiene otras ventajas como detección automática de tipos de datos y mejor integración con otros paquetes de Tidyverse (ej. dplyr, tidyr, ggplot2).
+
+```{r}
+#| label: carga-estadisticaspoliciales2022
+#| message: false
+
+# Carga de los datos de delitos cometidos en 2022
+delitos_2022 <-
+  read.csv(
+    "https://raw.githubusercontent.com/gf0604-procesamientodatosgeograficos/2023-i/main/datos/oij/estadisticas-policiales/estadisticaspoliciales2022.csv"
+  )
+```
+
+Estructura del conjunto de datos:
+
+```{r}
+#| label: estructura-estadisticaspoliciales2022
+
+# Estructura de los datos de delitos cometidos en 2022
+glimpse(delitos_2022)
+```
+
+Despliegue de los datos (debido a que `delitos_2022` es un data frame, pero no un tibble, se limitan las filas y columnas que se muestran):
+
+```{r vista-penguins, eval=FALSE}
+#| label: vista-estadisticaspoliciales2022
+#| eval: true
+
+# Despliegue de una muestra de los datos de delitos cometidos en 2022
+delitos_2022[1:10, c("Delito", "Victima", "Provincia")]
+```
+
+En RStudio, un conjunto de datos completo puede verse más cómodamente con la función `View()`.
+
+## Funciones
+En esta sección, se describen y ejemplifican las principales funciones de dplyr.
+
+### select()
+La función [select()](https://dplyr.tidyverse.org/reference/select.html) selecciona (y opcionalmente renombra) columnas de un data frame con base en sus nombres.
+
+```{r}
+#| label: select-ejemplo-01
+
+# Selección de las columnas species, bill_length_mm y sex
+penguins |>
+  select(species, bill_length_mm, sex)
+```
+
+Cambio de nombres de columnas:
+
+```{r}
+#| label: select-ejemplo-02
+
+# Selección y cambio de nombre de las columnas 
+# species, bill_length_mm y sex
+penguins |>
+  select(especie = species,
+         longitud_pico_mm = bill_length_mm,
+         sexo = sex)
+```
+
+El operador `:` permite seleccionar un rango de columnas continuas:
+
+```{r}
+#| label: select-ejemplo-03
+
+# Selección de las columnas desde species a flipper_length_mm
+penguins |>
+  select(species:flipper_length_mm)
+```
+
+Selección de todas las columnas que cumplen una condición:
+
+```{r}
+#| label: select-ejemplo-04
+
+# Selección de las columnas numéricas
+penguins |>
+  select(where(is.numeric))
+```
+
+### filter()
+La función [filter()](https://dplyr.tidyverse.org/reference/filter.html) retorna un subconjunto de un data frame con todas las filas que satisfacen una condición (i.e. expresión lógica).
+
+Puede utilizar los operadores relacionales:
+
+- `==` (igual que) **Note la diferencia con el operador de asignación: `=`**
+- `!=` (diferente de)
+- `>` (estrictamente mayor que), `>=` (mayor o igual que)
+- `<` (estrictamente menor que), `<=` (menor o igual que)
+
+Y los operadores lógicos:
+
+- `&` (*AND* o Y lógico)
+- `|` (*OR* u O lógico)
+- `!` (*NOT* o NO lógico)
+
+Ejemplos de uso de expresiones y operadores lógicos:
+
+```{r}
+#| label: filter-ejemplo-01
+
+# Pingüinos de la especie 'Adelie' 
+# con longitud del pico mayor o igual a 45 mm
+penguins |>
+  filter(species == 'Adelie' & bill_length_mm >= 45)
+```
+
+```{r}
+#| label: filter-ejemplo-02
+
+# Pingüinos de las especies 'Adelie' o 'Gentoo'
+penguins |>
+  filter(species == 'Adelie' | species == 'Gentoo')
+```
+
+```{r}
+#| label: filter-ejemplo-04
+
+# Pingüinos de especies diferentes a 'Chinstrap'
+penguins |>
+  filter(!(species == 'Chinstrap'))
+```
+
+```{r}
+#| label: filter-ejemplo-05
+
+# Homicidios cometidos en el cantón de Esparza
+delitos_2022 |>
+  filter(SubDelito == "HOMICIDIO" & Canton == "ESPARZA") |>
+  select(SubDelito, Canton, Fecha, Victima, Edad, Nacionalidad)
+```
+
+```{r}
+#| label: filter-ejemplo-05b
+
+# Homicidios cometidos en el cantón de Esparza 
+# a personas no costarricenses
+delitos_2022 |>
+  filter(SubDelito == "HOMICIDIO" &
+      Canton == "ESPARZA" & Nacionalidad != "COSTA RICA") |>
+  select(SubDelito, Canton, Fecha, Victima, Edad, Nacionalidad)
+```
+
+```{r}
+#| label: filter-ejemplo-06
+
+# Pingüinos con longitud del pico mayor o igual al promedio
+#   El argumento lógico na.rm de mean() 
+#   indica si los valores NA ("not available") 
+#   deben ser removidos antes del cálculo
+penguins |>
+  filter(bill_length_mm >= mean(bill_length_mm, na.rm = TRUE))
+```
+
+Condiciones relacionadas con valores `NA` (nulos):
+
+```{r}
+#| label: filter-ejemplo-07
+
+# Filas con valor NA en la columna sex
+penguins |>
+  select(species, island, sex) |>
+  filter(is.na(sex))
+```
+
+La función [tidyr::drop_na()](https://tidyr.tidyverse.org/reference/drop_na.html) remueve las filas con valores `NA` en una o varias columnas.
+
+```{r}
+#| label: filter-ejemplo-08
+
+# Filas con valor diferente a NA en la columna sex
+penguins |>
+  select(species,
+         bill_length_mm,
+         bill_depth_mm,
+         flipper_length_mm,
+         body_mass_g,
+         sex) |>
+  drop_na(sex)
+```
+
+```{r}
+#| label: filter-ejemplo-09
+
+# Filas con valor diferente a NA en cualquier columna
+penguins |>
+  select(species,
+         bill_length_mm,
+         bill_depth_mm,
+         flipper_length_mm,
+         body_mass_g,
+         sex) |>
+  drop_na()
+```
+
+### arrange()
+La función [arrange()](https://dplyr.tidyverse.org/reference/arrange.html) cambia el orden de las filas de un data frame de acuerdo con los valores de las columnas seleccionadas.
+
+```{r}
+#| label: arrange-ejemplo-01
+
+# Ordenamiento ascendente por las columnas 
+# bill_length_mm y bill_depth_mm
+penguins |>
+  arrange(bill_length_mm, bill_depth_mm)
+```
+
+Por defecto, las columnas se ordenan de manera acendente. Si se desea un orden descendente, puede utilizarse la función [desc()](https://dplyr.tidyverse.org/reference/desc.html).
+
+```{r}
+#| label: arrange-ejemplo-02
+
+# Ordenamiento descendente por las columnas 
+# bill_length_mm y bill_depth_mm
+penguins |>
+  arrange(desc(bill_length_mm), desc(bill_depth_mm))
+```
+
+Nótese que los valores `NA` se ubican al final de cualquier ordenamiento.
+
+### mutate()
+La función [mutate()](https://dplyr.tidyverse.org/reference/mutate.html) crea o modifica columnas en un data frame.
+
+```{r}
+#| label: mutate-ejemplo-01
+
+# Creación de la columna body_mass_kg,
+# correspondiente al valor de body_mass_g, pero expresado en kg
+penguins |>
+  select(species, body_mass_g) |>
+  mutate(body_mass_kg = body_mass_g/1000)
+```
+
+```{r}
+#| label: mutate-ejemplo-02
+
+# Creación de las columnas body_mass_g_mean (promedio de masa) y
+# body_mass_g_normalized (masa normalizada con respecto al promedio)
+penguins |>
+  select(species, body_mass_g) |>
+  mutate(body_mass_g_mean = mean(body_mass_g, na.rm = TRUE)) |>
+  mutate(body_mass_g_normalized = body_mass_g / body_mass_g_mean)
+```
+
+```{r}
+#| label: mutate-ejemplo-03
+
+# Creación de las columnas 
+# Fecha_Date (tipo Date), Anio, Mes y Dia (enteros)
+delitos_2022 |>
+  select(Fecha) |>
+  mutate(Fecha_Date = as.Date(delitos_2022$Fecha, format="%m/%d/%Y")) |>
+  mutate(Anio = as.integer(format(as.Date(delitos_2022$Fecha, format="%m/%d/%Y"), "%Y"))) |>  
+  mutate(Dia = as.integer(format(as.Date(delitos_2022$Fecha, format="%m/%d/%Y"), "%m"))) |>
+  mutate(Mes = as.integer(format(as.Date(delitos_2022$Fecha, format="%m/%d/%Y"), "%d"))) |>
+  slice_head(n = 10)
+```
+
+La función [group_by()](https://dplyr.tidyverse.org/reference/group_by.html) agrupa una o más columnas. Generalmente, esto se hace con el objetivo de rea
+
+```{r}
+#| label: mutate-ejemplo-04
+
+# Creación de la columnas 
+# body_mass_g_mean_species (promedio de masa de la especie) y
+# body_mass_g_species_normalized (masa normalizada con respecto al promedio de la especie)
+penguins |>
+  select(species, body_mass_g) |>
+  group_by(species) |>
+  mutate(body_mass_g_mean_species = mean(body_mass_g, na.rm = TRUE)) |>
+  mutate(body_mass_g_species_normalized = body_mass_g / body_mass_g_mean_species)
+```
+
+### summarize()
+La función [summarize()](https://dplyr.tidyverse.org/reference/summarise.html) se utiliza generalmente junto con la función [group_by()](https://dplyr.tidyverse.org/reference/group_by.html) para realizar cálculos en grupos de filas de un data frame. `group_by()` agrupa las filas y `summarize()` realiza los cálculos (ej. sumas, promedios) en las columnas, para cada grupo. El resultado es un nuevo data frame con una fila por grupo. Si no hay agrupación, se retorna una sola fila correspondiente a los cálculos para todo el data frame.
+
+Ejemplos de cálculos en grupos:
+
+```{r}
+#| label: summarise-ejemplo-02
+
+# Creación de un data frame con las columnas calculadas de 
+# mínimo, máximo y promedio de masa,
+# y cantidad de individuos para cada especie
+penguins |>
+  group_by(species) |>
+  summarize(
+    body_mass_g_min = min(body_mass_g, na.rm = TRUE),
+    body_mass_g_max = max(body_mass_g, na.rm = TRUE),
+    body_mass_g_mean = mean(body_mass_g, na.rm = TRUE),
+    n = n()
+  )
+```
+
+La función [n()](https://dplyr.tidyverse.org/reference/context.html) cuenta la cantidad de filas en un grupo.
+
+```{r}
+#| label: summarise-ejemplo-03
+#| message: false
+
+# Creación de un data frame con la cantidad de homicidios 
+# por provincia, cantón
+delitos_2022 |>
+  filter(SubDelito == "HOMICIDIO") |>
+  group_by(Provincia, Canton) |>
+  summarize(
+    homicidios_2022 = n()
+  ) |>
+  arrange(desc(homicidios_2022)) |>
+  print(n = Inf)
+```
+
+La función [print()](https://rdrr.io/r/base/print.html) se utiliza para especificar la cantidad de filas que se imprimirán (`Inf` quiere decir que se imprimirán todas).
+
+```{r}
+#| label: summarise-ejemplo-04
+#| message: false
+
+# Creación de un data frame con la cantidad de registros 
+# por delito y subdelito
+delitos_2022 |>
+  group_by(Delito, SubDelito) |>
+  summarize(
+    n = n()
+  ) |>
+  arrange(desc(n)) |>
+  print(n = Inf)
+```
+
+Ejemplo de cálculos sin agrupamiento:
+
+```{r}
+#| label: summarise-ejemplo-01
+
+# Creación de un data frame con las columnas 
+# body_mass_g_mean (promedio de masa) y n (cantidad de registros)
+penguins |>
+  summarise(body_mass_g_mean = mean(body_mass_g, na.rm = TRUE),
+            n = n())
+```
+
+### Otras
+
+#### distinct()
+La función [distinct()](https://dplyr.tidyverse.org/reference/distinct.html) retorna las combinaciones únicas de filas en un data frame.
+
+```{r}
+#| label: otras-ejemplo-01
+
+# Valores distintos de la columna Victima
+
+delitos_2022 |>
+  distinct(Victima)
+```
+
+#### count()
+
+Una forma alternativa a `summarize()` para realizar un conteo es con la función [count()](https://dplyr.tidyverse.org/reference/count.html):
+
+```{r}
+#| label: otras-ejemplo-02
+
+# Conteo de delitos por tipo de Victima
+delitos_2022 |>
+  count(Victima)
+
+# Expresión equivalente con summarize
+delitos_2022 |>
+  group_by(Victima) |>
+  summarize(n = n())
+```
+
+## Ejercicios
+Utilice las funciones de dplyr para responder a las siguientes preguntas sobre el conjunto de datos `penguins`:
+
+1. ¿Cuántos individuos de cada sexo hay en cada especie?
+2. ¿Cuál es el mínimo, máximo y promedio de masa corporal (peso) por especie y sexo?
+3. ¿Cuántos individuos se observaron durante cada año?
+4. ¿Cuántos individuos de cada especie se observaron durante cada año?
+5. ¿Cuántos individuos de cada especie y cada sexo se observaron durante cada año?
+6. ¿Cuál es el promedio de masa corporal (peso) por año?
+7. ¿Cuál es el promedio de masa corporal (peso) por año para cada especie?
+
+## Recursos de interés
+RStudio. (2017). *Data transformation with dplyr::Cheat Sheet*. <https://github.com/rstudio/cheatsheets/blob/45c1e642468695830fd8b724587ccfe8901e2185/data-transformation.pdf>
+

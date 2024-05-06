@@ -50,7 +50,7 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./parte-vii-evaluaciones.html" rel="next">
+<link href="./06-markdown.html" rel="next">
 <link href="./parte-iii-herramientas-investigacion-reproducible-desarrollo-colaborativo.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -202,12 +202,30 @@ div.csl-indent {
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Reproducibilidad</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-markdown.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Markdown - lenguaje de marcado</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-git.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Git - sistema de control de versiones</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-quarto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Quarto - sistema de publicación técnica y científica</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./parte-vii-evaluaciones.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Evaluaciones</span></a>
+            <a href="./parte-iv-graficacion-estadistica-r.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">IV - Graficación estadística en R</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Alternar sección">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -215,8 +233,31 @@ div.csl-indent {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./09-dplyr.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">dplyr - gramática para manipulación de datos</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./parte-vii-evaluaciones.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Evaluaciones</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./examen-corto-01.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Examen corto 1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./examen-corto-02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Examen corto 2</span></a>
   </div>
 </li>
       </ul>
@@ -294,10 +335,10 @@ div.csl-indent {
 <li>En los casos en los que la reproducibilidad total no sea posible (ej. datos sensibles), los investigadores deben esforzarse por incluir todos los aspectos que puedan de un marco de trabajo abierto.</li>
 </ol>
 <p>En general, el estándar mínimo de reproducibilidad requiere que los datos y el código fuente estén disponibles para otros investigadores <span class="citation" data-cites="peng_reproducible_2011">(<a href="02-introduccion-ciencia-datos.html#ref-peng_reproducible_2011" role="doc-biblioref">Peng, 2011</a>)</span>. Sin embargo, dependiendo de las circunstancias y recursos disponibles, existe todo un espectro de posibilidades, que se ilustra en la <a href="#fig-espectro-reproducibilidad" class="quarto-xref">Figura&nbsp;<span>5.1</span></a>.</p>
-<div id="fig-espectro-reproducibilidad" class="lightbox quarto-figure quarto-figure-center quarto-float anchored" alt="Espectro de reproducibilidad" data-fig-align="center">
+<div id="fig-espectro-reproducibilidad" class="lightbox quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center" alt="Espectro de reproducibilidad">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-espectro-reproducibilidad-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="img/espectro-reproducibilidad.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" data-glightbox="description: .lightbox-desc-1"><img src="img/espectro-reproducibilidad.png" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="Espectro de reproducibilidad"></a>
+<a href="img/espectro-reproducibilidad.png" class="lightbox" data-glightbox="description: .lightbox-desc-1" data-gallery="quarto-lightbox-gallery-1"><img src="img/espectro-reproducibilidad.png" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="Espectro de reproducibilidad"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-espectro-reproducibilidad-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figura&nbsp;5.1: Espectro de reproducibilidad. Imagen de <a href="https://www.youtube.com/watch?v=ZjXb53pOor0">Anita Graser</a>, basada en <a href="https://doi.org/10.1126/science.1213847">(Peng, 2001)</a>.
@@ -753,13 +794,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./parte-vii-evaluaciones.html" class="pagination-link" aria-label="Evaluaciones">
-        <span class="nav-page-text">Evaluaciones</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./06-markdown.html" class="pagination-link" aria-label="Markdown - lenguaje de marcado">
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Markdown - lenguaje de marcado</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
 </div> <!-- /content -->
-<script>var lightboxQuarto = GLightbox({"selector":".lightbox","loop":false,"openEffect":"zoom","closeEffect":"zoom","descPosition":"bottom"});
+<script>var lightboxQuarto = GLightbox({"selector":".lightbox","descPosition":"bottom","openEffect":"zoom","loop":false,"closeEffect":"zoom"});
 window.onload = () => {
   lightboxQuarto.on('slide_before_load', (data) => {
     const { slideIndex, slideNode, slideConfig, player, trigger } = data;
