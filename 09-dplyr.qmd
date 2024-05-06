@@ -11,15 +11,15 @@ Wickham, H., Çetinkaya-Rundel, M., & Grolemund, G. (s. f.). *R for Data Science
 ## Introducción
 El paquete [dplyr](https://dplyr.tidyverse.org/) de [Tidyverse](https://www.tidyverse.org/) es descrito como una *gramática para la manipulación de datos*, la cual proporciona un conjunto consistente de "verbos" que ayuda a solucionar los retos de procesamiento de datos más comunes. Los principales verbos (i.e. funciones) de esta gramática son:
 
--   [select()](https://dplyr.tidyverse.org/reference/select.html): selecciona columnas con base en sus nombres.
+[select()](https://dplyr.tidyverse.org/reference/select.html): selecciona columnas con base en sus nombres.
 
--   [filter()](https://dplyr.tidyverse.org/reference/filter.html): selecciona filas con base en sus valores.
+[filter()](https://dplyr.tidyverse.org/reference/filter.html): selecciona filas con base en sus valores.
 
--   [arrange()](https://dplyr.tidyverse.org/reference/arrange.html): cambia el orden de las filas.
+[arrange()](https://dplyr.tidyverse.org/reference/arrange.html): cambia el orden de las filas.
 
--   [mutate()](https://dplyr.tidyverse.org/reference/mutate.html): crea nuevas columnas, las cuales se expresan como funciones de columnas existentes.
+[mutate()](https://dplyr.tidyverse.org/reference/mutate.html): crea nuevas columnas, las cuales se expresan como funciones de columnas existentes.
 
--   [summarize()](https://dplyr.tidyverse.org/reference/summarise.html): agrupa y resume valores.
+[summarize()](https://dplyr.tidyverse.org/reference/summarise.html): agrupa y resume valores.
 
 Todas estas operaciones pueden combinarse con la función [group_by()](https://dplyr.tidyverse.org/reference/group_by.html), la cual ejecuta cualquiera de las operaciones anteriores "en grupo". Además, dplyr proporciona [funciones adicionales](https://dplyr.tidyverse.org/reference/index.html) para tareas más específicas.
 
@@ -94,8 +94,8 @@ library(readr)
 # Carga de tidyr, paquete para creación de datos "tidy"
 library(tidyr)
 
-# Carga knitr, paquete para integrar salidas en R en documentos dinámicos (ej. Quarto)
-# En este capítulo se usa para generar tablas
+# Carga de knitr, paquete para integrar salidas en R en documentos dinámicos
+# (ej. Quarto). En este capítulo se usa para generar tablas.
 library(knitr)
 ```
 
@@ -103,7 +103,7 @@ library(knitr)
 En los ejemplos de este capítulo, se utilizan dos conjunto de datos:
 
 - `penguins`, contenido en el paquete [palmerpenguins](https://allisonhorst.github.io/palmerpenguins/).
-- [Estadísticas de delitos cometidos en 2023](https://sitiooij.poder-judicial.go.cr/phocadownload/Estadisticas/estadsticaspoliciales2023.xlsx), disponibles en el [sitio de datos abiertos del Organismo de Investigación Judicial (OIJ)](https://sitiooij.poder-judicial.go.cr/index.php/ayuda/servicios-policiales/servicios-a-organizaciones/indice-de-transparencia-del-sector-publico-costarricense/datos-abiertos).
+- [Estadísticas de delitos cometidos en 2023](https://sitiooij.poder-judicial.go.cr/phocadownload/Estadisticas/estadsticaspoliciales2023.xlsx), disponibles en el [sitio Datos Abiertos del Organismo de Investigación Judicial (OIJ)](https://sitiooij.poder-judicial.go.cr/index.php/ayuda/servicios-policiales/servicios-a-organizaciones/indice-de-transparencia-del-sector-publico-costarricense/datos-abiertos).
 
 ### penguins
 Para cargar el conjunto de datos `penguins`, basta con cargar el paquete `palmerpenguins`.
@@ -125,6 +125,16 @@ La función [glimpse()](https://dplyr.tidyverse.org/reference/glimpse.html) desp
 glimpse(penguins)
 ```
 
+La función también puede llamarse mediante un *pipe*:
+
+```{r}
+#| label: estructura-penguins-pipe
+
+# Estructura del conjunto de datos penguins
+penguins |>
+  glimpse()
+```
+
 Un conjunto de datos puede visualizarse al escribir su nombre en la consola de R o en un programa:
 
 ```{r}
@@ -135,7 +145,7 @@ Un conjunto de datos puede visualizarse al escribir su nombre en la consola de R
 penguins
 ```
 
-`penguins` es un [tibble](https://tibble.tidyverse.org/), un tipo especial de data frame que se utiliza en Tidyverse. La diferencia más importante entre un tibble y un data frame es la manera en la que se imprimen: los tibbles están diseñados para conjuntos de datos grandes, por lo que solo muestran los primeros registros y las columnas que caben en la pantalla. Un data frame regular muestra todas sus columnas y muchos más registros, lo que dificulta su visualización. En general, un data frame regular y un tibble pueden tratarse indistintamente.
+`penguins` es un [tibble](https://tibble.tidyverse.org/), un tipo especial de data frame que se utiliza en Tidyverse. La diferencia más importante entre un tibble y un data frame es la manera en la que se imprimen: los tibbles están diseñados para conjuntos de datos grandes, por lo que solo muestran los primeros registros y las columnas que caben en la pantalla. Un data frame regular muestra todas sus columnas y muchos más registros, lo que dificulta su visualización. Note la diferencia, por ejemplo, con la forma en la que se despliega el conjunto de datos `iris` (observe también la diferencia entre las salidas de `class(iris)` y `class(penguins)`). A pesar de estas diferencias en el despliegue, en general, un data frame regular y un tibble pueden tratarse indistintamente.
 
 Para generar una salida más estilizada, puede usarse la función [knitr::kable()](https://rdrr.io/cran/knitr/man/kable.html), la cual genera tablas para documentos web. En el siguiente ejemplo, se obtienen los primeros registros de penguins con la función [head()](https://rdrr.io/r/utils/head.html) y se despliegan en una tabla mediante `kable()`.
 
