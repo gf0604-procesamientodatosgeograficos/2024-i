@@ -102,10 +102,10 @@ library(knitr)
 ## Conjuntos de datos para ejemplos
 En los ejemplos de este capítulo, se utilizan dos conjunto de datos:
 
-- `penguins`, contenido en el paquete [palmerpenguins](https://allisonhorst.github.io/palmerpenguins/).
-- [Estadísticas de delitos cometidos en 2023](https://sitiooij.poder-judicial.go.cr/phocadownload/Estadisticas/estadsticaspoliciales2023.xlsx), disponibles en el [sitio Datos Abiertos del Organismo de Investigación Judicial (OIJ)](https://sitiooij.poder-judicial.go.cr/index.php/ayuda/servicios-policiales/servicios-a-organizaciones/indice-de-transparencia-del-sector-publico-costarricense/datos-abiertos).
+- [Pingüinos del archipiélago Palmer](https://allisonhorst.github.io/palmerpenguins/#about-the-data), contenido en el paquete [palmerpenguins](https://allisonhorst.github.io/palmerpenguins/).
+- [Delitos cometidos en Costa Rica en 2023](https://sitiooij.poder-judicial.go.cr/phocadownload/Estadisticas/estadsticaspoliciales2023.xlsx), disponibles en el [sitio Datos Abiertos del Organismo de Investigación Judicial (OIJ)](https://sitiooij.poder-judicial.go.cr/index.php/ayuda/servicios-policiales/servicios-a-organizaciones/indice-de-transparencia-del-sector-publico-costarricense/datos-abiertos).
 
-### penguins
+### Pingüinos del archipiélago Palmer
 Para cargar el conjunto de datos `penguins`, basta con cargar el paquete `palmerpenguins`.
 
 ```{r}
@@ -159,7 +159,7 @@ penguins |>
   kable(format = "html")
 ```
 
-### Estadísticas de delitos cometidos en 2023
+### Delitos cometidos en Costa Rica en 2023
 Se utiliza la función [readr::read_csv()](https://readr.tidyverse.org/reference/read_delim.html) para leer un archivo CSV almacenado en el repositorio GitHub de este curso, con los datos de las estadísticas policiales proporcionados por el OIJ en formato Excel. `readr::read_csv()` es más eficiente que `read.csv()` (del paquete base de R) y tiene otras ventajas como detección automática de tipos de datos y mejor integración con otros paquetes de Tidyverse (ej. dplyr, tidyr, ggplot2).
 
 ```{r}
@@ -168,7 +168,7 @@ Se utiliza la función [readr::read_csv()](https://readr.tidyverse.org/reference
 
 # Carga de los datos de delitos cometidos en 2023
 delitos_2023 <-
-  read.csv(
+  read_csv(
     "https://raw.githubusercontent.com/gf0604-procesamientodatosgeograficos/2024-i/main/datos/oij/estadisticas-policiales/estadisticaspoliciales2023.csv"
   )
 ```
@@ -188,8 +188,8 @@ Despliegue de los datos (debido a que `delitos_2023` es un data frame, pero no u
 #| label: vista-estadisticaspoliciales2023
 #| eval: true
 
-# Despliegue de una muestra de los datos de delitos cometidos en 2023
-delitos_2023[, c("Delito", "SubDelito", "Victima", "Fecha", "Provincia", "Canton", "Distrito")] |>
+# Despliegue de los primeros registros de delitos en una tabla kable
+delitos_2023 |>
   head(n = 10) |>
   kable(format = "html")
 ```
@@ -444,9 +444,8 @@ Ejemplos de cálculos en grupos:
 ```{r}
 #| label: summarise-ejemplo-02
 
-# Creación de un data frame con las columnas calculadas de 
-# mínimo, máximo y promedio de masa,
-# y cantidad de individuos para cada especie
+# Mmínimo, máximo, promedio de masa y cantidad de individuos 
+# para cada especie de pingüinos
 penguins |>
   group_by(species) |>
   summarize(
@@ -463,8 +462,7 @@ La función [n()](https://dplyr.tidyverse.org/reference/context.html) cuenta la 
 #| label: summarise-ejemplo-03
 #| message: false
 
-# Creación de un data frame con la cantidad de homicidios 
-# por provincia, cantón
+# Cantidad de homicidios por provincia y cantón
 delitos_2023 |>
   filter(Delito == "HOMICIDIO") |>
   group_by(Provincia, Canton) |>
@@ -475,14 +473,11 @@ delitos_2023 |>
   kable()
 ```
 
-La función [print()](https://rdrr.io/r/base/print.html) se utiliza para especificar la cantidad de filas que se imprimirán (`Inf` quiere decir que se imprimirán todas).
-
 ```{r}
 #| label: summarise-ejemplo-04
 #| message: false
 
-# Creación de un data frame con la cantidad de registros 
-# por delito y subdelito
+# Cantidad de registros por delito y subdelito
 delitos_2023 |>
   group_by(Delito, SubDelito) |>
   summarize(
@@ -497,12 +492,10 @@ Ejemplo de cálculos sin agrupamiento:
 ```{r}
 #| label: summarise-ejemplo-01
 
-# Creación de un data frame con las columnas 
-# body_mass_g_mean (promedio de masa) y n (cantidad de registros)
+# Promedio de masa y n cantidad de registros de pingüinos
 penguins |>
   summarise(body_mass_g_mean = mean(body_mass_g, na.rm = TRUE),
-            n = n()) |>
-  kable()
+            n = n())
 ```
 
 ### Otras
