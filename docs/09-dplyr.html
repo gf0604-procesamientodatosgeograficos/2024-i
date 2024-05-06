@@ -351,7 +351,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate()</a>: crea nuevas columnas, las cuales se expresan como funciones de columnas existentes.</p>
 <p><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize()</a>: agrupa y resume valores.</p>
 <p>Todas estas operaciones pueden combinarse con la función <a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by()</a>, la cual ejecuta cualquiera de las operaciones anteriores “en grupo”. Además, dplyr proporciona <a href="https://dplyr.tidyverse.org/reference/index.html">funciones adicionales</a> para tareas más específicas.</p>
-<p>Las funciones de dplyr pueden encadenarse a través del operador <em>pipe</em> (tubo), ya sea el del paquete magrittr <a href="https://magrittr.tidyverse.org/reference/pipe.html">(%&gt;%)</a> o el del paquete base de R <a href="https://michaelbarrowman.co.uk/post/the-new-base-pipe/">(|&gt;)</a>. Los procesos se enlazan con <em>pipes</em> para formar <em>pipelines</em> (tuberías).</p>
+<p>Las funciones de dplyr pueden encadenarse a través del operador <em>pipe</em> (tubo), ya sea el del paquete magrittr <a href="https://magrittr.tidyverse.org/reference/pipe.html">(%&gt;%)</a> o el del paquete base de R <a href="https://michaelbarrowman.co.uk/post/the-new-base-pipe/">(|&gt;)</a>. En el material de este curso, se prefiere la segunda opción. Los <em>pipes</em> se utilizan para comunicar procesos y así formar <em>pipelines</em> (tuberías).</p>
 <p>Todas las funciones de dplyr trabajan de manera similar:</p>
 <ol type="1">
 <li>El primer argumento siempre es un data frame. Puede omitirse si la función recibe el data frame a través del operador <em>pipe</em>.</li>
@@ -481,7 +481,7 @@ $ year              &lt;int&gt; 2007, 2007, 2007, 2007, 2007, 2007, 2007, 2007, 
 <p><code>penguins</code> es un <a href="https://tibble.tidyverse.org/">tibble</a>, un tipo especial de data frame que se utiliza en Tidyverse. La diferencia más importante entre un tibble y un data frame es la manera en la que se imprimen: los tibbles están diseñados para conjuntos de datos grandes, por lo que solo muestran los primeros registros y las columnas que caben en la pantalla. Un data frame regular muestra todas sus columnas y muchos más registros, lo que dificulta su visualización. Note la diferencia, por ejemplo, con la forma en la que se despliega el conjunto de datos <code>iris</code> (observe también la diferencia entre las salidas de <code>class(iris)</code> y <code>class(penguins)</code>). A pesar de estas diferencias en el despliegue, en general, un data frame regular y un tibble pueden tratarse indistintamente.</p>
 <p>Para generar una salida más estilizada, puede usarse la función <a href="https://rdrr.io/cran/knitr/man/kable.html">knitr::kable()</a>, la cual genera tablas para documentos web. En el siguiente ejemplo, se obtienen los primeros registros de penguins con la función <a href="https://rdrr.io/r/utils/head.html">head()</a> y se despliegan en una tabla mediante <code>kable()</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Despliegue de los datos de penguins en una tabla kable</span></span>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Despliegue de los primeros registros de penguins en una tabla kable</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="at">n =</span> <span class="dv">10</span>) <span class="sc">|&gt;</span></span>
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>(<span class="at">format =</span> <span class="st">"html"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -613,52 +613,151 @@ $ year              &lt;int&gt; 2007, 2007, 2007, 2007, 2007, 2007, 2007, 2007, 
 <h3 data-number="9.5.2" class="anchored" data-anchor-id="estadísticas-de-delitos-cometidos-en-2023"><span class="header-section-number">9.5.2</span> Estadísticas de delitos cometidos en 2023</h3>
 <p>Se utiliza la función <a href="https://readr.tidyverse.org/reference/read_delim.html">readr::read_csv()</a> para leer un archivo CSV almacenado en el repositorio GitHub de este curso, con los datos de las estadísticas policiales proporcionados por el OIJ en formato Excel. <code>readr::read_csv()</code> es más eficiente que <code>read.csv()</code> (del paquete base de R) y tiene otras ventajas como detección automática de tipos de datos y mejor integración con otros paquetes de Tidyverse (ej. dplyr, tidyr, ggplot2).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Carga de los datos de delitos cometidos en 2022</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>delitos_2022 <span class="ot">&lt;-</span></span>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Carga de los datos de delitos cometidos en 2023</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>delitos_2023 <span class="ot">&lt;-</span></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">read.csv</span>(</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"https://raw.githubusercontent.com/gf0604-procesamientodatosgeograficos/2023-i/main/datos/oij/estadisticas-policiales/estadisticaspoliciales2022.csv"</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"https://raw.githubusercontent.com/gf0604-procesamientodatosgeograficos/2024-i/main/datos/oij/estadisticas-policiales/estadisticaspoliciales2023.csv"</span></span>
 <span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Estructura del conjunto de datos:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Estructura de los datos de delitos cometidos en 2022</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(delitos_2022)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Estructura de los datos de delitos cometidos en 2023</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(delitos_2023)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Rows: 96,651
+<pre><code>Rows: 49,609
 Columns: 12
-$ Delito       &lt;chr&gt; "DELITOS CONTRA LA ADMINISTRACION DE JUSTICIA", "DELITOS …
-$ SubDelito    &lt;chr&gt; "FALSAS ACUSACIONES", "AMENAZA A UN FUNCIONARIO PUBLICO",…
-$ Fecha        &lt;chr&gt; "12/31/2022", "12/31/2022", "12/31/2022", "12/31/2022", "…
-$ Hora         &lt;chr&gt; "09:00:00 - 11:59:59", "12:00:00 - 14:59:59", "15:00:00 -…
-$ Victima      &lt;chr&gt; "VEHICULO", "PERSONA", "PERSONA", "PERSONA", "PERSONA", "…
-$ SubVictima   &lt;chr&gt; "SERVICIO PUBLICO/TAXI LEGAL O PIRATA/AUTOBUS", "OTRO O I…
-$ Edad         &lt;chr&gt; "Adulto Mayor", "Mayor de edad", "Mayor de edad", "Mayor …
-$ Genero       &lt;chr&gt; "Adulto Mayor", "Mayor de edad", "Mayor de edad", "Mayor …
-$ Nacionalidad &lt;chr&gt; "COSTA RICA", "COSTA RICA", "COSTA RICA", "COSTA RICA", "…
-$ Provincia    &lt;chr&gt; "SAN JOSE", "SAN JOSE", "LIMON", "CARTAGO", "PUNTARENAS",…
-$ Canton       &lt;chr&gt; "SAN JOSE", "PEREZ ZELEDON", "SIQUIRRES", "CARTAGO", "QUE…
-$ Distrito     &lt;chr&gt; "HOSPITAL", "DANIEL FLORES", "SIQUIRRES", "GUADALUPE", "Q…</code></pre>
+$ Delito       &lt;chr&gt; "ASALTO", "ASALTO", "HURTO", "ASALTO", "ASALTO", "HURTO",…
+$ SubDelito    &lt;chr&gt; "ARMA BLANCA", "ARMA BLANCA", "ARDID PREVIO/DISTRACCION",…
+$ Fecha        &lt;chr&gt; "12/31/2023", "12/31/2023", "12/31/2023", "12/31/2023", "…
+$ Hora         &lt;chr&gt; "21:00:00 - 23:59:59", "21:00:00 - 23:59:59", "21:00:00 -…
+$ Victima      &lt;chr&gt; "PERSONA", "PERSONA", "PERSONA", "PERSONA", "PERSONA", "V…
+$ SubVictima   &lt;chr&gt; "PEATON [PERSONA]", "PEATON [PERSONA]", "TAXISTA [PERSONA…
+$ Edad         &lt;chr&gt; "Mayor de edad", "Mayor de edad", "Mayor de edad", "Mayor…
+$ Genero       &lt;chr&gt; "HOMBRE", "MUJER", "HOMBRE", "HOMBRE", "HOMBRE", "MUJER",…
+$ Nacionalidad &lt;chr&gt; "COSTA RICA", "COSTA RICA", "COSTA RICA", "NICARAGUA", "C…
+$ Provincia    &lt;chr&gt; "SAN JOSE", "SAN JOSE", "SAN JOSE", "SAN JOSE", "SAN JOSE…
+$ Canton       &lt;chr&gt; "SAN JOSE", "MORAVIA", "DESAMPARADOS", "SAN JOSE", "SAN J…
+$ Distrito     &lt;chr&gt; "MERCED", "SAN VICENTE", "SAN MIGUEL", "HOSPITAL", "HOSPI…</code></pre>
 </div>
 </div>
-<p>Despliegue de los datos (debido a que <code>delitos_2022</code> es un data frame, pero no un tibble, se limitan las filas y columnas que se muestran):</p>
+<p>Despliegue de los datos (debido a que <code>delitos_2023</code> es un data frame, pero no un tibble, se limitan manualmente las filas y columnas que se muestran):</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Despliegue de una muestra de los datos de delitos cometidos en 2022</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>delitos_2022[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="fu">c</span>(<span class="st">"Delito"</span>, <span class="st">"Victima"</span>, <span class="st">"Provincia"</span>)]</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>                                         Delito  Victima  Provincia
-1  DELITOS CONTRA LA ADMINISTRACION DE JUSTICIA VEHICULO   SAN JOSE
-2           DELITOS CONTRA LA AUTORIDAD PUBLICA  PERSONA   SAN JOSE
-3                    DELITOS CONTRA LA LIBERTAD  PERSONA      LIMON
-4                    DELITOS CONTRA LA LIBERTAD  PERSONA    CARTAGO
-5                    DELITOS CONTRA LA LIBERTAD  PERSONA PUNTARENAS
-6                    DELITOS CONTRA LA LIBERTAD  PERSONA   SAN JOSE
-7                    DELITOS CONTRA LA LIBERTAD  PERSONA   SAN JOSE
-8                    DELITOS CONTRA LA LIBERTAD  PERSONA   SAN JOSE
-9                    DELITOS CONTRA LA LIBERTAD  PERSONA   SAN JOSE
-10                   DELITOS CONTRA LA LIBERTAD  PERSONA   SAN JOSE</code></pre>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Despliegue de una muestra de los datos de delitos cometidos en 2023</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>delitos_2023[, <span class="fu">c</span>(<span class="st">"Delito"</span>, <span class="st">"SubDelito"</span>, <span class="st">"Victima"</span>, <span class="st">"Fecha"</span>, <span class="st">"Provincia"</span>, <span class="st">"Canton"</span>, <span class="st">"Distrito"</span>)] <span class="sc">|&gt;</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="at">n =</span> <span class="dv">10</span>) <span class="sc">|&gt;</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>(<span class="at">format =</span> <span class="st">"html"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<table data-quarto-postprocess="true" class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Delito</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">SubDelito</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Victima</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Fecha</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Provincia</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Canton</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Distrito</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">ASALTO</td>
+<td style="text-align: left;">ARMA BLANCA</td>
+<td style="text-align: left;">PERSONA</td>
+<td style="text-align: left;">12/31/2023</td>
+<td style="text-align: left;">SAN JOSE</td>
+<td style="text-align: left;">SAN JOSE</td>
+<td style="text-align: left;">MERCED</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">ASALTO</td>
+<td style="text-align: left;">ARMA BLANCA</td>
+<td style="text-align: left;">PERSONA</td>
+<td style="text-align: left;">12/31/2023</td>
+<td style="text-align: left;">SAN JOSE</td>
+<td style="text-align: left;">MORAVIA</td>
+<td style="text-align: left;">SAN VICENTE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">HURTO</td>
+<td style="text-align: left;">ARDID PREVIO/DISTRACCION</td>
+<td style="text-align: left;">PERSONA</td>
+<td style="text-align: left;">12/31/2023</td>
+<td style="text-align: left;">SAN JOSE</td>
+<td style="text-align: left;">DESAMPARADOS</td>
+<td style="text-align: left;">SAN MIGUEL</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">ASALTO</td>
+<td style="text-align: left;">INMOVILIZACION</td>
+<td style="text-align: left;">PERSONA</td>
+<td style="text-align: left;">12/31/2023</td>
+<td style="text-align: left;">SAN JOSE</td>
+<td style="text-align: left;">SAN JOSE</td>
+<td style="text-align: left;">HOSPITAL</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">ASALTO</td>
+<td style="text-align: left;">ARMA DE FUEGO</td>
+<td style="text-align: left;">PERSONA</td>
+<td style="text-align: left;">12/31/2023</td>
+<td style="text-align: left;">SAN JOSE</td>
+<td style="text-align: left;">SAN JOSE</td>
+<td style="text-align: left;">HOSPITAL</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">HURTO</td>
+<td style="text-align: left;">POR DESCUIDO</td>
+<td style="text-align: left;">VIVIENDA</td>
+<td style="text-align: left;">12/31/2023</td>
+<td style="text-align: left;">SAN JOSE</td>
+<td style="text-align: left;">DOTA</td>
+<td style="text-align: left;">JARDIN</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">ASALTO</td>
+<td style="text-align: left;">ARREBATO</td>
+<td style="text-align: left;">PERSONA</td>
+<td style="text-align: left;">12/31/2023</td>
+<td style="text-align: left;">SAN JOSE</td>
+<td style="text-align: left;">SAN JOSE</td>
+<td style="text-align: left;">DESCONOCIDO</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">ASALTO</td>
+<td style="text-align: left;">GOLPES</td>
+<td style="text-align: left;">PERSONA</td>
+<td style="text-align: left;">12/31/2023</td>
+<td style="text-align: left;">PUNTARENAS</td>
+<td style="text-align: left;">CORREDORES</td>
+<td style="text-align: left;">CORREDOR</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">ASALTO</td>
+<td style="text-align: left;">INMOVILIZACION</td>
+<td style="text-align: left;">PERSONA</td>
+<td style="text-align: left;">12/31/2023</td>
+<td style="text-align: left;">SAN JOSE</td>
+<td style="text-align: left;">SAN JOSE</td>
+<td style="text-align: left;">HATILLO</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">HURTO</td>
+<td style="text-align: left;">CON LLAVE</td>
+<td style="text-align: left;">VIVIENDA</td>
+<td style="text-align: left;">12/31/2023</td>
+<td style="text-align: left;">GUANACASTE</td>
+<td style="text-align: left;">NICOYA</td>
+<td style="text-align: left;">NICOYA</td>
+</tr>
+</tbody>
+</table>
+
+
 </div>
 </div>
-<p>En RStudio, un conjunto de datos completo puede verse más cómodamente con la función <code>View()</code>.</p>
+</div>
 </section>
 </section>
 <section id="funciones" class="level2" data-number="9.6">
@@ -668,9 +767,9 @@ $ Distrito     &lt;chr&gt; "HOSPITAL", "DANIEL FLORES", "SIQUIRRES", "GUADALUPE"
 <h3 data-number="9.6.1" class="anchored" data-anchor-id="select"><span class="header-section-number">9.6.1</span> select()</h3>
 <p>La función <a href="https://dplyr.tidyverse.org/reference/select.html">select()</a> selecciona (y opcionalmente renombra) columnas de un data frame con base en sus nombres.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Selección de las columnas species, bill_length_mm y sex</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(species, bill_length_mm, sex)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Selección de las columnas species, bill_length_mm y sex</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(species, bill_length_mm, sex)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 344 × 3
    species bill_length_mm sex   
@@ -690,12 +789,12 @@ $ Distrito     &lt;chr&gt; "HOSPITAL", "DANIEL FLORES", "SIQUIRRES", "GUADALUPE"
 </div>
 <p>Cambio de nombres de columnas:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Selección y cambio de nombre de las columnas </span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="co"># species, bill_length_mm y sex</span></span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span></span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="at">especie =</span> species,</span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">longitud_pico_mm =</span> bill_length_mm,</span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">sexo =</span> sex)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Selección y cambio de nombre de las columnas </span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="co"># species, bill_length_mm y sex</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="at">especie =</span> species,</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">longitud_pico_mm =</span> bill_length_mm,</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">sexo =</span> sex)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 344 × 3
    especie longitud_pico_mm sexo  
@@ -715,9 +814,9 @@ $ Distrito     &lt;chr&gt; "HOSPITAL", "DANIEL FLORES", "SIQUIRRES", "GUADALUPE"
 </div>
 <p>El operador <code>:</code> permite seleccionar un rango de columnas continuas:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Selección de las columnas desde species a flipper_length_mm</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(species<span class="sc">:</span>flipper_length_mm)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Selección de las columnas desde species a flipper_length_mm</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(species<span class="sc">:</span>flipper_length_mm)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 344 × 5
    species island    bill_length_mm bill_depth_mm flipper_length_mm
@@ -737,9 +836,9 @@ $ Distrito     &lt;chr&gt; "HOSPITAL", "DANIEL FLORES", "SIQUIRRES", "GUADALUPE"
 </div>
 <p>Selección de todas las columnas que cumplen una condición:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Selección de las columnas numéricas</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span></span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">where</span>(is.numeric))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Selección de las columnas numéricas</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">where</span>(is.numeric))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 344 × 5
    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g  year
@@ -763,7 +862,7 @@ $ Distrito     &lt;chr&gt; "HOSPITAL", "DANIEL FLORES", "SIQUIRRES", "GUADALUPE"
 <p>La función <a href="https://dplyr.tidyverse.org/reference/filter.html">filter()</a> retorna un subconjunto de un data frame con todas las filas que satisfacen una condición (i.e.&nbsp;expresión lógica).</p>
 <p>Puede utilizar los operadores relacionales:</p>
 <ul>
-<li><code>==</code> (igual que) <strong>Note la diferencia con el operador de asignación: <code>=</code></strong></li>
+<li><code>==</code> (igual que) <strong>Note la diferencia con el operador de asignación (<code>=</code>)</strong></li>
 <li><code>!=</code> (diferente de)</li>
 <li><code>&gt;</code> (estrictamente mayor que), <code>&gt;=</code> (mayor o igual que)</li>
 <li><code>&lt;</code> (estrictamente menor que), <code>&lt;=</code> (menor o igual que)</li>
@@ -776,10 +875,10 @@ $ Distrito     &lt;chr&gt; "HOSPITAL", "DANIEL FLORES", "SIQUIRRES", "GUADALUPE"
 </ul>
 <p>Ejemplos de uso de expresiones y operadores lógicos:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pingüinos de la especie 'Adelie' </span></span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="co"># con longitud del pico mayor o igual a 45 mm</span></span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span></span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(species <span class="sc">==</span> <span class="st">'Adelie'</span> <span class="sc">&amp;</span> bill_length_mm <span class="sc">&gt;=</span> <span class="dv">45</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pingüinos de la especie 'Adelie' </span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="co"># con longitud del pico mayor o igual a 45 mm</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(species <span class="sc">==</span> <span class="st">'Adelie'</span> <span class="sc">&amp;</span> bill_length_mm <span class="sc">&gt;=</span> <span class="dv">45</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 8
   species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
@@ -791,9 +890,9 @@ $ Distrito     &lt;chr&gt; "HOSPITAL", "DANIEL FLORES", "SIQUIRRES", "GUADALUPE"
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pingüinos de las especies 'Adelie' o 'Gentoo'</span></span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span></span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(species <span class="sc">==</span> <span class="st">'Adelie'</span> <span class="sc">|</span> species <span class="sc">==</span> <span class="st">'Gentoo'</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pingüinos de las especies 'Adelie' o 'Gentoo'</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(species <span class="sc">==</span> <span class="st">'Adelie'</span> <span class="sc">|</span> species <span class="sc">==</span> <span class="st">'Gentoo'</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 276 × 8
    species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
@@ -813,9 +912,9 @@ $ Distrito     &lt;chr&gt; "HOSPITAL", "DANIEL FLORES", "SIQUIRRES", "GUADALUPE"
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pingüinos de especies diferentes a 'Chinstrap'</span></span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span></span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>(species <span class="sc">==</span> <span class="st">'Chinstrap'</span>))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pingüinos de especies diferentes a 'Chinstrap'</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>(species <span class="sc">==</span> <span class="st">'Chinstrap'</span>))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 276 × 8
    species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
@@ -835,40 +934,254 @@ $ Distrito     &lt;chr&gt; "HOSPITAL", "DANIEL FLORES", "SIQUIRRES", "GUADALUPE"
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Homicidios cometidos en el cantón de Esparza</span></span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>delitos_2022 <span class="sc">|&gt;</span></span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(SubDelito <span class="sc">==</span> <span class="st">"HOMICIDIO"</span> <span class="sc">&amp;</span> Canton <span class="sc">==</span> <span class="st">"ESPARZA"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(SubDelito, Canton, Fecha, Victima, Edad, Nacionalidad)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>  SubDelito  Canton      Fecha Victima          Edad Nacionalidad
-1 HOMICIDIO ESPARZA 12/24/2022 PERSONA Mayor de edad   COSTA RICA
-2 HOMICIDIO ESPARZA 06/13/2022 PERSONA Mayor de edad   COSTA RICA
-3 HOMICIDIO ESPARZA 05/13/2022 PERSONA   Desconocido  Desconocido
-4 HOMICIDIO ESPARZA 04/08/2022 PERSONA Mayor de edad     COLOMBIA
-5 HOMICIDIO ESPARZA 03/20/2022 PERSONA Mayor de edad   COSTA RICA
-6 HOMICIDIO ESPARZA 01/06/2022 PERSONA Menor de edad   COSTA RICA</code></pre>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Homicidios cometidos en el cantón de Sarapiquí</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>delitos_2023 <span class="sc">|&gt;</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Delito <span class="sc">==</span> <span class="st">"HOMICIDIO"</span> <span class="sc">&amp;</span> Canton <span class="sc">==</span> <span class="st">"SARAPIQUI"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Canton, SubDelito, Fecha, Edad, Nacionalidad) <span class="sc">|&gt;</span></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>()</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 12%">
+<col style="width: 39%">
+<col style="width: 13%">
+<col style="width: 17%">
+<col style="width: 16%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Canton</th>
+<th style="text-align: left;">SubDelito</th>
+<th style="text-align: left;">Fecha</th>
+<th style="text-align: left;">Edad</th>
+<th style="text-align: left;">Nacionalidad</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">SARAPIQUI</td>
+<td style="text-align: left;">DISCUSION/RIÑA</td>
+<td style="text-align: left;">12/06/2023</td>
+<td style="text-align: left;">Desconocido</td>
+<td style="text-align: left;">COSTA RICA</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">SARAPIQUI</td>
+<td style="text-align: left;">AJUSTE DE CUENTAS/VENGANZA</td>
+<td style="text-align: left;">10/28/2023</td>
+<td style="text-align: left;">Desconocido</td>
+<td style="text-align: left;">Desconocido</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">SARAPIQUI</td>
+<td style="text-align: left;">AJUSTE DE CUENTAS/VENGANZA</td>
+<td style="text-align: left;">10/16/2023</td>
+<td style="text-align: left;">Mayor de edad</td>
+<td style="text-align: left;">COSTA RICA</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">SARAPIQUI</td>
+<td style="text-align: left;">AJUSTE DE CUENTAS/VENGANZA</td>
+<td style="text-align: left;">09/30/2023</td>
+<td style="text-align: left;">Mayor de edad</td>
+<td style="text-align: left;">COSTA RICA</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">SARAPIQUI</td>
+<td style="text-align: left;">AJUSTE DE CUENTAS/VENGANZA</td>
+<td style="text-align: left;">09/28/2023</td>
+<td style="text-align: left;">Desconocido</td>
+<td style="text-align: left;">Desconocido</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">SARAPIQUI</td>
+<td style="text-align: left;">AJUSTE DE CUENTAS/VENGANZA</td>
+<td style="text-align: left;">07/28/2023</td>
+<td style="text-align: left;">Desconocido</td>
+<td style="text-align: left;">Desconocido</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">SARAPIQUI</td>
+<td style="text-align: left;">AJUSTE DE CUENTAS/VENGANZA</td>
+<td style="text-align: left;">07/07/2023</td>
+<td style="text-align: left;">Desconocido</td>
+<td style="text-align: left;">Desconocido</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">SARAPIQUI</td>
+<td style="text-align: left;">AJUSTE DE CUENTAS/VENGANZA</td>
+<td style="text-align: left;">07/05/2023</td>
+<td style="text-align: left;">Mayor de edad</td>
+<td style="text-align: left;">COSTA RICA</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">SARAPIQUI</td>
+<td style="text-align: left;">AJUSTE DE CUENTAS/VENGANZA</td>
+<td style="text-align: left;">06/25/2023</td>
+<td style="text-align: left;">Desconocido</td>
+<td style="text-align: left;">Desconocido</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">SARAPIQUI</td>
+<td style="text-align: left;">AJUSTE DE CUENTAS/VENGANZA</td>
+<td style="text-align: left;">05/31/2023</td>
+<td style="text-align: left;">Mayor de edad</td>
+<td style="text-align: left;">COSTA RICA</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">SARAPIQUI</td>
+<td style="text-align: left;">AJUSTE DE CUENTAS/VENGANZA</td>
+<td style="text-align: left;">05/22/2023</td>
+<td style="text-align: left;">Desconocido</td>
+<td style="text-align: left;">COSTA RICA</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">SARAPIQUI</td>
+<td style="text-align: left;">DISCUSION/RIÑA</td>
+<td style="text-align: left;">05/16/2023</td>
+<td style="text-align: left;">Mayor de edad</td>
+<td style="text-align: left;">COSTA RICA</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">SARAPIQUI</td>
+<td style="text-align: left;">AJUSTE DE CUENTAS/VENGANZA</td>
+<td style="text-align: left;">04/12/2023</td>
+<td style="text-align: left;">Mayor de edad</td>
+<td style="text-align: left;">COSTA RICA</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">SARAPIQUI</td>
+<td style="text-align: left;">POR LA COMISION DE OTRO DELITO</td>
+<td style="text-align: left;">03/18/2023</td>
+<td style="text-align: left;">Mayor de edad</td>
+<td style="text-align: left;">NICARAGUA</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">SARAPIQUI</td>
+<td style="text-align: left;">DISCUSION/RIÑA</td>
+<td style="text-align: left;">03/13/2023</td>
+<td style="text-align: left;">Mayor de edad</td>
+<td style="text-align: left;">COSTA RICA</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">SARAPIQUI</td>
+<td style="text-align: left;">AJUSTE DE CUENTAS/VENGANZA</td>
+<td style="text-align: left;">02/16/2023</td>
+<td style="text-align: left;">Mayor de edad</td>
+<td style="text-align: left;">Desconocido</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">SARAPIQUI</td>
+<td style="text-align: left;">AJUSTE DE CUENTAS/VENGANZA</td>
+<td style="text-align: left;">01/31/2023</td>
+<td style="text-align: left;">Adulto Mayor</td>
+<td style="text-align: left;">COSTA RICA</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">SARAPIQUI</td>
+<td style="text-align: left;">AJUSTE DE CUENTAS/VENGANZA</td>
+<td style="text-align: left;">01/31/2023</td>
+<td style="text-align: left;">Mayor de edad</td>
+<td style="text-align: left;">COSTA RICA</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">SARAPIQUI</td>
+<td style="text-align: left;">AJUSTE DE CUENTAS/VENGANZA</td>
+<td style="text-align: left;">01/07/2023</td>
+<td style="text-align: left;">Mayor de edad</td>
+<td style="text-align: left;">COSTA RICA</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Homicidios cometidos en el cantón de Esparza </span></span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="co"># a personas no costarricenses</span></span>
-<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>delitos_2022 <span class="sc">|&gt;</span></span>
-<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(SubDelito <span class="sc">==</span> <span class="st">"HOMICIDIO"</span> <span class="sc">&amp;</span></span>
-<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>      Canton <span class="sc">==</span> <span class="st">"ESPARZA"</span> <span class="sc">&amp;</span> Nacionalidad <span class="sc">!=</span> <span class="st">"COSTA RICA"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(SubDelito, Canton, Fecha, Victima, Edad, Nacionalidad)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>  SubDelito  Canton      Fecha Victima          Edad Nacionalidad
-1 HOMICIDIO ESPARZA 05/13/2022 PERSONA   Desconocido  Desconocido
-2 HOMICIDIO ESPARZA 04/08/2022 PERSONA Mayor de edad     COLOMBIA</code></pre>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Homicidios cometidos en el cantón de Sarapiquí </span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="co"># a personas no costarricenses</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>delitos_2023 <span class="sc">|&gt;</span></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Delito <span class="sc">==</span> <span class="st">"HOMICIDIO"</span> <span class="sc">&amp;</span></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>           Canton <span class="sc">==</span> <span class="st">"SARAPIQUI"</span> <span class="sc">&amp;</span> Nacionalidad <span class="sc">!=</span> <span class="st">"COSTA RICA"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Canton, SubDelito, Fecha, Edad, Nacionalidad) <span class="sc">|&gt;</span></span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>()</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 12%">
+<col style="width: 39%">
+<col style="width: 13%">
+<col style="width: 17%">
+<col style="width: 16%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Canton</th>
+<th style="text-align: left;">SubDelito</th>
+<th style="text-align: left;">Fecha</th>
+<th style="text-align: left;">Edad</th>
+<th style="text-align: left;">Nacionalidad</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">SARAPIQUI</td>
+<td style="text-align: left;">AJUSTE DE CUENTAS/VENGANZA</td>
+<td style="text-align: left;">10/28/2023</td>
+<td style="text-align: left;">Desconocido</td>
+<td style="text-align: left;">Desconocido</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">SARAPIQUI</td>
+<td style="text-align: left;">AJUSTE DE CUENTAS/VENGANZA</td>
+<td style="text-align: left;">09/28/2023</td>
+<td style="text-align: left;">Desconocido</td>
+<td style="text-align: left;">Desconocido</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">SARAPIQUI</td>
+<td style="text-align: left;">AJUSTE DE CUENTAS/VENGANZA</td>
+<td style="text-align: left;">07/28/2023</td>
+<td style="text-align: left;">Desconocido</td>
+<td style="text-align: left;">Desconocido</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">SARAPIQUI</td>
+<td style="text-align: left;">AJUSTE DE CUENTAS/VENGANZA</td>
+<td style="text-align: left;">07/07/2023</td>
+<td style="text-align: left;">Desconocido</td>
+<td style="text-align: left;">Desconocido</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">SARAPIQUI</td>
+<td style="text-align: left;">AJUSTE DE CUENTAS/VENGANZA</td>
+<td style="text-align: left;">06/25/2023</td>
+<td style="text-align: left;">Desconocido</td>
+<td style="text-align: left;">Desconocido</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">SARAPIQUI</td>
+<td style="text-align: left;">POR LA COMISION DE OTRO DELITO</td>
+<td style="text-align: left;">03/18/2023</td>
+<td style="text-align: left;">Mayor de edad</td>
+<td style="text-align: left;">NICARAGUA</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">SARAPIQUI</td>
+<td style="text-align: left;">AJUSTE DE CUENTAS/VENGANZA</td>
+<td style="text-align: left;">02/16/2023</td>
+<td style="text-align: left;">Mayor de edad</td>
+<td style="text-align: left;">Desconocido</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pingüinos con longitud del pico mayor o igual al promedio</span></span>
-<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="co">#   El argumento lógico na.rm de mean() </span></span>
-<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="co">#   indica si los valores NA ("not available") </span></span>
-<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a><span class="co">#   deben ser removidos antes del cálculo</span></span>
-<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span></span>
-<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(bill_length_mm <span class="sc">&gt;=</span> <span class="fu">mean</span>(bill_length_mm, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pingüinos con longitud del pico mayor o igual al promedio</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="co">#   El argumento lógico na.rm de mean() </span></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="co">#   indica si los valores NA ("not available") </span></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a><span class="co">#   deben ser removidos antes del cálculo</span></span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span></span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(bill_length_mm <span class="sc">&gt;=</span> <span class="fu">mean</span>(bill_length_mm, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 175 × 8
    species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
@@ -889,10 +1202,10 @@ $ Distrito     &lt;chr&gt; "HOSPITAL", "DANIEL FLORES", "SIQUIRRES", "GUADALUPE"
 </div>
 <p>Condiciones relacionadas con valores <code>NA</code> (nulos):</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Filas con valor NA en la columna sex</span></span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span></span>
-<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(species, island, sex) <span class="sc">|&gt;</span></span>
-<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">is.na</span>(sex))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Filas con valor NA en la columna sex</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(species, island, sex) <span class="sc">|&gt;</span></span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">is.na</span>(sex))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 11 × 3
    species island    sex  
@@ -912,15 +1225,15 @@ $ Distrito     &lt;chr&gt; "HOSPITAL", "DANIEL FLORES", "SIQUIRRES", "GUADALUPE"
 </div>
 <p>La función <a href="https://tidyr.tidyverse.org/reference/drop_na.html">tidyr::drop_na()</a> remueve las filas con valores <code>NA</code> en una o varias columnas.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Filas con valor diferente a NA en la columna sex</span></span>
-<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span></span>
-<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(species,</span>
-<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>         bill_length_mm,</span>
-<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>         bill_depth_mm,</span>
-<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>         flipper_length_mm,</span>
-<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a>         body_mass_g,</span>
-<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a>         sex) <span class="sc">|&gt;</span></span>
-<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>(sex)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Filas con valor diferente a NA en la columna sex</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(species,</span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>         bill_length_mm,</span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>         bill_depth_mm,</span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>         flipper_length_mm,</span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>         body_mass_g,</span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>         sex) <span class="sc">|&gt;</span></span>
+<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>(sex)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 333 × 6
    species bill_length_mm bill_depth_mm flipper_length_mm body_mass_g sex   
@@ -939,15 +1252,15 @@ $ Distrito     &lt;chr&gt; "HOSPITAL", "DANIEL FLORES", "SIQUIRRES", "GUADALUPE"
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Filas con valor diferente a NA en cualquier columna</span></span>
-<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span></span>
-<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(species,</span>
-<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>         bill_length_mm,</span>
-<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>         bill_depth_mm,</span>
-<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a>         flipper_length_mm,</span>
-<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a>         body_mass_g,</span>
-<span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a>         sex) <span class="sc">|&gt;</span></span>
-<span id="cb43-9"><a href="#cb43-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>()</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Filas con valor diferente a NA en cualquier columna</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(species,</span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>         bill_length_mm,</span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>         bill_depth_mm,</span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>         flipper_length_mm,</span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>         body_mass_g,</span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a>         sex) <span class="sc">|&gt;</span></span>
+<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>()</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 333 × 6
    species bill_length_mm bill_depth_mm flipper_length_mm body_mass_g sex   
@@ -970,10 +1283,10 @@ $ Distrito     &lt;chr&gt; "HOSPITAL", "DANIEL FLORES", "SIQUIRRES", "GUADALUPE"
 <h3 data-number="9.6.3" class="anchored" data-anchor-id="arrange"><span class="header-section-number">9.6.3</span> arrange()</h3>
 <p>La función <a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange()</a> cambia el orden de las filas de un data frame de acuerdo con los valores de las columnas seleccionadas.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ordenamiento ascendente por las columnas </span></span>
-<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="co"># bill_length_mm y bill_depth_mm</span></span>
-<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span></span>
-<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(bill_length_mm, bill_depth_mm)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ordenamiento ascendente por las columnas </span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="co"># bill_length_mm y bill_depth_mm</span></span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span></span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(bill_length_mm, bill_depth_mm)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 344 × 8
    species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
@@ -994,10 +1307,10 @@ $ Distrito     &lt;chr&gt; "HOSPITAL", "DANIEL FLORES", "SIQUIRRES", "GUADALUPE"
 </div>
 <p>Por defecto, las columnas se ordenan de manera acendente. Si se desea un orden descendente, puede utilizarse la función <a href="https://dplyr.tidyverse.org/reference/desc.html">desc()</a>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ordenamiento descendente por las columnas </span></span>
-<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a><span class="co"># bill_length_mm y bill_depth_mm</span></span>
-<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span></span>
-<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(bill_length_mm), <span class="fu">desc</span>(bill_depth_mm))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ordenamiento descendente por las columnas </span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="co"># bill_length_mm y bill_depth_mm</span></span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span></span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(bill_length_mm), <span class="fu">desc</span>(bill_depth_mm))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 344 × 8
    species   island bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
@@ -1022,11 +1335,11 @@ $ Distrito     &lt;chr&gt; "HOSPITAL", "DANIEL FLORES", "SIQUIRRES", "GUADALUPE"
 <h3 data-number="9.6.4" class="anchored" data-anchor-id="mutate"><span class="header-section-number">9.6.4</span> mutate()</h3>
 <p>La función <a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate()</a> crea o modifica columnas en un data frame.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Creación de la columna body_mass_kg,</span></span>
-<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a><span class="co"># correspondiente al valor de body_mass_g, pero expresado en kg</span></span>
-<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span></span>
-<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(species, body_mass_g) <span class="sc">|&gt;</span></span>
-<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">body_mass_kg =</span> body_mass_g<span class="sc">/</span><span class="dv">1000</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Creación de la columna body_mass_kg,</span></span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="co"># correspondiente al valor de body_mass_g, pero expresado en kg</span></span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span></span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(species, body_mass_g) <span class="sc">|&gt;</span></span>
+<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">body_mass_kg =</span> body_mass_g<span class="sc">/</span><span class="dv">1000</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 344 × 3
    species body_mass_g body_mass_kg
@@ -1045,12 +1358,12 @@ $ Distrito     &lt;chr&gt; "HOSPITAL", "DANIEL FLORES", "SIQUIRRES", "GUADALUPE"
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Creación de las columnas body_mass_g_mean (promedio de masa) y</span></span>
-<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a><span class="co"># body_mass_g_normalized (masa normalizada con respecto al promedio)</span></span>
-<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span></span>
-<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(species, body_mass_g) <span class="sc">|&gt;</span></span>
-<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">body_mass_g_mean =</span> <span class="fu">mean</span>(body_mass_g, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb51-6"><a href="#cb51-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">body_mass_g_normalized =</span> body_mass_g <span class="sc">/</span> body_mass_g_mean)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Creación de las columnas body_mass_g_mean (promedio de masa) y</span></span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a><span class="co"># body_mass_g_normalized (masa normalizada con respecto al promedio)</span></span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span></span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(species, body_mass_g) <span class="sc">|&gt;</span></span>
+<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">body_mass_g_mean =</span> <span class="fu">mean</span>(body_mass_g, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">body_mass_g_normalized =</span> body_mass_g <span class="sc">/</span> body_mass_g_mean)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 344 × 4
    species body_mass_g body_mass_g_mean body_mass_g_normalized
@@ -1069,39 +1382,39 @@ $ Distrito     &lt;chr&gt; "HOSPITAL", "DANIEL FLORES", "SIQUIRRES", "GUADALUPE"
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Creación de las columnas </span></span>
-<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Fecha_Date (tipo Date), Anio, Mes y Dia (enteros)</span></span>
-<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>delitos_2022 <span class="sc">|&gt;</span></span>
-<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Fecha) <span class="sc">|&gt;</span></span>
-<span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Fecha_Date =</span> <span class="fu">as.Date</span>(delitos_2022<span class="sc">$</span>Fecha, <span class="at">format=</span><span class="st">"%m/%d/%Y"</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb53-6"><a href="#cb53-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Anio =</span> <span class="fu">as.integer</span>(<span class="fu">format</span>(<span class="fu">as.Date</span>(delitos_2022<span class="sc">$</span>Fecha, <span class="at">format=</span><span class="st">"%m/%d/%Y"</span>), <span class="st">"%Y"</span>))) <span class="sc">|&gt;</span>  </span>
-<span id="cb53-7"><a href="#cb53-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Dia =</span> <span class="fu">as.integer</span>(<span class="fu">format</span>(<span class="fu">as.Date</span>(delitos_2022<span class="sc">$</span>Fecha, <span class="at">format=</span><span class="st">"%m/%d/%Y"</span>), <span class="st">"%m"</span>))) <span class="sc">|&gt;</span></span>
-<span id="cb53-8"><a href="#cb53-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Mes =</span> <span class="fu">as.integer</span>(<span class="fu">format</span>(<span class="fu">as.Date</span>(delitos_2022<span class="sc">$</span>Fecha, <span class="at">format=</span><span class="st">"%m/%d/%Y"</span>), <span class="st">"%d"</span>))) <span class="sc">|&gt;</span></span>
-<span id="cb53-9"><a href="#cb53-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">10</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Creación de las columnas </span></span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Fecha_Date (tipo Date), Anio, Mes y Dia (enteros)</span></span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>delitos_2023 <span class="sc">|&gt;</span></span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Fecha) <span class="sc">|&gt;</span></span>
+<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Fecha_Date =</span> <span class="fu">as.Date</span>(delitos_2023<span class="sc">$</span>Fecha, <span class="at">format=</span><span class="st">"%m/%d/%Y"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Anio =</span> <span class="fu">as.integer</span>(<span class="fu">format</span>(<span class="fu">as.Date</span>(delitos_2023<span class="sc">$</span>Fecha, <span class="at">format=</span><span class="st">"%m/%d/%Y"</span>), <span class="st">"%Y"</span>))) <span class="sc">|&gt;</span>  </span>
+<span id="cb50-7"><a href="#cb50-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Dia =</span> <span class="fu">as.integer</span>(<span class="fu">format</span>(<span class="fu">as.Date</span>(delitos_2023<span class="sc">$</span>Fecha, <span class="at">format=</span><span class="st">"%m/%d/%Y"</span>), <span class="st">"%m"</span>))) <span class="sc">|&gt;</span></span>
+<span id="cb50-8"><a href="#cb50-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Mes =</span> <span class="fu">as.integer</span>(<span class="fu">format</span>(<span class="fu">as.Date</span>(delitos_2023<span class="sc">$</span>Fecha, <span class="at">format=</span><span class="st">"%m/%d/%Y"</span>), <span class="st">"%d"</span>))) <span class="sc">|&gt;</span></span>
+<span id="cb50-9"><a href="#cb50-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">10</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>        Fecha Fecha_Date Anio Dia Mes
-1  12/31/2022 2022-12-31 2022  12  31
-2  12/31/2022 2022-12-31 2022  12  31
-3  12/31/2022 2022-12-31 2022  12  31
-4  12/31/2022 2022-12-31 2022  12  31
-5  12/31/2022 2022-12-31 2022  12  31
-6  12/31/2022 2022-12-31 2022  12  31
-7  12/31/2022 2022-12-31 2022  12  31
-8  12/31/2022 2022-12-31 2022  12  31
-9  12/31/2022 2022-12-31 2022  12  31
-10 12/31/2022 2022-12-31 2022  12  31</code></pre>
+1  12/31/2023 2023-12-31 2023  12  31
+2  12/31/2023 2023-12-31 2023  12  31
+3  12/31/2023 2023-12-31 2023  12  31
+4  12/31/2023 2023-12-31 2023  12  31
+5  12/31/2023 2023-12-31 2023  12  31
+6  12/31/2023 2023-12-31 2023  12  31
+7  12/31/2023 2023-12-31 2023  12  31
+8  12/31/2023 2023-12-31 2023  12  31
+9  12/31/2023 2023-12-31 2023  12  31
+10 12/31/2023 2023-12-31 2023  12  31</code></pre>
 </div>
 </div>
 <p>La función <a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by()</a> agrupa una o más columnas. Generalmente, esto se hace con el objetivo de rea</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Creación de la columnas </span></span>
-<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a><span class="co"># body_mass_g_mean_species (promedio de masa de la especie) y</span></span>
-<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a><span class="co"># body_mass_g_species_normalized (masa normalizada con respecto al promedio de la especie)</span></span>
-<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span></span>
-<span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(species, body_mass_g) <span class="sc">|&gt;</span></span>
-<span id="cb55-6"><a href="#cb55-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(species) <span class="sc">|&gt;</span></span>
-<span id="cb55-7"><a href="#cb55-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">body_mass_g_mean_species =</span> <span class="fu">mean</span>(body_mass_g, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb55-8"><a href="#cb55-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">body_mass_g_species_normalized =</span> body_mass_g <span class="sc">/</span> body_mass_g_mean_species)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Creación de la columnas </span></span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a><span class="co"># body_mass_g_mean_species (promedio de masa de la especie) y</span></span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a><span class="co"># body_mass_g_species_normalized (masa normalizada con respecto al promedio de la especie)</span></span>
+<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span></span>
+<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(species, body_mass_g) <span class="sc">|&gt;</span></span>
+<span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(species) <span class="sc">|&gt;</span></span>
+<span id="cb52-7"><a href="#cb52-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">body_mass_g_mean_species =</span> <span class="fu">mean</span>(body_mass_g, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb52-8"><a href="#cb52-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">body_mass_g_species_normalized =</span> body_mass_g <span class="sc">/</span> body_mass_g_mean_species)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 344 × 4
 # Groups:   species [3]
@@ -1126,17 +1439,17 @@ $ Distrito     &lt;chr&gt; "HOSPITAL", "DANIEL FLORES", "SIQUIRRES", "GUADALUPE"
 <p>La función <a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize()</a> se utiliza generalmente junto con la función <a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by()</a> para realizar cálculos en grupos de filas de un data frame. <code>group_by()</code> agrupa las filas y <code>summarize()</code> realiza los cálculos (ej. sumas, promedios) en las columnas, para cada grupo. El resultado es un nuevo data frame con una fila por grupo. Si no hay agrupación, se retorna una sola fila correspondiente a los cálculos para todo el data frame.</p>
 <p>Ejemplos de cálculos en grupos:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Creación de un data frame con las columnas calculadas de </span></span>
-<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a><span class="co"># mínimo, máximo y promedio de masa,</span></span>
-<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a><span class="co"># y cantidad de individuos para cada especie</span></span>
-<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span></span>
-<span id="cb57-5"><a href="#cb57-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(species) <span class="sc">|&gt;</span></span>
-<span id="cb57-6"><a href="#cb57-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
-<span id="cb57-7"><a href="#cb57-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">body_mass_g_min =</span> <span class="fu">min</span>(body_mass_g, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb57-8"><a href="#cb57-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">body_mass_g_max =</span> <span class="fu">max</span>(body_mass_g, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb57-9"><a href="#cb57-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">body_mass_g_mean =</span> <span class="fu">mean</span>(body_mass_g, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb57-10"><a href="#cb57-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">n =</span> <span class="fu">n</span>()</span>
-<span id="cb57-11"><a href="#cb57-11" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Creación de un data frame con las columnas calculadas de </span></span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a><span class="co"># mínimo, máximo y promedio de masa,</span></span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a><span class="co"># y cantidad de individuos para cada especie</span></span>
+<span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span></span>
+<span id="cb54-5"><a href="#cb54-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(species) <span class="sc">|&gt;</span></span>
+<span id="cb54-6"><a href="#cb54-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb54-7"><a href="#cb54-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">body_mass_g_min =</span> <span class="fu">min</span>(body_mass_g, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb54-8"><a href="#cb54-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">body_mass_g_max =</span> <span class="fu">max</span>(body_mass_g, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb54-9"><a href="#cb54-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">body_mass_g_mean =</span> <span class="fu">mean</span>(body_mass_g, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb54-10"><a href="#cb54-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">n =</span> <span class="fu">n</span>()</span>
+<span id="cb54-11"><a href="#cb54-11" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 5
   species   body_mass_g_min body_mass_g_max body_mass_g_mean     n
@@ -1148,233 +1461,668 @@ $ Distrito     &lt;chr&gt; "HOSPITAL", "DANIEL FLORES", "SIQUIRRES", "GUADALUPE"
 </div>
 <p>La función <a href="https://dplyr.tidyverse.org/reference/context.html">n()</a> cuenta la cantidad de filas en un grupo.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Creación de un data frame con la cantidad de homicidios </span></span>
-<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a><span class="co"># por provincia, cantón</span></span>
-<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a>delitos_2022 <span class="sc">|&gt;</span></span>
-<span id="cb59-4"><a href="#cb59-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(SubDelito <span class="sc">==</span> <span class="st">"HOMICIDIO"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb59-5"><a href="#cb59-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Provincia, Canton) <span class="sc">|&gt;</span></span>
-<span id="cb59-6"><a href="#cb59-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
-<span id="cb59-7"><a href="#cb59-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">homicidios_2022 =</span> <span class="fu">n</span>()</span>
-<span id="cb59-8"><a href="#cb59-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb59-9"><a href="#cb59-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(homicidios_2022)) <span class="sc">|&gt;</span></span>
-<span id="cb59-10"><a href="#cb59-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="at">n =</span> <span class="cn">Inf</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 68 × 3
-# Groups:   Provincia [7]
-   Provincia  Canton        homicidios_2022
-   &lt;chr&gt;      &lt;chr&gt;                   &lt;int&gt;
- 1 SAN JOSE   SAN JOSE                   48
- 2 LIMON      LIMON                      47
- 3 PUNTARENAS PUNTARENAS                 43
- 4 ALAJUELA   ALAJUELA                   42
- 5 LIMON      POCOCI                     38
- 6 LIMON      MATINA                     25
- 7 LIMON      GUACIMO                    17
- 8 ALAJUELA   SAN CARLOS                 16
- 9 ALAJUELA   SAN RAMON                  15
-10 CARTAGO    CARTAGO                    15
-11 SAN JOSE   GOICOECHEA                 15
-12 HEREDIA    SARAPIQUI                  14
-13 PUNTARENAS CORREDORES                 14
-14 CARTAGO    LA UNION                   12
-15 HEREDIA    HEREDIA                    12
-16 PUNTARENAS GARABITO                   11
-17 GUANACASTE LIBERIA                    10
-18 GUANACASTE SANTA CRUZ                 10
-19 LIMON      SIQUIRRES                   9
-20 GUANACASTE NICOYA                      8
-21 LIMON      TALAMANCA                   8
-22 SAN JOSE   ASERRI                      8
-23 HEREDIA    SANTO DOMINGO               7
-24 PUNTARENAS BUENOS AIRES                7
-25 SAN JOSE   DESAMPARADOS                7
-26 SAN JOSE   TIBAS                       7
-27 GUANACASTE CARRILLO                    6
-28 GUANACASTE LA CRUZ                     6
-29 PUNTARENAS ESPARZA                     6
-30 SAN JOSE   ALAJUELITA                  6
-31 ALAJUELA   GRECIA                      5
-32 GUANACASTE BAGACES                     5
-33 GUANACASTE CANAS                       5
-34 PUNTARENAS GOLFITO                     5
-35 PUNTARENAS OSA                         5
-36 PUNTARENAS PARRITA                     5
-37 PUNTARENAS QUEPOS                      5
-38 SAN JOSE   PEREZ ZELEDON               5
-39 ALAJUELA   LOS CHILES                  4
-40 ALAJUELA   POAS                        4
-41 CARTAGO    TURRIALBA                   4
-42 HEREDIA    BARVA                       4
-43 HEREDIA    SAN RAFAEL                  4
-44 PUNTARENAS COTO BRUS                   4
-45 PUNTARENAS MONTES DE ORO               4
-46 ALAJUELA   ATENAS                      3
-47 ALAJUELA   NARANJO                     3
-48 ALAJUELA   RIO CUARTO                  3
-49 CARTAGO    EL GUARCO                   3
-50 CARTAGO    OREAMUNO                    3
-51 CARTAGO    PARAISO                     3
-52 GUANACASTE TILARAN                     3
-53 SAN JOSE   ESCAZU                      3
-54 SAN JOSE   MORAVIA                     3
-55 ALAJUELA   OROTINA                     2
-56 ALAJUELA   SARCHÍ                      2
-57 ALAJUELA   UPALA                       2
-58 SAN JOSE   CURRIDABAT                  2
-59 SAN JOSE   SANTA ANA                   2
-60 SAN JOSE   TURRUBARES                  2
-61 ALAJUELA   PALMARES                    1
-62 ALAJUELA   ZARCERO                     1
-63 CARTAGO    JIMENEZ                     1
-64 HEREDIA    FLORES                      1
-65 HEREDIA    SAN ISIDRO                  1
-66 HEREDIA    SANTA BARBARA               1
-67 SAN JOSE   MONTES DE OCA               1
-68 SAN JOSE   PURISCAL                    1</code></pre>
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Creación de un data frame con la cantidad de homicidios </span></span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a><span class="co"># por provincia, cantón</span></span>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>delitos_2023 <span class="sc">|&gt;</span></span>
+<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Delito <span class="sc">==</span> <span class="st">"HOMICIDIO"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb56-5"><a href="#cb56-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Provincia, Canton) <span class="sc">|&gt;</span></span>
+<span id="cb56-6"><a href="#cb56-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb56-7"><a href="#cb56-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">homicidios_2023 =</span> <span class="fu">n</span>()</span>
+<span id="cb56-8"><a href="#cb56-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb56-9"><a href="#cb56-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(homicidios_2023)) <span class="sc">|&gt;</span></span>
+<span id="cb56-10"><a href="#cb56-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>()</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Provincia</th>
+<th style="text-align: left;">Canton</th>
+<th style="text-align: right;">homicidios_2023</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">LIMON</td>
+<td style="text-align: left;">LIMON</td>
+<td style="text-align: right;">91</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">SAN JOSE</td>
+<td style="text-align: left;">SAN JOSE</td>
+<td style="text-align: right;">82</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">PUNTARENAS</td>
+<td style="text-align: left;">PUNTARENAS</td>
+<td style="text-align: right;">68</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">LIMON</td>
+<td style="text-align: left;">MATINA</td>
+<td style="text-align: right;">50</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">ALAJUELA</td>
+<td style="text-align: left;">ALAJUELA</td>
+<td style="text-align: right;">44</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">LIMON</td>
+<td style="text-align: left;">POCOCI</td>
+<td style="text-align: right;">31</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">GUANACASTE</td>
+<td style="text-align: left;">NICOYA</td>
+<td style="text-align: right;">28</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">SAN JOSE</td>
+<td style="text-align: left;">DESAMPARADOS</td>
+<td style="text-align: right;">26</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">GUANACASTE</td>
+<td style="text-align: left;">SANTA CRUZ</td>
+<td style="text-align: right;">24</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">SAN JOSE</td>
+<td style="text-align: left;">ALAJUELITA</td>
+<td style="text-align: right;">23</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">CARTAGO</td>
+<td style="text-align: left;">CARTAGO</td>
+<td style="text-align: right;">21</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">LIMON</td>
+<td style="text-align: left;">SIQUIRRES</td>
+<td style="text-align: right;">21</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">SAN JOSE</td>
+<td style="text-align: left;">GOICOECHEA</td>
+<td style="text-align: right;">20</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">ALAJUELA</td>
+<td style="text-align: left;">SAN CARLOS</td>
+<td style="text-align: right;">19</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">HEREDIA</td>
+<td style="text-align: left;">SARAPIQUI</td>
+<td style="text-align: right;">19</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">CARTAGO</td>
+<td style="text-align: left;">PARAISO</td>
+<td style="text-align: right;">17</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">HEREDIA</td>
+<td style="text-align: left;">HEREDIA</td>
+<td style="text-align: right;">17</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">PUNTARENAS</td>
+<td style="text-align: left;">PARRITA</td>
+<td style="text-align: right;">17</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">GUANACASTE</td>
+<td style="text-align: left;">LIBERIA</td>
+<td style="text-align: right;">16</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">PUNTARENAS</td>
+<td style="text-align: left;">CORREDORES</td>
+<td style="text-align: right;">16</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">CARTAGO</td>
+<td style="text-align: left;">LA UNION</td>
+<td style="text-align: right;">15</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">PUNTARENAS</td>
+<td style="text-align: left;">QUEPOS</td>
+<td style="text-align: right;">15</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">ALAJUELA</td>
+<td style="text-align: left;">SAN RAMON</td>
+<td style="text-align: right;">13</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">PUNTARENAS</td>
+<td style="text-align: left;">GARABITO</td>
+<td style="text-align: right;">13</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">SAN JOSE</td>
+<td style="text-align: left;">PEREZ ZELEDON</td>
+<td style="text-align: right;">13</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">GUANACASTE</td>
+<td style="text-align: left;">CARRILLO</td>
+<td style="text-align: right;">11</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">CARTAGO</td>
+<td style="text-align: left;">TURRIALBA</td>
+<td style="text-align: right;">10</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">LIMON</td>
+<td style="text-align: left;">GUACIMO</td>
+<td style="text-align: right;">10</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">LIMON</td>
+<td style="text-align: left;">TALAMANCA</td>
+<td style="text-align: right;">10</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">SAN JOSE</td>
+<td style="text-align: left;">ESCAZU</td>
+<td style="text-align: right;">8</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">SAN JOSE</td>
+<td style="text-align: left;">ASERRI</td>
+<td style="text-align: right;">7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">SAN JOSE</td>
+<td style="text-align: left;">TIBAS</td>
+<td style="text-align: right;">7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">SAN JOSE</td>
+<td style="text-align: left;">VASQUEZ DE CORONADO</td>
+<td style="text-align: right;">7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">ALAJUELA</td>
+<td style="text-align: left;">LOS CHILES</td>
+<td style="text-align: right;">6</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">GUANACASTE</td>
+<td style="text-align: left;">CANAS</td>
+<td style="text-align: right;">6</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">SAN JOSE</td>
+<td style="text-align: left;">CURRIDABAT</td>
+<td style="text-align: right;">6</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">SAN JOSE</td>
+<td style="text-align: left;">MONTES DE OCA</td>
+<td style="text-align: right;">6</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">GUANACASTE</td>
+<td style="text-align: left;">ABANGARES</td>
+<td style="text-align: right;">5</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">PUNTARENAS</td>
+<td style="text-align: left;">ESPARZA</td>
+<td style="text-align: right;">5</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">PUNTARENAS</td>
+<td style="text-align: left;">GOLFITO</td>
+<td style="text-align: right;">5</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">PUNTARENAS</td>
+<td style="text-align: left;">OSA</td>
+<td style="text-align: right;">5</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">ALAJUELA</td>
+<td style="text-align: left;">GRECIA</td>
+<td style="text-align: right;">4</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">CARTAGO</td>
+<td style="text-align: left;">EL GUARCO</td>
+<td style="text-align: right;">4</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">GUANACASTE</td>
+<td style="text-align: left;">LA CRUZ</td>
+<td style="text-align: right;">4</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">HEREDIA</td>
+<td style="text-align: left;">SAN RAFAEL</td>
+<td style="text-align: right;">4</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">ALAJUELA</td>
+<td style="text-align: left;">ATENAS</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">ALAJUELA</td>
+<td style="text-align: left;">GUATUSO</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">ALAJUELA</td>
+<td style="text-align: left;">NARANJO</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">ALAJUELA</td>
+<td style="text-align: left;">OROTINA</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">CARTAGO</td>
+<td style="text-align: left;">OREAMUNO</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">GUANACASTE</td>
+<td style="text-align: left;">BAGACES</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">HEREDIA</td>
+<td style="text-align: left;">SANTO DOMINGO</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">PUNTARENAS</td>
+<td style="text-align: left;">MONTES DE ORO</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">SAN JOSE</td>
+<td style="text-align: left;">LEON CORTES</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">SAN JOSE</td>
+<td style="text-align: left;">MORAVIA</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">ALAJUELA</td>
+<td style="text-align: left;">POAS</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">ALAJUELA</td>
+<td style="text-align: left;">UPALA</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">CARTAGO</td>
+<td style="text-align: left;">ALVARADO</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">GUANACASTE</td>
+<td style="text-align: left;">TILARAN</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">HEREDIA</td>
+<td style="text-align: left;">SANTA BARBARA</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">PUNTARENAS</td>
+<td style="text-align: left;">COTO BRUS</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">SAN JOSE</td>
+<td style="text-align: left;">MORA</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">ALAJUELA</td>
+<td style="text-align: left;">RIO CUARTO</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">CARTAGO</td>
+<td style="text-align: left;">JIMENEZ</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">GUANACASTE</td>
+<td style="text-align: left;">NANDAYURE</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">HEREDIA</td>
+<td style="text-align: left;">BARVA</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">HEREDIA</td>
+<td style="text-align: left;">FLORES</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">HEREDIA</td>
+<td style="text-align: left;">SAN PABLO</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">PUNTARENAS</td>
+<td style="text-align: left;">BUENOS AIRES</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">SAN JOSE</td>
+<td style="text-align: left;">PURISCAL</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">SAN JOSE</td>
+<td style="text-align: left;">SANTA ANA</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">SAN JOSE</td>
+<td style="text-align: left;">TARRAZU</td>
+<td style="text-align: right;">1</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 <p>La función <a href="https://rdrr.io/r/base/print.html">print()</a> se utiliza para especificar la cantidad de filas que se imprimirán (<code>Inf</code> quiere decir que se imprimirán todas).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Creación de un data frame con la cantidad de registros </span></span>
-<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a><span class="co"># por delito y subdelito</span></span>
-<span id="cb61-3"><a href="#cb61-3" aria-hidden="true" tabindex="-1"></a>delitos_2022 <span class="sc">|&gt;</span></span>
-<span id="cb61-4"><a href="#cb61-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Delito, SubDelito) <span class="sc">|&gt;</span></span>
-<span id="cb61-5"><a href="#cb61-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
-<span id="cb61-6"><a href="#cb61-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">n =</span> <span class="fu">n</span>()</span>
-<span id="cb61-7"><a href="#cb61-7" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb61-8"><a href="#cb61-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(n)) <span class="sc">|&gt;</span></span>
-<span id="cb61-9"><a href="#cb61-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="at">n =</span> <span class="cn">Inf</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 112 × 3
-# Groups:   Delito [27]
-    Delito                                                       SubDelito     n
-    &lt;chr&gt;                                                        &lt;chr&gt;     &lt;int&gt;
-  1 DELITOS CONTRA LA PROPIEDAD                                  HURTO     15744
-  2 DELITOS CONTRA LA PROPIEDAD                                  ROBO      14228
-  3 DELITOS CONTRA LA PROPIEDAD                                  ASALTO    10794
-  4 ESTAFAS Y OTRAS DEFRAUDACIONES                               TIMOS     10430
-  5 ESTAFAS Y OTRAS DEFRAUDACIONES                               ESTAFA     6746
-  6 DELITOS CONTRA LA PROPIEDAD                                  ROBO DE …  4225
-  7 DELITOS CONTRA LA LIBERTAD                                   DELITOS …  4081
-  8 DELITOS CONTRA LA VIDA                                       AGRESION   3424
-  9 DELITOS INFORMATICOS                                         ESTAFA I…  3002
- 10 OTROS DELITOS                                                OTRO O I…  2745
- 11 OTROS DELITOS CONTRA LA PROPIEDAD                            DAÑOS      2559
- 12 DELITOS CONTRA LA VIDA                                       LESIONES   2218
- 13 OTROS DELITOS CONTRA LA PROPIEDAD                            ADMINIST…  1336
- 14 DELITOS SEXUALES                                             VIOLACIO…  1285
- 15 OTROS DELITOS CONTRA LA PROPIEDAD                            EXTORSIO…  1249
- 16 DELITOS CONTRA LOS DEBERES DE LA FUNCION PUBLICA             ABUSO DE…  1234
- 17 ESTAFAS Y OTRAS DEFRAUDACIONES                               FRAUDE     1084
- 18 DELITOS CONTRA LA PROPIEDAD                                  ROBO DE …   863
- 19 DELITOS INFORMATICOS                                         SUPLANTA…   771
- 20 DELITOS CONTRA LA VIDA                                       HOMICIDI…   654
- 21 DELITOS CONTRA LA VIDA                                       HOMICIDIO   604
- 22 DELITOS CONTRA LA ADMINISTRACION DE JUSTICIA                 ENCUBRIM…   526
- 23 DELITOS CONTRA LA VIDA                                       MUERTE I…   522
- 24 NO DELITO                                                    DESAPARI…   476
- 25 INFRACCION A LA LEY DE PSICOTROPICOS                         TRAFICO …   434
- 26 DELITOS CONTRA LA SEGURIDAD COMUN                            INCENDIO…   410
- 27 DELITOS SEXUALES                                             CORRUPCI…   378
- 28 NO DELITO                                                    DESAPARI…   376
- 29 DELITOS CONTRA LA FAMILIA                                    VIOLENCI…   279
- 30 DELITOS INFORMATICOS                                         SUPLANTA…   276
- 31 OTROS DELITOS CONTRA LA PROPIEDAD                            USURPACI…   272
- 32 LEY CONTRA EL ACOSO SEXUAL CALLEJERO                         LEY CONT…   240
- 33 DELITOS CONTRA LA SEGURIDAD COMUN                            DELITOS …   238
- 34 INFRACCION A LA LEY DE BIENESTAR ANIMAL                      MUERTE D…   209
- 35 DELITOS INFORMATICOS                                         OTRO O I…   206
- 36 DELITOS INFORMATICOS                                         DIFUSION…   205
- 37 DELITOS CONTRA LA VIDA                                       SUICIDIO    174
- 38 DELITOS CONTRA LA VIDA                                       MUERTE A…   163
- 39 DELITOS INFORMATICOS                                         FACILITA…   155
- 40 DELITOS CONTRA LA FAMILIA                                    SUSTRACC…   152
- 41 DELITOS CONTRA LA LIBERTAD                                   DELITOS …   140
- 42 DELITOS CONTRA EL AMBITO DE LA INTIMIDAD                     VIOLACIO…   136
- 43 DELITOS INFORMATICOS                                         ESPIONAJ…   127
- 44 DELITOS CONTRA LA VIDA                                       ABANDONO…   116
- 45 INFRACCION A LA LEY DE BIENESTAR ANIMAL                      MALTRATO…    98
- 46 DELITOS CONTRA EL HONOR                                      INJURIA,…    87
- 47 DELITOS CONTRA LA VIDA                                       MUERTE N…    84
- 48 DELITOS INFORMATICOS                                         SEDUCCIO…    80
- 49 DELITOS AMBIENTALES                                          LEY FORE…    74
- 50 DELITOS CONTRA LA FAMILIA                                    INCUMPLI…    73
- 51 INFRACCION A LA LEY DE PSICOTROPICOS                         LEGITIMA…    56
- 52 DELITOS CONTRA LA AUTORIDAD PUBLICA                          DESOBEDI…    54
- 53 INFRACCION A LA LEY DE BIENESTAR ANIMAL                      CRUELDAD…    50
- 54 DELITOS CONTRA LOS DEBERES DE LA FUNCION PUBLICA             CORRUPCI…    46
- 55 DELITOS CONTRA EL AMBITO DE LA INTIMIDAD                     VIOLACIO…    45
- 56 DELITOS INFORMATICOS                                         INSTALAC…    43
- 57 DELITOS AMBIENTALES                                          LEY DE C…    33
- 58 DELITOS CONTRA LA ADMINISTRACION DE JUSTICIA                 FALSAS A…    30
- 59 ESTAFAS Y OTRAS DEFRAUDACIONES                               ADMINIST…    28
- 60 DELITOS INFORMATICOS                                         SABOTAJE…    22
- 61 DELITOS SEXUALES                                             OTRO O I…    19
- 62 DELITOS CONTRA LOS DEBERES DE LA FUNCION PUBLICA             PECULADO…    17
- 63 DELITOS INFORMATICOS                                         DAÑO INF…    15
- 64 ESTAFAS Y OTRAS DEFRAUDACIONES                               OTRO O I…    14
- 65 DELITOS CONTRA LA AUTORIDAD PUBLICA                          RESISTEN…    13
- 66 DELITOS CONTRA LA AUTORIDAD PUBLICA                          AMENAZA …    12
- 67 DELITOS CONTRA LOS DEBERES DE LA FUNCION PUBLICA             CONCUSIO…    12
- 68 DELITOS AMBIENTALES                                          USURPACI…    10
- 69 DELITOS CONTRA LA FE PUBLICA                                 OTRO O I…    10
- 70 DELITOS CONTRA LA SEGURIDAD COMUN                            DELITOS …    10
- 71 INFRACCION A LA LEY DE PSICOTROPICOS                         TRAFICO …     9
- 72 DELITOS CONTRA LA FAMILIA                                    PROTECCI…     8
- 73 DELITOS CONTRA LA SEGURIDAD COMUN                            DELITOS …     8
- 74 DELITOS CONTRA LA VIDA                                       ABORTO        8
- 75 NO DELITO                                                    OTRO IND…     8
- 76 DELITOS CONTRA EL AMBITO DE LA INTIMIDAD                     INFRACCI…     7
- 77 OTROS DELITOS                                                INFRACCI…     7
- 78 DELITOS AMBIENTALES                                          LEY DE G…     6
- 79 INFRACCION A LA LEY DE BIENESTAR ANIMAL                      PELEA EN…     5
- 80 TRATA DE PERSONAS                                            TRATA SE…     5
- 81 DELITOS CONTRA LA AUTORIDAD PUBLICA                          EJERCICI…     4
- 82 DELITOS CONTRA LA VIDA                                       OTRO O I…     4
- 83 DELITOS AMBIENTALES                                          LEY DE L…     3
- 84 DELITOS CONTRA EL AMBITO DE LA INTIMIDAD                     OTRO O I…     3
- 85 DELITOS CONTRA EL AMBITO DE LA INTIMIDAD                     TURBACIO…     3
- 86 DELITOS CONTRA LA AUTORIDAD PUBLICA                          USO ILEG…     3
- 87 DELITOS CONTRA LA TRANQUILIDAD PUBLICA                       INTIMIDA…     3
- 88 OTROS DELITOS CONTRA LA PROPIEDAD                            INFRACCI…     3
- 89 DELITOS AMBIENTALES                                          LEY DE P…     2
- 90 DELITOS CONTRA LA ADMINISTRACION DE JUSTICIA                 EVASION …     2
- 91 DELITOS CONTRA LA BUENA FE DELOS NEGOCIOS                    USURA Y …     2
- 92 DELITOS CONTRA LOS DEBERES DE LA FUNCION PUBLICA             PREVARIC…     2
- 93 DESCONOCIDO                                                  DESCONOC…     2
- 94 INFRACCION A LA LEY DE PSICOTROPICOS                         OTRO O I…     2
- 95 OTROS DELITOS CONTRA LA PROPIEDAD                            OTRO O I…     2
- 96 TRAFICO DE PERSONAS                                          PERSONAS…     2
- 97 TRATA DE PERSONAS                                            OTRO O I…     2
- 98 DELITOS CONTRA LA ADMINISTRACION DE JUSTICIA                 FALSO TE…     1
- 99 DELITOS CONTRA LA AUTORIDAD PUBLICA                          FACILITA…     1
-100 DELITOS CONTRA LA AUTORIDAD PUBLICA                          VIOLACIO…     1
-101 DELITOS CONTRA LA AUTORIDAD PUBLICA                          VIOLACIO…     1
-102 DELITOS CONTRA LA BUENA FE DELOS NEGOCIOS                    DELITOS …     1
-103 DELITOS CONTRA LA FAMILIA                                    MATRIMON…     1
-104 DELITOS CONTRA LA FAMILIA                                    OTRO O I…     1
-105 DELITOS CONTRA LA FE PUBLICA                                 FALSEDAD…     1
-106 DELITOS CONTRA LA LIBERTAD                                   OTRO O I…     1
-107 DELITOS CONTRA LOS PODERES PUBLICOS Y EL ORDEN CONSTITUCION… ATENTADO…     1
-108 DELITOS CONTRA LOS PODERES PUBLICOS Y EL ORDEN CONSTITUCION… OTRO          1
-109 DELITOS INFORMATICOS                                         NARCOTRF…     1
-110 DELITOS SEXUALES                                             RAPTO         1
-111 TRATA DE PERSONAS                                            MENDICID…     1
-112 TRATA DE PERSONAS                                            TRATA LA…     1</code></pre>
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Creación de un data frame con la cantidad de registros </span></span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a><span class="co"># por delito y subdelito</span></span>
+<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a>delitos_2023 <span class="sc">|&gt;</span></span>
+<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Delito, SubDelito) <span class="sc">|&gt;</span></span>
+<span id="cb57-5"><a href="#cb57-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb57-6"><a href="#cb57-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">n =</span> <span class="fu">n</span>()</span>
+<span id="cb57-7"><a href="#cb57-7" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb57-8"><a href="#cb57-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(n)) <span class="sc">|&gt;</span></span>
+<span id="cb57-9"><a href="#cb57-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>()</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Delito</th>
+<th style="text-align: left;">SubDelito</th>
+<th style="text-align: right;">n</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">HURTO</td>
+<td style="text-align: left;">POR DESCUIDO</td>
+<td style="text-align: right;">8326</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">ROBO</td>
+<td style="text-align: left;">FORZADURA</td>
+<td style="text-align: right;">6066</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">ASALTO</td>
+<td style="text-align: left;">ARMA DE FUEGO</td>
+<td style="text-align: right;">4915</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">TACHA DE VEHICULO</td>
+<td style="text-align: left;">TACHA DE VEHICULO</td>
+<td style="text-align: right;">3863</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">ASALTO</td>
+<td style="text-align: left;">ARMA BLANCA</td>
+<td style="text-align: right;">2925</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">HURTO</td>
+<td style="text-align: left;">POR CONFIANZA</td>
+<td style="text-align: right;">2924</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">HURTO</td>
+<td style="text-align: left;">CARTERISTA</td>
+<td style="text-align: right;">2869</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">ROBO DE VEHICULO</td>
+<td style="text-align: left;">DESCUIDO</td>
+<td style="text-align: right;">2356</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">ASALTO</td>
+<td style="text-align: left;">ARREBATO</td>
+<td style="text-align: right;">1915</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">ROBO</td>
+<td style="text-align: left;">BOQUETE</td>
+<td style="text-align: right;">1385</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">ROBO</td>
+<td style="text-align: left;">ESCALAMIENTO</td>
+<td style="text-align: right;">1274</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">ASALTO</td>
+<td style="text-align: left;">GOLPES</td>
+<td style="text-align: right;">1248</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">ROBO DE VEHICULO</td>
+<td style="text-align: left;">ASALTO</td>
+<td style="text-align: right;">1070</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">ROBO DE VEHICULO</td>
+<td style="text-align: left;">COCHERAZO</td>
+<td style="text-align: right;">750</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">HURTO</td>
+<td style="text-align: left;">ARDID PREVIO/DISTRACCION</td>
+<td style="text-align: right;">728</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">ROBO</td>
+<td style="text-align: left;">CORTA CANDADOS</td>
+<td style="text-align: right;">695</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">ROBO</td>
+<td style="text-align: left;">RUPTURA VENTANA</td>
+<td style="text-align: right;">682</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">ASALTO</td>
+<td style="text-align: left;">INTIMIDACION VERBAL</td>
+<td style="text-align: right;">666</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">HOMICIDIO</td>
+<td style="text-align: left;">AJUSTE DE CUENTAS/VENGANZA</td>
+<td style="text-align: right;">633</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">HURTO</td>
+<td style="text-align: left;">OTRO O INDETERMINADO</td>
+<td style="text-align: right;">633</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">ROBO</td>
+<td style="text-align: left;">QUITAN CELOSIAS</td>
+<td style="text-align: right;">502</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">HURTO</td>
+<td style="text-align: left;">CON LLAVE</td>
+<td style="text-align: right;">484</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">ROBO DE VEHICULO</td>
+<td style="text-align: left;">POR CONFIANZA</td>
+<td style="text-align: right;">399</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">ASALTO</td>
+<td style="text-align: left;">CANDADO CHINO</td>
+<td style="text-align: right;">352</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">ROBO</td>
+<td style="text-align: left;">OTRO O INDETERMINADO</td>
+<td style="text-align: right;">345</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">ASALTO</td>
+<td style="text-align: left;">INMOVILIZACION</td>
+<td style="text-align: right;">331</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">HURTO</td>
+<td style="text-align: left;">PROGRESIVOS</td>
+<td style="text-align: right;">233</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">ASALTO</td>
+<td style="text-align: left;">ARMA CONTUNDENTE</td>
+<td style="text-align: right;">170</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">ASALTO</td>
+<td style="text-align: left;">OTRO O INDETERMINADO</td>
+<td style="text-align: right;">149</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">ROBO DE VEHICULO</td>
+<td style="text-align: left;">OTRO O INDETERMINADO</td>
+<td style="text-align: right;">133</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">HOMICIDIO</td>
+<td style="text-align: left;">DISCUSION/RIÑA</td>
+<td style="text-align: right;">118</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">HURTO</td>
+<td style="text-align: left;">RETIRO DE CAJERO AUTOMATICO</td>
+<td style="text-align: right;">116</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">HOMICIDIO</td>
+<td style="text-align: left;">POR LA COMISION DE OTRO DELITO</td>
+<td style="text-align: right;">83</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">HURTO</td>
+<td style="text-align: left;">USO DE SOMNIFERO</td>
+<td style="text-align: right;">74</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">ROBO DE VEHICULO</td>
+<td style="text-align: left;">ARDID PREVIO</td>
+<td style="text-align: right;">51</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">HURTO</td>
+<td style="text-align: left;">GANZUA/VARILLA</td>
+<td style="text-align: right;">47</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">HOMICIDIO</td>
+<td style="text-align: left;">VIOLENCIA DOMESTICA</td>
+<td style="text-align: right;">26</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">ASALTO</td>
+<td style="text-align: left;">USO DE GAS</td>
+<td style="text-align: right;">19</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">HOMICIDIO</td>
+<td style="text-align: left;">OTRO O INDETERMINADO</td>
+<td style="text-align: right;">16</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">HOMICIDIO</td>
+<td style="text-align: left;">REPELIENDO ACTIVIDAD CRIMINAL</td>
+<td style="text-align: right;">12</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">HOMICIDIO</td>
+<td style="text-align: left;">PROFESIONAL</td>
+<td style="text-align: right;">9</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">HOMICIDIO</td>
+<td style="text-align: left;">NO DETERMINADO</td>
+<td style="text-align: right;">5</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">HURTO</td>
+<td style="text-align: left;">DESCONOCIDO</td>
+<td style="text-align: right;">5</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">ASALTO</td>
+<td style="text-align: left;">DESCONOCIDO</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">ROBO</td>
+<td style="text-align: left;">DESCONOCIDO</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">HOMICIDIO</td>
+<td style="text-align: left;">FEMICIDIO</td>
+<td style="text-align: right;">1</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 <p>Ejemplo de cálculos sin agrupamiento:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Creación de un data frame con las columnas </span></span>
-<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a><span class="co"># body_mass_g_mean (promedio de masa) y n (cantidad de registros)</span></span>
-<span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span></span>
-<span id="cb63-4"><a href="#cb63-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">body_mass_g_mean =</span> <span class="fu">mean</span>(body_mass_g, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb63-5"><a href="#cb63-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">n =</span> <span class="fu">n</span>())</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1 × 2
-  body_mass_g_mean     n
-             &lt;dbl&gt; &lt;int&gt;
-1            4202.   344</code></pre>
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Creación de un data frame con las columnas </span></span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a><span class="co"># body_mass_g_mean (promedio de masa) y n (cantidad de registros)</span></span>
+<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span></span>
+<span id="cb58-4"><a href="#cb58-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">body_mass_g_mean =</span> <span class="fu">mean</span>(body_mass_g, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb58-5"><a href="#cb58-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">n =</span> <span class="fu">n</span>()) <span class="sc">|&gt;</span></span>
+<span id="cb58-6"><a href="#cb58-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>()</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: right;">body_mass_g_mean</th>
+<th style="text-align: right;">n</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">4201.754</td>
+<td style="text-align: right;">344</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </section>
@@ -1384,17 +2132,36 @@ $ Distrito     &lt;chr&gt; "HOSPITAL", "DANIEL FLORES", "SIQUIRRES", "GUADALUPE"
 <h4 data-number="9.6.6.1" class="anchored" data-anchor-id="distinct"><span class="header-section-number">9.6.6.1</span> distinct()</h4>
 <p>La función <a href="https://dplyr.tidyverse.org/reference/distinct.html">distinct()</a> retorna las combinaciones únicas de filas en un data frame.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Valores distintos de la columna Victima</span></span>
-<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-3"><a href="#cb65-3" aria-hidden="true" tabindex="-1"></a>delitos_2022 <span class="sc">|&gt;</span></span>
-<span id="cb65-4"><a href="#cb65-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>(Victima)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>      Victima
-1    VEHICULO
-2     PERSONA
-3       OTROS
-4    VIVIENDA
-5 EDIFICACION</code></pre>
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Valores distintos de la columna Victima</span></span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a>delitos_2023 <span class="sc">|&gt;</span></span>
+<span id="cb59-4"><a href="#cb59-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>(Victima) <span class="sc">|&gt;</span></span>
+<span id="cb59-5"><a href="#cb59-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>()</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Victima</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">PERSONA</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">VIVIENDA</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">VEHICULO</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">EDIFICACION</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">OTROS</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </section>
@@ -1402,30 +2169,53 @@ $ Distrito     &lt;chr&gt; "HOSPITAL", "DANIEL FLORES", "SIQUIRRES", "GUADALUPE"
 <h4 data-number="9.6.6.2" class="anchored" data-anchor-id="count"><span class="header-section-number">9.6.6.2</span> count()</h4>
 <p>Una forma alternativa a <code>summarize()</code> para realizar un conteo es con la función <a href="https://dplyr.tidyverse.org/reference/count.html">count()</a>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Conteo de delitos por tipo de Victima</span></span>
-<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a>delitos_2022 <span class="sc">|&gt;</span></span>
-<span id="cb67-3"><a href="#cb67-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(Victima)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Conteo de delitos por tipo de Victima</span></span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>delitos_2023 <span class="sc">|&gt;</span></span>
+<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(Victima)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      Victima     n
-1 EDIFICACION  6705
-2       OTROS  4756
-3     PERSONA 62046
-4    VEHICULO 11752
-5    VIVIENDA 11392</code></pre>
+1 EDIFICACION  6981
+2       OTROS  1946
+3     PERSONA 19448
+4    VEHICULO 11476
+5    VIVIENDA  9758</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Expresión equivalente con summarize</span></span>
-<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a>delitos_2022 <span class="sc">|&gt;</span></span>
-<span id="cb69-3"><a href="#cb69-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Victima) <span class="sc">|&gt;</span></span>
-<span id="cb69-4"><a href="#cb69-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n =</span> <span class="fu">n</span>())</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 5 × 2
-  Victima         n
-  &lt;chr&gt;       &lt;int&gt;
-1 EDIFICACION  6705
-2 OTROS        4756
-3 PERSONA     62046
-4 VEHICULO    11752
-5 VIVIENDA    11392</code></pre>
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Expresión equivalente con summarize</span></span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>delitos_2023 <span class="sc">|&gt;</span></span>
+<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Victima) <span class="sc">|&gt;</span></span>
+<span id="cb62-4"><a href="#cb62-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n =</span> <span class="fu">n</span>()) <span class="sc">|&gt;</span></span>
+<span id="cb62-5"><a href="#cb62-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>()</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Victima</th>
+<th style="text-align: right;">n</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">EDIFICACION</td>
+<td style="text-align: right;">6981</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">OTROS</td>
+<td style="text-align: right;">1946</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">PERSONA</td>
+<td style="text-align: right;">19448</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">VEHICULO</td>
+<td style="text-align: right;">11476</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">VIVIENDA</td>
+<td style="text-align: right;">9758</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </section>

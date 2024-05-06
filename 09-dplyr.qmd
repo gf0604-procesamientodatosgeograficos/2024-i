@@ -23,7 +23,7 @@ El paquete [dplyr](https://dplyr.tidyverse.org/) de [Tidyverse](https://www.tidy
 
 Todas estas operaciones pueden combinarse con la función [group_by()](https://dplyr.tidyverse.org/reference/group_by.html), la cual ejecuta cualquiera de las operaciones anteriores "en grupo". Además, dplyr proporciona [funciones adicionales](https://dplyr.tidyverse.org/reference/index.html) para tareas más específicas.
 
-Las funciones de dplyr pueden encadenarse a través del operador *pipe* (tubo), ya sea el del paquete magrittr [(%\>%)](https://magrittr.tidyverse.org/reference/pipe.html) o el del paquete base de R [(\|\>)](https://michaelbarrowman.co.uk/post/the-new-base-pipe/). Los procesos se enlazan con *pipes* para formar *pipelines* (tuberías).
+Las funciones de dplyr pueden encadenarse a través del operador *pipe* (tubo), ya sea el del paquete magrittr [(%\>%)](https://magrittr.tidyverse.org/reference/pipe.html) o el del paquete base de R [(\|\>)](https://michaelbarrowman.co.uk/post/the-new-base-pipe/). En el material de este curso, se prefiere la segunda opción. Los *pipes* se utilizan para comunicar procesos y así formar *pipelines* (tuberías).
 
 Todas las funciones de dplyr trabajan de manera similar:
 
@@ -153,7 +153,7 @@ Para generar una salida más estilizada, puede usarse la función [knitr::kable(
 #| label: penguins-kable
 #| eval: true
 
-# Despliegue de los datos de penguins en una tabla kable
+# Despliegue de los primeros registros de penguins en una tabla kable
 penguins |>
   head(n = 10) |>
   kable(format = "html")
@@ -163,36 +163,36 @@ penguins |>
 Se utiliza la función [readr::read_csv()](https://readr.tidyverse.org/reference/read_delim.html) para leer un archivo CSV almacenado en el repositorio GitHub de este curso, con los datos de las estadísticas policiales proporcionados por el OIJ en formato Excel. `readr::read_csv()` es más eficiente que `read.csv()` (del paquete base de R) y tiene otras ventajas como detección automática de tipos de datos y mejor integración con otros paquetes de Tidyverse (ej. dplyr, tidyr, ggplot2).
 
 ```{r}
-#| label: carga-estadisticaspoliciales2022
+#| label: carga-estadisticaspoliciales2023
 #| message: false
 
-# Carga de los datos de delitos cometidos en 2022
-delitos_2022 <-
+# Carga de los datos de delitos cometidos en 2023
+delitos_2023 <-
   read.csv(
-    "https://raw.githubusercontent.com/gf0604-procesamientodatosgeograficos/2023-i/main/datos/oij/estadisticas-policiales/estadisticaspoliciales2022.csv"
+    "https://raw.githubusercontent.com/gf0604-procesamientodatosgeograficos/2024-i/main/datos/oij/estadisticas-policiales/estadisticaspoliciales2023.csv"
   )
 ```
 
 Estructura del conjunto de datos:
 
 ```{r}
-#| label: estructura-estadisticaspoliciales2022
+#| label: estructura-estadisticaspoliciales2023
 
-# Estructura de los datos de delitos cometidos en 2022
-glimpse(delitos_2022)
+# Estructura de los datos de delitos cometidos en 2023
+glimpse(delitos_2023)
 ```
 
-Despliegue de los datos (debido a que `delitos_2022` es un data frame, pero no un tibble, se limitan las filas y columnas que se muestran):
+Despliegue de los datos (debido a que `delitos_2023` es un data frame, pero no un tibble, se limitan manualmente las filas y columnas que se muestran):
 
 ```{r vista-penguins, eval=FALSE}
-#| label: vista-estadisticaspoliciales2022
+#| label: vista-estadisticaspoliciales2023
 #| eval: true
 
-# Despliegue de una muestra de los datos de delitos cometidos en 2022
-delitos_2022[1:10, c("Delito", "Victima", "Provincia")]
+# Despliegue de una muestra de los datos de delitos cometidos en 2023
+delitos_2023[, c("Delito", "SubDelito", "Victima", "Fecha", "Provincia", "Canton", "Distrito")] |>
+  head(n = 10) |>
+  kable(format = "html")
 ```
-
-En RStudio, un conjunto de datos completo puede verse más cómodamente con la función `View()`.
 
 ## Funciones
 En esta sección, se describen y ejemplifican las principales funciones de dplyr.
@@ -246,7 +246,7 @@ La función [filter()](https://dplyr.tidyverse.org/reference/filter.html) retorn
 
 Puede utilizar los operadores relacionales:
 
-- `==` (igual que) **Note la diferencia con el operador de asignación: `=`**
+- `==` (igual que) **Note la diferencia con el operador de asignación (`=`)**
 - `!=` (diferente de)
 - `>` (estrictamente mayor que), `>=` (mayor o igual que)
 - `<` (estrictamente menor que), `<=` (menor o igual que)
@@ -287,21 +287,23 @@ penguins |>
 ```{r}
 #| label: filter-ejemplo-05
 
-# Homicidios cometidos en el cantón de Esparza
-delitos_2022 |>
-  filter(SubDelito == "HOMICIDIO" & Canton == "ESPARZA") |>
-  select(SubDelito, Canton, Fecha, Victima, Edad, Nacionalidad)
+# Homicidios cometidos en el cantón de Sarapiquí
+delitos_2023 |>
+  filter(Delito == "HOMICIDIO" & Canton == "SARAPIQUI") |>
+  select(Canton, SubDelito, Fecha, Edad, Nacionalidad) |>
+  kable()
 ```
 
 ```{r}
 #| label: filter-ejemplo-05b
 
-# Homicidios cometidos en el cantón de Esparza 
+# Homicidios cometidos en el cantón de Sarapiquí 
 # a personas no costarricenses
-delitos_2022 |>
-  filter(SubDelito == "HOMICIDIO" &
-      Canton == "ESPARZA" & Nacionalidad != "COSTA RICA") |>
-  select(SubDelito, Canton, Fecha, Victima, Edad, Nacionalidad)
+delitos_2023 |>
+  filter(Delito == "HOMICIDIO" &
+           Canton == "SARAPIQUI" & Nacionalidad != "COSTA RICA") |>
+  select(Canton, SubDelito, Fecha, Edad, Nacionalidad) |>
+  kable()
 ```
 
 ```{r}
@@ -410,12 +412,12 @@ penguins |>
 
 # Creación de las columnas 
 # Fecha_Date (tipo Date), Anio, Mes y Dia (enteros)
-delitos_2022 |>
+delitos_2023 |>
   select(Fecha) |>
-  mutate(Fecha_Date = as.Date(delitos_2022$Fecha, format="%m/%d/%Y")) |>
-  mutate(Anio = as.integer(format(as.Date(delitos_2022$Fecha, format="%m/%d/%Y"), "%Y"))) |>  
-  mutate(Dia = as.integer(format(as.Date(delitos_2022$Fecha, format="%m/%d/%Y"), "%m"))) |>
-  mutate(Mes = as.integer(format(as.Date(delitos_2022$Fecha, format="%m/%d/%Y"), "%d"))) |>
+  mutate(Fecha_Date = as.Date(delitos_2023$Fecha, format="%m/%d/%Y")) |>
+  mutate(Anio = as.integer(format(as.Date(delitos_2023$Fecha, format="%m/%d/%Y"), "%Y"))) |>  
+  mutate(Dia = as.integer(format(as.Date(delitos_2023$Fecha, format="%m/%d/%Y"), "%m"))) |>
+  mutate(Mes = as.integer(format(as.Date(delitos_2023$Fecha, format="%m/%d/%Y"), "%d"))) |>
   slice_head(n = 10)
 ```
 
@@ -463,14 +465,14 @@ La función [n()](https://dplyr.tidyverse.org/reference/context.html) cuenta la 
 
 # Creación de un data frame con la cantidad de homicidios 
 # por provincia, cantón
-delitos_2022 |>
-  filter(SubDelito == "HOMICIDIO") |>
+delitos_2023 |>
+  filter(Delito == "HOMICIDIO") |>
   group_by(Provincia, Canton) |>
   summarize(
-    homicidios_2022 = n()
+    homicidios_2023 = n()
   ) |>
-  arrange(desc(homicidios_2022)) |>
-  print(n = Inf)
+  arrange(desc(homicidios_2023)) |>
+  kable()
 ```
 
 La función [print()](https://rdrr.io/r/base/print.html) se utiliza para especificar la cantidad de filas que se imprimirán (`Inf` quiere decir que se imprimirán todas).
@@ -481,13 +483,13 @@ La función [print()](https://rdrr.io/r/base/print.html) se utiliza para especif
 
 # Creación de un data frame con la cantidad de registros 
 # por delito y subdelito
-delitos_2022 |>
+delitos_2023 |>
   group_by(Delito, SubDelito) |>
   summarize(
     n = n()
   ) |>
   arrange(desc(n)) |>
-  print(n = Inf)
+  kable()
 ```
 
 Ejemplo de cálculos sin agrupamiento:
@@ -499,7 +501,8 @@ Ejemplo de cálculos sin agrupamiento:
 # body_mass_g_mean (promedio de masa) y n (cantidad de registros)
 penguins |>
   summarise(body_mass_g_mean = mean(body_mass_g, na.rm = TRUE),
-            n = n())
+            n = n()) |>
+  kable()
 ```
 
 ### Otras
@@ -512,8 +515,9 @@ La función [distinct()](https://dplyr.tidyverse.org/reference/distinct.html) re
 
 # Valores distintos de la columna Victima
 
-delitos_2022 |>
-  distinct(Victima)
+delitos_2023 |>
+  distinct(Victima) |>
+  kable()
 ```
 
 #### count()
@@ -524,13 +528,14 @@ Una forma alternativa a `summarize()` para realizar un conteo es con la función
 #| label: otras-ejemplo-02
 
 # Conteo de delitos por tipo de Victima
-delitos_2022 |>
+delitos_2023 |>
   count(Victima)
 
 # Expresión equivalente con summarize
-delitos_2022 |>
+delitos_2023 |>
   group_by(Victima) |>
-  summarize(n = n())
+  summarize(n = n()) |>
+  kable()
 ```
 
 ## Ejercicios
