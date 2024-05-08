@@ -6,9 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Manuel Vargas">
 
-<title>GF0604 Procesamiento de datos geográficos 2024-I</title>
+<title>GF0604 Procesamiento de datos geográficos 2024-I - Tarea 3 - Grupo 002</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -31,7 +30,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./programa_curso.html" rel="next">
+<link href="./examen-corto-02.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -81,7 +80,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Bienvenida</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./parte-vii-evaluaciones.html">Evaluaciones</a></li><li class="breadcrumb-item"><a href="./tarea-03-grupo-002.html">Tarea 3 - Grupo 002</a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -108,7 +107,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Bienvenida</span></a>
   </div>
 </li>
@@ -239,7 +238,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./tarea-03-grupo-002.html" class="sidebar-item-text sidebar-link">
+  <a href="./tarea-03-grupo-002.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Tarea 3 - Grupo 002</span></a>
   </div>
 </li>
@@ -255,39 +254,36 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Tabla de contenidos</h2>
    
   <ul>
-  <li><a href="#bienvenida" id="toc-bienvenida" class="nav-link active" data-scroll-target="#bienvenida">Bienvenida</a></li>
+  <li><a href="#fecha-y-hora-límite-de-entrega" id="toc-fecha-y-hora-límite-de-entrega" class="nav-link active" data-scroll-target="#fecha-y-hora-límite-de-entrega">Fecha y hora límite de entrega</a></li>
+  <li><a href="#descripción-general" id="toc-descripción-general" class="nav-link" data-scroll-target="#descripción-general">Descripción general</a></li>
   <li><a href="#objetivos" id="toc-objetivos" class="nav-link" data-scroll-target="#objetivos">Objetivos</a></li>
-  <li><a href="#programa" id="toc-programa" class="nav-link" data-scroll-target="#programa">Programa</a></li>
-  <li><a href="#ciclos-anteriores" id="toc-ciclos-anteriores" class="nav-link" data-scroll-target="#ciclos-anteriores">Ciclos anteriores</a></li>
-  <li><a href="#información-de-contacto" id="toc-información-de-contacto" class="nav-link" data-scroll-target="#información-de-contacto">Información de contacto</a></li>
+  <li><a href="#acerca-del-conjunto-de-datos" id="toc-acerca-del-conjunto-de-datos" class="nav-link" data-scroll-target="#acerca-del-conjunto-de-datos">Acerca del conjunto de datos</a></li>
+  <li><a href="#entregables" id="toc-entregables" class="nav-link" data-scroll-target="#entregables">Entregables</a></li>
+  <li><a href="#desarrollo" id="toc-desarrollo" class="nav-link" data-scroll-target="#desarrollo">Desarrollo</a>
+  <ul class="collapse">
+  <li><a href="#introducción" id="toc-introducción" class="nav-link" data-scroll-target="#introducción">1 - Introducción</a></li>
+  <li><a href="#carga-de-paquetes" id="toc-carga-de-paquetes" class="nav-link" data-scroll-target="#carga-de-paquetes">2 - Carga de paquetes</a></li>
+  <li><a href="#carga-de-datos" id="toc-carga-de-datos" class="nav-link" data-scroll-target="#carga-de-datos">3 - Carga de datos</a></li>
+  <li><a href="#consultas" id="toc-consultas" class="nav-link" data-scroll-target="#consultas">4 - Consultas</a></li>
+  </ul></li>
+  <li><a href="#calificación" id="toc-calificación" class="nav-link" data-scroll-target="#calificación">Calificación</a></li>
+  <li><a href="#consideraciones-adicionales" id="toc-consideraciones-adicionales" class="nav-link" data-scroll-target="#consideraciones-adicionales">Consideraciones adicionales</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./parte-vii-evaluaciones.html">Evaluaciones</a></li><li class="breadcrumb-item"><a href="./tarea-03-grupo-002.html">Tarea 3 - Grupo 002</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">GF0604 Procesamiento de datos geográficos 2024-I</h1>
+<h1 class="title">Tarea 3 - Grupo 002</h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Autor/a</div>
-    <div class="quarto-title-meta-contents">
-             <p>Manuel Vargas </p>
-          </div>
-  </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Fecha de publicación</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">3 de marzo de 2024</p>
-    </div>
-  </div>
   
     
   </div>
@@ -297,54 +293,121 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="bienvenida" class="level1 unnumbered">
-<h1 class="unnumbered">Bienvenida</h1>
-<p>Este es un curso introductorio a la programación de computadoras y al procesamiento de datos geográficos mediante el lenguaje de programación <a href="https://www.r-project.org/">R</a>. También se estudian herramientas para facilitar la reproducibilidad de los procedimientos y la comunicación de las soluciones a través de Internet y otros medios. Se imparte en la <a href="https://www.geografia.fcs.ucr.ac.cr/">Escuela de Geografía</a> de la <a href="https://www.ucr.ac.cr/">Universidad de Costa Rica</a>.</p>
-<p>El enfoque del curso es teórico-práctico, con lecciones teóricas combinadas con ejercicios de programación en los cuales los estudiantes aplican en diversos escenarios de procesamiento de datos los conocimientos y habilidades aprendidas. No se requiere de experiencia previa en programación de computadoras. Es recomendable contar con conocimentos básicos de datos geoespaciales y sistemas de información geográfica.</p>
-<p>Tanto las lecciones teóricas como las prácticas se imparten de manera presencial, con apoyo de medios virtuales. Los contenidos del curso y los recursos relacionados se comparten en el sitio web <a href="https://gf0604-procesamientodatosgeograficos.github.io/2024-i/">https://gf0604-procesamientodatosgeograficos.github.io/2024-i/</a> y en la plataforma <a href="https://mediacionvirtual.ucr.ac.cr/">Mediación Virtual</a> de la Universidad de Costa Rica.</p>
+<section id="fecha-y-hora-límite-de-entrega" class="level2">
+<h2 class="anchored" data-anchor-id="fecha-y-hora-límite-de-entrega">Fecha y hora límite de entrega</h2>
+<p><strong>Martes 14 de mayo de 2024, 8:00 a.m.</strong></p>
 </section>
-<section id="objetivos" class="level1 unnumbered">
-<h1 class="unnumbered">Objetivos</h1>
-<p>Al finalizar el curso, el estudiantado será capaz de:</p>
+<section id="descripción-general" class="level2">
+<h2 class="anchored" data-anchor-id="descripción-general">Descripción general</h2>
+<p>Esta tarea consiste en desarrollar un documento Quarto con bloques de código en R que utilicen funciones de Tidyverse para consultar un conjunto de datos y presentar los resultados en formato de tablas. El documento debe publicarse como una página web en GitHub Pages.</p>
+</section>
+<section id="objetivos" class="level2">
+<h2 class="anchored" data-anchor-id="objetivos">Objetivos</h2>
+<p>Cada estudiante debe mostrar que es capaz de:</p>
 <ol type="1">
-<li>Aplicar el pensamiento computacional para resolver problemas mediante el lenguaje de programación R.</li>
-<li>Utilizar un enfoque de ciencia de datos para la importación, transformación y visualización de datos.</li>
-<li>Desarrollar soluciones reproducibles a problemas computacionales.</li>
-<li>Elaborar gráficos estadísticos con paquetes de R.</li>
-<li>Procesar datos geográficos con paquetes de R.</li>
-<li>Desarrollar aplicaciones interactivas que incluyan visualizaciones como tablas, gráficos estadísticos y mapas, entre otras.</li>
+<li>Escribir código fuente en el lenguaje de programación R y utilizar funciones de la colección de paquetes de Tidyverse para leer datos, procesarlos y generar visualizaciones en forma de tablas.</li>
+<li>Escribir documentos en el sistema de publicación científica y técnica Quarto que combinen narrativa en Markdown con bloques de código en R.</li>
+<li>Publicar documentos Quarto como páginas web en GitHub Pages.</li>
+<li>Analizar y corregir errores de programación.</li>
 </ol>
 </section>
-<section id="programa" class="level1 unnumbered">
-<h1 class="unnumbered">Programa</h1>
-<p>Los siguientes documentos contienen el programa del curso, para los grupos 001 y 002, según el formato definido por la Escuela de Geografía de la Universidad de Costa Rica.</p>
+<section id="acerca-del-conjunto-de-datos" class="level2">
+<h2 class="anchored" data-anchor-id="acerca-del-conjunto-de-datos">Acerca del conjunto de datos</h2>
+<p>El conjunto de datos de esta tarea consiste de 299 registros de pacientes que sufrieron <a href="https://es.wikipedia.org/wiki/Insuficiencia_card%C3%ADaca">insuficiencia cardíaca</a>. Para cada paciente, se consideran 13 características clínicas (edad, sexo, si tenía anemia, si tenía diabetes, si fumaba y otras). Estos datos forman parte del artículo <a href="https://bmcmedinformdecismak.biomedcentral.com/articles/10.1186/s12911-020-1023-5">Chicco, D., Jurman, G. Machine learning can predict survival of patients with heart failure from serum creatinine and ejection fraction alone. <em>BMC Med Inform Decis Mak</em> <strong>20</strong>, 16 (2020)</a>. Se recomienda leer el resumen (<em>abstract</em>) del artículo.</p>
+<p>El archivo CSV con los datos está disponible en la dirección <a href="https://github.com/gf0604-procesamientodatosgeograficos/2024-i/blob/main/datos/bmc/heart_failure_clinical_records_dataset.csv">https://github.com/gf0604-procesamientodatosgeograficos/2024-i/blob/main/datos/bmc/heart_failure_clinical_records_dataset.csv</a>.</p>
+<p>Para más información sobre las variables del conjunto de datos, su significado y sus unidades de medida, puede consultar <a href="https://bmcmedinformdecismak.biomedcentral.com/articles/10.1186/s12911-020-1023-5/tables/1">Meanings, measurement units, and intervals of each feature of the dataset</a>.</p>
+<p><strong>NOTA</strong>: hay varias variables <em>booleanas</em> con valor <code>0</code> o <code>1</code>. <code>0</code> significa falso (no) y <code>1</code> significa verdadero (sí). Por ejemplo, para <code>anaemia</code> un valor de <code>1</code> significa que el paciente sí tuvo anemia y un valor de <code>0</code> significa que no tuvo anemia. En el caso de <code>sex</code>, un <code>0</code> corresponde a una mujer y un <code>1</code> a un hombre.</p>
+</section>
+<section id="entregables" class="level2">
+<h2 class="anchored" data-anchor-id="entregables">Entregables</h2>
+<p>Debe entregar dos direcciones web:</p>
+<ol type="1">
+<li>Dirección de un repositorio en GitHub (ej. https://github.com/mfvargas/insuficiencia-cardiaca) con el código fuente y los datos. Específicamente, el repositorio debe contener:
+<ol type="a">
+<li>Un documento Quarto llamado <code>index.qmd</code> con el código en R y la sintaxis Markdown necesarios para generar las salidas especificadas en la sección Desarrollo.</li>
+<li>Un documento llamado <code>index.html</code> generado a partir de <code>index.qmd</code>.</li>
+<li>El archivo de datos <code>heart_failure_clinical_records_dataset.csv</code>.</li>
+<li>El directorio <code>index_files</code>.</li>
+</ol></li>
+<li>Dirección de un sitio web en GitHub Pages publicado a partir del repositorio GitHub del punto 1 (ej. https://mfvargas.github.io/insuficiencia-cardiaca/).</li>
+</ol>
+<p>La entrega debe realizarse a través de la plataforma Mediación Virtual.</p>
+</section>
+<section id="desarrollo" class="level2">
+<h2 class="anchored" data-anchor-id="desarrollo">Desarrollo</h2>
+<p>El documento Quarto debe cumplir con las siguientes características generales:</p>
 <ul>
-<li><a href="gf0604-procesamientodatosgeograficos-g001-2024-i.pdf">Grupo 001</a></li>
-<li><a href="gf0604-procesamientodatosgeograficos-g002-2024-i.pdf">Grupo 002</a></li>
+<li>En general, debe estar ordenado y bien presentado (incluyendo la redacción y la ortografía).</li>
+<li>Debe tener una tabla de contenidos.</li>
+<li>El lenguaje del documento debe ser español.</li>
+<li>Debe utilizar un <a href="https://quarto.org/docs/output-formats/html-themes.html">estilo (<em>theme</em>) de Quarto para HTML</a>.</li>
+</ul>
+<p>El documento debe contener las siguientes secciones:</p>
+<section id="introducción" class="level3">
+<h3 class="anchored" data-anchor-id="introducción">1 - Introducción</h3>
+<p>Breve explicación del contenido del documento (uno o dos párrafos) y mención de la fuente de los datos originales: el enlace al artículo de Chicco y Jurman.</p>
+</section>
+<section id="carga-de-paquetes" class="level3">
+<h3 class="anchored" data-anchor-id="carga-de-paquetes">2 - Carga de paquetes</h3>
+<p>Bloque de código en R para cargar los paquetes.</p>
+</section>
+<section id="carga-de-datos" class="level3">
+<h3 class="anchored" data-anchor-id="carga-de-datos">3 - Carga de datos</h3>
+<p>Bloque de código en R para cargar los datos.</p>
+</section>
+<section id="consultas" class="level3">
+<h3 class="anchored" data-anchor-id="consultas">4 - Consultas</h3>
+<p>Debe escribir cuatro bloques de código en R que consulten el conjunto de datos y presenten los resultados en tablas. Los bloques de código en R deben utilizar funciones del paquete <code>dplyr</code> de Tidyverse (<code>select()</code>, <code>filter()</code>, <code>mutate()</code>, <code>arrange()</code>, <code>group_by()</code>, <code>summarize()</code> y otras). Las tablas deben generarse mediante la función <code>kable()</code> del paquete <code>knitr</code>.</p>
+<p>En cada caso, debe mostrarse el bloque de código y la tabla que muestra los resultado de la consulta, como se ejemplifica en la siguiente figura:</p>
+<p><img src="img/tarea-03-ejercicio-00.png" class="img-fluid"></p>
+<section id="consulta-1" class="level4">
+<h4 class="anchored" data-anchor-id="consulta-1">Consulta 1</h4>
+<p>Tabla que para los hombres mayores de 70 años, diabéticos y no anémicos muestre, en orden descendente de edad, las columnas correspondientes a:</p>
+<ul>
+<li>Sexo</li>
+<li>Edad</li>
+<li>Diabetes</li>
+<li>Anemia</li>
+<li>Presión arterial alta</li>
 </ul>
 </section>
-<section id="ciclos-anteriores" class="level1 unnumbered">
-<h1 class="unnumbered">Ciclos anteriores</h1>
-<p>Este sitio web corresponde al curso impartido durante el primer lectivo de 2024. Para consultar las versiones de otros años y ciclos lectivos, puede visitar:</p>
+<section id="consulta-2" class="level4">
+<h4 class="anchored" data-anchor-id="consulta-2">Consulta 2</h4>
+<p>Tabla que muestre para todas las mujeres con fracción de eyección entre 20 (inclusive) y 25 (inclusive), en orden descendente de fracción de eyección, las columnas correspondientes a:</p>
 <ul>
-<li><a href="https://gf0604-procesamientodatosgeograficos.github.io/2023-i/">2023-I</a></li>
-<li><a href="https://gf0604-procesamientodatosgeograficos.github.io/2022-i/">2022-I</a></li>
-<li><a href="https://gf0604-procesamientodatosgeograficos.github.io/2021i/">2021-I</a></li>
-<li><a href="https://geoprocesamiento-2020i.github.io/">2020-I</a></li>
+<li>Sexo</li>
+<li>Fracción de eyección</li>
+<li>Anemia</li>
+<li>Diabetes</li>
 </ul>
 </section>
-<section id="información-de-contacto" class="level1 unnumbered">
-<h1 class="unnumbered">Información de contacto</h1>
-<p>Si tiene alguna pregunta o comentario sobre este curso, por favor contacte a:</p>
-<blockquote class="blockquote">
-<p>Manuel Vargas - manuel.vargas_d@ucr.ac.cr<br>
-Profesor<br>
-Universidad de Costa Rica,<br>
-Ciudad Universitaria Rodrigo Facio,<br>
-San Pedro de Montes de Oca,<br>
-Costa Rica.</p>
-</blockquote>
-<p><a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" alt="Licencia de Creative Commons" style="border-width:0"></a><br>Los contenidos de este curso, a menos que se especifique de otra forma, se comparten mediante una <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">licencia de Creative Commons Reconocimiento-CompartirIgual 4.0 Internacional</a>.</p>
+<section id="consulta-3" class="level4">
+<h4 class="anchored" data-anchor-id="consulta-3">Consulta 3</h4>
+<p>Tabla que muestre el promedio de creatinina sérica de pacientes sobrevivientes y de pacientes fallecidos.</p>
+</section>
+<section id="consulta-4" class="level4">
+<h4 class="anchored" data-anchor-id="consulta-4">Consulta 4</h4>
+<p>Tabla que muestre el valor máximo de creatinina sérica de las mujeres que son anémicas o diabéticas.</p>
+</section>
+</section>
+</section>
+<section id="calificación" class="level2">
+<h2 class="anchored" data-anchor-id="calificación">Calificación</h2>
+<ol type="1">
+<li>Presentación general del documento (uso de un tema, tabla de contenidos, lenguaje, orden, redacción): 20%</li>
+<li>Consulta 1: 20%</li>
+<li>Consulta 2: 20%</li>
+<li>Consulta 3: 20%</li>
+<li>Consulta 4: 20%</li>
+</ol>
+</section>
+<section id="consideraciones-adicionales" class="level2">
+<h2 class="anchored" data-anchor-id="consideraciones-adicionales">Consideraciones adicionales</h2>
+<ol type="1">
+<li>Esta tarea puede presentarse individualmente o en parejas. En este último caso, solo un estudiante debe presentar la tarea en Mediación Virtual y debe indicar ahí el nombre del otro estudiante.</li>
+<li>Si solo se entrega la dirección del repositorio en GitHub, y no el sitio publicado o este no es consistente con el código fuente del repositorio, se rebajará el 25% del valor de la tarea. <strong>RECOMENDACIÓN: genere el sitio web desde el inicio y actualícelo continuamente. No lo deje para última hora.</strong></li>
+<li><strong>No se aceptarán tareas que se entreguen después de la fecha y hora límite</strong>.</li>
+</ol>
 
 
 </section>
@@ -761,11 +824,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="./examen-corto-02.html" class="pagination-link" aria-label="Examen corto 2">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Examen corto 2</span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./programa_curso.html" class="pagination-link" aria-label="Programa del curso">
-        <span class="nav-page-text">Programa del curso</span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->
