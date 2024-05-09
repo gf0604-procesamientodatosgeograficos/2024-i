@@ -1,0 +1,99 @@
+# Tarea 3 - Grupo 001 {.unnumbered}
+
+## Fecha y hora límite de entrega
+**Jueves 16 de mayo de 2024, 11:00 a.m.**
+
+## Descripción general
+Esta tarea consiste en desarrollar un documento Quarto con bloques de código en R que utilicen funciones de Tidyverse para consultar un conjunto de datos y presentar los resultados en formato de tablas. El documento debe publicarse como una página web en GitHub Pages.
+
+## Objetivos
+Cada estudiante debe mostrar que es capaz de:
+
+1. Escribir código fuente en el lenguaje de programación R y utilizar funciones de la colección de paquetes de Tidyverse para leer datos, procesarlos y generar visualizaciones en forma de tablas.
+2. Escribir documentos en el sistema de publicación científica y técnica Quarto que combinen narrativa en Markdown con bloques de código en R.
+3. Publicar documentos Quarto como páginas web en GitHub Pages.
+4. Analizar y corregir errores de programación.
+
+## Acerca del conjunto de datos
+El conjunto de datos de esta tarea consiste de 299 registros de pacientes que sufrieron [insuficiencia cardíaca](https://es.wikipedia.org/wiki/Insuficiencia_card%C3%ADaca). Para cada paciente, se consideran 13 características clínicas (edad, sexo, si tenía anemia, si tenía diabetes, si fumaba y otras). Estos datos forman parte del artículo [Chicco, D., Jurman, G. Machine learning can predict survival of patients with heart failure from serum creatinine and ejection fraction alone. *BMC Med Inform Decis Mak* **20**, 16 (2020)](https://bmcmedinformdecismak.biomedcentral.com/articles/10.1186/s12911-020-1023-5). Se recomienda leer el resumen (*abstract*) del artículo.
+
+El archivo CSV con los datos está disponible en la dirección [https://github.com/gf0604-procesamientodatosgeograficos/2024-i/blob/main/datos/bmc/heart_failure_clinical_records_dataset.csv](https://github.com/gf0604-procesamientodatosgeograficos/2024-i/blob/main/datos/bmc/heart_failure_clinical_records_dataset.csv).
+
+Para más información sobre las variables del conjunto de datos, su significado y sus unidades de medida, puede consultar [Meanings, measurement units, and intervals of each feature of the dataset](https://bmcmedinformdecismak.biomedcentral.com/articles/10.1186/s12911-020-1023-5/tables/1).
+
+**NOTA**: hay varias variables *booleanas* con valor `0` o `1`. `0` significa falso (no) y `1` significa verdadero (sí). Por ejemplo, para `anaemia` un valor de `1` significa que el paciente sí tuvo anemia y un valor de `0` significa que no tuvo anemia. En el caso de `sex`, un `0` corresponde a una mujer y un `1` a un hombre.
+
+## Entregables
+Debe entregar dos direcciones web:
+
+1.  Dirección de un repositorio en GitHub (ej. https://github.com/mfvargas/insuficiencia-cardiaca) con el código fuente y los datos. Específicamente, el repositorio debe contener:
+    a. Un documento Quarto llamado `index.qmd` con el código en R y la sintaxis Markdown necesarios para generar las salidas especificadas en la sección Desarrollo.
+    b. Un documento llamado `index.html` generado a partir de `index.qmd`.
+    c. El archivo de datos `heart_failure_clinical_records_dataset.csv`.
+    d. El directorio `index_files`.    
+    
+2. Dirección de un sitio web en GitHub Pages publicado a partir del repositorio GitHub del punto 1 (ej. https://mfvargas.github.io/insuficiencia-cardiaca/).
+
+La entrega debe realizarse a través de la plataforma Mediación Virtual.
+
+## Desarrollo
+El documento Quarto debe cumplir con las siguientes características generales:
+
+- En general, debe estar ordenado y bien presentado (incluyendo la redacción y la ortografía).
+- Debe tener una tabla de contenidos.
+- El lenguaje del documento debe ser español.
+- Debe utilizar un [estilo (*theme*) de Quarto para HTML](https://quarto.org/docs/output-formats/html-themes.html).
+
+El documento debe contener las siguientes secciones:
+
+### 1 - Introducción
+Breve explicación del contenido del documento (uno o dos párrafos) y mención de la fuente de los datos originales: el enlace al artículo de Chicco y Jurman.
+
+### 2 - Carga de paquetes
+Bloque de código en R para cargar los paquetes.
+
+### 3 - Carga de datos
+Bloque de código en R para cargar los datos.
+
+### 4 - Consultas
+Debe escribir cuatro bloques de código en R que consulten el conjunto de datos y presenten los resultados en tablas. Los bloques de código en R deben utilizar funciones del paquete `dplyr` de Tidyverse (`select()`, `filter()`, `mutate()`, `arrange()`, `group_by()`, `summarize()` y otras). Las tablas deben generarse mediante la función `kable()` del paquete `knitr`.
+
+En cada caso, debe mostrarse el bloque de código y la tabla que muestra los resultado de la consulta, como se ejemplifica en la siguiente figura:
+
+![](img/tarea-03-ejercicio-00.png)
+
+#### Consulta 1
+Tabla que para las mujeres mayores de 75 años muestre, en orden descendente de edad, las columnas correspondientes a:
+
+- Sexo
+- Edad
+- Diabetes
+- Presión arterial alta
+- Creatinina sérica
+
+#### Consulta 2
+Tabla que para todos los hombres diabéticos o fumadores muestre, en orden ascendente de edad, las columnas correspondientes a:
+
+- Sexo
+- Edad
+- Diabetes
+- Fumador
+- Fracción de eyección
+
+#### Consulta 3
+Tabla que muestre el promedio de fracción de eyección de los pacientes diabéticos y de los pacientes no diabéticos.
+
+#### Consulta 4
+Tabla que muestre la menor edad de los hombres fallecidos.
+
+## Calificación
+1. Presentación general del documento (uso de un tema, tabla de contenidos, lenguaje, orden, redacción): 20%
+2. Consulta 1: 20%
+3. Consulta 2: 20%
+4. Consulta 3: 20%
+5. Consulta 4: 20%
+
+## Consideraciones adicionales
+1. Esta tarea puede presentarse individualmente o en parejas. En este último caso, solo un estudiante debe presentar la tarea en Mediación Virtual y debe indicar ahí el nombre del otro estudiante.
+2. Si solo se entrega la dirección del repositorio en GitHub, y no el sitio publicado o este no es consistente con el código fuente del repositorio, se rebajará el 25% del valor de la tarea. **RECOMENDACIÓN: genere el sitio web desde el inicio y actualícelo continuamente. No lo deje para última hora.**
+3. **No se aceptarán tareas que se entreguen después de la fecha y hora límite**.

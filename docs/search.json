@@ -1142,5 +1142,103 @@
       "Evaluaciones",
       "Tarea 3 - Grupo 002"
     ]
+  },
+  {
+    "objectID": "parte-vii-evaluaciones.html#tareas",
+    "href": "parte-vii-evaluaciones.html#tareas",
+    "title": "Evaluaciones",
+    "section": "Tareas",
+    "text": "Tareas\nTarea 3 - Grupo 001\nTarea 3 - Grupo 002",
+    "crumbs": [
+      "Evaluaciones"
+    ]
+  },
+  {
+    "objectID": "tarea-03-grupo-001.html",
+    "href": "tarea-03-grupo-001.html",
+    "title": "Tarea 3 - Grupo 001",
+    "section": "",
+    "text": "Fecha y hora límite de entrega\nJueves 16 de mayo de 2024, 11:00 a.m.",
+    "crumbs": [
+      "Evaluaciones",
+      "Tarea 3 - Grupo 001"
+    ]
+  },
+  {
+    "objectID": "tarea-03-grupo-001.html#descripción-general",
+    "href": "tarea-03-grupo-001.html#descripción-general",
+    "title": "Tarea 3 - Grupo 001",
+    "section": "Descripción general",
+    "text": "Descripción general\nEsta tarea consiste en desarrollar un documento Quarto con bloques de código en R que utilicen funciones de Tidyverse para consultar un conjunto de datos y presentar los resultados en formato de tablas. El documento debe publicarse como una página web en GitHub Pages.",
+    "crumbs": [
+      "Evaluaciones",
+      "Tarea 3 - Grupo 001"
+    ]
+  },
+  {
+    "objectID": "tarea-03-grupo-001.html#objetivos",
+    "href": "tarea-03-grupo-001.html#objetivos",
+    "title": "Tarea 3 - Grupo 001",
+    "section": "Objetivos",
+    "text": "Objetivos\nCada estudiante debe mostrar que es capaz de:\n\nEscribir código fuente en el lenguaje de programación R y utilizar funciones de la colección de paquetes de Tidyverse para leer datos, procesarlos y generar visualizaciones en forma de tablas.\nEscribir documentos en el sistema de publicación científica y técnica Quarto que combinen narrativa en Markdown con bloques de código en R.\nPublicar documentos Quarto como páginas web en GitHub Pages.\nAnalizar y corregir errores de programación.",
+    "crumbs": [
+      "Evaluaciones",
+      "Tarea 3 - Grupo 001"
+    ]
+  },
+  {
+    "objectID": "tarea-03-grupo-001.html#acerca-del-conjunto-de-datos",
+    "href": "tarea-03-grupo-001.html#acerca-del-conjunto-de-datos",
+    "title": "Tarea 3 - Grupo 001",
+    "section": "Acerca del conjunto de datos",
+    "text": "Acerca del conjunto de datos\nEl conjunto de datos de esta tarea consiste de 299 registros de pacientes que sufrieron insuficiencia cardíaca. Para cada paciente, se consideran 13 características clínicas (edad, sexo, si tenía anemia, si tenía diabetes, si fumaba y otras). Estos datos forman parte del artículo Chicco, D., Jurman, G. Machine learning can predict survival of patients with heart failure from serum creatinine and ejection fraction alone. BMC Med Inform Decis Mak 20, 16 (2020). Se recomienda leer el resumen (abstract) del artículo.\nEl archivo CSV con los datos está disponible en la dirección https://github.com/gf0604-procesamientodatosgeograficos/2024-i/blob/main/datos/bmc/heart_failure_clinical_records_dataset.csv.\nPara más información sobre las variables del conjunto de datos, su significado y sus unidades de medida, puede consultar Meanings, measurement units, and intervals of each feature of the dataset.\nNOTA: hay varias variables booleanas con valor 0 o 1. 0 significa falso (no) y 1 significa verdadero (sí). Por ejemplo, para anaemia un valor de 1 significa que el paciente sí tuvo anemia y un valor de 0 significa que no tuvo anemia. En el caso de sex, un 0 corresponde a una mujer y un 1 a un hombre.",
+    "crumbs": [
+      "Evaluaciones",
+      "Tarea 3 - Grupo 001"
+    ]
+  },
+  {
+    "objectID": "tarea-03-grupo-001.html#entregables",
+    "href": "tarea-03-grupo-001.html#entregables",
+    "title": "Tarea 3 - Grupo 001",
+    "section": "Entregables",
+    "text": "Entregables\nDebe entregar dos direcciones web:\n\nDirección de un repositorio en GitHub (ej. https://github.com/mfvargas/insuficiencia-cardiaca) con el código fuente y los datos. Específicamente, el repositorio debe contener:\n\nUn documento Quarto llamado index.qmd con el código en R y la sintaxis Markdown necesarios para generar las salidas especificadas en la sección Desarrollo.\nUn documento llamado index.html generado a partir de index.qmd.\nEl archivo de datos heart_failure_clinical_records_dataset.csv.\nEl directorio index_files.\n\nDirección de un sitio web en GitHub Pages publicado a partir del repositorio GitHub del punto 1 (ej. https://mfvargas.github.io/insuficiencia-cardiaca/).\n\nLa entrega debe realizarse a través de la plataforma Mediación Virtual.",
+    "crumbs": [
+      "Evaluaciones",
+      "Tarea 3 - Grupo 001"
+    ]
+  },
+  {
+    "objectID": "tarea-03-grupo-001.html#desarrollo",
+    "href": "tarea-03-grupo-001.html#desarrollo",
+    "title": "Tarea 3 - Grupo 001",
+    "section": "Desarrollo",
+    "text": "Desarrollo\nEl documento Quarto debe cumplir con las siguientes características generales:\n\nEn general, debe estar ordenado y bien presentado (incluyendo la redacción y la ortografía).\nDebe tener una tabla de contenidos.\nEl lenguaje del documento debe ser español.\nDebe utilizar un estilo (theme) de Quarto para HTML.\n\nEl documento debe contener las siguientes secciones:\n\n1 - Introducción\nBreve explicación del contenido del documento (uno o dos párrafos) y mención de la fuente de los datos originales: el enlace al artículo de Chicco y Jurman.\n\n\n2 - Carga de paquetes\nBloque de código en R para cargar los paquetes.\n\n\n3 - Carga de datos\nBloque de código en R para cargar los datos.\n\n\n4 - Consultas\nDebe escribir cuatro bloques de código en R que consulten el conjunto de datos y presenten los resultados en tablas. Los bloques de código en R deben utilizar funciones del paquete dplyr de Tidyverse (select(), filter(), mutate(), arrange(), group_by(), summarize() y otras). Las tablas deben generarse mediante la función kable() del paquete knitr.\nEn cada caso, debe mostrarse el bloque de código y la tabla que muestra los resultado de la consulta, como se ejemplifica en la siguiente figura:\n\n\nConsulta 1\nTabla que para las mujeres mayores de 75 años muestre, en orden descendente de edad, las columnas correspondientes a:\n\nSexo\nEdad\nDiabetes\nPresión arterial alta\nCreatinina sérica\n\n\n\nConsulta 2\nTabla que para todos los hombres diabéticos o fumadores muestre, en orden ascendente de edad, las columnas correspondientes a:\n\nSexo\nEdad\nDiabetes\nFumador\nFracción de eyección\n\n\n\nConsulta 3\nTabla que muestre el promedio de fracción de eyección de los pacientes diabéticos y de los pacientes no diabéticos.\n\n\nConsulta 4\nTabla que muestre la menor edad de los hombres fallecidos.",
+    "crumbs": [
+      "Evaluaciones",
+      "Tarea 3 - Grupo 001"
+    ]
+  },
+  {
+    "objectID": "tarea-03-grupo-001.html#calificación",
+    "href": "tarea-03-grupo-001.html#calificación",
+    "title": "Tarea 3 - Grupo 001",
+    "section": "Calificación",
+    "text": "Calificación\n\nPresentación general del documento (uso de un tema, tabla de contenidos, lenguaje, orden, redacción): 20%\nConsulta 1: 20%\nConsulta 2: 20%\nConsulta 3: 20%\nConsulta 4: 20%",
+    "crumbs": [
+      "Evaluaciones",
+      "Tarea 3 - Grupo 001"
+    ]
+  },
+  {
+    "objectID": "tarea-03-grupo-001.html#consideraciones-adicionales",
+    "href": "tarea-03-grupo-001.html#consideraciones-adicionales",
+    "title": "Tarea 3 - Grupo 001",
+    "section": "Consideraciones adicionales",
+    "text": "Consideraciones adicionales\n\nEsta tarea puede presentarse individualmente o en parejas. En este último caso, solo un estudiante debe presentar la tarea en Mediación Virtual y debe indicar ahí el nombre del otro estudiante.\nSi solo se entrega la dirección del repositorio en GitHub, y no el sitio publicado o este no es consistente con el código fuente del repositorio, se rebajará el 25% del valor de la tarea. RECOMENDACIÓN: genere el sitio web desde el inicio y actualícelo continuamente. No lo deje para última hora.\nNo se aceptarán tareas que se entreguen después de la fecha y hora límite.",
+    "crumbs": [
+      "Evaluaciones",
+      "Tarea 3 - Grupo 001"
+    ]
   }
 ]
