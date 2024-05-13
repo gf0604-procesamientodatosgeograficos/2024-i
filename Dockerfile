@@ -14,12 +14,6 @@ RUN apt-get update && \
 # Instalación del paquete here de R, versión 1.0.1
 RUN R -e "devtools::install_version('here', version = '1.0.1', repos = 'http://cran.us.r-project.org')"
 
-# Instalación del paquete janitor de R, versión 2.2.0
-RUN R -e "devtools::install_version('janitor', version = '2.2.0', repos = 'http://cran.us.r-project.org')"
-
-# Instalación del paquete rgbif de R, versión 3.7.9
-RUN R -e "devtools::install_version('rgbif', version = '3.7.9', repos = 'http://cran.us.r-project.org')"
-
 # Instalación del paquete DT de R, versión 0.32
 RUN R -e "devtools::install_version('DT', version = '0.32', repos = 'http://cran.us.r-project.org')"
 
@@ -37,6 +31,9 @@ RUN R -e "devtools::install_version('PASWR2', version = '1.0.5', repos = 'http:/
 
 # Instalación del paquete palmerpenguins de R, versión 0.1.1
 RUN R -e "devtools::install_version('palmerpenguins', version = '0.1.1', repos = 'http://cran.us.r-project.org')"
+
+# Instalación del paquete gapminder de R, versión 1.0.0
+RUN R -e "devtools::install_version('gapminder', version = '1.0.0', repos = 'http://cran.us.r-project.org')"
 
 # Instalación del paquete ggthemes de R, versión 5.1.0
 RUN R -e "devtools::install_version('ggthemes', version = '5.1.0', repos = 'http://cran.us.r-project.org')"
