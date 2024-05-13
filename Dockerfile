@@ -38,8 +38,12 @@ RUN R -e "devtools::install_version('PASWR2', version = '1.0.5', repos = 'http:/
 # Instalación del paquete palmerpenguins de R, versión 0.1.1
 RUN R -e "devtools::install_version('palmerpenguins', version = '0.1.1', repos = 'http://cran.us.r-project.org')"
 
-# Instalación del paquete crhexgrids de R (parece que no maneja versiones)
-RUN R -e "devtools::install_github('ManuelSpinola/crhexgrids')"
+# Instalación del paquete ggthemes de R, versión 5.1.0
+RUN R -e "devtools::install_version('ggthemes', version = '5.1.0', repos = 'http://cran.us.r-project.org')"
+
+# Instalación del paquete hrbrthemes de R, versión 0.8.7
+RUN R -e "devtools::install_version('hrbrthemes', version = '0.8.7', repos = 'http://cran.us.r-project.org')"
+
 
 # Se limpia el cache de apt-get para reducir el tamaño de la imagen
 RUN apt-get clean && \
