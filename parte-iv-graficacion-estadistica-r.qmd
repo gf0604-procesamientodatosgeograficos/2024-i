@@ -1,3 +1,4 @@
 # IV - Graficación estadística en R {.unnumbered}
 
-[9 dplyr - gramática para manipulación de datos](09-dplyr.qmd)
+[9 dplyr - gramática para manipulación de datos](09-dplyr.qmd)  
+[10 ggplot2 y plotly - creación declarativa de gráficos interactivos](10-ggplot2-plotly.qmd)  

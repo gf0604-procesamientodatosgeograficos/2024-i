@@ -1240,5 +1240,49 @@
       "Evaluaciones",
       "Tarea 3 - Grupo 001"
     ]
+  },
+  {
+    "objectID": "10-ggplot2-plotly.html",
+    "href": "10-ggplot2-plotly.html",
+    "title": "10  ggplot2 y plotly - creación declarativa de gráficos interactivos",
+    "section": "",
+    "text": "10.1 Resumen\nR proporciona una gran cantidad de funciones para la elaboración de gráficos estadísticos y otros tipos de visualizaciones. El paquete base de R, por ejemplo, contiene un conjunto básico de funciones muy versátiles, especialmente para gráficos simples de conjuntos de datos relativamente pequeños. Sin embargo, para visualizaciones más avanzadas, puede ser conveniente explorar otras bibliotecas.\nggplot2 es una de las bibliotecas más populares de graficación de R. Implementa el concepto de “gramática de gráficos”, que permite crear visualizaciones complejas a partir de capas y componentes simples. Forma parte de Tidyverse, por lo que se comunica muy bien con los demás paquetes de esta familia, enfocada en conjuntos de datos grandes y en ciencia de datos.\nplotly es una biblioteca para crear gráficos interactivos y dinámicos. Contiene capacidades para agregar controles y mecanismos que le permiten al usuario interactuar con los gráficos y realizar operaciones como filtrados, acercamientos y alejamientos, entre otras.\nEl paquete DT, por su parte, permite presentar conjuntos de datos en tablas interactivas en las que se pueden realizar operaciones como ordenamientos, consultas y filtrados.",
+    "crumbs": [
+      "IV - Graficación estadística en R",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>ggplot2 y plotly - creación declarativa de gráficos interactivos</span>"
+    ]
+  },
+  {
+    "objectID": "10-ggplot2-plotly.html#trabajo-previo",
+    "href": "10-ggplot2-plotly.html#trabajo-previo",
+    "title": "10  ggplot2 y plotly - creación declarativa de gráficos interactivos",
+    "section": "10.2 Trabajo previo",
+    "text": "10.2 Trabajo previo\n\n10.2.1 Lecturas\nChang, W. (2018). R graphics cookbook: Practical recipes for visualizing data. O’Reilly. https://r-graphics.org/\nWickham, H., & Grolemund, G. (2017). R for Data Science: Import, Tidy, Transform, Visualize, and Model Data (capítulo 3). O’Reilly Media. https://r4ds.had.co.nz/\nWickham, H., & Grolemund, G. (s. f.). R para Ciencia de Datos (1era ed.) (capítulo 3). https://es.r4ds.hadley.nz/\nWickham, H., Çetinkaya-Rundel, M., & Grolemund, G. (s. f.). R for Data Science (2nd ed.) (capítulo 2). https://r4ds.hadley.nz/\nWickham, H., Navarro, D., & Pedersen, T. L. (s.f.). ggplot2: Elegant graphics for data analysis. https://ggplot2-book.org/",
+    "crumbs": [
+      "IV - Graficación estadística en R",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>ggplot2 y plotly - creación declarativa de gráficos interactivos</span>"
+    ]
+  },
+  {
+    "objectID": "10-ggplot2-plotly.html#instalación-y-carga",
+    "href": "10-ggplot2-plotly.html#instalación-y-carga",
+    "title": "10  ggplot2 y plotly - creación declarativa de gráficos interactivos",
+    "section": "10.3 Instalación y carga",
+    "text": "10.3 Instalación y carga\nLos paquetes necesarios pueden instalarse con la función install.packages(). Ya que se usaron en capítulos anteriores, en este punto se asumen instalados los paquetes de Tidyverse.\n\n# Instalación de plotly\ninstall.packages(\"plotly\")\n\n# Instalación de DT\ninstall.packages(\"DT\")\n\nUna vez instalados, los paquetes pueden cargarse con la función library():\n\n# Carga conjunta de Tidyverse \n# (incluye ggplot2, dplyr, readr y otros)\nlibrary(tidyverse)\n\n# Carga de plotly\nlibrary(plotly)\n\n# Carga de DT\nlibrary(DT)",
+    "crumbs": [
+      "IV - Graficación estadística en R",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>ggplot2 y plotly - creación declarativa de gráficos interactivos</span>"
+    ]
+  },
+  {
+    "objectID": "10-ggplot2-plotly.html#conjuntos-de-datos-de-ejemplo",
+    "href": "10-ggplot2-plotly.html#conjuntos-de-datos-de-ejemplo",
+    "title": "10  ggplot2 y plotly - creación declarativa de gráficos interactivos",
+    "section": "10.4 Conjuntos de datos de ejemplo",
+    "text": "10.4 Conjuntos de datos de ejemplo\n\n10.4.1 mpg\nmpg es uno de los conjuntos de datos de ejemplo que se incluyen junto con el paquete ggplot2. Contiene observaciones para 38 modelos de automóviles, recopiladas por la Agencia de Protección Ambiental de los Estados Unidos, y un conjunto de variables relacionadas con el consumo de combustible.\nEn el siguiente bloque de código, se utiliza la función datatable() del paquete DT, para desplegar las observaciones de mpg en una tabla.\n\n# Tabla de datos de mpg\nmpg |&gt;\n  datatable(\n    options = list(\n      pageLength = 5,\n      language = list(url = '//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json')\n    )\n  )\n\n\n\n\n\nDT es un “envoltorio” (wrapper) de la biblioteca DataTables de JavaScript, un lenguaje ampliamente utilizado en el desarrollo de páginas web interactivas.\n\n\n10.4.2 diamonds\ndiamonds es otro de los conjuntos de datos de ejemplo de ggplot2. Contiene observaciones de más de 50000 diamantes, incluyendo su precio, color, claridad y otros atributos.\n\n# Tabla de datos de diamonds\ndiamonds |&gt;\n  datatable(\n    options = list(\n      pageLength = 5,\n      language = list(url = '//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json')\n    )\n  )",
+    "crumbs": [
+      "IV - Graficación estadística en R",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>ggplot2 y plotly - creación declarativa de gráficos interactivos</span>"
+    ]
   }
 ]

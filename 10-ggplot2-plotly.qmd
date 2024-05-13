@@ -1,0 +1,1259 @@
+# ggplot2 y plotly - creación declarativa de gráficos interactivos
+
+## Resumen
+R proporciona una gran cantidad de funciones para la elaboración de gráficos estadísticos y otros tipos de visualizaciones. El paquete base de R, por ejemplo, contiene un conjunto básico de funciones muy versátiles, especialmente para gráficos simples de conjuntos de datos relativamente pequeños. Sin embargo, para visualizaciones más avanzadas, puede ser conveniente explorar otras bibliotecas.
+
+ggplot2 es una de las bibliotecas más populares de graficación de R. Implementa el concepto de "gramática de gráficos", que permite crear visualizaciones complejas a partir de capas y componentes simples. Forma parte de Tidyverse, por lo que se comunica muy bien con los demás paquetes de esta familia, enfocada en conjuntos de datos grandes y en ciencia de datos. 
+
+plotly es una biblioteca para crear gráficos interactivos y dinámicos. Contiene capacidades para agregar controles y mecanismos que le permiten al usuario interactuar con los gráficos y realizar operaciones como filtrados, acercamientos y alejamientos, entre otras.
+
+El paquete DT, por su parte, permite presentar conjuntos de datos en tablas interactivas en las que se pueden realizar operaciones como ordenamientos, consultas y filtrados.
+
+## Trabajo previo
+
+### Lecturas
+Chang, W. (2018). *R graphics cookbook: Practical recipes for visualizing data*. O'Reilly. <https://r-graphics.org/>
+
+Wickham, H., & Grolemund, G. (2017). *R for Data Science: Import, Tidy, Transform, Visualize, and Model Data* (capítulo 3). O'Reilly Media. <https://r4ds.had.co.nz/>
+
+Wickham, H., & Grolemund, G. (s. f.). *R para Ciencia de Datos (1era ed.)* (capítulo 3). <https://es.r4ds.hadley.nz/>
+
+Wickham, H., Çetinkaya-Rundel, M., & Grolemund, G. (s. f.). *R for Data Science (2nd ed.)* (capítulo 2). <https://r4ds.hadley.nz/>
+
+Wickham, H., Navarro, D., & Pedersen, T. L. (s.f.). *ggplot2: Elegant graphics for data analysis*. <https://ggplot2-book.org/>
+
+## Instalación y carga
+Los paquetes necesarios pueden instalarse con la función `install.packages()`. Ya que se usaron en capítulos anteriores, en este punto se asumen instalados los paquetes de Tidyverse.
+
+```{r}
+#| label: instalacion-paquetes
+#| eval: false
+
+# Instalación de plotly
+install.packages("plotly")
+
+# Instalación de DT
+install.packages("DT")
+```
+
+Una vez instalados, los paquetes pueden cargarse con la función `library()`:
+
+```{r}
+#| label: carga-paquetes
+#| message: false
+
+# Carga conjunta de Tidyverse 
+# (incluye ggplot2, dplyr, readr y otros)
+library(tidyverse)
+
+# Carga de plotly
+library(plotly)
+
+# Carga de DT
+library(DT)
+```
+
+## Conjuntos de datos de ejemplo
+
+### mpg
+[mpg](https://ggplot2.tidyverse.org/reference/mpg.html) es uno de los conjuntos de datos de ejemplo que se incluyen junto con el paquete ggplot2. Contiene observaciones para 38 modelos de automóviles, recopiladas por la Agencia de Protección Ambiental de los Estados Unidos, y un conjunto de variables relacionadas con el consumo de combustible.
+
+En el siguiente bloque de código, se utiliza la función [datatable()](https://rdrr.io/cran/DT/man/datatable.html) del paquete [DT](https://rstudio.github.io/DT/), para desplegar las observaciones de mpg en una tabla.
+
+```{r}
+#| label: tabla-mpg
+
+# Tabla de datos de mpg
+mpg |>
+  datatable(
+    options = list(
+      pageLength = 5,
+      language = list(url = '//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json')
+    )
+  )
+```
+
+DT es un "envoltorio" (*wrapper*) de la biblioteca [DataTables](https://datatables.net/) de [JavaScript](https://es.wikipedia.org/wiki/JavaScript), un lenguaje ampliamente utilizado en el desarrollo de páginas web interactivas.
+
+### diamonds
+[diamonds](https://ggplot2.tidyverse.org/reference/diamonds.html) es otro de los conjuntos de datos de ejemplo de ggplot2. Contiene observaciones de más de 50000 diamantes, incluyendo su precio, color, claridad y otros atributos.
+
+```{r}
+#| label: tabla-diamonds
+#| warning: false
+
+# Tabla de datos de diamonds
+diamonds |>
+  datatable(
+    options = list(
+      pageLength = 5,
+      language = list(url = '//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json')
+    )
+  )
+```
+
+### gapminder
+Este conjunto es un extracto de los datos disponibles en [Gapminder.org](https://www.gapminder.org/), una organización son fines de lucro que promueve el desarrollo global y el cumplimiento de los [Objetivos de Desarrollo del Milenio de las Naciones Unidas](https://es.wikipedia.org/wiki/Objetivos_de_Desarrollo_del_Milenio), a través de la estadística y la información general sobre desarrollo social, económico y ambiental a nivel local, nacional y global. 
+
+Se distribuye en el paquete [gapminder](https://rdrr.io/cran/gapminder/), el cual contiene el data frame `gapminder`, que incluye datos de esperanza de vida, producto interno bruto y población de 142 países, para cada cinco años, entre 1952 y 2007.
+
+```{r}
+#| label: gapminder-instalacion
+#| eval: false
+
+# Instalación de gapminder
+install.packages("gapminder")
+```
+
+```{r}
+#| label: gapminder-carga
+
+# Carga de gapminder
+library(gapminder)
+```
+
+La siguiente tabla muestra los datos de gapminder para el año 2007.
+
+```{r}
+#| label: tabla-gapminder
+#| warning: false
+
+# Tabla de datos de gapminder
+gapminder |>
+  filter(year == 2007) |> # filtro para el año 2007
+  datatable(
+    options = list(
+      pageLength = 5,
+      language = list(url = '//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json')
+    )
+  )
+```
+
+### Casos de COVID-19 en Costa Rica
+Estos datos fueron publicados por el Ministerio de Salud de Costa Rica en [https://geovision.uned.ac.cr/oges/](https://geovision.uned.ac.cr/oges/) (a la fecha de escritura de este documento, el enlace no está funcionando). Se distribuyen en archivos CSV, incluyendo un archivo de datos generales para todo el país y varios archivos con datos por cantón. La fecha de la última actualización es 2022-05-30.
+
+Puede encontrar el archivo que se necesita para este capítulo en [https://raw.githubusercontent.com/gf0604-procesamientodatosgeograficos/2024-i/main/datos/ministerio-salud/covid/05_30_22_CSV_GENERAL.csv](https://raw.githubusercontent.com/gf0604-procesamientodatosgeograficos/2024-i/main/datos/ministerio-salud/covid/05_30_22_CSV_GENERAL.csv).
+
+El siguiente bloque de código, carga y transforma los datos generales de COVID-19 con funciones de los paquetes readr y dplyr. La función [read_delim()](https://readr.tidyverse.org/reference/read_delim.html) de [readr](https://readr.tidyverse.org/), lee datos de formatos tabulares (ej. CSV, TSV) y, entre otras ventajas, permite cargar solo las columnas especificadas en el argumento `col_select`. Las funciones `read_csv()`, `read_csv2()` y `read_tsv()` son casos especiales de `read_delim()`.
+
+```{r}
+#| label: carga-transformacion-datos-covid-generales
+#| message: false
+
+# Carga del archivo CSV de entrada en un dataframe
+# con la función read_delim() de readr
+covid_general <-
+  read_delim(
+    file = "https://raw.githubusercontent.com/gf0604-procesamientodatosgeograficos/2024-i/main/datos/ministerio-salud/covid/05_30_22_CSV_GENERAL.csv",
+    col_select = c(
+      "FECHA",
+      "positivos",
+      "activos",
+      "RECUPERADOS",
+      "fallecidos",
+      "nue_posi",
+      "nue_falleci",
+      "salon",
+      "UCI"
+    )
+  )
+
+# Cambio de nombre de columnas
+covid_general <-
+  covid_general |>
+  rename(
+    fecha = FECHA,
+    recuperados = RECUPERADOS,
+    nuevos_positivos = nue_posi,
+    nuevos_fallecidos = nue_falleci,
+    uci = UCI
+  )
+
+# Cambio de tipo de datos de la columna fecha, de str a date
+covid_general <-
+  covid_general |>
+  mutate(fecha = as.Date(fecha, format = "%d/%m/%Y"))
+```
+
+La siguiente tabla muestra los datos generales de COVID-19.
+
+```{r}
+#| label: tabla-covid-generales
+#| warning: false
+
+# Tabla de datos de COVID generales
+covid_general |>
+  datatable(
+    options = list(
+      pageLength = 5,
+      language = list(url = '//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json')
+    )
+  )
+```
+
+### Delitos cometidos en 2023 en Costa Rica
+Contiene estadísticas policiales de 2022, publicadas en el [sitio de datos abiertos del Organismo de Investigación Judicial (OIJ)](https://sitiooij.poder-judicial.go.cr/index.php/ayuda/servicios-policiales/servicios-a-organizaciones/indice-de-transparencia-del-sector-publico-costarricense/datos-abiertos).
+
+Puede encontrar el archivo que se necesita para este capítulo en [https://raw.githubusercontent.com/gf0604-procesamientodatosgeograficos/2024-i/main/datos/oij/estadisticas-policiales/estadisticaspoliciales2023.csv](https://raw.githubusercontent.com/gf0604-procesamientodatosgeograficos/2023-i/main/datos/oij/estadisticas-policiales/estadisticaspoliciales2022.csv)
+
+```{r}
+#| label: tabla-delitos-2023
+#| warning: false
+
+# Carga de datos
+delitos_2023 <-
+  read_delim(
+    file = "https://raw.githubusercontent.com/gf0604-procesamientodatosgeograficos/2024-i/main/datos/oij/estadisticas-policiales/estadisticaspoliciales2023.csv"
+  )
+
+# Tabla de datos
+delitos_2023 |>
+  datatable(
+    options = list(
+      pageLength = 5,
+      language = list(url = '//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json')
+    )
+  )
+```
+
+## Introducción
+Se introducen los paquetes de graficación estadística ggplot2 y plotly. Se utiliza ggplot2 para elaborar los gráficos y plotly para hacerlos interactivos.
+
+### ggplot2
+[ggplot2](https://ggplot2.tidyverse.org/) es un sistema para la creación declarativa de gráficos, creado por Hadley Wickham en 2005. Está basado en el libro [*The Grammar of Graphics*, de Leland Wilkinson](https://www.springer.com/gp/book/9780387245447), un esquema general para visualización de datos que descompone un gráfico en sus principales componentes semánticos, tales como capas y geometrías.
+
+#### Principales componentes de un gráfico
+De acuerdo con *The Grammar of Graphics*, los tres principales componentes de un gráfico son:
+
+1.  Datos (observaciones y variables).
+2.  Conjunto de mapeos de las variables del conjunto de datos a propiedades visuales (*aesthetics*) del gráfico, tales como posición en el eje x, posición en el eje y, color, tamaño y forma, entre otras.
+3.  Al menos una capa, la cual describe como graficar cada observación. Por lo general, las capas se crean con funciones de geometrías (ej. puntos, líneas, barras).
+
+#### Opciones básicas
+ggplot2 implementa un gráfico estadístico por medio de la función [ggplot()](https://ggplot2.tidyverse.org/reference/ggplot.html), cuya sintaxis básica puede resumirse de la siguiente forma:
+
+```
+ggplot(data = <DATOS>) + 
+    <FUNCION_GEOMETRIA>(mapping = aes(<MAPEOS>))
+```
+
+El llamado a `ggplot()` crea un sistema de coordenadas (i.e. un "canvas"), al cual se le agregan capas. Su primer argumento es `<DATOS>`, el cual es usualmente un dataframe o un tibble.
+
+La función [aes()](https://ggplot2.tidyverse.org/reference/aes.html) realiza los mapeos (`<MAPEOS>`) de las variables del conjunto de datos a las propiedades visuales del gráfico. Las capas se crean con funciones de geometrías (`<FUNCION_GEOMETRIA>`) como [geom_point()](https://ggplot2.tidyverse.org/reference/geom_point.html), [geom_bar()](https://ggplot2.tidyverse.org/reference/geom_bar.html) o [geom_histogram()](https://ggplot2.tidyverse.org/reference/geom_histogram.html), entre muchas otras. Note el uso del operador `+` para agregar las capas al gráfico.
+
+Como ejemplo, seguidamente se crea un [gráfico de dispersión](https://es.wikipedia.org/wiki/Diagrama_de_dispersi%C3%B3n) que muestra la variable *engine displacement* o cilindrada (`displ`) en el eje X, y la variable *highway miles per gallon* o millas por galón en autopista (`hwy`) en el eje Y.
+
+```{r}
+#| label: grafico-dispersion-mpg-basico
+
+# Gráfico de dispersión de cilindrada vs millas por galón en autopista
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy))
+```
+
+El bloque de código anterior puede reescribirse mediante un *pipe*, para pasar el conjunto de datos a `ggplot()`. También puede llamarse a `aes()` como un argumento de `ggplot()` y no de la función de geometría. Esto último acostumbra hacerse cuando los mapeos de las variables a las propiedades estéticas son los mismos en todas las capas del gráfico.
+
+```{r}
+#| label: grafico-dispersion-mpg-pipe
+
+# Gráfico de dispersión de cilindrada vs millas por galón en autopista
+mpg |>
+  ggplot(aes(x = displ, y = hwy)) +
+  geom_point()
+```
+
+El gráfico muestra una relación negativa entre el tamaño del motor (`displ`) y la eficiencia en el uso del combustible (`hwy`). En otras palabras, los vehículos con motores grandes usan más combustible.
+
+#### Variables adicionales
+Se pueden incluir variables adicionales en el gráfico mediante su mapeo a otras propiedades visuales. En el siguiente bloque de código, la variable correspondiente al tipo de automóvil (`class`), se mapea a la propiedad `color`.
+
+```{r}
+#| label: grafico-dispersion-mpg-color
+
+# Gráfico de dispersión de cilindrada vs millas por galón en autopista
+# coloreado por tipo de automóvil
+mpg |>
+  ggplot(aes(x = displ, y = hwy, color = class)) +
+  geom_point()
+```
+
+La misma variable puede mapearse a la propiedad visual `shape` (forma). 
+
+```{r}
+#| label: grafico-dispersion-mpg-shape
+#| warning: false
+
+# Gráfico de dispersión de cilindrada vs millas por galón en autopista
+# con formas de puntos correspondientes al tipo de automóvil
+mpg |>
+  ggplot(aes(x = displ, y = hwy, shape = class)) +
+  geom_point()
+```
+
+La categoría de los SUV no se incluye en el gráfico debido a que `ggplot()` solo muestra, por defecto, seis formas diferentes cuando se asignan de manera automática. Esto puede solucionarse si se asigna explícitamente una forma a cada categoría. En el siguiente bloque de código, se asignan manualmente tanto formas como colores a cada categoría de vehículo, mediante las funciones [scale_shape_manual()](https://ggplot2.tidyverse.org/reference/scale_shape.html) y [scale_color_manual()](https://ggplot2.tidyverse.org/reference/scale_manual.html).
+
+```{r}
+#| label: grafico-dispersion-mpg-shape-color
+#| warning: false
+
+# Gráfico de dispersión de cilindrada vs millas por galón en autopista
+# con formas y colores correspondientes al tipo de automóvil
+mpg |>
+  ggplot(aes(x = displ, y = hwy, shape = class, color = class)) +
+  geom_point() +
+  scale_shape_manual(values = c(0, 1, 2, 3, 4, 5, 6)) +
+  scale_color_manual(values = c("red", "blue", "green", "purple", "orange", "brown", "pink"))
+```
+
+El siguiente bloque de código mapea la variable de la cilindrada con la propiedad visual tamaño (`size`) y compara el rendimiento en autopista de los automóviles con el rendimiento en ciudad.
+
+```{r}
+#| label: grafico-dispersion-mpg-size
+#| warning: false
+
+# Gráfico de dispersión de rendimiento en autopista vs rendimiento en ciudad
+# con tamaño de puntos correspondiente a la cilindrada
+mpg |>
+  ggplot(aes(x = hwy, y = cty, size = displ)) +
+  geom_point()
+```
+
+El gráfico muestra que, ya sea en autopista o en ciudad, los motores con mayor cilindrada requieren de más combustible que los motores de menor cilindrada.
+
+#### Capas adicionales
+Un mismo gráfico puede contener múltiples capas, cada una con su propia función de geometría. El siguiente bloque de código agrega una capa con la función [geom_smooth()](https://ggplot2.tidyverse.org/reference/geom_smooth.html), la cual muestra una curva de tendencia.
+
+```{r}
+#| label: grafico-dispersion-mpg-smooth
+#| warning: false
+
+# Gráfico de dispersión de cilindrada vs millas por galón en autopista
+# + curva de tendencia
+mpg |>
+  ggplot(aes(x = displ, y = hwy)) +
+  geom_point() +
+  geom_smooth()
+```
+
+En el siguiente ejemplo, se mapea la variable tipo de tracción (`drv`) a la propiedad visual del color, tanto para la capa de puntos como para la de la curva de tendencia.
+
+```{r}
+#| label: grafico-dispersion-mpg-smooth-drv
+#| warning: false
+
+# Gráfico de dispersión de cilindrada vs millas por galón en autopista
+# coloreado por tipo de tracción
+# + curva de tendencia
+mpg |>
+  ggplot(aes(x = displ, y = hwy, color = drv)) +
+  geom_point() +
+  geom_smooth()
+```
+
+#### Paneles
+Como se mostró anteriormente, una forma de mostrar variables adicionales en un gráfico es mediante propiedades visuales (color, forma, tamaño, etc.). Otra forma es mediante el uso de paneles (*facets*), los cuales dividen un gráfico en subgráficos, de acuerdo con los valores de una variable. Este método es particularmente apropiado cuando la variable adicional es categórica.
+
+La función [facet_wrap()](https://ggplot2.tidyverse.org/reference/facet_wrap.html) divide un gráfico en paneles de acuerdo con una sola variable. El primer argumento es una [fórmula](https://www.datacamp.com/tutorial/r-formula-tutorial), la cual se crea con el caracter `~` (tilde) seguido por el nombre de la variable.
+
+En el siguiente bloque de código, se generan paneles para el gráfico de dispersión de cilindrada vs millas por galón en autopista, de acuerdo con el tipo de automóvil. Es decir, un panel (subgráfico) por cada tipo de automóvil.
+
+```{r}
+#| label: grafico-dispersion-mpg-facet_wrap
+#| warning: false
+
+# Gráfico de dispersión de cilindrada vs millas por galón en autopista
+# + paneles por tipo de automóvil
+mpg |>
+  ggplot(aes(x = displ, y = hwy)) +
+  geom_point() +
+  facet_wrap(~ class, nrow = 2)
+```
+
+La función [facet_grid()](https://ggplot2.tidyverse.org/reference/facet_grid.html) genera paneles con la combinación de dos variables. El primer argumento es también una fórmula, la cual contiene dos variables separadas por `~`.
+
+En el siguiente bloque de código, se generan paneles para el gráfico de dispersión de cilindrada vs millas por galón en autopista, de acuerdo con el tipo de automóvil y el tipo de tracción.
+
+```{r}
+#| label: grafico-dispersion-mpg-facet_grid
+#| warning: false
+
+# Gráfico de dispersión de cilindrada vs millas por galón en autopista
+# + paneles por tipo de automóvil y tipo de tracción
+mpg |>
+  ggplot(aes(x = displ, y = hwy)) +
+  geom_point() +
+  facet_grid(class ~ drv)
+```
+
+#### Títulos, etiquetas, estilos y colores
+
+##### Titulos, subtítulos y etiquetas
+ggplot2 incluye las funciones [ggtitle()](https://ggplot2.tidyverse.org/reference/labs.html), [xlab()](https://ggplot2.tidyverse.org/reference/labs.html), [ylab()](https://ggplot2.tidyverse.org/reference/labs.html) y [labs()](https://ggplot2.tidyverse.org/reference/labs.html), las cuales permiten agregar títulos, subtítulos, etiquetas en los ejes y de otros tipos a un gráfico.
+
+Algunas de las opciones que ofrecen estas funciones se ilustran en el siguiente gráfico.
+
+```{r}
+#| label: grafico-dispersion-mpg-etiquetas
+#| warning: false
+#| message: false
+
+# Gráfico de dispersión de cilindrada vs millas por galón en autopista
+# coloreado por tipo de tracción con título, subtítulo y etiquetas
+mpg |>
+  ggplot(aes(x = displ, y = hwy, color = drv)) +
+  geom_point() +
+  geom_smooth() +
+  ggtitle("Cilindrada vs rendimiento en autopista por tipo de tracción") +
+  xlab("Cilindrada (l)") +
+  ylab("Rendimiento en autopista (mpg)") +
+  labs(subtitle = "Datos de 38 modelos de automóviles de años entre 1999 y 2008", 
+       caption = "Fuente: United States Environmental Protection Agency (EPA)",
+       color = "Tipo de tracción")
+```
+
+El títulos y las etiquetas de los ejes se pueden agregar también mediante argumentos de `labs()`.
+
+##### Estilos
+ggplot2 incluye un conjunto de [estilos](https://ggplot2.tidyverse.org/reference/ggtheme.html) (*themes*) que pueden ayudar a mejorar el aspecto visual de los gráficos.
+
+```{r}
+#| label: grafico-dispersion-mpg-etiquetas-estilo
+#| warning: false
+#| message: false
+
+# Gráfico de dispersión de cilindrada vs millas por galón en autopista
+# coloreado por tipo de tracción con título, subtítulo, etiquetas y estilo
+mpg |>
+  ggplot(aes(x = displ, y = hwy, color = drv)) +
+  geom_point() +
+  geom_smooth() +
+  ggtitle("Cilindrada vs rendimiento en autopista") +
+  xlab("Cilindrada (l)") +
+  ylab("Rendimiento en autopista (mpg)") +
+  labs(subtitle = "Datos de 38 modelos de automóviles de años entre 1999 y 2008", 
+       caption = "Fuente: United States Environmental Protection Agency (EPA)",
+       color = "Tipo de tracción") +
+  theme_bw() # tema de ggplot2
+```
+
+Existen paquetes que ofrecen estilos adicionales como, por ejemplo, [ggthemes](https://yutannihilation.github.io/allYourFigureAreBelongToUs/ggthemes/).
+
+```{r}
+#| label: ggthemes-instalacion
+#| eval: false
+
+# Instalación de ggthemes
+install.packages("ggthemes")
+```
+
+```{r}
+#| label: ggthemes-carga
+
+# Carga de ggthemes
+library(ggthemes)
+```
+
+```{r}
+#| label: grafico-dispersion-mpg-ggthemes
+#| warning: false
+#| message: false
+
+# Gráfico de dispersión de cilindrada vs millas por galón en autopista
+# coloreado por tipo de tracción con título, subtítulo, etiquetas y estilo de ggthemes
+mpg |>
+  ggplot(aes(x = displ, y = hwy, color = drv)) +
+  geom_point() +
+  geom_smooth() +
+  ggtitle("Cilindrada vs rendimiento en autopista") +
+  xlab("Cilindrada (l)") +
+  ylab("Rendimiento en autopista (mpg)") +
+  labs(subtitle = "Datos de 38 modelos de automóviles de años entre 1999 y 2008", 
+       caption = "Fuente: United States Environmental Protection Agency (EPA)",
+       color = "Tipo de tracción") +
+  theme_economist() # estilo de ggthemes
+```
+
+Otro paquete de estilos y recursos relacionados (escalas de colores, fuentes, etc.) es [hrbrthemes](https://github.com/hrbrmstr/hrbrthemes). 
+
+```{r}
+#| label: hbrthemes-instalacion
+#| eval: false
+
+# Instalación de hbrthemes
+install.packages("hrbrthemes")
+```
+
+```{r}
+#| label: hbrthemes-carga
+#| warning: false
+#| message: false
+
+# Carga de hbrthemes
+library(hrbrthemes)
+```
+
+```{r}
+#| label: grafico-dispersion-mpg-hbrthemes
+#| message: false
+
+# Gráfico de dispersión de cilindrada vs millas por galón en autopista
+# coloreado por tipo de tracción con título, subtítulo, etiquetas y estilo de hbrthemes
+mpg |>
+  ggplot(aes(x = displ, y = hwy, color = drv)) +
+  geom_point() +
+  geom_smooth() +
+  ggtitle("Cilindrada vs rendimiento en autopista") +
+  xlab("Cilindrada (l)") +
+  ylab("Rendimiento en autopista (mpg)") +
+  labs(subtitle = "Datos de 38 modelos de automóviles de años entre 1999 y 2008", 
+       caption = "Fuente: United States Environmental Protection Agency (EPA)",
+       color = "Tipo de tracción") +
+  theme_ipsum() # tema de hrbrthemes
+```
+
+##### Colores
+ggplot2 incluye múltiples funciones para escalas de colores, entre las que pueden mencionarse:
+
+- [scale_color_brewer()](https://ggplot2.tidyverse.org/reference/scale_brewer.html): para escalas de colores secuenciales, divergentes y cualitativas de [ColorBrewer](https://colorbrewer2.org/).
+- [scale_color_viridis_d()](https://ggplot2.tidyverse.org/reference/scale_viridis.html): para escalas [viridis](https://cran.r-project.org/web/packages/viridis/vignettes/intro-to-viridis.html), diseñadas para mejorar la legibilidad de gráficos para lectores con formas comunes de daltonismo y discapacidades relacionadas con la percepción de colores.
+- [scale_color_manual()](https://ggplot2.tidyverse.org/reference/scale_manual.html): para especificar directamente los colores a utilizar.
+
+El siguiente bloque de código genera un gráfico de dispersión para los datos de diamonds. Muestra el peso en quilates (`carat`) de los diamantes en el eje X y su precio (`price`) en el eje Y. La variable correspondiente a su claridad (`clarity`) se muestra mediante el color de los puntos, de acuerdo con una escala de ColorBrewer.
+
+```{r}
+#| label: grafico-dispersion-diamonds-scale_color
+#| message: false
+
+# Gráfico de dispersión de peso vs precio de diamantes
+# coloreado por claridad
+diamonds |>
+  ggplot(aes(x = carat, y = price, color = clarity)) +
+  geom_point() +
+  ggtitle("Peso vs precio de diamantes") +
+  xlab("Peso (quilates)") +
+  ylab("Precio ($ EE.UU.)") +
+  labs(color = "Claridad\n(I1=peor IF=mejor)") +
+  scale_colour_brewer(palette = "YlOrBr", direction = -1) +
+  theme_ipsum() # estilo de hrbrthemes
+```
+
+Para más información sobre etiquetas, estilos, colores y otros temas relacionados en ggplot2, se recomienda leer [ggplot2: Elegant Graphics for Data Analysis - Themes](https://ggplot2-book.org/themes.html).
+
+#### Opciones avanzadas
+En las secciones y ejemplos anteriores, se han estudiado las opciones básicas para crear un gráfico en ggplot2: datos, mapeos de variables a propiedades visuales y capas. También se mostró la forma de implementar paneles, como un mecanismo para visualizar variables adicionales y algunos recursos para mejorar la apariencia de los gráficos.
+
+ggplot2 incluye otras opciones para la creación de gráficos, como transformaciones estadísticas, transformaciones de sistemas de coordenadas y posicionamiento de las geometrías, las cuales pueden esquematizarse de la siguiente forma:
+
+```
+ggplot(data = <DATOS>) + 
+  <FUNCION_GEOMETRIA>(
+    mapping = aes(<MAPEOS>),
+    stat = <ESTADISTICA>,
+    position = <POSICION>
+  ) +
+  <FUNCION_COORDENADAS> +
+  <FUNCION_FACET>
+```
+
+En las secciones siguientes, se explicarán y ejemplificarán alguna de estas opciones.
+
+### plotly
+[plotly R](https://plotly.com/r/) es una biblioteca para gráficos interactivos que forma parte del [grupo de bibliotecas de graficación de Plotly](https://plotly.com/graphing-libraries/), el cual también incluye bibliotecas para otros lenguajes como Python, Julia, F# y MATLAB. Plotly fue originalmente escrita en JavaScript, por lo que es particularmente adecuada para gráficos interactivos en la Web.
+
+plotly implementa la función [ggplotly()](https://rdrr.io/cran/plotly/man/ggplotly.html), la cual convierte graficos de ggplot2 a plotly, haciéndolos interactivos.
+
+El siguiente bloque de código muestra un gráfico generado con ggplot2 y convertido a plotly con la función `ggplotly()`.
+
+```{r}
+#| label: grafico-dispersion-mpg-plotly
+#| warning: false
+#| message: false
+
+# Gráfico ggplot2
+grafico_ggplot2 <-
+  mpg |>
+  ggplot(aes(x = displ, y = hwy, color = drv)) +
+  geom_point(aes(
+    # datos que se muestran al colocar el ratón sobre un punto
+    text = paste0(
+      "Modelo: ", manufacturer, " ", model, " ", year, "\n",
+      "Cilindrada: ", displ, " l", "\n",
+      "Rendimiento en autopista: ", hwy, " mpg", "\n",
+      "Tipo de tracción: ", drv
+    )
+  )) +
+  geom_smooth() +
+  ggtitle("Cilindrada vs rendimiento en autopista") +
+  xlab("Cilindrada (l)") +
+  ylab("Rendimiento en autopista (mpg)") +
+  labs(subtitle = "Datos de 38 modelos de automóviles de años entre 1999 y 2008",
+       caption = "Fuente: United States Environmental Protection Agency (EPA)",
+       color = "Tipo de tracción") +
+  theme_ipsum()
+
+# Gráfico plotly
+ggplotly(grafico_ggplot2, tooltip = "text") |> 
+  config(locale = 'es') # para mostrar los controles en español
+```
+
+## Tipos de gráficos
+En esta sección, se ejemplifican varios tipos de gráficos, los cuales se construyen con ggplot2 y luego se convierten a plotly.
+
+### Histogramas
+Un [histograma](https://es.wikipedia.org/wiki/Histograma) es una representación gráfica de la distribución de una variable numérica en forma de barras (en este caso, llamadas en inglés *bins*). La longitud de cada barra representa la frecuencia de un rango de valores de la variable. La graficación de la distribución de las variables es, frecuentemente, una de las primeras tareas que se realiza cuando se explora un conjunto de datos.
+
+En ggplot2, los histogramas se implementan con la función [geom_histogram()](https://ggplot2.tidyverse.org/reference/geom_histogram.html).
+
+El siguiente bloque de código muestra, mediante un histograma, la distribución del [producto interno bruto (PIB) per cápita](https://es.wikipedia.org/wiki/Renta_per_c%C3%A1pita) para el año 2007, entre los países incluídos en gapminder.
+
+```{r}
+#| label: histograma-gapminder-gdp
+#| warning: false
+
+# Histograma ggplot2 de distribución del PIB per cápita en 2007
+histograma_ggplot2 <- 
+  gapminder |>
+  filter(year == 2007) |>
+  ggplot(aes(x = gdpPercap)) +
+  geom_histogram(
+    aes(
+      text = paste0(
+        "PIB per cápita (valor medio del rango): $", round(after_stat(x), 2), "\n",
+        "Frecuencia: ", after_stat(count)
+      )
+    ), 
+    bins = 10
+  ) + 
+  ggtitle("Distribución del PIB per cápita en 2007") +
+  xlab("PIB per cápita ($ EE.UU.)") +
+  ylab("Frecuencia") +
+  labs(subtitle = "Datos de 14o países", caption = "Fuente: Gapminder.org") +
+  theme_economist()
+
+# Histograma plotly
+ggplotly(histograma_ggplot2, tooltip = "text") |> 
+  config(locale = 'es')
+```
+
+La función [geom_density()](https://ggplot2.tidyverse.org/reference/geom_density.html) permite crear una estimación de densidad del kernel (*Kernel Density Estimation* o KDE), una curva que muestra la densidad de los datos.
+
+```{r}
+#| label: histograma-gapminder-gdp-density
+#| warning: false
+
+# Histograma ggplot2 de distribución del PIB per cápita en 2007
+histograma_ggplot2 <-
+  gapminder |>
+  filter(year == 2007) |>
+  ggplot(aes(x = gdpPercap)) +
+  geom_histogram(
+    aes(
+      text = paste0(
+        "PIB per cápita (valor medio del rango): $", round(after_stat(x), 2), "\n",
+        "Frecuencia: ", after_stat(count)
+      ),
+      y = after_stat(density) # argumento necesario para crear la curva KDE
+    ),
+    bins = 10
+  ) +
+  geom_density() +
+  scale_y_continuous(labels = scales::label_comma()) + # para formatear el eje y en notación decimal
+  ggtitle("Distribución del PIB per cápita en 2007") +
+  xlab("PIB per cápita ($ EE.UU.)") +
+  ylab("Densidad") +
+  labs(subtitle = "Datos de 140 países", caption = "Fuente: Gapminder.org") +
+  theme_economist()
+
+# Histograma plotly
+ggplotly(histograma_ggplot2, tooltip = "text") |>
+  config(locale = 'es')
+```
+
+En el siguiente bloque, se incluye en el gráfico anterior la variable `continent` a través de la propiedad visual relleno (`fill`).
+
+```{r}
+#| label: histograma-gapminder-gdp-continent
+#| warning: false
+
+# Histograma ggplot2 de distribución del PIB per cápita en 2007 por continente
+histograma_ggplot2 <-
+  gapminder |>
+  filter(year == 2007) |>
+  ggplot(aes(x = gdpPercap, fill = continent)) +
+  geom_histogram(
+    aes(
+      text = paste0(
+        "Continente: ", after_stat(fill), "\n",
+        "PIB per cápita (valor medio del rango): $", round(after_stat(x), 2), "\n",
+        "Frecuencia: ", after_stat(count)
+      ),      
+      y = after_stat(density)
+    ),    
+    bins = 10
+  ) +
+  ggtitle("Distribución del PIB per cápita en 2007 por continente") +
+  xlab("PIB per cápita ($ EE.UU.)") +
+  ylab("Densidad") +
+  labs(subtitle = "Datos de 140 países",
+       caption = "Fuente: Gapminder.org",
+       fill = "Continente") +
+  theme_economist()
+
+# Histograma plotly
+ggplotly(histograma_ggplot2, tooltip = "text") |>
+  config(locale = 'es')
+```
+
+El gráfico anterior muestra como el PIB per cápita varía considerablemente entre continentes. La misma información puede mostrarse mediante paneles.
+
+```{r}
+#| label: histograma-gapminder-gdp-continent-facets
+#| warning: false
+
+# Histogramas ggplot2 de distribución del PIB per cápita en 2007 por continente
+histograma_ggplot2 <-
+  gapminder |>
+  filter(year == 2007) |>
+  ggplot(aes(x = gdpPercap)) +
+  geom_histogram(
+    aes(
+      text = paste0(
+        "PIB per cápita (valor medio del rango): $", round(after_stat(x), 2), "\n",
+        "Frecuencia: ", after_stat(count)
+      )
+    ),
+    bins = 10
+  ) +
+  ggtitle("Distribución del PIB per cápita en 2007 por continente") +
+  xlab("PIB per cápita ($ EE.UU.)") +
+  ylab("Frecuencia") +
+  labs(subtitle = "Datos de 140 países",
+       caption = "Fuente: Gapminder.org",
+       fill = "Continente") +
+  facet_wrap(~ continent, nrow = 2) +
+  theme_economist()
+
+# Histograma plotly
+ggplotly(histograma_ggplot2, tooltip = "text") |>
+  config(locale = 'es')
+```
+
+### Gráficos de caja
+Un [gráfico de caja (*boxplot*)](https://es.wikipedia.org/wiki/Diagrama_de_caja) muestra información de una variable numérica a través de su [mediana](https://es.wikipedia.org/wiki/Mediana), sus [cuartiles](https://es.wikipedia.org/wiki/Cuartiles) (Q1, Q2 y Q3) y sus [valores atípicos](https://es.wikipedia.org/wiki/Valor_at%C3%ADpico).
+
+La figura @fig-componentes-diagrama-caja muestra los componentes de un gráfico de caja.
+
+```{r}
+#| label: fig-componentes-diagrama-caja
+#| fig.cap: Componentes de un diagrama de caja. Imagen de [Onkel Dagobert](https://commons.wikimedia.org/wiki/File:Diagrama_de_caja.jpg).
+#| echo: false
+
+knitr::include_graphics(rep("img/640px-Diagrama_de_caja.jpg"))
+```
+
+En ggplot2, los gráficos de caja se implementan con la función [geom_boxplot()](https://ggplot2.tidyverse.org/reference/geom_boxplot.html).
+
+El siguiente bloque de código muestra, mediante un gráfico de caja, la distribución del PIB per cápita para el año 2007, entre los países incluídos en gapminder.
+
+```{r}
+#| label: grafico-caja-gapminder-gdp
+
+# Gráfico de caja ggplot2 de distribución del PIB per cápita en 2007
+grafico_caja_ggplot2 <-
+gapminder |>
+  filter(year == 2007) |>
+  ggplot(aes(y = gdpPercap)) +
+  geom_boxplot() +
+  ggtitle("Distribución del PIB per cápita en 2007") +
+  ylab("PIB per cápita ($ EE.UU.)") +
+  labs(subtitle = "Datos de 140 países", caption = "Fuente: Gapminder.org") +
+  theme_economist()
+
+# Gráfico de caja plotly
+ggplotly(grafico_caja_ggplot2) |> 
+  config(locale = 'es')
+```
+
+En el siguiente bloque, se utiliza la posición en el eje X para mostrar la variable `continent` y apreciar la distribución del PIB per cápita en cada continente.
+
+```{r}
+#| label: grafico-caja-gapminder-gdp-continent
+
+# Gráfico de caja ggplot2 de distribución del PIB per cápita en 2007 por continente
+grafico_caja_ggplot2 <-
+gapminder |>
+  filter(year == 2007) |>
+  ggplot(aes(x = continent, y = gdpPercap)) +
+  geom_boxplot() +
+  ggtitle("Distribución del PIB per cápita en 2007 por continente") +
+  ylab("PIB per cápita ($ EE.UU.)") +
+  labs(subtitle = "Datos de 140 países", caption = "Fuente: Gapminder.org") +
+  theme_economist()
+
+# Gráfico de caja plotly
+ggplotly(grafico_caja_ggplot2) |> 
+  config(locale = 'es')
+```
+
+### Gráficos de barras
+Un [gráfico de barras](https://es.wikipedia.org/wiki/Diagrama_de_barras) se compone de barras rectangulares con longitud proporcional a estadísticas (ej. frecuencias, promedios, mínimos, máximos) asociadas a una variable categórica o discreta. Las barras pueden ser horizontales o verticales y se recomienda que estén ordenadas según su longitud, a menos que exista un orden inherente a la variable (ej. el orden de los días de la semana). Es uno de los tipos de gráficos estadísticos más antiguos y comunes y tiene la ventaja de ser muy fácil de comprender.
+
+En ggplot2, los gráficos de barras se implementan con las funciones [geom_bar()](https://ggplot2.tidyverse.org/reference/geom_bar.html), que se utiliza en gráficos que requieren transformaciones estadísticas, y [geom_col()](https://ggplot2.tidyverse.org/reference/geom_col.html), para gráficos que no requieren estas transformaciones.
+
+#### Barras con transformaciones estadísticas
+Los gráficos de barras y otros tipos de gráficos (ej. histogramas, gráficos de caja, líneas de ajuste) pueden requerir de alguna **transformación estadística** antes de presentar la información. Esta transformación estadística puede ser un conteo, el cálculo de un promedio, un mínimo o un máximo, entre otras opciones.
+
+Por ejemplo, el siguiente gráfico muestra la cantidad de países por continente presentes en el conjunto de datos gapminder para el año 2007. Nótese que este conteo no está presente en ninguna de las variables del conjunto de datos.
+
+```{r}
+#| label: grafico-barras-gapminder-count-continent
+#| warning: false
+
+# Gráfico de barras con conteo de países por continente para el año 2007
+grafico_barras_ggplot2 <-
+gapminder |>
+  filter(year == 2007) |>
+  ggplot(aes(x = continent)) +
+  geom_bar(
+    aes(
+      text = paste0(
+        "Cantidad de países: ", after_stat(count)
+      )
+    ),    
+  ) +
+  ggtitle("Cantidad de países por continente") +
+  xlab("Continente") +
+  ylab("Cantidad de países") +
+  labs(caption = "Fuente: Gapminder.org") +
+  theme_economist()
+
+# Gráfico de barras plotly
+ggplotly(grafico_barras_ggplot2, tooltip = "text") |> 
+  config(locale = 'es')
+```
+
+Para ordenar las barras de acuerdo con el conteo, puede utilizarse la función [fct_infreq()](https://forcats.tidyverse.org/reference/fct_inorder.html) del paquete [forcats](https://forcats.tidyverse.org/index.html) de Tidyerse, para manejo de factores. Tenga en cuenta que la columna `continent` está definida como un factor.
+
+```{r}
+#| label: grafico-barras-gapminder-count-continent-ordered
+#| warning: false
+
+# Gráfico de barras con conteo de países por continente para el año 2007
+grafico_barras_ggplot2 <-
+gapminder |>
+  filter(year == 2007) |>
+  ggplot(aes(x = fct_infreq(continent))) +
+  geom_bar(
+    aes(
+      text = paste0(
+        "Cantidad de países: ", after_stat(count)
+      )
+    )    
+  ) +
+  ggtitle("Cantidad de países por continente") +
+  xlab("Continente") +
+  ylab("Cantidad de países") +
+  labs(caption = "Fuente: Gapminder.org") +
+  theme_economist()
+
+# Gráfico de barras plotly
+ggplotly(grafico_barras_ggplot2, tooltip = "text") |> 
+  config(locale = 'es')
+```
+
+Si se prefiere el orden inverso, puede utilizarse la función [fct_rev()](https://forcats.tidyverse.org/reference/fct_rev.html) (ej. `fct_rev(fct_infreq(continent))`). Para más información sobre el ordenamiento en gráficos, se recomienda consultar [FAQ: Reordering - ggplot2](https://ggplot2.tidyverse.org/articles/faq-reordering.html).
+
+En un ejemplo similar, se cuenta la cantidad de diamantes por tipo de corte (`cut`), para el conjunto de datos diamonds.
+
+```{r}
+#| label: grafico-barras-diamonds-count-cut
+#| warning: false
+
+# Gráfico de barras con conteo de diamantes por corte
+grafico_barras_ggplot2 <-
+diamonds |>
+  ggplot(aes(x = fct_rev(cut))) +
+  geom_bar(
+    aes(
+      text = paste0(
+        "Cantidad de diamantes: ", after_stat(count)
+      )
+    )
+  ) +
+  ggtitle("Cantidad de diamantes por corte") +
+  xlab("Corte") +
+  ylab("Cantidad de diamantes") +
+  theme_economist()
+
+# Gráfico de barras plotly
+ggplotly(grafico_barras_ggplot2, tooltip = "text") |> 
+  config(locale = 'es')
+```
+
+El cálculo de la cantidad de países por continente o el de la cantidad de diamantes por corte, son ejemplos de transformaciones estadísticas. La @fig-ggplot2-transformacion-estadistica muestra como se realiza este proceso para el gráfico anterior.
+
+```{r}
+#| label: fig-ggplot2-transformacion-estadistica
+#| fig.cap: Transformación estadística para un gráfico de barras de ggplot2. Imagen de [Hadley Wickham](https://r4ds.had.co.nz/data-visualisation.html).
+#| echo: false
+
+knitr::include_graphics(rep("img/ggplot2-transformacion-estadistica.png"))
+```
+
+Las barras pueden mostrar otras transformaciones estadísticas a través del uso de los argumentos `stat` y `fun.y` de `geom_bar()`. Por ejemplo, `stat = "summary"` y `fun.y = "mean"`generan un gráfico que muestra el promedio de esperanza de vida (`lifeExp`) para cada continente para el año 2007.
+
+```{r}
+#| label: grafico-barras-gapminder-mean-lifeexp-continent
+#| warning: false
+#| message: false
+
+# Gráfico de barras con promedio de esperanza de vida
+# para cada continente para el año 2007
+grafico_barras_ggplot2 <-
+  gapminder |>
+  filter(year == 2007) |>
+  ggplot(aes(x = fct_infreq(continent), y = lifeExp)) +
+  geom_bar(
+    stat = "summary", 
+    fun.y = "mean",
+    aes(
+      text = paste0(
+        "Promedio de esperanza de vida: ", round(after_stat(y), 2)
+      )
+    )
+  ) +
+  ggtitle("Promedio de esperanza de vida por continente en 2007") +
+  xlab("Continente") +
+  ylab("Promedio de esperanza de vida") +
+  labs(caption = "Fuente: Gapminder.org") +
+  theme_economist()
+
+# Gráfico de barras plotly
+ggplotly(grafico_barras_ggplot2, tooltip = "text") |>
+  config(locale = 'es')
+```
+
+**Nota: ** la función `fct_infreq()` no está ordenando en este caso las columnas (se desconoce la razón). El ordenamiento aún puede conseguirse si se realiza primero el cálculo del promedio y luego se grafica la columna correspondiente, como en el siguiente bloque de código.
+
+```{r}
+# Cálculo del promedio de esperanza de vida por continente
+gapminder_mean_lifeExp_continent <-
+  gapminder |>
+  filter(year == 2007) |>
+  group_by(continent) |>
+  summarize(lifeExp_mean = mean(lifeExp))
+
+# Despliegue por orden descendente del promedio de esperanza de vida
+gapminder_mean_lifeExp_continent |>
+  arrange(desc(lifeExp_mean))
+
+```
+
+Luego se dibuja luego el gráfico con `geom_col()` y se ordenan las barras con la función [reorder()](https://rdrr.io/cran/gplots/man/reorder.html).
+
+```{r}
+#| label: grafico-barras-gapminder-mean-lifeexp-continent-ordered
+#| warning: false
+
+# Gráfico de barras con promedio de esperanza de vida
+# para cada continente para el año 2007
+grafico_barras_ggplot2 <-
+  gapminder_mean_lifeExp_continent |>
+  ggplot(aes(x = reorder(continent,-lifeExp_mean), y = lifeExp_mean)) +
+  geom_col(
+    aes(
+      text = paste0(
+        "Promedio de esperanza de vida: ", round(after_stat(y), 2)
+      )
+    )    
+  ) +
+  ggtitle("Promedio de esperanza de vida por continente en 2007") +
+  xlab("Continente") +
+  ylab("Promedio de esperanza de vida") +
+  labs(caption = "Fuente: Gapminder.org") +
+  theme_economist()
+
+# Gráfico de barras plotly
+ggplotly(grafico_barras_ggplot2, tooltip = "text") |>
+  config(locale = 'es')
+```
+
+El uso de `geom_col()` se ampliará en la sección siguiente.
+
+#### Barras sin transformaciones estadísticas
+En algunos conjuntos de datos, el valor que se quiere representar en la longitud de las barras ya está presente como una variable en el conjunto de datos, por lo que no es necesario que `ggplot2` realice una transformación estadística. En estos casos, se utiliza la función [geom_col()](https://ggplot2.tidyverse.org/reference/geom_bar.html).
+
+**Nota: ** para dibujar barras sin transformaciones estadísticas, tambien es posible utilizar la función `geom_bar()`. En este caso, al argumento `stat` se le asigna el valor `"identity"` y al argumento `y` de `aes()` la variable que contiene el valor que quiere mostrarse en las barras.
+
+El siguiente gráfico de barras muestra la población de los países de los países de América en 2007. Nótese que este valor se puede tomar directamente de la variable `pop`, después de realizar los filtros correspondientes.
+
+```{r}
+#| label: grafico-barras-gapminder-pop-america
+#| warning: false
+
+# Gráfico de barras con población de países 
+# de América para el año 2007
+grafico_barras_ggplot2 <-
+gapminder |>
+  filter(year == 2007 & continent == "Americas") |>
+  ggplot(aes(x = reorder(country, pop), y = pop/1000000)) +
+  geom_col(
+    aes(
+      text = paste0(
+        "País: ", country, "\n",
+        "Población (millones de habitantes): ", round(pop/1000000, 2)
+      )
+    )
+  ) +
+  coord_flip() + # para mostrar barras horizontales
+  ggtitle("Población de países de América en 2007") +
+  xlab("País") +
+  ylab("Población (millones de habitantes)") +
+  labs(caption = "Fuente: Gapminder.org") +
+  theme_economist()
+
+# Gráfico de barras plotly
+ggplotly(grafico_barras_ggplot2, tooltip = "text") |> 
+  config(locale = 'es')
+```
+
+#### Barras apiladas
+Al usar el argumento `fill` de `aes()`, las barras de un gráfico pueden dividirse de acuerdo con una variable adicional, produciendo el efecto de barras apiladas (i.e. unas sobre otras).
+
+En el siguiente bloque de código, se genera un gráfico de barras apiladas que, para el conjunto de datos diamonds, muestra las cantidades de diamantes por corte (`cut`) subdivididas por claridad (`clarity`). 
+
+```{r}
+#| label: grafico-barras-apiladas-diamonds
+#| warning: false
+
+# Gráfico de barras apiladas por tipo de corte y claridad 
+grafico_barras_ggplot2 <-
+diamonds |>
+  ggplot(aes(x = cut, fill = clarity)) +
+  geom_bar() +
+  ggtitle("Cantidad de diamantes por corte y claridad") +
+  xlab("Corte") +
+  ylab("Cantidad de diamantes") +
+  labs(fill = "Claridad") +
+  theme_minimal()
+
+# Gráfico de barras plotly
+ggplotly(grafico_barras_ggplot2) |> 
+  config(locale = 'es')
+```
+
+El argumento `position = "fill"` de `geom_bar()` también genera barras apiladas, pero le asigna a todas las barras la misma longitud, facilitando así la comparación de proporciones.
+
+```{r}
+#| label: grafico-barras-apiladas-diamonds-proporcion
+#| warning: false
+
+# Gráfico de barras apiladas por tipo de corte y claridad 
+grafico_barras_ggplot2 <-
+diamonds |>
+  ggplot(aes(x = cut, fill = clarity)) +
+  geom_bar(position = "fill") +
+  ggtitle("Proporción de tipos de claridad en cortes de diamantes") +
+  xlab("Corte") +
+  ylab("Proporción") +
+  labs(fill = "Claridad") +
+  theme_minimal()
+
+# Gráfico de barras plotly
+ggplotly(grafico_barras_ggplot2) |> 
+  config(locale = 'es')
+```
+
+#### Barras agrupadas
+El argumento `position = "dodge"` de `geom_bar()` genera barras agrupadas (i.e. unas al lado de otras), facilitando así la comparación de valores individuales.
+
+```{r}
+#| label: grafico-barras-agrupadas-diamonds
+#| warning: false
+
+# Gráfico de barras agrupadas por tipo de corte y claridad 
+grafico_barras_ggplot2 <-
+diamonds |>
+  ggplot(aes(x = cut, fill = clarity)) +
+  geom_bar(position = "dodge") +
+  ggtitle("Cantidad de diamantes por corte y claridad") +
+  xlab("Corte") +
+  ylab("Cantidad de diamantes") +
+  labs(fill = "Claridad") +
+  theme_minimal()
+
+# Gráfico de barras plotly
+ggplotly(grafico_barras_ggplot2) |> 
+  config(locale = 'es')
+```
+
+### Gráficos de dispersión
+Un [gráfico de dispersión (*scatterplot*)](https://es.wikipedia.org/wiki/Diagrama_de_dispersi%C3%B3n) despliega los valores de dos variables numéricas, como puntos en un sistema de coordenadas. El valor de una variable se despliega en el eje X y el de la otra variable en el eje Y. Variables adicionales pueden ser mostradas mediante atributos de los puntos, tales como su tamaño, color o forma.
+
+En ggplot2, los gráficos de dispersión se implementan con la función de geometría [geom_point()](https://ggplot2.tidyverse.org/reference/geom_point.html).
+
+El siguiente bloque de código muestra la relación entre el PIB per cápita y la esperanza de vida de los países en el conjunto de datos gapminder, para el año 2007.
+
+```{r}
+#| label: grafico-dispersion-gdpPercap-lifeExp
+#| warning: false
+
+# Gráfico de dispersión PIB per cápita vs esperanza de vida en 2007
+# + línea de tendencia
+grafico_dispersion_ggplot2 <-
+  gapminder |>
+  filter(year == 2007) |>
+  ggplot(aes(x = gdpPercap, y = lifeExp)) +
+  geom_point(aes(
+    text = paste0(
+      "País: ", country, "\n",
+      "PIB per cápita: $", round(gdpPercap, 2), "\n",
+      "Esperanza de vida: ", round(lifeExp, 2), " años"
+    )
+  )) +
+  geom_smooth(method = "lm") +
+  ggtitle("PIB per cápita vs esperanza de vida en 2007") +
+  xlab("PIB per cápita ($ EE.UU.)") +
+  ylab("Esperanza de vida (años)") +
+  labs(caption = "Fuente: Gapminder.org") +
+  theme_economist()  
+
+# Gráfico de dispersión plotly
+ggplotly(grafico_dispersion_ggplot2, tooltip = "text") |>
+  config(locale = 'es')
+```
+
+Como se explicó anteriormente, se pueden agregar al gráfico variables adicionales mediante su mapeo a propiedades visuales. En el siguiente ejemplo, se agrega la variable de continente al gráfico anterior, mediante su mapeo a la propiedad correspondiente al color.
+
+```{r}
+#| label: grafico-dispersion-gdpPercap-lifeExp-continent
+#| warning: false
+
+# Gráfico de dispersión PIB per cápita vs esperanza de vida por continente en 2007
+grafico_dispersion_ggplot2 <-
+  gapminder |>
+  filter(year == 2007) |>
+  ggplot(aes(x = gdpPercap, y = lifeExp, color = continent)) +
+  geom_point(aes(
+    text = paste0(
+      "País: ", country, "\n",
+      "Continente: ", continent, "\n",
+      "PIB per cápita: $", round(gdpPercap, 2), "\n",
+      "Esperanza de vida: ", round(lifeExp, 2), " años"      
+    )
+  )) +
+  ggtitle("PIB per cápita vs esperanza de vida por continente en 2007") +
+  xlab("PIB per cápita ($ EE.UU.)") +
+  ylab("Esperanza de vida (años)") +
+  labs(caption = "Fuente: Gapminder.org", color = "Continente") +
+  theme_economist()  
+
+# Gráfico de dispersión plotly
+ggplotly(grafico_dispersion_ggplot2, tooltip = "text") |>
+  config(locale = 'es')
+```
+
+### Gráficos de líneas
+Un [gráfico de líneas](https://en.wikipedia.org/wiki/Line_chart) muestra información en la forma de puntos de datos, llamados marcadores (*markers*), conectados por segmentos de líneas rectas. Es similar a un gráfico de dispersión pero, además del uso de segmentos de línea, tiene la particularidad de que los datos están ordenados, usualmente con respecto al eje X. Los gráficos de línea son usados frecuentemente para mostrar tendencias a través del tiempo.
+
+En ggplot2, los gráficos de líneas se implementan con la función de geometría [geom_line()](https://ggplot2.tidyverse.org/reference/geom_path.html).
+
+El siguiente gráfico de línea muestran la evolución en el tiempo de los casos positivos, fallecidos, recuperados y activos de COVID-19 en Costa Rica.
+
+```{r}
+#| label: grafico-lineas-covid-general
+#| warning: false
+
+# Gráfico de líneas con la evolución de los casos de COVID
+grafico_lineas_ggplot2 <-
+  covid_general |>
+  ggplot(aes(x = fecha, y = value, color = variable)) +
+  geom_line(aes(y = positivos, color = "Positivos")) +
+  geom_line(aes(y = recuperados, color = "Recuperados")) +
+  geom_line(aes(y = activos, color = "Activos")) +
+  geom_line(aes(y = fallecidos, color = "Fallecidos")) +
+  scale_color_manual( # colores
+    "",
+    values = c(
+      "Positivos" = "blue",
+      "Recuperados" = "green",
+      "Activos" = "red",
+      "Fallecidos" = "black"
+    )
+  ) +
+  ggtitle("Casos acumulados de COVID en Costa Rica al 2022-05-30") +
+  xlab("Fecha") +
+  ylab("Casos") +
+  theme_economist()  
+
+# Gráfico de dispersión plotly
+ggplotly(grafico_lineas_ggplot2) |>
+  config(locale = 'es')
+```
+
+### Gráficos de pastel
+Un [gráfico de pastel](https://es.wikipedia.org/wiki/Gr%C3%A1fico_circular) representa porcentajes y porciones en secciones (*slices*) de un círculo. Son muy populares, pero también criticados debido a la dificultad del cerebro humano de comparar áreas de sectores circulares, por lo que [algunos expertos recomiendan sustituirlos por otros tipos de gráficos como, por ejemplo, gráficos de barras](https://www.data-to-viz.com/caveat/pie.html).
+
+En ggplot2, los gráficos de pastel se implementan con la función de geometría `geom_bar(stat = "identity", width = 1)` y la función [coord_polar()](https://ggplot2.tidyverse.org/reference/coord_polar.html), la cual implementa un sistema de coordenadas polares.
+
+El siguiente gráfico de pastel muestra la distribución de los delitos cometidos en 2022 en las provincias de Costa Rica.
+
+```{r}
+#| label: grafico-pastel-homicidios
+#| warning: false
+
+# Crear tabla de frecuencias
+tabla_frecuencias_delitos_2023_provincias <- table(delitos_2023$Provincia)
+
+# Convertir la tabla en un data frame
+delitos_2023_provincias <- as.data.frame(tabla_frecuencias_delitos_2023_provincias)
+
+# Cambiar nombres de columnas del data frame
+delitos_2023_provincias <-
+  delitos_2023_provincias |>
+  rename(Provincia = Var1, Frecuencia = Freq)
+
+# Calcular porcentajes por provincia
+delitos_2023_provincias$Porcentaje <-
+  100 * delitos_2023_provincias$Frecuencia / sum(delitos_2023_provincias$Frecuencia)
+
+# Crear gráfico de pastel utilizando ggplot2
+grafico_pastel_ggplot2 <-
+  delitos_2023_provincias |>
+  ggplot(aes(x = "", y = Porcentaje, fill = Provincia)) +
+  geom_bar(stat = "identity", width = 1) +
+  coord_polar("y", start = 0) +
+  theme_void() +
+  labs(title = "Porcentaje de delitos cometidos en 2022 por provincia",
+    subtitle = "Fuente: OIJ") +
+  scale_fill_discrete(name = "Provincia") +
+  geom_text(
+    aes(label = paste0(round(Porcentaje, 1), "%")),
+    position = position_stack(vjust = 0.5),
+    color = "white",
+    size = 4
+  ) 
+
+# Despliegue del gráfico
+grafico_pastel_ggplot2
+
+# Gráfico de pastel plotly (está generando un error)
+# ggplotly(grafico_pastel_ggplot2) |>
+#   config(locale = 'es')
+```
+
+El gráfico interactivo no se presenta en este caso, debido a que la función `ggplotly()` produce un error al procesar el gráfico de pastel generado por ggplot2.
+
+### Otros tipos de gráficos
+ggplot2 provee más de 40 tipos de geometrías para gráficos (puntos, líneas, barras, histogramas, cajas, etc.) y los paquetes de extensión proporcionan aún más (ej. [https://exts.ggplot2.tidyverse.org/gallery/](https://exts.ggplot2.tidyverse.org/gallery/)).
+
+Para una explicación resumida de ggplot2, se recomienda leer [Data visualization with ggplot2::Cheat Sheet](https://raw.githubusercontent.com/rstudio/cheatsheets/main/data-visualization.pdf).
+
+## Recursos de interés
+*DT: An R interface to the DataTables library*. (s. f.). Recuperado 21 de mayo de 2022, de [https://rstudio.github.io/DT/](https://rstudio.github.io/DT/)
+
+Healy, Y. H. and C. (s. f.). *From data to Viz | Find the graphic you need*. Recuperado 20 de marzo de 2022, de [https://www.data-to-viz.com/](https://www.data-to-viz.com/)
+
+RStudio. (2017). *Data visualization with ggplot2::Cheat Sheet*. [https://raw.githubusercontent.com/rstudio/cheatsheets/main/data-visualization.pdf](https://raw.githubusercontent.com/rstudio/cheatsheets/main/data-visualization.pdf)
+
+Wickham, H. (2010). *A Layered Grammar of Graphics. Journal of Computational and Graphical Statistics, 19*(1), 3-28. [https://doi.org/10.1198/jcgs.2009.07098](https://doi.org/10.1198/jcgs.2009.07098)

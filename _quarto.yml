@@ -26,6 +26,7 @@ book:
     - part: parte-iv-graficacion-estadistica-r.qmd   
       chapters:  
         - 09-dplyr.qmd    
+        - 10-ggplot2-plotly.qmd  
     - part: parte-vii-evaluaciones.qmd
       chapters: 
         - examen-corto-01.qmd
