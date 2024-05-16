@@ -1,7 +1,7 @@
 # Examen corto 3 - Grupo 001 {.unnumbered}
 
 ## Fecha {.unnumbered}
-Miércoles 22 de mayo de 2024
+Jueves 23 de mayo de 2024
 
 ## Temas a evaluar {.unnumbered}
 [9  dplyr - gramática para manipulación de datos](https://gf0604-procesamientodatosgeograficos.github.io/2024-i/09-dplyr.html)  
