@@ -469,7 +469,7 @@
     "href": "parte-vii-evaluaciones.html",
     "title": "Evaluaciones",
     "section": "",
-    "text": "Exámenes cortos\nExamen corto 1\nExamen corto 2",
+    "text": "Exámenes cortos\nExamen corto 1\nExamen corto 2\nExamen corto 3",
     "crumbs": [
       "Evaluaciones"
     ]
@@ -1283,6 +1283,61 @@
     "crumbs": [
       "IV - Graficación estadística en R",
       "<span class='chapter-number'>10</span>  <span class='chapter-title'>ggplot2 y plotly - creación declarativa de gráficos interactivos</span>"
+    ]
+  },
+  {
+    "objectID": "examen-corto-03.html",
+    "href": "examen-corto-03.html",
+    "title": "Examen corto 3",
+    "section": "",
+    "text": "Fecha",
+    "crumbs": [
+      "Evaluaciones",
+      "Examen corto 3"
+    ]
+  },
+  {
+    "objectID": "examen-corto-03.html#fecha",
+    "href": "examen-corto-03.html#fecha",
+    "title": "Examen corto 3",
+    "section": "",
+    "text": "Grupo 001: jueves 23 de mayo de 2024\nGrupo 002: miércoles 22 de mayo de 2024",
+    "crumbs": [
+      "Evaluaciones",
+      "Examen corto 3"
+    ]
+  },
+  {
+    "objectID": "examen-corto-03.html#temas-a-evaluar",
+    "href": "examen-corto-03.html#temas-a-evaluar",
+    "title": "Examen corto 3",
+    "section": "Temas a evaluar",
+    "text": "Temas a evaluar\n9 dplyr - gramática para manipulación de datos\n10 ggplot2 y plotly - creación declarativa de gráficos interactivos (hasta la sección 10.5.2 “plotly” inclusive)",
+    "crumbs": [
+      "Evaluaciones",
+      "Examen corto 3"
+    ]
+  },
+  {
+    "objectID": "examen-corto-03-01.html",
+    "href": "examen-corto-03-01.html",
+    "title": "Examen corto 3 - Grupo 001",
+    "section": "",
+    "text": "Fecha\nMiércoles 22 de mayo de 2024",
+    "crumbs": [
+      "Evaluaciones",
+      "Examen corto 3 - Grupo 001"
+    ]
+  },
+  {
+    "objectID": "examen-corto-03-01.html#temas-a-evaluar",
+    "href": "examen-corto-03-01.html#temas-a-evaluar",
+    "title": "Examen corto 3 - Grupo 001",
+    "section": "Temas a evaluar",
+    "text": "Temas a evaluar\n9 dplyr - gramática para manipulación de datos\n10 ggplot2 y plotly - creación declarativa de gráficos interactivos",
+    "crumbs": [
+      "Evaluaciones",
+      "Examen corto 3 - Grupo 001"
     ]
   }
 ]

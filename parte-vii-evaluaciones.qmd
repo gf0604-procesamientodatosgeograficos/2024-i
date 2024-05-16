@@ -3,6 +3,7 @@
 ## Exámenes cortos {.unnumbered}
 [Examen corto 1](examen-corto-01.qmd)  
 [Examen corto 2](examen-corto-02.qmd)  
+[Examen corto 3](examen-corto-03-01.qmd)  
 
 ## Tareas {.unnumbered}
 [Tarea 3 - Grupo 001](tarea-03-grupo-001.qmd)  

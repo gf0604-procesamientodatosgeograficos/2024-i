@@ -33,6 +33,7 @@ book:
         - examen-corto-02.qmd
         - tarea-03-grupo-001.qmd
         - tarea-03-grupo-002.qmd
+        - examen-corto-03-01.qmd
 
 bibliography: referencias.bib
 csl: apa-6th-edition.csl
