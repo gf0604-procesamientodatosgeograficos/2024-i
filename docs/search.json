@@ -469,7 +469,7 @@
     "href": "parte-vii-evaluaciones.html",
     "title": "Evaluaciones",
     "section": "",
-    "text": "Exámenes cortos\nExamen corto 1\nExamen corto 2\nExamen corto 3",
+    "text": "Exámenes cortos\nExamen corto 1\nExamen corto 2\nExamen corto 3- grupo 001 Examen corto 3- grupo 002",
     "crumbs": [
       "Evaluaciones"
     ]
@@ -1338,6 +1338,28 @@
     "crumbs": [
       "Evaluaciones",
       "Examen corto 3 - Grupo 001"
+    ]
+  },
+  {
+    "objectID": "examen-corto-03-02.html",
+    "href": "examen-corto-03-02.html",
+    "title": "Examen corto 3 - Grupo 002",
+    "section": "",
+    "text": "Fecha\nMartes 28 de mayo de 2024",
+    "crumbs": [
+      "Evaluaciones",
+      "Examen corto 3 - Grupo 002"
+    ]
+  },
+  {
+    "objectID": "examen-corto-03-02.html#temas-a-evaluar",
+    "href": "examen-corto-03-02.html#temas-a-evaluar",
+    "title": "Examen corto 3 - Grupo 002",
+    "section": "Temas a evaluar",
+    "text": "Temas a evaluar\n9 dplyr - gramática para manipulación de datos\n10 ggplot2 y plotly - creación declarativa de gráficos interactivos",
+    "crumbs": [
+      "Evaluaciones",
+      "Examen corto 3 - Grupo 002"
     ]
   }
 ]
