@@ -1,0 +1,654 @@
+# Introducción al manejo de datos geoespaciales con R
+
+## Resumen
+El lenguaje de programación R cuenta con una gran variedad de paquetes para manejo de datos geoespaciales, entre los que están el paquete sf para datos vectoriales, el paquete terra para datos raster y el paquete leaflet para mapas en la Web.
+
+El modelo vectorial se basa en puntos localizados en un sistema de referencia de coordenadas. Los puntos pueden representar objetos independientes o pueden agruparse para formar geometrías más complejas como líneas (ej. ríos, caminos) o polígonos (ej. fincas, países, provincias).
+
+El modelo de datos raster usualmente consiste de un encabezado y de una matriz con celdas (también llamadas pixeles) de un mismo tamaño. Cada celda tiene una identificación (ID) y almacena un único valor, el cual puede ser numérico o categórico.
+
+## Trabajo previo
+
+### Lecturas
+Lovelace, R., Nowosad, J., & Münchow, J. (2019). *Geocomputation with R* (capítulos 1 y 2). CRC Press. <https://geocompr.robinlovelace.net/>
+
+## Introducción
+La comunidad de programadores de R ha desarrollado un conjunto de paquetes para el manejo de datos geoespaciales, tanto en formatos vectoriales como raster. Algunos de los principales de estos paquetes son:
+
+-   El paquete [sf](https://cran.r-project.org/web/packages/sf/). Ofrece un conjunto de funciones para el manejo de datos vectoriales, de acuerdo con el estándar [Simple Features](https://www.ogc.org/standards/sfa).
+
+-   El paquete [terra](https://cran.r-project.org/web/packages/terra/). Implementa un conjunto de funciones para el manejo de datos raster. Es una reimplementación del paquete [raster](https://cran.r-project.org/web/packages/raster/).
+
+-   El paquete [leaflet](https://cran.r-project.org/web/packages/leaflet/). Es una implementación en R de la biblioteca [Leaflet para el lenguaje JavaScript](https://leafletjs.com/) para la programación de mapas interactivos en páginas web.
+
+Algunos paquetes de graficación estadística, como [ggplot2](https://cran.r-project.org/web/packages/ggplot2/) y [plotly](https://cran.r-project.org/web/packages/plotly/), también cuentan con capacidades para visualización de datos geoespaciales.
+
+En [CRAN Task View: Analysis of Spatial Data](https://cran.r-project.org/web/views/Spatial.html), puede encontrarse un resumen detallado de los paquetes de R con funciones geoespaciales.
+
+## Datos vectoriales
+
+### El modelo vectorial
+El modelo vectorial de datos está basado en puntos localizados en un [sistema de referencia de coordenadas (CRS)](https://en.wikipedia.org/wiki/Spatial_reference_system). Los puntos individuales pueden representar objetos independientes (ej. postes eléctricos, cabinas telefónicas) o pueden también agruparse para formar geometrías más complejas como líneas (ej. ríos, caminos) o polígonos (ej. fincas, países, provincias). Por lo general, los puntos tienen solo dos dimensiones (x, y), a las que se les puede agregar una tercera dimensión z, usualmente correspondiente a la altitud sobre el nivel del mar.
+
+### El estándar Simple Features
+[Simple Features](https://www.ogc.org/standards/sfa) (o Simple Feature Access) es un estándar abierto de la [Organización Internacional de Estandarización (ISO)](https://iso.org/) y del [Open Geospatial Consortium (OGC)](https://www.ogc.org/) que especifica un modelo común de almacenamiento y acceso para geometrías de dos dimensiones (líneas, polígonos, multilíneas, multipolígonos, etc.). El estándar es implementado por muchas bibliotecas y bases de datos geoespaciales como [sf](https://cran.r-project.org/web/packages/sf/), [Fiona](https://pypi.org/project/Fiona/), [GDAL](https://gdal.org/), [PostgreSQL/PostGIS](https://postgis.net/), [SQLite/SpatiaLite](https://www.gaia-gis.it/fossil/libspatialite/), [Oracle Spatial](https://www.oracle.com/database/technologies/spatialandgraph.html) y [Microsoft SQL Server](https://www.microsoft.com/en-us/sql-server/), entre muchas otras.
+
+La especificación define 17 tipos de geometrías, de las cuales siete son las más comúnmente utilizadas. Estas últimas se muestran en la @fig-tipos-geometrias-simple-features.
+
+```{r}
+#| label: fig-tipos-geometrias-simple-features
+#| fig.cap: Tipos de geometrías de Simple Features más usadas. Imagen de [Robin Lovelace et al.](https://geocompr.robinlovelace.net/spatial-class.html#vector-data).
+#| echo: false
+
+knitr::include_graphics(rep("img/tipos-geometrias-simple-features.png"))
+```
+
+### El paquete sf
+El paquete [sf](https://r-spatial.github.io/sf/) (de *Simple Features*) de R implementa los modelos de datos de las geometrías de tipo vectorial: puntos, líneas, polígonos, sus versiones múltiples y las colecciones de geometrías. Está basado en bibliotecas de sofware ampliamente utilizadas en aplicaciones geoespaciales:
+
+-   [Geospatial Data Abstraction Library (GDAL)](https://gdal.org/): es una biblioteca para leer y escribir datos geoespaciales en varios formatos [raster](https://gdal.org/drivers/raster/) y [vectoriales](https://gdal.org/drivers/vector/). Implementa un único [modelo abstracto de datos raster](https://gdal.org/user/raster_data_model.html) y un único [modelo abstracto de datos vectoriales](https://gdal.org/user/vector_data_model.html), lo que permite programar aplicaciones geoespaciales sin tener que ocuparse de las particularidades de cada formato que se utilice (GeoTIFF, NetCDF, ESRI Shapefile, GeoJSON, etc.). A pesar de que GDAL está programada en C/C++, cuenta con una interfaz de programación de aplicaciones (API) para varios lenguajes de programación, incluyendo [C](https://gdal.org/api/index.html#c-api), [C++](https://gdal.org/api/index.html#id3), [Python](https://gdal.org/python/index.html) y [Java](https://gdal.org/java/overview-summary.html). Además, ofrece un conjunto de [utilitarios de línea de comandos](https://gdal.org/programs/) cuyas [distribuciones binarias](https://gdal.org/download.html#binaries) están disponibles para varios sistemas operativos, incluyendo Windows, macOS y Linux.
+-   [Geometry Engine, Open Source (GEOS)](https://trac.osgeo.org/geos): es una implementación en C++ de la biblioteca [JTS Topology Suite](http://www.tsusiatsoftware.net/jts/main.html) (desarrollada en Java) y que implementa un conjunto de operaciones y predicados geoespaciales (ej. unión, intersección, distancia, área).
+-   [PROJ](https://proj.org/): es una biblioteca que transforma coordenadas entre diferentes CRS, incluyendo tanto proyecciones cartográficas como transformaciones geodésicas.
+
+sf provee acceso, desde un mismo paquete de R, a la funcionalidad de estas tres bibliotecas, proporcionando así una interfaz unificada para leer y escribir datos geoespaciales mediante GDAL, realizar operaciones con geometrías mediante GEOS y efectuar transformaciones entre sistemas de coordenadas mediante PROJ.
+
+En sf, los conjuntos de datos geoespaciales se almacenan en objetos de una clase también llamada [sf](https://rdrr.io/cran/sf/man/sf.html), los cuales son data frames que contiene una columna especial para las geometrías. Esta columna se denomina generalmente `geom` o `geometry` (aunque pueden tener cualquier otro nombre). El manejo de datos geoespaciales como data frames permite manipularlos con las funciones ya desarrolladas para este tipo de datos y con la misma forma de referenciar las filas (observaciones) y las columnas (variables).
+
+#### Instalación y carga
+
+```{r}
+#| label: sf-instalacion
+#| eval: false
+
+# Instalación de sf
+install.packages("sf")
+```
+
+```{r}
+#| label: sf-carga
+#| warning: false
+#| message: false
+
+# Carga de sf
+library(sf)
+```
+
+#### Métodos
+La lista de métodos (i.e. funciones) de la clase `sf` puede obtenerse a través de la función `methods()`:
+
+```{r}
+#| label: sf-metodos
+
+# Métodos de la clase sf
+methods(class = "sf")
+```
+
+Seguidamente, se describen y ejemplifican algunos de los métodos básicos de la clase `sf`.
+
+##### st_read() - lectura de datos
+El método [st_read()](https://r-spatial.github.io/sf/reference/st_read.html) lee datos vectoriales de una fuente en formato geoespacial (ej. shapefiles, archivos GeoJSON, bases de datos geoespaciales) y los recupera en un [objeto sf](https://r-spatial.github.io/sf/reference/sf.html).
+
+En el siguiente bloque de código en R, se utiliza el método `st_read()` para leer un [archivo GeoJSON con los polígonos de las provincias de Costa Rica](datos/ign/delimitacion-territorial-administrativa/provincias.geojson). Este archivo proviene de un [geoservicio de tipo Web Feature Service (WFS)](http://geos.snitcr.go.cr/be/IGN_5/wfs) publicado por el Instituto Geográfico Nacional (IGN).
+
+```{r}
+#| label: st_read-geopespacial
+
+# Lectura de una capa vectorial (GeoJSON) de provincias de Costa Rica
+provincias <-
+  st_read(
+    "datos/ign/delimitacion-territorial-administrativa/provincias.geojson",
+    quiet = TRUE # para evitar el despliegue de mensajes
+  )
+```
+
+`st_read()` también puede crear objetos `sf` a partir de archivos de texto. Esta variante se utiliza principalmente cuando el archivo contiene coordenadas correspondientes a geometrías de puntos.
+
+En el siguiente bloque de código, se utiliza `st_read()` para leer un [archivo CSV con registros de presencia de félidos de Costa Rica](datos/gbif/felidos.csv), el cual contiene dos columnas llamadas `decimalLongitude` y `decimalLatitude` correspondientes a la longitud decimal y latitud decimal en las que fue observado cada felino. Este archivo proviene de una [consulta al portal de datos de la Infraestructura Mundial de Información en Biodiversidad (GBIF)](https://doi.org/10.15468/dl.gmgzh6).
+
+```{r}
+#| label: st_read-texto
+
+# Lectura de un archivo CSV con registros de presencia de félidos en Costa Rica
+felidos <-
+  st_read(
+    "datos/gbif/felidos.csv",
+    options = c(
+      "X_POSSIBLE_NAMES=decimalLongitude", # columna de longitud decimal
+      "Y_POSSIBLE_NAMES=decimalLatitude"   # columna de latitud decimal
+    ),
+    quiet = TRUE
+  )
+```
+
+Tanto `provincias` como `felidos` son objetos de la clase `sf` (y además de `data.frame`).
+
+```{r}
+#| label: clase
+
+# Clase del objeto provincias
+class(provincias)
+
+# Clase del objeto felidos
+class(felidos)
+```
+
+Al escribirse el nombre de un objeto `sf` en la consola de R, se despliega información general sobre este.
+
+```{r}
+#| label: consola-sf
+
+# Información general sobre el objeto provincias
+provincias
+```
+
+##### st_crs() y st_transform() - manejo de sistemas de coordenadas
+El método [st_crs()](https://r-spatial.github.io/sf/reference/st_crs.html) retorna el CRS de un objeto `sf`.
+
+```{r}
+#| label: st_crs-1
+
+# Despliegue del CRS del objeto provincias
+st_crs(provincias)
+
+# Despliegue CRS del objeto felidos
+st_crs(felidos)
+```
+
+`st_crs()` también puede asignar un CRS a un objeto `sf` que no lo tiene.
+
+```{r}
+#| label: st_crs-2
+
+# Asignación de un CRS al objeto felidos
+st_crs(felidos) <- 4326
+```
+
+El método [st_transform()](https://r-spatial.github.io/sf/reference/st_transform.html) transforma un objeto `sf` a un nuevo CRS.
+
+```{r}
+#| label: st_transform
+
+# Transformación del CRS del objeto provincias a WGS84 (EPSG = 4326)
+provincias <-
+  provincias |>
+  st_transform(4326)
+```
+
+##### plot() - mapeo
+El método [plot()](https://r-spatial.github.io/sf/reference/plot.html) grafica objetos `sf` en un mapa.
+
+```{r}
+#| label: sf-plot-01
+
+# Mapeo de las geometrías del objeto provincias
+plot(provincias$geometry)
+
+# Mapeo con argumentos adicionales de plot()
+plot(
+  provincias$geometry,
+  extent = st_bbox(c(xmin = -86.0, xmax = -82.3, ymin = 8.0, ymax = 11.3)),
+  main = "Provincias de Costa Rica",
+  axes = TRUE,
+  graticule = TRUE
+)
+```
+
+Los argumentos `reset` y `add` de `plot()` permiten generar un mapa con varias capas.
+
+```{r}
+#| label: sf-plot-02
+
+# Primera capa del mapa
+plot(
+  provincias$geometry,
+  extent = st_bbox(c(xmin = -86.0, xmax = -82.3, ymin = 8.0, ymax = 11.3)),
+  main = "Registros de presencia de félidos en Costa Rica",
+  axes = TRUE,
+  graticule = TRUE,
+  reset = FALSE
+)
+
+# Segunda capa
+plot(felidos$geometry,
+     add = TRUE,     
+     pch = 16,
+     col = "blue")
+```
+
+Para conocer los valores del argumento `pch`, puede consultar [R plot pch symbols](http://www.sthda.com/english/wiki/r-plot-pch-symbols-the-different-point-shapes-available-in-r).
+
+##### st_write() - escritura de datos
+El método [st_write()](https://r-spatial.github.io/sf/reference/st_write.html) guarda en el disco un objeto `sf` en los diferentes [formatos vectoriales de GDAL](https://gdal.org/drivers/vector/).
+
+```{r}
+#| label: st_write
+#| eval: false
+
+# Especificación del directorio de trabajo (debe utilizarse una ruta existente)
+setwd("/home/mfvargas")
+
+# Escritura del objeto provincias en formato GPKG
+provincias |>
+  st_write("provincias.gpkg")
+
+# Escritura del objeto felidos en formato KML
+felidos |>
+  st_write("felidos.kml")
+```
+
+##### Otros
+
+```{r}
+#| label: sf-otros
+
+# Cantidad de filas de un objeto sf
+nrow(provincias)
+
+# Cantidad de columnas de un objeto sf
+ncol(provincias)
+
+# Resumen de la columna de geometría
+summary(provincias$geometry)
+```
+
+### Mapeo de objetos `sf::sf` con otros paquetes
+
+#### leaflet
+El paquete [leaflet](https://rstudio.github.io/leaflet/) genera mapas interactivos en [lenguaje de marcado de hipertexto (HTML)](https://es.wikipedia.org/wiki/HTML), el lenguaje de marcado utilizado para desarrollar páginas web.
+
+##### Instalación y carga
+
+```{r}
+#| label: leaflet-instalacion
+#| eval: false
+
+# Instalación de leaflet
+install.packages("leaflet")
+
+# Instalación de leaflet.extras (funciones adicionales de leaflet)
+install.packages("leaflet.extras")
+
+# Instalación de leaflem (funciones adicionales de leaflet)
+install.packages("leafem")
+```
+
+```{r}
+#| label: leaflet-carga
+#| message: false
+
+# Carga de leaflet
+library(leaflet)
+
+# Carga de leaflet.extras
+library(leaflet.extras)
+
+# Carga de leafem
+library(leafem)
+```
+
+El siguiente bloque de código muestra las capas de provincias (polígonos) y de registros de presencia de félidos (puntos) sobre una capa base de [OpenStreetMap (OSM)](https://www.openstreetmap.org/) y otra de ESRI.
+
+```{r}
+#| label: leaflet-ejemplo
+#| warning: false
+
+# Mapa leaflet básico de provincias y registros de presencia de félidos
+leaflet() |>
+  setView(# centro y nivel inicial de acercamiento
+    lng = -84.19452,
+    lat = 9.572735,
+    zoom = 7) |>
+  addTiles(group = "Mapa general (OpenStreetMap)") |>
+  addProviderTiles(
+    providers$Esri.WorldImagery, 
+    group = "Imágenes satelitales (ESRI World Imagery)"
+  ) |>
+  addPolygons(
+    # capa de provincias (polígonos)
+    data = provincias,
+    color = "black",
+    fillColor = "transparent",
+    stroke = TRUE,
+    weight = 1.0,
+    group = "Provincias"
+  ) |>
+  addCircleMarkers(
+    # capa de registros de presencia (puntos)
+    data = felidos,
+    stroke = F,
+    radius = 4,
+    fillColor = 'blue',
+    fillOpacity = 1,
+    popup = paste(
+      paste0("<strong>Especie: </strong>", felidos$species),
+      paste0("<strong>Localidad: </strong>", felidos$locality),
+      paste0("<strong>Fecha: </strong>", felidos$eventDate),
+      paste0("<strong>Fuente: </strong>", felidos$institutionCode),
+      paste0("<a href='", felidos$occurrenceID, "'>Más información</a>"),
+      sep = '<br/>'
+    ),
+    group = "Félidos"
+  ) |>
+  addLayersControl(
+    baseGroups = c(
+      "Mapa general (OpenStreetMap)", 
+      "Imágenes satelitales (ESRI World Imagery)"
+    ),
+    overlayGroups = c("Provincias", "Félidos")) |> # control de capas
+  addResetMapButton() |> # botón de reinicio
+  addSearchOSM() |> # búsqueda en OSM
+  addMouseCoordinates() |> # coordenadas del puntero del ratón
+  addScaleBar(
+    position = "bottomleft", 
+    options = scaleBarOptions(imperial = FALSE)
+  ) |> # barra de escala
+  addMiniMap(position = "bottomright") |> # mapa de ubicación
+  addFullscreenControl() # mapa de pantalla completa
+```
+
+### Ejercicios
+1.  Agregue capas base adicionales al mapa anterior, con la función [leaflet::addProviderTiles()](https://rdrr.io/cran/leaflet/man/addProviderTiles.html) (vea [Leaflet for R - Using Basemaps](https://rstudio.github.io/leaflet/basemaps.html)).
+2.  Agrupe puntos agrupados (*clusters*) correspondientes a los registros de presencia mediante la función `markerClusterOptions()` (vea [Leaflet for R - Markers](https://rstudio.github.io/leaflet/markers.html)).
+3.  Genere una capa de calor ([*heat map*](https://es.wikipedia.org/wiki/Mapa_de_calor)) con la función [leaflet.extras::addHeatmap()](https://bhaskarvk.github.io/leaflet.extras/reference/heatmap.html).
+
+## Datos raster
+
+### El modelo raster
+El modelo de datos raster usualmente consiste de un encabezado y de una matriz con celdas (también llamadas pixeles) de un mismo tamaño. El encabezado define el CRS, la extensión y el punto de origen de una capa raster. Por lo general, el origen se ubica en la esquina inferior izquierda o en la esquina superior izquierda de la matriz. La extensión se define mediante el número de filas, el número de columnas y el tamaño (resolución) de la celda.
+
+Cada celda tiene una identificación (ID) y almacena un único valor, el cual puede ser numérico o categórico, como se muestra en la @fig-modelo-raster.
+
+```{r}
+#| label: fig-modelo-raster
+#| fig-cap: "El modelo raster: (A) ID de las celdas, (B) valores de las celdas, (C) mapa raster de colores. Imagen de [Robin Lovelace et al.](https://geocompr.robinlovelace.net/spatial-class.html#raster-data)"
+#| echo: false
+
+knitr::include_graphics(rep("img/modelo-raster.png"))
+```
+
+A diferencia del modelo vectorial, el modelo raster no necesita almacenar todas las coordenadas de cada geometría (i.e. las esquinas de las celdas), debido a que la ubicación de cada celda puede calcularse a partir de la información contenida en el encabezado. Esta simplicidad, en conjunto con el [álgebra de mapas](https://en.wikipedia.org/wiki/Map_algebra), permiten que el procesamiento de datos raster sea mucho más eficiente que el procesamiento de datos vectoriales. Por otra parte, el modelo vectorial es mucho más flexible en cuanto a las posibilidades de representación de geometrías y almacenamiento de valores, por medio de múltiples elementos de datos.
+
+Los mapas raster generalmente almacenan fenómenos continuos como elevación, precipitación, temperatura, densidad de población y datos espectrales. También es posible representar mediante raster datos discretos, tales como tipos de suelo o clases de cobertura de la tierra, como se muestra en la @fig-raster-continuo-categorico.
+
+```{r}
+#| label: fig-raster-continuo-categorico
+#| fig.cap: 'Ejemplos de mapas raster continuos y categóricos. Imagen de [Robin Lovelace et al.](https://geocompr.robinlovelace.net/spatial-class.html#raster-data)'
+#| echo: false
+
+knitr::include_graphics(rep("img/raster-continuo-categorico.png"))
+```
+
+### El paquete terra
+El paquete [terra](https://rspatial.org/terra/) implementa un conjunto de funciones para la lectura, escritura, manipulación, análisis y modelado de datos raster y vectoriales. Implementa la clase [SpatRaster](https://rdrr.io/cran/terra/man/SpatRaster-class.html) para manejar los objetos raster.
+
+#### Instalación y carga
+
+```{r}
+#| label:  terra-instalacion
+#| eval: false
+
+# Instalación de terra
+install.packages("terra")
+```
+
+```{r}
+#| label: terra-carga
+#| message: false
+
+# Carga de terra
+library(terra)
+```
+
+#### Métodos
+La función `help()` presenta la documentación del paquete terra, incluyendo sus métodos.
+
+```{r}
+#| label: metodos-terra
+#| eval: false
+
+# Ayuda sobre el paquete terra
+help("terra-package")
+```
+
+Seguidamente, se describen y ejemplifican algunos de los métodos básicos para manejo de datos raster del paquete terra.
+
+##### rast() - lectura de datos
+El método [rast()](https://rdrr.io/pkg/terra/man/rast.html) lee datos raster.
+
+En el siguiente bloque de código en R, se utiliza el método `rast()` para leer un [archivo GeoTIFF correspondiente a la altitud de Costa Rica](datos/worldclim/cr/altitud.tif). Este archivo proviene de [WorldClim](https://www.worldclim.org/), un conjunto de capas climáticas disponibles en varias resoluciones espaciales.
+
+```{r}
+#| label: rast
+
+# Lectura de una capa raster de altitud
+altitud <-
+  rast(
+    "datos/worldclim/cr/altitud.tif"
+  )
+```
+
+`altitud` es un objeto de la clase `SpatRaster`.
+
+```{r}
+#| label: clase-terra
+
+# Clase del objeto altitud
+class(altitud)
+```
+
+Al escribirse el nombre de un objeto `SpatRaster` en la consola de R, se despliega información general sobre este.
+
+```{r}
+#| label: consola-terra
+
+# Información general sobre el objeto altitud
+altitud
+```
+
+##### crs() y project() - manejo de sistemas de coordenadas
+El método [crs()](https://rdrr.io/pkg/terra/man/crs.html) retorna el CRS de un objeto `SpatRaster`.
+
+```{r}
+#| label: crs-1
+
+# CRS del objeto altitud
+crs(altitud)
+```
+
+`crs()` también puede asignar un CRS a un objeto `SpatRaster`.
+
+```{r}
+#| label: crs-2
+
+# Asignación de un CRS a una copia del objeto altitud
+altitud_crtm05 <- altitud
+crs(altitud_crtm05) <- "EPSG:5367"
+
+# Consulta
+crs(altitud_crtm05)
+```
+
+El método [project()](https://rdrr.io/pkg/terra/man/project.html) reproyecta un objeto `SpatRaster` a un nuevo CRS.
+
+```{r}
+#| label: project
+
+# Transformación del CRS del objeto altitud
+altitud_utm17N <-
+  altitud |>
+  project("EPSG:8910")
+
+# Consulta
+crs(altitud_utm17N)
+```
+
+##### plot() - mapeo
+El método [plot()](https://rdrr.io/pkg/terra/man/plot.html) muestra objetos `SpatRaster` en un mapa.
+
+```{r}
+#| label: terra-plot-01
+
+# Mapa de la capa de altitud
+plot(altitud)
+```
+
+Los argumentos `reset` y `add` de `plot()` permiten generar un mapa con varias capas.
+
+```{r}
+#| label: terra-plot-02
+#| warning: false
+
+# Primera capa del mapa (raster)
+plot(
+  altitud,
+  main = "Registros de presencia de félidos en Costa Rica",
+  axes = TRUE,
+  reset = FALSE
+)
+
+# Segunda capa (vectorial)
+plot(felidos$geometry,
+     add = TRUE,     
+     pch = 16,
+     col = "blue")
+```
+
+##### writeRaster() - escritura de datos
+La función [writeRaster()](https://rdrr.io/pkg/terra/man/writeRaster.html) guarda en el disco un objeto `SpatRaster` en los diferentes [formatos raster de GDAL](https://gdal.org/drivers/raster/).
+
+```{r}
+#| label: write-raster
+#| eval: false
+
+# Especificación del directorio de trabajo (debe utilizarse una ruta existente)
+setwd("/home/mfvargas")
+
+# Escritura del objeto altitud
+altitud |>
+  writeRaster("altitud.asc")
+```
+
+##### Otros
+
+```{r}
+#| label: terra-otros
+
+# Cantidad de filas de un objeto SpatRaster
+nrow(altitud)
+
+# Cantidad de columnas de un objeto SpatRaster
+ncol(altitud)
+
+# Resolución de un objeto SpatRaster
+res(altitud)
+```
+
+### Mapeo de objetos `terra::SpatRaster` con otros paquetes
+
+#### leaflet
+El método [addRasterImage()](https://rdrr.io/pkg/leaflet/man/addRasterImage.html) de `leaflet` despliega un objeto `SpatRaster` en un mapa. En el siguiente bloque, se muestran en un mapa leaflet las capas de altitud (raster), provincias (polígonos) y registros de presencia de félidos (puntos) sobre una capa base de [OpenStreetMap (OSM)](https://www.openstreetmap.org/) y otra de ESRI.
+
+```{r}
+#| label: leaflet-raster
+#| message: false
+#| warning: false
+
+# Paleta de colores de altitud de Costa Rica
+colores_altitud <-
+  colorNumeric(terrain.colors(25),
+               values(altitud),
+               na.color = "transparent")
+
+# Mapa leaflet básico con capas de altitud, provincias y registros de presencia de félidos
+leaflet() %>%
+  setView(# centro y nivel inicial de acercamiento
+    lng = -84.19452,
+    lat = 9.572735,
+    zoom = 7) |>  
+  addTiles(group = "Mapa general (OpenStreetMap)") |>
+  addProviderTiles(
+    providers$Esri.WorldImagery, 
+    group = "Imágenes satelitales (ESRI World Imagery)"
+  ) |>
+  addRasterImage( # capa raster
+    altitud,
+    colors = colores_altitud, # paleta de colores
+    opacity = 0.6,
+    group = "Altitud",
+  ) |>
+  addLegend(
+    title = "Altitud",
+    values = values(altitud),
+    pal = colores_altitud,
+    position = "bottomleft",
+    group = "Altitud"
+  ) |>
+  addPolygons(
+    data = provincias,
+    color = "black",
+    fillColor = "transparent",
+    stroke = TRUE,
+    weight = 1.0,
+    group = "Provincias"
+  ) |>
+  addCircleMarkers(
+    data = felidos,
+    stroke = F,
+    radius = 4,
+    fillColor = 'blue',
+    fillOpacity = 1,
+    popup = paste(
+      paste0("<strong>Especie: </strong>", felidos$species),
+      paste0("<strong>Localidad: </strong>", felidos$locality),
+      paste0("<strong>Fecha: </strong>", felidos$eventDate),
+      paste0("<strong>Fuente: </strong>", felidos$institutionCode),
+      paste0("<a href='", felidos$occurrenceID, "'>Más información</a>"),
+      sep = '<br/>'
+    ),
+    group = "Félidos"    
+  ) |>
+  addLayersControl(
+    # control de capas
+    baseGroups = c(
+      "Mapa general (OpenStreetMap)", 
+      "Imágenes satelitales (ESRI World Imagery)"
+    ),
+    overlayGroups = c("Altitud", "Provincias", "Félidos")
+  ) |>
+  addResetMapButton() |> # botón de reinicio
+  addSearchOSM() |> # búsqueda en OSM
+  addMouseCoordinates() |> # coordenadas del puntero del ratón
+  addScaleBar(
+    position = "bottomleft", 
+    options = scaleBarOptions(imperial = FALSE)
+  ) |> # barra de escala
+  addMiniMap(position = "bottomright") |> # mapa de ubicación
+  addFullscreenControl() # mapa de pantalla completa  
+```
+
+## Ejercicios
+En un documento Quarto incluya:
+
+1.  Una tabla DT con las columnas del conjunto de datos de félidos de Costa Rica correspondientes a especie (`species`), fecha (`eventDate`), provincia (`stateProvince`), localidad (`locality`), longitud (`decimalLongitude`) y latitud (`decimalLatitude`).
+    -   Las columnas deben, si es necesario, convertirse al tipo de datos adecuado (ej. `Date`).
+    -   Los encabezados de las columnas en la tabla deben desplegarse en español, pero no deben alterarse los nombres de las columnas. Sugerencia: utilice el argumento `colnames` de la función `datatable()`.
+    -   Los controles de la tabla deben estar en español.
+2.  Un gráfico de barras, generado con gglot2 y traducido a plotly con `ggplotly()`, que muestre la cantidad de registros para cada especie de félidos.
+    -   Las barras deben estar ordenadas de mayor a menor.
+    -   Todos los controles y etiquetas del gráfico deben estar en español.
+3.  Un mapa leaflet con las siguientes capas:
+    -   Capa base de OpenStreetMap (OSM).
+    -   Provincias de Costa Rica (polígonos).
+    -   Registros de presencia de félidos (puntos).
+
+Publique el documento como un sitio web en [GitHub Pages](https://pages.github.com/).
+
+## Recursos de interés
+Bivand, R. (2022). *CRAN Task View: Analysis of Spatial Data*. <https://CRAN.R-project.org/view=Spatial>
+
+Holtz, Y. (s. f.). *The R Graph Gallery – Help and inspiration for R charts*. The R Graph Gallery. <https://r-graph-gallery.com/>
+
+Popovic, M. (s. f.). *Milos Makes Maps*. <https://www.youtube.com/@milos-makes-maps>
+
+R-Ladies Madrid. (2021). *R-Ladies Madrid (español)---Analiza datos espaciales---Stephanie Orellana*. <https://www.youtube.com/watch?v=59tO2ARvVVU>
+
