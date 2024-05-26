@@ -1,0 +1,628 @@
+# Operaciones con datos de atributos
+
+## Resumen
+Se les llama atributos a los elementos de datos no espaciales o geométricos de un conjunto de datos geoespaciales. Estos datos pueden ser de tipos numéricos o textuales, entre otros. Un conjunto de datos vectoriales puede tener asociados varios campos de atributos, mientras que un conjunto de datos raster tiene solamente uno.
+
+Las operaciones con atributos en datos vectoriales incluyen creación de subconjuntos, agregación y unión (*join*). Estas operaciones pueden ejecutarse con funciones del paquete base de R o con las de paquetes de Tidyverse, como dplyr. Por su parte, las operaciones con atributos en datos raster incluyen creación de subconjuntos y resumen de información.
+
+## Trabajo previo
+
+### Lecturas
+Lovelace, R., Nowosad, J., & Münchow, J. (2019). *Geocomputation with R* (capítulo 3). CRC Press. <https://geocompr.robinlovelace.net/>
+
+## Carga de paquetes
+```{r}
+#| label: carga-paquetes
+#| warning: false
+#| message: false
+
+# Carga de paquetes
+library(tidyverse)
+library(DT)
+library(sf)
+library(terra)
+library(leaflet)
+library(leaflet.extras)
+library(leafem)
+```
+
+## Carga de datos para ejemplos
+
+### Cantones de Costa Rica
+Este archivo proviene de un [geoservicio de tipo Web Feature Service (WFS)](http://geos.snitcr.go.cr/be/IGN_5/wfs) publicado por el Instituto Geográfico Nacional (IGN). Se utiliza una versión del año 2020 (con 82 cantones), debido a que esa es la que corresponde con los datos de COVID-19 que publicó el Ministerio de Salud durante la pandemia.
+
+[Archivo GeoJSON de cantones de Costa Rica (del año 2020)](https://github.com/gf0604-procesamientodatosgeograficos/2023-i/blob/main/datos/ign/delimitacion-territorial-administrativa/cantones_2020.geojson)
+```{r}
+#| label: carga-datos-cantones
+#| warning: false
+#| message: false
+#| code-fold: show
+
+# Carga de datos de cantones de Costa Rica
+# El argumento dsn debe tener la ruta a la fuente de datos
+cantones <-
+  st_read(
+    dsn = "datos/ign/delimitacion-territorial-administrativa/cantones_2020.geojson",
+    quiet = TRUE
+  )
+```
+
+::: {#mapa-tabla-cantones layout-ncol=2}
+
+```{r}
+#| label: mapa-ggplot2-cantones
+#| warning: false
+#| message: false
+#| code-fold: true
+
+# Mapa leaflet de cantones
+leaflet() |>
+  setView(
+    lng = -84.19452,
+    lat = 9.572735,
+    zoom = 7
+  ) |>  
+  addTiles() |>
+  addPolygons(
+    data = st_transform(cantones, 4326),
+    color = "black",
+    fillColor = "transparent",
+    stroke = TRUE,
+    weight = 1.0,
+    popup = paste(
+      paste0("<strong>Código de cantón: </strong>", cantones$cod_canton),
+      paste0("<strong>Cantón: </strong>", cantones$canton),
+      sep = '<br/>'
+    )
+  ) |>
+  addScaleBar(
+    position = "bottomleft", 
+    options = scaleBarOptions(imperial = FALSE)
+  ) |>
+  addFullscreenControl(position = "topright")
+```
+
+```{r}
+#| label: tabla-dt-cantones
+#| warning: false
+#| message: false
+#| code-fold: true
+
+# Tabla DT de cantones
+cantones |>
+  st_drop_geometry() |>
+  dplyr::select(cod_canton, canton) |>
+  arrange(cod_canton) |>
+  datatable(
+    rownames = FALSE,
+    options = list(
+      dom = 'ft',
+      pageLength = 8,
+      language = list(url = '//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json')
+    )    
+  )
+```
+
+Mapa y tabla de cantones de Costa Rica
+:::
+
+### Casos positivos de COVID-19 en cantones de Costa Rica
+Estos datos fueron publicados por el Ministerio de Salud de Costa Rica en <https://geovision.uned.ac.cr/oges/> (a la fecha de escritura de este documento, el enlace no está funcionando). Se distribuyen en archivos CSV, incluyendo un archivo de datos generales para todo el país y varios archivos con datos por cantón. La fecha de la última actualización es 2022-05-30.
+
+[Archivo CSV de casos positivos de COVID-19 en cantones de Costa Rica](https://github.com/gf0604-procesamientodatosgeograficos/2024-i/blob/main/datos/ministerio-salud/covid/05_30_22_CSV_POSITIVOS.csv)
+
+El archivo contiene una columna por cada fecha en la que se tomaron datos en el nivel de cantón. Se carga solamente la columna de la última fecha (2022-05-30).
+
+```{r}
+#| label: carga-datos-covid-cantones-positivos
+#| warning: false
+#| message: false
+#| code-fold: show
+
+# Carga de datos de casos positivos de COVID-19 en cantones de Costa Rica
+# El argumento file debe tener la ruta al archivo de datos
+covid_positivos_cantones <-
+  read_delim(
+    file = "datos/ministerio-salud/covid/05_30_22_CSV_POSITIVOS.csv",
+    delim = ";",
+    locale = locale(encoding = "WINDOWS-1252"), # para desplegar correctamente acentos y otros caracteres
+    col_select = c("cod_provin", "provincia", "cod_canton", "canton", "30/05/2022") # 30/05/2022 contiene los datos para la última fecha disponible
+)
+
+# Se remueve la fila con canton == "Otros"
+covid_positivos_cantones <-
+  covid_positivos_cantones |>
+  filter(canton != "Otros")
+
+# Cambio de nombre de columnas
+covid_positivos_cantones <-
+  covid_positivos_cantones %>%
+  rename(positivos_20220530 = '30/05/2022')
+```
+
+::: {#tabla-covid layout-ncol=1}
+
+```{r}
+#| label: tabla-dt-covid
+#| warning: false
+#| message: false
+#| code-fold: true
+
+# Tabla DT de casos positivos de COVID-19 en cantones de Costa Rica
+covid_positivos_cantones |>
+  arrange(cod_canton) |>
+  datatable(
+    rownames = FALSE,
+    options = list(
+      pageLength = 7,
+      language = list(url = '//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json')
+    )    
+  )
+```
+
+Tabla de casos positivos de COVID-19 en cantones de Costa Rica
+:::
+
+## Introducción
+Se les llama atributos a los elementos de datos no espaciales o geométricos de un conjunto de datos geográficos. Estos datos pueden ser de tipos numéricos o textuales, entre otros. Un conjunto de datos vectoriales puede tener asociados varios campos de atributos, mientras que un conjunto de datos raster tiene solamente uno.
+
+## Datos vectoriales
+Las operaciones con atributos en datos vectoriales incluyen:
+
+- Creación de subconjuntos (*subsetting*).  
+- Agregación (*aggregation*).  
+- Unión (*joining*). 
+
+Seguidamente, se explica como maneja estas operaciones el paquete sf.
+
+### Manejo de datos de atributos con el paquete sf
+Como se mencionó en capítulos anteriores, el paquete sf define una clase, llamada `sf`, la cual extiende la clase `data.frame` del paquete base de R. Los objetos de la clase sf tienen una fila (o *feature*) por cada observación y una columna por cada atributo. También tienen una columna especial para almacenar las geometrías (puntos, líneas, polígonos, etc.), la cual generalmente se denomina `geometry` o `geom` (pero puede tener cualquier otro nombre). Esto permite que sf utilice métodos (i.e. funciones) de la clase `data.frame`, tales como `plot()` y `summary()`, entre otros.
+
+Además de `data.frame`, `sf` es compatible con la clase [tibble](https://tibble.tidyverse.org/reference/tibble.html), la cual también puede manipularse mediante los métodos de [dplyr](https://dplyr.tidyverse.org/). Esto que permite un manejo *tidy* (i.e. ordenado, organizado) de los datos geoespaciales, de acuerdo con el enfoque de [Tidyverse](https://www.tidyverse.org/).
+
+En la secciones siguientes, se explicará el manejo de datos de atributos en conjuntos de datos geoespaciales, mediante Tidyverse.
+
+#### El método `st_drop_geometry()`
+[`st_drop_geometry()`](https://rdrr.io/cran/sf/man/st_geometry.html) es un método que remueve las geometrías de un objeto sf. Esto puede ser útil cuando se desea operar solamente con las variables no espaciales.
+
+**Secuencia de operaciones que no incluye `st_drop_geometry()`**
+```{r}
+#| label: sin-st_drop_geometry()
+#| warning: false
+#| message: false
+#| code-fold: show
+
+# Operaciones sin st_drop_geometry()
+cantones |>
+  dplyr::select(canton, area) |>
+  filter(area >= 2000)
+```
+
+**Secuencia de operaciones que incluye `st_drop_geometry()`**
+```{r}
+#| label: con-st_drop_geometry()
+#| warning: false
+#| message: false
+#| code-fold: show
+
+# Operaciones con st_drop_geometry()
+cantones |>
+  st_drop_geometry() |>
+  dplyr::select(canton, area) |>
+  filter(area >= 2000)
+```
+
+Como puede verse, la columna de geometrías se incluye como resultado de cualquier operación, a menos que se remueva explícitamente.
+
+#### Creación de subconjuntos
+Frecuentemente, es necesario extrer subconjuntos del conjunto de datos original, para facilidad de manejo y para atender requerimientos específicos de un análisis. 
+
+El paquete dplyr permite crear flujos de trabajo intuitivos y rápidos, debido a que se apoya en código escrito en el lenguaje C++. Esto es útil, por ejemplo, cuando se trabaja con conjuntos de datos grandes (_big data_) y cuando se necesita integración con bases de datos. Los principales métodos de dplyr para creación de subconjuntos son `select()`, `slice()` y `filter()`.
+
+##### El método `select()`
+[`select()`](https://dplyr.tidyverse.org/reference/select.html) permite seleccionar y renombrar columnas de un conjunto de datos.
+
+**Selección y cambio de nombre de columnas**
+```{r}
+#| label: seleccion-renombramiento-columnas
+#| warning: false
+#| message: false
+#| code-fold: show
+
+# Selección de columnas canton, area (renombrada a area_km2) y provincia
+cantones |>
+  head(10) |> # para mostrar solo las 10 primeras filas
+  st_drop_geometry() |> # para remover la columna de geometrías
+  dplyr::select(canton, area_km2 = area, provincia)
+```
+
+##### El método `slice()`
+[`slice()`](https://dplyr.tidyverse.org/reference/slice.html) crea un subconjunto con base en las posiciones de las filas.
+
+**Subconjunto especificado mediante un rango de posiciones de filas**
+```{r}
+#| label: slice
+#| warning: false
+#| message: false
+#| code-fold: show
+
+# Subconjunto de filas entre las posiciones 1 y 10 del conjunto de datos de COVID-19
+covid_positivos_cantones |>
+  slice(1:10)
+```
+
+##### El método `filter()`
+[`filter()`](https://dplyr.tidyverse.org/reference/filter.html) filtra filas que cumplen una expresión lógica.
+
+**Filtrado de filas que cumplen una expresión lógica**
+```{r}
+#| label: filter
+#| warning: false
+#| message: false
+#| code-fold: show
+
+# Filtrado de cantones de la provincia de Heredia
+cantones |>
+  st_drop_geometry() |>
+  dplyr::select(provincia, canton) |>
+  filter(provincia == "Heredia")
+```
+
+#### Agregación
+Las operaciones de agregación realizan cálculos (ej. sumas, promedios, mínimos, máximos) a partir de la agrupaciones de datos. En Tidyverse y dplyr, las agregaciones de datos se realizan con las funciones `group_by()` y `summarize()`.
+
+##### Las funciones `group_by()` y `summarize()`
+[`group_by()`](https://dplyr.tidyverse.org/reference/group_by.html) crea grupos de filas de un conjunto de datos, de acuerdo con los valores de una o varias columnas. [`summarize()`](https://dplyr.tidyverse.org/reference/summarise.html) crea columnas adicionales con cálculos para cada grupo, tales como promedios, sumas, mínimos, máximos y otros. Si `summarize()` se ejecuta sin `group_by()`, crea una única fila para todo el conjunto de datos.
+
+Por ejemplo, en un conjunto de datos de ventas de una cadena de tiendas, se podría usar `group_by()` para hacer un grupo por cada ciudad en la que una o varias tiendas. Luego con `summarize()`, se podría crear una columna con el total de ventas para cada ciudad (i.e. para cada grupo).
+
+**Agrupación y sumarización**
+```{r}
+#| label: agrupacion-sumarizacion
+#| warning: false
+#| message: false
+#| code-fold: show
+
+# Suma de áreas de cantones por provincia
+cantones |>
+  st_drop_geometry() |>
+  group_by(provincia) |>
+  summarize(area_km2 = sum(area, na.rm = TRUE))
+
+# Suma de áreas de cantones para todo el país
+cantones |>
+  st_drop_geometry() |>
+  summarize(area_km2 = sum(area, na.rm = TRUE))
+
+# Las tres provincias más grandes con sus respectivas áreas y cantidad de cantones
+cantones |>
+  st_drop_geometry() |>
+  dplyr::select(area, provincia) |>
+  group_by(provincia) %>%
+  summarize(
+    area = sum(area, na.rm = TRUE),
+    cantidad_cantones = n()
+  ) |>
+  arrange(desc(area)) |> # orden descendente por área
+  top_n(n = 3, wt = area) # se separan los primeros 3
+
+# Suma de casos positivos de COVID-19 por provincia
+covid_positivos_cantones |>
+  group_by(provincia) |>
+  summarize(positivos_20220530 = sum(positivos_20220530, na.rm = TRUE))
+```
+
+#### Unión (*join*)
+La unión (en inglés, *join*) de datos ubicados en diferentes fuentes (ej. archivos) es una tarea común en análisis de información. Este tipo de operaciones se realizan con base en columnas que son comunes en los conjuntos de datos que se desea unir. 
+
+El paquete dplyr proporciona varios [métodos para realizar uniones de datos](https://dplyr.tidyverse.org/reference/mutate-joins.html), los cuales se ilustran en la @fig-join.
+
+```{r}
+#| label: fig-join
+#| fig.cap: Tipos de uniones (*join*) de datos. Imagen de [hostingplus](https://www.hostingplus.com.co/blog/tipos-de-join-en-sql-cuales-son-los-principales/).
+#| out-width: "100%"
+#| echo: false
+
+knitr::include_graphics(rep("img/join.jpg"))
+```
+
+Las funciones que los implementan son:
+
+- `left_join()`: mantiene todas las filas del conjunto de datos del lado izquierdo y les agrega las columnas del conjunto de datos del lado derecho, en las filas en las que hay coincidencia.
+- `inner_join()`: incluye las filas que coinciden en ambos conjuntos de datos.
+- `right_join()`: mantiene todas las filas del conjunto de datos del lado derecho y agrega las columnas del conjunto de datos del lado izquierdo, en las filas en las que hay coincidencia.
+- `full_join()`: incluye todas las filas de ambos conjuntos de datos.
+
+Todos los tipos de *joins* requieren de una o varias columnas que sean comunes a ambos conjuntos de datos, llamadas llaves de unión o *join keys*, en inglés. Esas columnas se especifican con el argumento `by`. Por ejemplo, `by = codigo`, si la columna común se llama `codigo` en ambos conjuntos de datos. Si tienen diferentes nombres, se utiliza un vector (ej. `by = c("codigo_1" = "codigo_2")`, en donde `codigo_1` es el nombre de la columna en el conjunto de datos de la izquierda y `codigo_2` en el de la derecha. Si hay columnas con nombres iguales en ambos conjuntos de datos, `by` utiliza esos nombres por defecto.
+
+##### Ejemplo: unión de los datos geoespaciales de cantones con los datos tabulares de COVID-19
+Se desea crear un [mapa de coropletas](https://es.wikipedia.org/wiki/Mapa_coropl%C3%A9tico) de los cantones de Costa Rica, coloreado de acuerdo con la cantidad de casos positivos de COVID-19 acumulados al 2022-05-30. Para esto se necesita unir, a través de un *left join*, el conjunto de datos `cantones` (con las geometrías y otros datos de los cantones) con el conjunto de datos de `covid_positivos_cantones` (con la cantidad de casos positivos para cada cantón). Para ambas tablas, la llave de unión es un campo llamado `cod_canton`, que contiene el código de cantón asignado por el IGN. Se utiliza un *left join* porque se desea incluir en la unión todos las filas del conjunto de datos de cantones, ya sea que tengan o no tengan datos de COVID-19 asociados.
+
+El siguiente bloque de código realiza el *left join* y almacena el resultado en un objeto `sf` llamado `cantones_union_covid`.
+```{r}
+#| label: cantones-join-covid
+#| warning: false
+#| message: false
+#| code-fold: show
+
+cantones_union_covid <-
+  cantones |>
+  left_join(
+    dplyr::select(covid_positivos_cantones, cod_canton, positivos_20220530), # este select() es para no llevar columnas innecesarias a la unión
+    by = "cod_canton" # llave para realizar la unión
+  )
+```
+
+El siguiente bloque de código genera el mapa leaflet de coropletas.
+```{r}
+#| label: mapa-cantones-join-covid
+#| warning: false
+#| message: false
+#| code-fold: show
+
+# Paleta de colores
+colores_cantones_union_covid <-
+  colorNumeric(
+    palette = "Reds",
+    domain = cantones_union_covid$positivos_20220530,
+    na.color = "transparent"
+  )
+
+# Mapa leaflet
+leaflet() |>
+  setView(
+    lng = -84.19452,
+    lat = 9.572735,
+    zoom = 7) |>
+  addTiles(group = "OSM") |>
+  addPolygons(
+    data = st_transform(cantones_union_covid, 4326), # se reproyecta a WGS84
+    fillColor = ~ colores_cantones_union_covid(cantones_union_covid$positivos_20220530),
+    fillOpacity = 0.8,
+    color = "black",
+    stroke = TRUE,
+    weight = 1.0,
+    popup = paste(
+      paste("<strong>Cantón:</strong>", cantones_union_covid$canton),
+      paste("<strong>Casos positivos al 2022-05-30:</strong>", cantones_union_covid$positivos_20220530),
+      sep = '<br/>'
+    ),
+    group = "Casos positivos al 2022-05-30"
+  ) |>
+  addLegend(
+    position = "bottomleft",
+    pal = colores_cantones_union_covid,
+    values = cantones_union_covid$positivos_20220530,
+    group = "Casos positivos al 2022-05-30",
+    title = "Cantidad de casos"
+  ) |>
+  addLayersControl(
+    baseGroups = c("OSM"),
+    overlayGroups = c("Casos positivos al 2022-05-30")
+  )
+```
+
+### Ejercicios
+1. Cree un mapa leaflet de coropletas de las provincias de Costa Rica, coloreado de acuerdo con la cantidad de casos positivos de COVID-19 acumulados al 2022-05-30. Se sugiere seguir los siguientes pasos:
+
+a. Cree un data frame con la suma, por provincia, de casos positivos de cantones (para realizar la agrupación, use el código de la provincia, no el nombre).
+b. Con un *left join*, una la [capa de provincias (del año 2020)](https://github.com/gf0604-procesamientodatosgeograficos/2023-i/blob/main/datos/ign/delimitacion-territorial-administrativa/provincias_2020.geojson) y el dataframe que creó en el punto a.
+c. Genere el mapa leaflet de coropletas con el objeto sf que creó en el punto b.
+
+## Datos raster
+Las operaciones con atributos en datos raster incluyen:
+
+- Creación de subconjuntos (_subsetting_).  
+- Resumen de información (_summarizing_).  
+
+Seguidamente, se explicará como maneja estas operaciones el paquete terra.
+
+### Manejo de datos de atributos con el paquete terra
+
+#### Funciones básicas para manejo de objetos SpatRaster
+El siguiente bloque de código crea y mapea un objeto `SpatRaster` llamado `elevacion`.
+
+```{r}
+#| label: rast-creacion-1
+#| warning: false
+#| message: false
+#| code-fold: show
+
+# Creación de un objeto SpatRaster
+elevacion <- rast(
+  nrows = 6,
+  ncols = 6,
+  resolution = 0.5,
+  xmin = -1.5,
+  xmax = 1.5,
+  ymin = -1.5,
+  ymax = 1.5,
+  vals = 1:36
+)
+
+# Mapeo
+plot(elevacion)
+```
+
+Los objetos `SpatRaster` también pueden contener valores categóricos de tipo `logical` o `factor`. El siguiente bloque de código crea y mapea un objeto `SpatRaster` con información sobre tipos de granos (i.e. partículas) de una porción de suelo.
+
+```{r}
+#| label: rast-creacion-2
+#| warning: false
+#| message: false
+#| code-fold: show
+
+# Tipos de granos
+grano_tipo <- c("arcilla", "limo", "arena")
+
+# Lista de granos generada aleatoriamente
+lista_granos <- sample(grano_tipo, 36, replace = TRUE)
+lista_granos
+
+# Factor de tipos de granos
+grano_factor <- factor(lista_granos, levels = grano_tipo)
+
+# Objeto SpatRaster de tipos de granos
+grano <- rast(
+  nrows = 6,
+  ncols = 6,
+  resolution = 0.5,
+  xmin = -1.5,
+  xmax = 1.5,
+  ymin = -1.5,
+  ymax = 1.5,
+  vals = grano_factor
+)
+
+# Mapeo
+plot(grano)
+```
+
+Ambos objetos pueden guardados en el disco con la función `writeRaster()`.
+
+```{r}
+#| label: raster-writing
+#| warning: false
+#| message: false
+#| code-fold: show
+#| eval: false
+
+# Especificación del directorio de trabajo (debe ser una ruta existente)
+setwd("/home/mfvargas")
+
+# Escritura de los objetos raster
+writeRaster(elevacion, "elevacion.asc")
+writeRaster(grano, "grano.asc")
+```
+
+La función `levels()` puede utilizarse para consultar la *Raster Attribute Table* (RAT) de un objeto `SpatRaster`, la cual contiene información sobre sus factores y niveles. También puede emplearse para asignar nuevos factores a un objeto.
+
+```{r}
+#| label: rat
+#| warning: false
+#| message: false
+#| code-fold: show
+
+# Consulta de la RAT
+levels(grano)
+
+# Nuevo factor
+levels(grano) = data.frame(value = c(0, 1, 2), wetness = c("mojado", "húmedo", "seco"))
+
+# Consulta de la RAT
+levels(grano)
+```
+
+Los raster categóricos también pueden almacenar información relacionada con los colores de cada valor, mediante una tabla. La tabla de colores es un data frame con tres (*red*, *green*, *blue*) o cuatro (*alpha*) columnas, en la que cada fila corresponde a un valor. Las tablas de colores en `terra` pueden consultarse o modificarse con la función `coltab()`.
+
+#### Creación de subconjuntos
+Los subconjuntos se crean en objetos `SpatRaster` con el operador `[`, el cual acepta varios tipos de entradas.
+
+- Índices de filas y columnas.
+- ID de celdas.
+- Coordenadas.
+- Otros objetos espaciales.
+
+En este capítulo, solo se tratarán las dos primeras opciones. Las restantes se cubrirán en las secciones sobre operaciones espaciales.
+
+Las dos primeras opciones se ilustran en el siguiente bloque de código, en el que se consulta la celda (también llamada pixel) ubicada en la esquina superior izquierda del objeto de elevación.
+
+```{r}
+#| label: indices-id-celdas
+#| warning: false
+#| message: false
+#| code-fold: show
+
+# Celda en la fila 1, columna 1
+elevacion[1, 1]
+elevacion[]
+
+# Celda con ID = 1
+elevacion[1]
+```
+
+La totalidad de los valores de un objeto `SpatRaster` puede consultarse con las función `values()`.
+
+```{r}
+#| label: values
+#| warning: false
+#| message: false
+#| code-fold: show
+
+# Valores de un objeto raster
+values(elevacion)
+```
+
+El operador `[` también puede utilizarse para modificar los valores de las celdas un objeto `SpatRaster`.
+
+```{r}
+#| label: modificacion-celdas
+#| warning: false
+#| message: false
+#| code-fold: show
+
+# Modificación de una celda
+elevacion[1, 1] = 0
+
+# Consulta de todos los valores del raster (equivalente a values())
+elevacion[]
+
+# Modificación de rangos de celdas
+elevacion[1, c(1, 2)] = 0
+
+elevacion[1, 1:6] = 0
+elevacion[2, 1:6] = 10
+elevacion[3, 1:6] = 15
+elevacion[4, 1:6] = 15
+elevacion[5, 1:6] = 20
+elevacion[6, 1:6] = 35
+
+# Consulta de los valores
+elevacion[]
+```
+
+#### Resumen y sumarización de información
+La escritura del nombre de un objeto `SpatRaster` en la consola imprime información general sobre ese objeto. La función `summary()` proporciona algunas estadísticas descriptivas (mínimo, máximo, cuartiles, etc.). Otras estadísticas pueden ser calculadas con la función  `global()`.
+
+```{r}
+#| label: global
+#| warning: false
+#| message: false
+#| code-fold: show
+
+# Información general
+elevacion
+
+# Resumen de un raster de una capa
+summary(elevacion)
+
+# Desviación estándar
+global(elevacion, sd)
+```
+
+Adicionalmente, la función `freq()` retorna la tabla de frecuencias de valores categóricos.
+
+```{r}
+#| label: freq
+#| warning: false
+#| message: false
+#| code-fold: show
+
+# Tabla de frecuencias
+freq(grano)
+```
+
+Las estadísticas pueden ser visualizadas con funciones como `hist()` y `density()`.
+
+```{r}
+#| label: hist-density
+#| warning: false
+#| message: false
+#| code-fold: show
+
+# Histograma
+hist(elevacion)
+
+# Densidad
+density(elevacion)
+```

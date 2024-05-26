@@ -30,6 +30,7 @@ book:
     - part: parte-v-ecosistema-espacial-r.qmd
       chapters: 
         - 11-introduccion-manejo-datos-geoespaciales.qmd
+        - 12-operaciones-datos-atributos.qmd
     - part: parte-vii-evaluaciones.qmd
       chapters: 
         - examen-corto-01.qmd
