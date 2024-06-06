@@ -1,0 +1,564 @@
+# Operaciones con datos espaciales
+
+## Resumen
+Las operaciones espaciales, tales como las basadas en relaciones topológicas (ej. intersección, traslape, contención, cobertura), en el caso de los datos vectoriales, y el álgebra de mapas, en el caso de los datos raster, constituyen un componente esencial del procesamiento de datos geoespaciales. Varias de las operaciones con datos de atributos estudiadas en el capítulo anterior tienen contrapartes espaciales.
+
+Las operaciones espaciales para datos vectoriales incluyen creación de subconjuntos espaciales, unión de datos espaciales, agregación de datos espaciales y relaciones de distancia, entre otras. Por su parte, las operaciones espaciales para datos raster incluyen creación de subconjuntos espaciales y álgebra de mapas, entre otras.
+
+## Trabajo previo
+
+### Lecturas
+Lovelace, R., Nowosad, J., & Münchow, J. (2019). *Geocomputation with R* (capítulo 4). CRC Press. <https://geocompr.robinlovelace.net/>
+
+### Carga de paquetes
+
+```{r}
+#| label: carga-paquetes
+#| warning: false
+#| message: false
+
+# Carga de paquetes
+library(tidyverse)
+library(DT)
+library(sf)
+library(terra)
+library(leaflet)
+library(leaflet.extras)
+library(leafem)
+library(viridisLite)
+```
+
+### Conjuntos de datos para ejemplos
+
+#### Carga de datos
+
+##### Cantones de Costa Rica
+Este archivo proviene de un [geoservicio de tipo Web Feature Service (WFS)](https://geos.snitcr.go.cr/be/IGN_5_CO/wfs) publicado por el Instituto Geográfico Nacional (IGN). Se utiliza una versión del año 2020 (con 82 cantones). Las geometrías se simplificaron con el método [st_simplify()](https://r-spatial.github.io/sf/reference/geos_unary.html), para reducir el tamaño del archivo.
+
+```{r}
+#| label: simplificacion-cantones
+#| code-summary: "Código para simplificar las geometrías de cantones (no es necesario ejecutarlo)"
+#| code-fold: true
+#| warning: false
+#| message: false
+#| eval: false
+
+# Simplificación de geometrías de la capa de cantones de Costa Rica
+st_read(
+  dsn = "datos/ign/delimitacion-territorial-administrativa/cantones_2020.geojson",
+  quiet = TRUE
+) |>
+st_simplify(dTolerance = 10, preserveTopology = TRUE) |>
+st_write("datos/ign/delimitacion-territorial-administrativa/cantones_2020_simp_10m.geojson")
+```
+
+[Archivo GeoJSON de cantones de Costa Rica (del año 2020) con geometrías simplificadas](https://github.com/gf0604-procesamientodatosgeograficos/2024-i/blob/main/datos/ign/delimitacion-territorial-administrativa/cantones_2020_simp_10m.geojson)
+
+```{r}
+#| label: carga-datos-cantones
+#| warning: false
+#| message: false
+#| code-fold: show
+#| code-summary: "Código para cargar los datos de cantones"
+
+# Carga de datos de cantones de Costa Rica
+# El argumento dsn debe tener la ruta a la fuente de datos
+cantones <-
+  st_read(
+    dsn = "datos/ign/delimitacion-territorial-administrativa/cantones_2020_simp_10m.geojson",
+    quiet = TRUE
+  ) |>
+  st_transform(4326) # reproyección a WGS84
+```
+
+##### Registros de presencia de félidos de Costa Rica
+Este archivo, con registros de presencia de especies silvestres de la familia [*Felidae*](https://es.wikipedia.org/wiki/Felidae) en Costa Rica, proviene de una [consulta al portal de datos de la Infraestructura Mundial de Información en Biodiversidad (GBIF)](https://www.gbif.org/occurrence/download/0022781-240506114902167).
+
+[Archivo CSV de registros de presencia de félidos silvestres de Costa Rica)](https://github.com/gf0604-procesamientodatosgeograficos/2024-i/blob/main/datos/gbif/felidos.csv)
+
+```{r}
+#| label: carga-datos-felidos
+#| warning: false
+#| message: false
+#| code-fold: show
+#| code-summary: "Código para cargar los datos de félidos"
+
+# Carga de datos de félidos de Costa Rica
+felidos <-
+  st_read(
+    "datos/gbif/felidos.csv",
+    options = c(
+      "X_POSSIBLE_NAMES=decimalLongitude", # columna de longitud decimal
+      "Y_POSSIBLE_NAMES=decimalLatitude"   # columna de latitud decimal
+    ),
+    quiet = TRUE
+  )
+
+# Asignación del CRS WGS84
+st_crs(felidos) <- 4326
+```
+
+#### Visualización
+
+::: {#mapa-cantones-felidos layout-ncol=1}
+
+```{r}
+#| label: mapa-leaflet-cantones-felidos
+#| warning: false
+#| message: false
+#| code-fold: true
+#| code-summary: "Código para generar el mapa leaflet de cantones y registros de presencia de félidos"
+
+# Factor de color basado en los valores únicos de especies
+colores_especies <- colorFactor(
+  palette = viridis(length(unique(felidos$species))), 
+  domain = felidos$species
+)
+
+# Mapa leaflet de cantones y registros de presencia de félidos
+leaflet() |>
+  setView(
+    lng = -84.19452,
+    lat = 9.572735,
+    zoom = 7
+  ) |>  
+  addTiles(group = "Mapa general (OpenStreetMap)") |>
+  addProviderTiles(
+    providers$Esri.WorldImagery, 
+    group = "Imágenes satelitales (ESRI World Imagery)"
+  ) |>  
+  addPolygons(
+    data = cantones,
+    color = "black",
+    fillColor = "transparent",
+    stroke = TRUE,
+    weight = 1.5,
+    popup = paste(
+      paste0("<strong>Código del cantón: </strong>", cantones$cod_canton),
+      paste0("<strong>Cantón: </strong>", cantones$canton),
+      sep = '<br/>'
+    ),
+    group = "Cantones"
+  ) |>  
+  addCircleMarkers(
+    data = felidos,
+    stroke = F,
+    radius = 4,
+    fillColor = ~colores_especies(felidos$species),
+    fillOpacity = 1.0,
+    popup = paste(
+      paste0("<strong>Especie: </strong>", felidos$species),
+      paste0("<strong>Localidad: </strong>", felidos$locality),
+      paste0("<strong>Fecha: </strong>", felidos$eventDate),
+      paste0("<strong>Fuente: </strong>", felidos$institutionCode),
+      paste0("<a href='", felidos$occurrenceID, "'>Más información</a>"),
+      sep = '<br/>'
+    ),    
+    group = "Félidos"
+  ) |>
+  addScaleBar(
+    position = "bottomleft", 
+    options = scaleBarOptions(imperial = FALSE)
+  ) |>  
+  addLegend(
+    position = "bottomleft",    
+    pal = colores_especies,
+    values = felidos$species,
+    title = "Especies de félidos",
+    group = "Félidos"    
+  ) |>  
+  addLayersControl(
+    baseGroups = c(
+      "Mapa general (OpenStreetMap)", 
+      "Imágenes satelitales (ESRI World Imagery)"
+    ),
+    overlayGroups = c("Cantones", "Félidos")
+  ) |>
+  addResetMapButton() |>
+  addSearchOSM() |>
+  addMouseCoordinates() |>
+  addMiniMap(position = "bottomright") |>
+  addFullscreenControl()
+```
+
+Mapa de cantones y registros de presencia de félidos de Costa Rica
+:::
+
+## Introducción
+Este capítulo brinda una visión general de las operaciones espaciales para datos vectoriales implementadas en el paquete sf, y para datos raster implementadas en el paquete terra.
+
+## Datos vectoriales
+Las operaciones espaciales para datos vectoriales incluyen:
+
+- Creación de subconjuntos espaciales (*spatial subsetting*).
+- Unión de datos espaciales (*spatial joining*).
+- Agregación de datos espaciales (*spatial aggregation*).
+- Relaciones de distancia.
+
+Seguidamente, se explica como maneja estas operaciones el paquete sf. Antes, se cubre el tema de las relaciones topológicas, el cual es importante en varias operaciones espaciales.
+
+### Relaciones topológicas
+Las *relaciones topológicas* o *relaciones topológicas binarias* son expresiones lógicas (verdaderas o falsas) sobre las relaciones espaciales entre dos objetos. Por ejemplo, si `a` y `b` son dos objetos espaciales (ej. puntos, líneas, polígonos), se pueden considerar relaciones topológicas como las siguientes:
+
+`a` interseca a `b`  
+`a` es adyacente a `b`  
+`a` está dentro de `b`  
+`b` está contenido en `a`
+
+Los diferentes tipos de relaciones topológicas están estandarizados en el modelo [DE-9IM (*Dimensionally Extended 9-Intersection Model*)](https://en.wikipedia.org/wiki/DE-9IM) y se ilustran en la @fig-relaciones-topologicas-vectoriales. Esta figura muestra también los métodos del paquete sf que implementan las relaciones topológicas (ej. `st_intersects()`, `st_overlaps()`, `st_winthin()`, `st_contains()`).
+
+```{r}
+#| label: fig-relaciones-topologicas-vectoriales
+#| fig.cap: Relaciones topológicas entre geometrías vectoriales. Imagen de [Robin Lovelace et al.](https://r.geocompx.org/spatial-operations.html#topological-relations), basada en Egenhofer and Herring (1990).
+#| echo: false
+
+knitr::include_graphics(rep("img/relaciones-topologicas-vectoriales.png"))
+```
+
+Nótese que para algunas relaciones topológicas (ej. intersección, traslape), el orden no es importante, mientras que para otras sí lo es (ej. contención).
+
+A las relaciones topológicas se les conoce también como *predicados espaciales* y así se les denomina en la [documentación de sf](https://r-spatial.github.io/sf/articles/sf3.html). 
+
+### Manejo de datos espaciales con el paquete sf
+
+#### Creación de subconjuntos espaciales
+La creación de subconjuntos espaciales consiste en retornar objetos espaciales que cumplen con algún predicado espacial. Es análoga a la creación de subconjuntos por datos de atributos. Puede realizarse a través de los operadores `[` y `$` del paquete base de R o por medio de la función `filter()` de dplyr. Esta última opción es la que se usa en los siguiente ejemplos.
+
+En este caso, la función [filter()](https://dplyr.tidyverse.org/reference/filter.html) usa tres argumentos: `x`, `y` y `.predicate`, en donde `x` e `y` son dos conjuntos de datos espaciales y `.predicate` el predicado espacial que los relaciona.
+
+##### Ejemplo: registros de presencia de félidos en el cantón de Sarapiquí y sus alrededores
+El siguiente bloque de código crea dos subconjuntos espaciales del conjunto de registros de presencia de félidos, al relacionarlo con el polígono del cantón de Sarapiquí mediante los predicados espaciales [st_within()](https://r-spatial.github.io/sf/reference/geos_binary_pred.html) y [st_is_within_distance()](https://r-spatial.github.io/sf/reference/geos_binary_pred.html).
+
+```{r}
+#| label: ejemplos-creacion-subconjuntos
+#| warning: false
+#| message: false
+#| code-fold: show
+
+# Polígono del cantón de Sarapiquí
+sarapiqui <- filter(cantones, canton == "Sarapiquí")
+
+# Puntos de félidos ubicados dentro del cantón de Sarapiquí
+felidos_dentro_sarapiqui <-
+  st_filter(
+    x = felidos,
+    y = sarapiqui, 
+    .predicate = st_within
+  )
+
+# Puntos de félidos ubicados dentro de una distancia
+# de hasta 10 km del cantón de Sarapiquí
+felidos_10km_sarapiqui <- st_filter(
+  x = felidos, 
+  y = sarapiqui, 
+  .predicate = function(a, b) st_is_within_distance(a, b, 10000)
+)
+```
+
+Los subconjuntos espaciales creados se despliegan en los mapas que se muestran seguidamente.
+
+::: {#mapas-felidos-sarapiqui layout-ncol=2}
+
+```{r}
+#| label: mapa-felidos-dentro-sarapiqui
+#| warning: false
+#| message: false
+#| code-fold: true
+
+# Mapa leaflet
+leaflet() |>
+  addTiles() |>
+  addPolygons(
+    data = sarapiqui,
+    color = "black",
+    fillColor = "transparent",
+    stroke = TRUE,
+    weight = 2.0
+  ) |>
+  addCircleMarkers(
+    data = felidos_dentro_sarapiqui,
+    stroke = F,
+    radius = 4,
+    fillColor = "blue",
+    fillOpacity = 1.0,
+    popup = paste(
+      paste0("<strong>Especie: </strong>", felidos_dentro_sarapiqui$species),
+      paste0("<strong>Localidad: </strong>", felidos_dentro_sarapiqui$locality),
+      paste0("<strong>Fecha: </strong>", felidos_dentro_sarapiqui$eventDate),
+      paste0("<strong>Fuente: </strong>", felidos_dentro_sarapiqui$institutionCode),
+      paste0("<a href='", felidos$occurrenceID, "'>Más información</a>"),
+      sep = '<br/>'
+    ),    
+    group = "Félidos"
+  ) |>  
+  addScaleBar(
+    position = "bottomleft", 
+    options = scaleBarOptions(imperial = FALSE)
+  ) |>
+  addFullscreenControl(position = "topright")
+```
+
+```{r}
+#| label: mapa-felidos-10km-sarapiqui
+#| warning: false
+#| message: false
+#| code-fold: true
+
+# Mapa leaflet
+leaflet() |>
+  addTiles() |>
+  addPolygons(
+    data = sarapiqui,
+    color = "black",
+    fillColor = "transparent",
+    stroke = TRUE,
+    weight = 2.0
+  ) |>
+  addCircleMarkers(
+    data = felidos_10km_sarapiqui,
+    stroke = F,
+    radius = 4,
+    fillColor = "blue",
+    fillOpacity = 1.0,
+    popup = paste(
+      paste0("<strong>Especie: </strong>", felidos_10km_sarapiqui$species),
+      paste0("<strong>Localidad: </strong>", felidos_10km_sarapiqui$locality),
+      paste0("<strong>Fecha: </strong>", felidos_10km_sarapiqui$eventDate),
+      paste0("<strong>Fuente: </strong>", felidos_10km_sarapiqui$institutionCode),
+      paste0("<a href='", felidos_10km_sarapiqui$occurrenceID, "'>Más información</a>"),
+      sep = '<br/>'
+    ),    
+    group = "Félidos"
+  ) |>  
+  addScaleBar(
+    position = "bottomleft", 
+    options = scaleBarOptions(imperial = FALSE)
+  ) |>
+  addFullscreenControl(position = "topright")
+```
+
+Mapa de registros de presencia de félidos localizados dentro del cantón de Sarapiquí.
+
+Mapa de registros de presencia de félidos localizados dentro de una distancia de hasta 10 km del cantón de Sarapiquí.
+:::
+
+#### Unión (*join*) de datos espaciales
+Como se estudió en el capítulo sobre operaciones de datos de atributos, la unión (*join*) “no espacial” de dos conjuntos de datos se basa en una o varias columnas (llamadas llaves o *keys*) que están presentes en ambos conjuntos. Las uniones espaciales se basan en un principio similar pero, en lugar de columnas, la relación entre los conjuntos se realiza a través de un predicado espacial. 
+
+En sf, la unión de datos espaciales se implementa a través de la función [st_join()](https://r-spatial.github.io/sf/reference/st_join.html), la cual tiene tres argumentos principales: `x`, `y` y `join`, en donde `x` e `y` son dos conjuntos de datos espaciales y `join` un predicado espacial que, por defecto, es `st_intersects`. `st_join()` agrega una o varias columnas a `x`, provenientes de `y`, para las filas que satisfacen el predicado.
+
+##### Ejemplo: riqueza de especies de félidos en los cantones de Costa Rica
+Los siguientes bloques de código calculan la [riqueza de especies](https://es.wikipedia.org/wiki/Riqueza_de_especies) de félidos en los cantones de Costa Rica, esto es, la cantidad de especies en cada cantón.
+
+El proceso se divide en los siguientes pasos:
+
+1. Unión espacial de félidos y cantones (esto le agrega a cada registros de félidos el código de cantón correspondiente a su ubicación).
+2. Conteo de la cantidad de especies de félidos en cada cantón (por código de cantón).
+3. Unión no espacial de cantones con el dataframe con el conteo de especies en cantones (esto le agrega a cada cantón la cantidad de especies de félidos).
+4. Generación del mapa de riqueza de especies.
+
+**1. Unión espacial de félidos y cantones**  
+Con `st_join()`, al conjunto de registros de presencia de félidos, se le agrega la columna `cod_canton` del conjunto de cantones, mediante el predicado espacial `st_within()`.
+
+```{r}
+#| label: union-felidos-cantones
+#| warning: false
+#| message: false
+#| code-fold: show
+
+# Unión espacial de félidos y cantones (solo la columna cod_canton),
+# mediante el predicado st_within().
+# Como resultado, cod_canton se une al conjunto de datos de félidos.
+felidos_union_cantones <- 
+  st_join(
+    x = felidos,
+    y = dplyr::select(cantones, cod_canton), # selección de columna cod_canton
+    join = st_within
+  )
+
+# Despliegue de los datos unidos de félidos y la columna cod_canton de cantones
+felidos_union_cantones |>
+  st_drop_geometry() |>
+  dplyr::select(species, locality, cod_canton) |>
+  datatable(
+    colnames = c("Especie", "Localidad", "Código de cantón"),
+    options = list(
+      pageLength = 5,
+      language = list(url = '//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json')
+    )
+  )
+```
+
+**2. Conteo de la cantidad de especies de félidos en cada cantón**  
+Se realiza una agrupación por código de cantón con `group_by(cod_canton)` y se crea la columna `riqueza_especies_felidos` con `summarize(riqueza_especies_felidos = n_distinct(species, na.rm = TRUE))`. La función [n_distinct()](https://dplyr.tidyverse.org/reference/n_distinct.html) cuenta la cantidad de valores diferentes de una columna; en este caso, la cantidad de especies en cada cantón.
+
+```{r}
+#| label: conteo-especies-felidos-cantones
+#| warning: false
+#| message: false
+#| code-fold: show
+
+# Conteo de la cantidad de especies de félidos en cantones
+riqueza_especies_felidos_cantones <-
+  felidos_union_cantones |>
+  st_drop_geometry() |>
+  group_by(cod_canton) |>
+  summarize(riqueza_especies_felidos = n_distinct(species, na.rm = TRUE))
+
+# Despliegue de la cantidad de especies de félidos en cada cantón
+riqueza_especies_felidos_cantones |>
+  arrange(desc(riqueza_especies_felidos)) |>
+  datatable(
+    colnames = c("Código de cantón", "Riqueza de especies de félidos"),
+    options = list(
+      pageLength = 5,
+      language = list(url = '//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json')
+    )
+  )
+```
+
+Nótese que hay registros que no están dentro del polígono de ningún cantón y tienen un valor `NA` en `cod_canton`. Esto puede deberse a errores de georreferenciación o a políticas de los publicadores de datos para no revelar la ubicación exacta de especies amenazadas.
+
+**3. Unión no espacial de cantones con el dataframe de riqueza de especies en cantones**  
+Con [left_join()](https://dplyr.tidyverse.org/reference/mutate-joins.html), al conjunto de datos de cantones (incluyendo sus geometrías), se le agrega la columna `riqueza_especies_felidos`, con el conteo de especies por cantón. La función [replace_na()](https://tidyr.tidyverse.org/reference/replace_na.html) se utiliza para reemplazar con 0 los registros de `riqueza_especies_felidos` que contienen `NA`.
+
+```{r}
+#| label: riqueza-felidos-cantones
+#| warning: false
+#| message: false
+#| code-fold: show
+
+# Unión (no espacial) de cantones y riqueza de especies
+cantones_union_riqueza <-
+  left_join(
+    x = cantones,
+    y = dplyr::select(riqueza_especies_felidos_cantones, cod_canton, riqueza_especies_felidos),
+    by = "cod_canton"
+  ) |>
+  replace_na(list(riqueza_especies_felidos = 0))
+
+# Despliegue de los datos de riqueza de especies en cantones
+cantones_union_riqueza |>
+  st_drop_geometry() |>
+  dplyr::select(canton, riqueza_especies_felidos) |>
+  arrange(desc(riqueza_especies_felidos)) |>
+  datatable(
+    colnames = c("Cantón", "Riqueza de especies de félidos"),
+    options = list(
+      pageLength = 5,
+      language = list(url = '//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json')
+    )
+  )
+```
+
+**4. Generación del mapa de riqueza de especies**  
+Con las geometrías de cantones y la riqueza de especies en el mismo conjunto de datos, puede generarse un mapa de coropletas.
+
+::: {#mapa-riqueza-especies-felidos-cantones layout-ncol=1}
+
+```{r}
+#| label: mapa-riqueza-especies-felidos-cantones
+#| warning: false
+#| message: false
+#| code-fold: true
+
+# Paleta de colores de riqueza de especies
+colores_riqueza_especies <-
+  colorNumeric(
+    palette = "Reds",
+    domain = cantones_union_riqueza$riqueza_especies_felidos,
+    na.color = "transparent"
+  )
+
+# Paleta de colores de especies
+colores_especies <- colorFactor(
+  palette = viridis(length(unique(felidos$species))), 
+  domain = felidos$species
+)
+
+# Mapa leaflet
+leaflet() |>
+  setView(
+    lng = -84.19452,
+    lat = 9.572735,
+    zoom = 7) |>
+  addTiles(group = "Mapa general (OpenStreetMap)") |>
+  addProviderTiles(
+    providers$Esri.WorldImagery, 
+    group = "Imágenes satelitales (ESRI World Imagery)"
+  ) |> 
+  addPolygons(
+    data = cantones_union_riqueza,
+    fillColor = ~ colores_riqueza_especies(cantones_union_riqueza$riqueza_especies_felidos),
+    fillOpacity = 0.8,
+    color = "black",
+    stroke = TRUE,
+    weight = 1.0,
+    popup = paste(
+      paste("<strong>Cantón:</strong>", cantones_union_riqueza$canton),
+      paste("<strong>Riqueza de especies:</strong>", cantones_union_riqueza$riqueza_especies_felidos),
+      sep = '<br/>'
+    ),
+    group = "Riqueza de especies"
+  ) |>
+  addScaleBar(
+    position = "bottomleft", 
+    options = scaleBarOptions(imperial = FALSE)
+  ) |>    
+  addLegend(
+    position = "bottomleft",
+    pal = colores_riqueza_especies,
+    values = cantones_union_riqueza$riqueza_especies_felidos,
+    group = "Riqueza de especies",
+    title = "Riqueza de especies"
+  ) |>
+  addCircleMarkers(
+    data = felidos,
+    stroke = F,
+    radius = 4,
+    fillColor = ~colores_especies(felidos$species),
+    fillOpacity = 1.0,
+    popup = paste(
+      paste0("<strong>Especie: </strong>", felidos$species),
+      paste0("<strong>Localidad: </strong>", felidos$locality),
+      paste0("<strong>Fecha: </strong>", felidos$eventDate),
+      paste0("<strong>Fuente: </strong>", felidos$institutionCode),
+      paste0("<a href='", felidos$occurrenceID, "'>Más información</a>"),
+      sep = '<br/>'
+    ),    
+    group = "Registros de presencia"
+  ) |>  
+  addLegend(
+    position = "bottomright",    
+    pal = colores_especies,
+    values = felidos$species,
+    title = "Especies",
+    group = "Registros de presencia"    
+  ) |>  
+  addLayersControl(
+    baseGroups = c(
+      "Mapa general (OpenStreetMap)", 
+      "Imágenes satelitales (ESRI World Imagery)"
+    ),
+    overlayGroups = c(
+      "Riqueza de especies",
+      "Registros de presencia"
+    )
+  ) |>
+  addResetMapButton() |>
+  addSearchOSM() |>
+  addMouseCoordinates() |>
+  addFullscreenControl() |>
+  hideGroup("Registros de presencia") 
+```
+
+Mapa de riqueza de especies de félidos en cantones de Costa Rica
+:::
+
+### Ejercicios
+1. Elabore un mapa de riqueza de especies de [vipéridos](https://es.wikipedia.org/wiki/Viperidae) en las provincias de Costa Rica. Impleméntelo como un mapa de coropletas en Leaflet.
+
+Utilice las siguientes fuentes de datos:
+
+- [Archivo GeoJSON de provincias de Costa Rica con geometrías simplificadas](https://github.com/gf0604-procesamientodatosgeograficos/2023-i/blob/main/datos/ign/delimitacion-territorial-administrativa/provincias_2020_simp_10m.geojson)
+- [Archivo CSV de registros de presencia de vipéridos de Costa Rica](https://github.com/gf0604-procesamientodatosgeograficos/2023-i/blob/main/datos/gbif/viperidos.csv)
