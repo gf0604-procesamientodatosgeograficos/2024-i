@@ -1,0 +1,11 @@
+# Examen corto 4 {.unnumbered}
+
+## Fecha {.unnumbered}
+- **Grupo 001**: jueves 20 de junio de 2024
+- **Grupo 002**: miércoles 19 de junio de 2024
+
+## Temas a evaluar {.unnumbered}
+[11 Introducción al manejo de datos geoespaciales con R](11-introduccion-manejo-datos-geoespaciales.qmd)  
+[12 Operaciones con datos de atributos](12-operaciones-datos-atributos.qmd)  
+[13 Operaciones con datos espaciales](13-operaciones-datos-espaciales.qmd)  
+[14 Operaciones con geometrías](14-operaciones-datos-geometrias.qmd)  

@@ -5,6 +5,7 @@
 [Examen corto 2](examen-corto-02.qmd)  
 [Examen corto 3- grupo 001](examen-corto-03-01.qmd)
 [Examen corto 3- grupo 002](examen-corto-03-02.qmd)  
+[Examen corto 4](examen-corto-04.qmd)  
 
 ## Tareas {.unnumbered}
 [Tarea 3 - Grupo 001](tarea-03-grupo-001.qmd)  

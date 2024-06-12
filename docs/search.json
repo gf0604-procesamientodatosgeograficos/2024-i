@@ -469,7 +469,7 @@
     "href": "parte-vii-evaluaciones.html",
     "title": "Evaluaciones",
     "section": "",
-    "text": "Exámenes cortos\nExamen corto 1\nExamen corto 2\nExamen corto 3- grupo 001 Examen corto 3- grupo 002",
+    "text": "Exámenes cortos\nExamen corto 1\nExamen corto 2\nExamen corto 3- grupo 001 Examen corto 3- grupo 002\nExamen corto 4",
     "crumbs": [
       "Evaluaciones"
     ]
@@ -1444,7 +1444,7 @@
     "href": "parte-v-ecosistema-espacial-r.html",
     "title": "V - El ecosistema espacial de R",
     "section": "",
-    "text": "11 Introducción al manejo de datos geoespaciales con R\n12 Operaciones con datos de atributos\n13 Operaciones con datos espaciales\n14 Operaciones con datos con geometrías",
+    "text": "11 Introducción al manejo de datos geoespaciales con R\n12 Operaciones con datos de atributos\n13 Operaciones con datos espaciales\n14 Operaciones con geometrías",
     "crumbs": [
       "V - El ecosistema espacial de R"
     ]
@@ -1487,7 +1487,7 @@
     "href": "12-operaciones-datos-atributos.html#carga-de-datos-para-ejemplos",
     "title": "12  Operaciones con datos de atributos",
     "section": "12.4 Carga de datos para ejemplos",
-    "text": "12.4 Carga de datos para ejemplos\n\n12.4.1 Cantones de Costa Rica\nEste archivo proviene de un geoservicio de tipo Web Feature Service (WFS) publicado por el Instituto Geográfico Nacional (IGN). Se utiliza una versión del año 2020 (con 82 cantones), debido a que esa es la que corresponde con los datos de COVID-19 que publicó el Ministerio de Salud durante la pandemia.\nArchivo GeoJSON de cantones de Costa Rica (del año 2020)\n\n\nCódigo\n# Carga de datos de cantones de Costa Rica\n# El argumento dsn debe tener la ruta a la fuente de datos\ncantones &lt;-\n  st_read(\n    dsn = \"datos/ign/delimitacion-territorial-administrativa/cantones_2020.geojson\",\n    quiet = TRUE\n  )\n\n\n\nCódigo\n# Mapa leaflet de cantones\nleaflet() |&gt;\n  setView(\n    lng = -84.19452,\n    lat = 9.572735,\n    zoom = 7\n  ) |&gt;  \n  addTiles() |&gt;\n  addPolygons(\n    data = st_transform(cantones, 4326),\n    color = \"black\",\n    fillColor = \"transparent\",\n    stroke = TRUE,\n    weight = 1.0,\n    popup = paste(\n      paste0(\"&lt;strong&gt;Código de cantón: &lt;/strong&gt;\", cantones$cod_canton),\n      paste0(\"&lt;strong&gt;Cantón: &lt;/strong&gt;\", cantones$canton),\n      sep = '&lt;br/&gt;'\n    )\n  ) |&gt;\n  addScaleBar(\n    position = \"bottomleft\", \n    options = scaleBarOptions(imperial = FALSE)\n  ) |&gt;\n  addFullscreenControl(position = \"topright\")\n# Tabla DT de cantones\ncantones |&gt;\n  st_drop_geometry() |&gt;\n  dplyr::select(cod_canton, canton) |&gt;\n  arrange(cod_canton) |&gt;\n  datatable(\n    rownames = FALSE,\n    options = list(\n      dom = 'ft',\n      pageLength = 8,\n      language = list(url = '//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json')\n    )    \n  )\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nMapa y tabla de cantones de Costa Rica\n\n\n\n\n\n12.4.2 Casos positivos de COVID-19 en cantones de Costa Rica\nEstos datos fueron publicados por el Ministerio de Salud de Costa Rica en https://geovision.uned.ac.cr/oges/ (a la fecha de escritura de este documento, el enlace no está funcionando). Se distribuyen en archivos CSV, incluyendo un archivo de datos generales para todo el país y varios archivos con datos por cantón. La fecha de la última actualización es 2022-05-30.\nArchivo CSV de casos positivos de COVID-19 en cantones de Costa Rica\nEl archivo contiene una columna por cada fecha en la que se tomaron datos en el nivel de cantón. Se carga solamente la columna de la última fecha (2022-05-30).\n\n\nCódigo\n# Carga de datos de casos positivos de COVID-19 en cantones de Costa Rica\n# El argumento file debe tener la ruta al archivo de datos\ncovid_positivos_cantones &lt;-\n  read_delim(\n    file = \"datos/ministerio-salud/covid/05_30_22_CSV_POSITIVOS.csv\",\n    delim = \";\",\n    locale = locale(encoding = \"WINDOWS-1252\"), # para desplegar correctamente acentos y otros caracteres\n    col_select = c(\"cod_provin\", \"provincia\", \"cod_canton\", \"canton\", \"30/05/2022\") # 30/05/2022 contiene los datos para la última fecha disponible\n)\n\n# Se remueve la fila con canton == \"Otros\"\ncovid_positivos_cantones &lt;-\n  covid_positivos_cantones |&gt;\n  filter(canton != \"Otros\")\n\n# Cambio de nombre de columnas\ncovid_positivos_cantones &lt;-\n  covid_positivos_cantones %&gt;%\n  rename(positivos_20220530 = '30/05/2022')\n\n\n\nCódigo\n# Tabla DT de casos positivos de COVID-19 en cantones de Costa Rica\ncovid_positivos_cantones |&gt;\n  arrange(cod_canton) |&gt;\n  datatable(\n    rownames = FALSE,\n    options = list(\n      pageLength = 7,\n      language = list(url = '//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json')\n    )    \n  )\n\n\n\n\n\n\n\n\n\n\n\n\nTabla de casos positivos de COVID-19 en cantones de Costa Rica",
+    "text": "12.4 Carga de datos para ejemplos\n\n12.4.1 Cantones de Costa Rica\nEste archivo proviene de un geoservicio de tipo Web Feature Service (WFS) publicado por el Instituto Geográfico Nacional (IGN). Se utiliza una versión del año 2020 (con 82 cantones), debido a que esa es la que corresponde con los datos de COVID-19 que publicó el Ministerio de Salud durante la pandemia.\nArchivo GeoJSON de cantones de Costa Rica (del año 2020)\n\n\nCódigo\n# Carga de datos de cantones de Costa Rica\n# El argumento dsn debe tener la ruta a la fuente de datos\ncantones &lt;-\n  st_read(\n    dsn = \"datos/ign/delimitacion-territorial-administrativa/cantones_2020.geojson\",\n    quiet = TRUE\n  )\n\n\n\nCódigo\n# Mapa leaflet de cantones\nleaflet() |&gt;\n  setView(\n    lng = -84.19452,\n    lat = 9.572735,\n    zoom = 7\n  ) |&gt;  \n  addTiles() |&gt;\n  addPolygons(\n    data = st_transform(cantones, 4326),\n    color = \"black\",\n    fillColor = \"transparent\",\n    stroke = TRUE,\n    weight = 1.0,\n    popup = paste(\n      paste0(\"&lt;strong&gt;Código de cantón: &lt;/strong&gt;\", cantones$cod_canton),\n      paste0(\"&lt;strong&gt;Cantón: &lt;/strong&gt;\", cantones$canton),\n      sep = '&lt;br/&gt;'\n    )\n  ) |&gt;\n  addScaleBar(\n    position = \"bottomleft\", \n    options = scaleBarOptions(imperial = FALSE)\n  ) |&gt;\n  addFullscreenControl(position = \"topright\")\n# Tabla DT de cantones\ncantones |&gt;\n  st_drop_geometry() |&gt;\n  dplyr::select(cod_canton, canton) |&gt;\n  arrange(cod_canton) |&gt;\n  datatable(\n    rownames = FALSE,\n    options = list(\n      dom = 'ft',\n      pageLength = 8,\n      language = list(url = '//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json')\n    )    \n  )",
     "crumbs": [
       "V - El ecosistema espacial de R",
       "<span class='chapter-number'>12</span>  <span class='chapter-title'>Operaciones con datos de atributos</span>"
@@ -1645,6 +1645,39 @@
     "crumbs": [
       "V - El ecosistema espacial de R",
       "<span class='chapter-number'>14</span>  <span class='chapter-title'>Operaciones con geometrías</span>"
+    ]
+  },
+  {
+    "objectID": "examen-corto-04.html",
+    "href": "examen-corto-04.html",
+    "title": "Examen corto 4",
+    "section": "",
+    "text": "Fecha",
+    "crumbs": [
+      "Evaluaciones",
+      "Examen corto 4"
+    ]
+  },
+  {
+    "objectID": "examen-corto-04.html#fecha",
+    "href": "examen-corto-04.html#fecha",
+    "title": "Examen corto 4",
+    "section": "",
+    "text": "Grupo 001: jueves 20 de junio de 2024\nGrupo 002: miércoles 19 de junio de 2024",
+    "crumbs": [
+      "Evaluaciones",
+      "Examen corto 4"
+    ]
+  },
+  {
+    "objectID": "examen-corto-04.html#temas-a-evaluar",
+    "href": "examen-corto-04.html#temas-a-evaluar",
+    "title": "Examen corto 4",
+    "section": "Temas a evaluar",
+    "text": "Temas a evaluar\n11 Introducción al manejo de datos geoespaciales con R\n12 Operaciones con datos de atributos\n13 Operaciones con datos espaciales\n14 Operaciones con geometrías",
+    "crumbs": [
+      "Evaluaciones",
+      "Examen corto 4"
     ]
   }
 ]
