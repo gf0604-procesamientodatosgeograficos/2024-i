@@ -387,7 +387,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#componentes" id="toc-componentes" class="nav-link" data-scroll-target="#componentes"><span class="header-section-number">15.4.1</span> Componentes</a></li>
   <li><a href="#configuración" id="toc-configuración" class="nav-link" data-scroll-target="#configuración"><span class="header-section-number">15.4.2</span> Configuración</a></li>
   </ul></li>
-  <li><a href="#recursos-adicionales" id="toc-recursos-adicionales" class="nav-link" data-scroll-target="#recursos-adicionales"><span class="header-section-number">15.5</span> Recursos adicionales</a></li>
+  <li><a href="#ejercicios" id="toc-ejercicios" class="nav-link" data-scroll-target="#ejercicios"><span class="header-section-number">15.5</span> Ejercicios</a></li>
+  <li><a href="#recursos-adicionales" id="toc-recursos-adicionales" class="nav-link" data-scroll-target="#recursos-adicionales"><span class="header-section-number">15.6</span> Recursos adicionales</a></li>
   </ul>
 </nav>
     </div>
@@ -467,34 +468,64 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="mamíferos-de-costa-rica" class="level4" data-number="15.2.3.2">
-<h4 data-number="15.2.3.2" class="anchored" data-anchor-id="mamíferos-de-costa-rica"><span class="header-section-number">15.2.3.2</span> Mamíferos de Costa Rica</h4>
-<p>Es un <a href="https://github.com/gf0604-procesamientodatosgeograficos/2024-i/blob/main/datos/gbif/mamiferos.csv">archivo CSV con registros de presencia de la clase <em>Mammalia</em> (mamíferos) de Costa Rica</a>. Este archivo proviene de una <a href="https://doi.org/10.15468/dl.wfvs7s">consulta al portal de datos de la Infraestructura Mundial de Información en Biodiversidad (GBIF)</a>.</p>
+<section id="red-vial-de-costa-rica" class="level4" data-number="15.2.3.2">
+<h4 data-number="15.2.3.2" class="anchored" data-anchor-id="red-vial-de-costa-rica"><span class="header-section-number">15.2.3.2</span> Red vial de Costa Rica</h4>
+<p>Es un <a href="https://github.com/gf0604-procesamientodatosgeograficos/2024-i/blob/main/datos/ign/infraestructura/redvial.geojson">archivo GeoJSON con las líneas de la red vial de Costa Rica</a>. Este archivo proviene de un <a href="https://geos.snitcr.go.cr/be/IGN_200/wfs?version=1.1.0">geoservicio de tipo Web Feature Service (WFS)</a> publicado por el Instituto Geográfico Nacional (IGN).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Lectura y visualización de datos geoespaciales de mamíferos</span></span>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Lectura y visualización de datos geoespaciales de la red vial</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Lectura</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>mamiferos <span class="ot">&lt;-</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>red_vial <span class="ot">&lt;-</span></span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_read</span>(</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"datos/gbif/mamiferos.csv"</span>,</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">options =</span> <span class="fu">c</span>(</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>      <span class="st">"X_POSSIBLE_NAMES=decimalLongitude"</span>, <span class="co"># columna de longitud decimal</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Y_POSSIBLE_NAMES=decimalLatitude"</span>   <span class="co"># columna de latitud decimal</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    ),</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">quiet =</span> <span class="cn">TRUE</span></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Asignación del CRS WGS84</span></span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="fu">st_crs</span>(mamiferos) <span class="ot">&lt;-</span> <span class="dv">4326</span></span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualización en un mapa</span></span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(</span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>  mamiferos<span class="sc">$</span>geometry,</span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">pch =</span> <span class="dv">16</span>,</span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">"Mamíferos de Costa Rica"</span>,</span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>  <span class="at">axes =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>  <span class="at">graticule =</span> <span class="cn">TRUE</span></span>
-<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">dsn =</span> <span class="st">"datos/ign/infraestructura/redvial.geojson"</span>,</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">quiet =</span> <span class="cn">TRUE</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualización en un mapa</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  red_vial<span class="sc">$</span>geometry,</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">extent =</span> <span class="fu">st_bbox</span>(<span class="fu">c</span>(<span class="at">xmin =</span> <span class="dv">280000</span>, <span class="at">xmax =</span> <span class="dv">660000</span>, <span class="at">ymin =</span> <span class="dv">880000</span>, <span class="at">ymax=</span> <span class="dv">1250000</span>)),</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">"Red vial de Costa Rica"</span>,</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">axes =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">graticule =</span> <span class="cn">TRUE</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="15-tableros-control_files/figure-html/carga-datos-redvial-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="mamíferos-de-costa-rica" class="level4" data-number="15.2.3.3">
+<h4 data-number="15.2.3.3" class="anchored" data-anchor-id="mamíferos-de-costa-rica"><span class="header-section-number">15.2.3.3</span> Mamíferos de Costa Rica</h4>
+<p>Es un <a href="https://github.com/gf0604-procesamientodatosgeograficos/2024-i/blob/main/datos/gbif/mamiferos.csv">archivo CSV con registros de presencia de la clase <em>Mammalia</em> (mamíferos) de Costa Rica</a>. Este archivo proviene de una <a href="https://doi.org/10.15468/dl.wfvs7s">consulta al portal de datos de la Infraestructura Mundial de Información en Biodiversidad (GBIF)</a>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Lectura y visualización de datos geoespaciales de mamíferos</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Lectura</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>mamiferos <span class="ot">&lt;-</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_read</span>(</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"datos/gbif/mamiferos.csv"</span>,</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">options =</span> <span class="fu">c</span>(</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>      <span class="st">"X_POSSIBLE_NAMES=decimalLongitude"</span>, <span class="co"># columna de longitud decimal</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Y_POSSIBLE_NAMES=decimalLatitude"</span>   <span class="co"># columna de latitud decimal</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">quiet =</span> <span class="cn">TRUE</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Asignación del CRS WGS84</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="fu">st_crs</span>(mamiferos) <span class="ot">&lt;-</span> <span class="dv">4326</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualización en un mapa</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>  mamiferos<span class="sc">$</span>geometry,</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">pch =</span> <span class="dv">16</span>,</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">"Mamíferos de Costa Rica"</span>,</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>  <span class="at">axes =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>  <span class="at">graticule =</span> <span class="cn">TRUE</span></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -561,8 +592,21 @@ Figura&nbsp;15.1: Tablero de control desarrollado con Quarto Dashboards. Fuente:
 </section>
 </section>
 </section>
-<section id="recursos-adicionales" class="level2" data-number="15.5">
-<h2 data-number="15.5" class="anchored" data-anchor-id="recursos-adicionales"><span class="header-section-number">15.5</span> Recursos adicionales</h2>
+<section id="ejercicios" class="level2" data-number="15.5">
+<h2 data-number="15.5" class="anchored" data-anchor-id="ejercicios"><span class="header-section-number">15.5</span> Ejercicios</h2>
+<ol type="1">
+<li><p>Organice en un tablero de control las visualizaciones de datos sobre riesgo de atropello de especies de mamíferos alrededor de la ruta 32. Incluya:</p>
+<ol type="a">
+<li>Una tabla DT con las especies en mayor riesgo y la cantidad de registros.</li>
+<li>Un gráfico Plotly que muestre la misma información que el punto a.</li>
+<li>Un mapa Leaflet que muestre la zona de riesgo y los registros de presencia.</li>
+</ol></li>
+<li><p>Agregue tablas, gráficos y mapas adicionales que considere de impoortancia.</p></li>
+<li><p>Publique el tablero de control como un sitio en GitHub Pages.</p></li>
+</ol>
+</section>
+<section id="recursos-adicionales" class="level2" data-number="15.6">
+<h2 data-number="15.6" class="anchored" data-anchor-id="recursos-adicionales"><span class="header-section-number">15.6</span> Recursos adicionales</h2>
 <p><a href="https://www.youtube.com/watch?v=_VGJIPRGTy4">Quarto Dashboards | Charles Teague | Posit</a><br>
 <a href="https://quarto.org/docs/gallery/#dashboards">Ejemplos de tableros de control desarrollados con Quarto Dashboards</a></p>
 
@@ -995,7 +1039,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
 </nav>
 </div> <!-- /content -->
-<script>var lightboxQuarto = GLightbox({"descPosition":"bottom","closeEffect":"zoom","selector":".lightbox","loop":false,"openEffect":"zoom"});
+<script>var lightboxQuarto = GLightbox({"selector":".lightbox","openEffect":"zoom","closeEffect":"zoom","loop":false,"descPosition":"bottom"});
 window.onload = () => {
   lightboxQuarto.on('slide_before_load', (data) => {
     const { slideIndex, slideNode, slideConfig, player, trigger } = data;

@@ -54,6 +54,33 @@ plot(
 )
 ```
 
+#### Red vial de Costa Rica
+Es un [archivo GeoJSON con las líneas de la red vial de Costa Rica](https://github.com/gf0604-procesamientodatosgeograficos/2024-i/blob/main/datos/ign/infraestructura/redvial.geojson). Este archivo proviene de un [geoservicio de tipo Web Feature Service (WFS)](https://geos.snitcr.go.cr/be/IGN_200/wfs?version=1.1.0) publicado por el Instituto Geográfico Nacional (IGN).
+
+```{r}
+#| label: carga-datos-redvial
+#| warning: false
+#| message: false
+
+# Lectura y visualización de datos geoespaciales de la red vial
+
+# Lectura
+red_vial <-
+  st_read(
+    dsn = "datos/ign/infraestructura/redvial.geojson",
+    quiet = TRUE
+  )
+
+# Visualización en un mapa
+plot(
+  red_vial$geometry,
+  extent = st_bbox(c(xmin = 280000, xmax = 660000, ymin = 880000, ymax= 1250000)),
+  main = "Red vial de Costa Rica",
+  axes = TRUE,
+  graticule = TRUE
+)
+```
+
 #### Mamíferos de Costa Rica
 Es un [archivo CSV con registros de presencia de la clase *Mammalia* (mamíferos) de Costa Rica](https://github.com/gf0604-procesamientodatosgeograficos/2024-i/blob/main/datos/gbif/mamiferos.csv). Este archivo proviene de una [consulta al portal de datos de la Infraestructura Mundial de Información en Biodiversidad (GBIF)](https://doi.org/10.15468/dl.wfvs7s).
 
@@ -131,6 +158,15 @@ Las tarjetas son la unidad fundamental de visualización en un tablero de contro
 
 Para más información sobre la configuración de los tableros de control, se recomienda consultar [Dashboard Layout](https://quarto.org/docs/dashboards/layout.html).
 
+## Ejercicios
+1. Organice en un tablero de control las visualizaciones de datos sobre riesgo de atropello de especies de mamíferos alrededor de la ruta 32. Incluya:
+
+    a. Una tabla DT con las especies en mayor riesgo y la cantidad de registros.
+    b. Un gráfico Plotly que muestre la misma información que el punto a.
+    c. Un mapa Leaflet que muestre la zona de riesgo y los registros de presencia.
+    
+2. Agregue tablas, gráficos y mapas adicionales que considere de impoortancia.
+3. Publique el tablero de control como un sitio en GitHub Pages.
 
 ## Recursos adicionales
 
