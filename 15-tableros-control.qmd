@@ -1,0 +1,138 @@
+# Tableros de control
+
+## Resumen
+
+
+## Trabajo previo
+
+### Lecturas
+Quarto - Quarto Dashboards. (s.f.). <https://quarto.org/docs/dashboards/>
+
+### Carga de paquetes
+
+```{r}
+#| label: carga-paquetes
+#| warning: false
+#| message: false
+
+# Carga de paquetes
+library(tidyverse)
+library(plotly)
+library(DT)
+library(sf)
+library(leaflet)
+library(leaflet.extras)
+library(leafem)
+```
+
+### Carga de datos para ejemplos
+
+#### Provincias de Costa Rica
+Es un [archivo GeoJSON con los polígonos de las provincias de Costa Rica](https://github.com/gf0604-procesamientodatosgeograficos/2024-i/blob/main/datos/ign/delimitacion-territorial-administrativa/provincias.geojson). Este archivo proviene de un [geoservicio de tipo Web Feature Service (WFS)](http://geos.snitcr.go.cr/be/IGN_5/wfs) publicado por el Instituto Geográfico Nacional (IGN).
+
+```{r}
+#| label: carga-datos-provincias
+#| message: false
+#| warning: false
+
+# Lectura y visualización de datos geoespaciales de provincias
+
+# Lectura
+provincias <-
+  st_read(
+    dsn = "datos/ign/delimitacion-territorial-administrativa/provincias.geojson",
+    quiet = TRUE
+  )
+
+# Visualización en un mapa
+plot(
+  provincias$geometry,
+  extent = st_bbox(c(xmin = 280000, xmax = 660000, ymin = 880000, ymax= 1250000)),
+  main = "Provincias de Costa Rica",
+  axes = TRUE,
+  graticule = TRUE
+)
+```
+
+#### Mamíferos de Costa Rica
+Es un [archivo CSV con registros de presencia de la clase *Mammalia* (mamíferos) de Costa Rica](https://github.com/gf0604-procesamientodatosgeograficos/2024-i/blob/main/datos/gbif/mamiferos.csv). Este archivo proviene de una [consulta al portal de datos de la Infraestructura Mundial de Información en Biodiversidad (GBIF)](https://doi.org/10.15468/dl.wfvs7s).
+
+```{r}
+#| label: carga-datos-mamiferos
+#| warning: false
+#| message: false
+
+# Lectura y visualización de datos geoespaciales de mamíferos
+
+# Lectura
+mamiferos <-
+  st_read(
+    "datos/gbif/mamiferos.csv",
+    options = c(
+      "X_POSSIBLE_NAMES=decimalLongitude", # columna de longitud decimal
+      "Y_POSSIBLE_NAMES=decimalLatitude"   # columna de latitud decimal
+    ),
+    quiet = TRUE
+  )
+
+# Asignación del CRS WGS84
+st_crs(mamiferos) <- 4326
+
+# Visualización en un mapa
+plot(
+  mamiferos$geometry,
+  pch = 16,
+  main = "Mamíferos de Costa Rica",
+  axes = TRUE,
+  graticule = TRUE
+)
+```
+
+## Introducción
+Un [tablero de control](https://es.wikipedia.org/wiki/Cuadro_de_mando), también llamado cuadro de mando o *dashboard*, es un tipo de interfaz gráfica de usuario que reúne visualizaciones de datos e información resumida relevantes para una temática, objetivo o proceso particular. Estas visualizaciones se presentan principalmente en formato de tablas, gráficos estadísticos y mapas (ej. [Tablero de control de la Universidad Johns Hopkins sobre la epidemia de Covid-19](https://www.arcgis.com/apps/dashboards/bda7594740fd40299423467b48e9ecf6)). El término *dashboard* proviene del tablero de instrumentos de un automóvil, el cual le permite al conductor monitorear rápidamente las funciones principales del vehículo.
+
+Los tableros de control son usualmente accesibles mediante un navegador web y pueden estar vinculados a fuentes de datos que se actualizan regularmente. Se caracterizan por ser interactivos y facilitar la exploración de datos a los usuarios.
+
+Quarto facilita el desarrollo de tableros de control a través de Quarto Dashboards](https://quarto.org/docs/dashboards/.
+
+## Quarto Dashboards
+[Quarto Dashboards](https://quarto.org/docs/dashboards/) es una capacidad de Quarto (introducida en la versión 1.4) que permite crear tableros de control mediante los lenguajes de programación R, Python, Julia y Observable. Estos tableros de control pueden incluir componentes desarrollados en DT, Ggplot2, Plotly y Leaflet, entre otros paquetes de R. Pueden publicarse como páginas estáticas (ej. en GitHub Pages) o en un [servidor Shiny para proporcionar mayor interactividad al usuario](https://quarto.org/docs/dashboards/interactivity/).
+
+La @fig-dashboards-gapminder muestra un tablero de control desarrollado con Quarto Dashboards.
+
+![Tablero de control desarrollado con Quarto Dashboards. Fuente: [Quarto Dashboards](https://quarto.org/docs/dashboards/).](img/dashboards-gapminder.png){#fig-dashboards-gapminder .lightbox fig-alt="Tablero de control desarrollado con Quarto Dashboards" fig-align="center"}
+
+### Componentes
+Un tablero de control desarrollado con Quarto Dashboards tiene los siguientes componentes:
+
+1. **Barra de navegación**: incluye el título, íconos y autor junto con enlaces a páginas (si se definen más de una página).
+
+2. **Páginas, filas, columnas y pestañas (*tabs*)**: Las páginas, filas y columnas se definen utilizando encabezados de Markdown (con atributos opcionales para controlar la altura, el ancho y otras propiedades). Las pestañas pueden usarse para dividir aún más el contenido de una fila o columna.
+
+3. **Tarjetas, barras laterales y barras de herramientas**: Las tarjetas son contenedores para visualizaciones de datos como tablas, gráficos estadísticos, mapas y otras. Las barras laterales y barras de herramientas se utilizan para el ingreso de datos en tableros de control interactivos.
+
+### Configuración
+Los tableros de control son arreglos de componentes que se utilizan para proporcionar navegación y presentar datos. A continuación, se describen los elementos que se utilizan para estructurar la navegación y el diseño de los tableros de control.
+
+#### Navegación
+Todos los tableros de control tienen una barra de navegación que muestra el título y, opcionalmente, un logotipo, el nombre del autor e íconos con enlaces a redes sociales y otros sitios de interés. Los tableros de control con [múltiples páginas](https://quarto.org/docs/dashboards/layout.html#pages) también contienen un enlace a cada página en la barra de navegación.
+
+#### Organización
+Dentro de una página, los componentes del tablero de control se organizan mediante conjuntos alternos de filas y columnas. Las filas y columnas, a su vez, se definen mediante encabezados de Markdown y celdas computacionales (bloques de código).
+
+#### Páginas
+Para introducir múltiples páginas, se utilizan encabezados de nivel 1 sobre los encabezados de nivel 2, los cuales se usan para definir filas y columnas. El texto de los encabezados de nivel 1 se usa para enlazar a las páginas en la barra de navegación.
+
+#### Pestañas
+Las pestañas (*tabs*) se utilizan para incluir múltiples vistas de datos o contenido de importancia secundaria sin que interfiera con la visualización principal. Las pestañas se crean añadiendo la clase `.tabset` a una fila o columna.
+
+#### Tarjetas
+Las tarjetas son la unidad fundamental de visualización en un tablero de control. Constituyen el contenido de las filas y las columnas.
+
+Para más información sobre la configuración de los tableros de control, se recomienda consultar [Dashboard Layout](https://quarto.org/docs/dashboards/layout.html).
+
+
+## Recursos adicionales
+
+[Quarto Dashboards | Charles Teague | Posit](https://www.youtube.com/watch?v=_VGJIPRGTy4)  
+[Ejemplos de tableros de control desarrollados con Quarto Dashboards](https://quarto.org/docs/gallery/#dashboards)  

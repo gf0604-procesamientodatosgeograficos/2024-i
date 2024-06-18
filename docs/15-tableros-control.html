@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>GF0604 Procesamiento de datos geográficos 2024-I - Programa del curso</title>
+<title>GF0604 Procesamiento de datos geográficos 2024-I - 15&nbsp; Tableros de control</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -30,8 +64,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./parte-i-introduccion-programacion_computadoras_ciencia_datos.html" rel="next">
-<link href="./index.html" rel="prev">
+<link href="./parte-vii-evaluaciones.html" rel="next">
+<link href="./parte-vi-visualizacion-avanzada.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -41,6 +75,9 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -81,7 +118,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./programa_curso.html">Programa del curso</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./parte-vi-visualizacion-avanzada.html">VI - Visualización avanzada</a></li><li class="breadcrumb-item"><a href="./15-tableros-control.html"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Tableros de control</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -114,7 +151,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./programa_curso.html" class="sidebar-item-text sidebar-link active">
+  <a href="./programa_curso.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Programa del curso</span></a>
   </div>
 </li>
@@ -268,7 +305,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./15-tableros-control.html" class="sidebar-item-text sidebar-link">
+  <a href="./15-tableros-control.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Tableros de control</span></span></a>
   </div>
 </li>
@@ -333,14 +370,33 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="5">
+    <h2 id="toc-title">Tabla de contenidos</h2>
+   
+  <ul>
+  <li><a href="#resumen" id="toc-resumen" class="nav-link active" data-scroll-target="#resumen"><span class="header-section-number">15.1</span> Resumen</a></li>
+  <li><a href="#trabajo-previo" id="toc-trabajo-previo" class="nav-link" data-scroll-target="#trabajo-previo"><span class="header-section-number">15.2</span> Trabajo previo</a>
+  <ul class="collapse">
+  <li><a href="#lecturas" id="toc-lecturas" class="nav-link" data-scroll-target="#lecturas"><span class="header-section-number">15.2.1</span> Lecturas</a></li>
+  <li><a href="#carga-de-paquetes" id="toc-carga-de-paquetes" class="nav-link" data-scroll-target="#carga-de-paquetes"><span class="header-section-number">15.2.2</span> Carga de paquetes</a></li>
+  <li><a href="#carga-de-datos-para-ejemplos" id="toc-carga-de-datos-para-ejemplos" class="nav-link" data-scroll-target="#carga-de-datos-para-ejemplos"><span class="header-section-number">15.2.3</span> Carga de datos para ejemplos</a></li>
+  </ul></li>
+  <li><a href="#introducción" id="toc-introducción" class="nav-link" data-scroll-target="#introducción"><span class="header-section-number">15.3</span> Introducción</a></li>
+  <li><a href="#quarto-dashboards" id="toc-quarto-dashboards" class="nav-link" data-scroll-target="#quarto-dashboards"><span class="header-section-number">15.4</span> Quarto Dashboards</a>
+  <ul class="collapse">
+  <li><a href="#componentes" id="toc-componentes" class="nav-link" data-scroll-target="#componentes"><span class="header-section-number">15.4.1</span> Componentes</a></li>
+  <li><a href="#configuración" id="toc-configuración" class="nav-link" data-scroll-target="#configuración"><span class="header-section-number">15.4.2</span> Configuración</a></li>
+  </ul></li>
+  <li><a href="#recursos-adicionales" id="toc-recursos-adicionales" class="nav-link" data-scroll-target="#recursos-adicionales"><span class="header-section-number">15.5</span> Recursos adicionales</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./parte-vi-visualizacion-avanzada.html">VI - Visualización avanzada</a></li><li class="breadcrumb-item"><a href="./15-tableros-control.html"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Tableros de control</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Programa del curso</h1>
+<h1 class="title"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Tableros de control</span></h1>
 </div>
 
 
@@ -357,11 +413,164 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Programa del curso en el formato especificado por la Comisión de Docencia de la Escuela de Geografía:</p>
-<p><a href="gf0604-procesamientodatosgeograficos-g001-2024-i.pdf">Grupo 001</a><br>
-<a href="gf0604-procesamientodatosgeograficos-g002-2024-i.pdf">Grupo 002</a></p>
+<section id="resumen" class="level2" data-number="15.1">
+<h2 data-number="15.1" class="anchored" data-anchor-id="resumen"><span class="header-section-number">15.1</span> Resumen</h2>
+</section>
+<section id="trabajo-previo" class="level2" data-number="15.2">
+<h2 data-number="15.2" class="anchored" data-anchor-id="trabajo-previo"><span class="header-section-number">15.2</span> Trabajo previo</h2>
+<section id="lecturas" class="level3" data-number="15.2.1">
+<h3 data-number="15.2.1" class="anchored" data-anchor-id="lecturas"><span class="header-section-number">15.2.1</span> Lecturas</h3>
+<p>Quarto - Quarto Dashboards. (s.f.). <a href="https://quarto.org/docs/dashboards/" class="uri">https://quarto.org/docs/dashboards/</a></p>
+</section>
+<section id="carga-de-paquetes" class="level3" data-number="15.2.2">
+<h3 data-number="15.2.2" class="anchored" data-anchor-id="carga-de-paquetes"><span class="header-section-number">15.2.2</span> Carga de paquetes</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Carga de paquetes</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plotly)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DT)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(leaflet)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(leaflet.extras)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(leafem)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="carga-de-datos-para-ejemplos" class="level3" data-number="15.2.3">
+<h3 data-number="15.2.3" class="anchored" data-anchor-id="carga-de-datos-para-ejemplos"><span class="header-section-number">15.2.3</span> Carga de datos para ejemplos</h3>
+<section id="provincias-de-costa-rica" class="level4" data-number="15.2.3.1">
+<h4 data-number="15.2.3.1" class="anchored" data-anchor-id="provincias-de-costa-rica"><span class="header-section-number">15.2.3.1</span> Provincias de Costa Rica</h4>
+<p>Es un <a href="https://github.com/gf0604-procesamientodatosgeograficos/2024-i/blob/main/datos/ign/delimitacion-territorial-administrativa/provincias.geojson">archivo GeoJSON con los polígonos de las provincias de Costa Rica</a>. Este archivo proviene de un <a href="http://geos.snitcr.go.cr/be/IGN_5/wfs">geoservicio de tipo Web Feature Service (WFS)</a> publicado por el Instituto Geográfico Nacional (IGN).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Lectura y visualización de datos geoespaciales de provincias</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Lectura</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>provincias <span class="ot">&lt;-</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_read</span>(</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">dsn =</span> <span class="st">"datos/ign/delimitacion-territorial-administrativa/provincias.geojson"</span>,</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">quiet =</span> <span class="cn">TRUE</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualización en un mapa</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  provincias<span class="sc">$</span>geometry,</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">extent =</span> <span class="fu">st_bbox</span>(<span class="fu">c</span>(<span class="at">xmin =</span> <span class="dv">280000</span>, <span class="at">xmax =</span> <span class="dv">660000</span>, <span class="at">ymin =</span> <span class="dv">880000</span>, <span class="at">ymax=</span> <span class="dv">1250000</span>)),</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">"Provincias de Costa Rica"</span>,</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">axes =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">graticule =</span> <span class="cn">TRUE</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="15-tableros-control_files/figure-html/carga-datos-provincias-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="mamíferos-de-costa-rica" class="level4" data-number="15.2.3.2">
+<h4 data-number="15.2.3.2" class="anchored" data-anchor-id="mamíferos-de-costa-rica"><span class="header-section-number">15.2.3.2</span> Mamíferos de Costa Rica</h4>
+<p>Es un <a href="https://github.com/gf0604-procesamientodatosgeograficos/2024-i/blob/main/datos/gbif/mamiferos.csv">archivo CSV con registros de presencia de la clase <em>Mammalia</em> (mamíferos) de Costa Rica</a>. Este archivo proviene de una <a href="https://doi.org/10.15468/dl.wfvs7s">consulta al portal de datos de la Infraestructura Mundial de Información en Biodiversidad (GBIF)</a>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Lectura y visualización de datos geoespaciales de mamíferos</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Lectura</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>mamiferos <span class="ot">&lt;-</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_read</span>(</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"datos/gbif/mamiferos.csv"</span>,</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">options =</span> <span class="fu">c</span>(</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>      <span class="st">"X_POSSIBLE_NAMES=decimalLongitude"</span>, <span class="co"># columna de longitud decimal</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Y_POSSIBLE_NAMES=decimalLatitude"</span>   <span class="co"># columna de latitud decimal</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">quiet =</span> <span class="cn">TRUE</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Asignación del CRS WGS84</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="fu">st_crs</span>(mamiferos) <span class="ot">&lt;-</span> <span class="dv">4326</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualización en un mapa</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>  mamiferos<span class="sc">$</span>geometry,</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">pch =</span> <span class="dv">16</span>,</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">"Mamíferos de Costa Rica"</span>,</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>  <span class="at">axes =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>  <span class="at">graticule =</span> <span class="cn">TRUE</span></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="15-tableros-control_files/figure-html/carga-datos-mamiferos-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="introducción" class="level2" data-number="15.3">
+<h2 data-number="15.3" class="anchored" data-anchor-id="introducción"><span class="header-section-number">15.3</span> Introducción</h2>
+<p>Un <a href="https://es.wikipedia.org/wiki/Cuadro_de_mando">tablero de control</a>, también llamado cuadro de mando o <em>dashboard</em>, es un tipo de interfaz gráfica de usuario que reúne visualizaciones de datos e información resumida relevantes para una temática, objetivo o proceso particular. Estas visualizaciones se presentan principalmente en formato de tablas, gráficos estadísticos y mapas (ej. <a href="https://www.arcgis.com/apps/dashboards/bda7594740fd40299423467b48e9ecf6">Tablero de control de la Universidad Johns Hopkins sobre la epidemia de Covid-19</a>). El término <em>dashboard</em> proviene del tablero de instrumentos de un automóvil, el cual le permite al conductor monitorear rápidamente las funciones principales del vehículo.</p>
+<p>Los tableros de control son usualmente accesibles mediante un navegador web y pueden estar vinculados a fuentes de datos que se actualizan regularmente. Se caracterizan por ser interactivos y facilitar la exploración de datos a los usuarios.</p>
+<p>Quarto facilita el desarrollo de tableros de control a través de Quarto Dashboards](https://quarto.org/docs/dashboards/.</p>
+</section>
+<section id="quarto-dashboards" class="level2" data-number="15.4">
+<h2 data-number="15.4" class="anchored" data-anchor-id="quarto-dashboards"><span class="header-section-number">15.4</span> Quarto Dashboards</h2>
+<p><a href="https://quarto.org/docs/dashboards/">Quarto Dashboards</a> es una capacidad de Quarto (introducida en la versión 1.4) que permite crear tableros de control mediante los lenguajes de programación R, Python, Julia y Observable. Estos tableros de control pueden incluir componentes desarrollados en DT, Ggplot2, Plotly y Leaflet, entre otros paquetes de R. Pueden publicarse como páginas estáticas (ej. en GitHub Pages) o en un <a href="https://quarto.org/docs/dashboards/interactivity/">servidor Shiny para proporcionar mayor interactividad al usuario</a>.</p>
+<p>La <a href="#fig-dashboards-gapminder" class="quarto-xref">Figura&nbsp;<span>15.1</span></a> muestra un tablero de control desarrollado con Quarto Dashboards.</p>
+<div id="fig-dashboards-gapminder" class="lightbox quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center" alt="Tablero de control desarrollado con Quarto Dashboards">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-dashboards-gapminder-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="img/dashboards-gapminder.png" class="lightbox" data-glightbox="description: .lightbox-desc-1" data-gallery="quarto-lightbox-gallery-1"><img src="img/dashboards-gapminder.png" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="Tablero de control desarrollado con Quarto Dashboards"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-dashboards-gapminder-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;15.1: Tablero de control desarrollado con Quarto Dashboards. Fuente: <a href="https://quarto.org/docs/dashboards/">Quarto Dashboards</a>.
+</figcaption>
+</figure>
+</div>
+<section id="componentes" class="level3" data-number="15.4.1">
+<h3 data-number="15.4.1" class="anchored" data-anchor-id="componentes"><span class="header-section-number">15.4.1</span> Componentes</h3>
+<p>Un tablero de control desarrollado con Quarto Dashboards tiene los siguientes componentes:</p>
+<ol type="1">
+<li><p><strong>Barra de navegación</strong>: incluye el título, íconos y autor junto con enlaces a páginas (si se definen más de una página).</p></li>
+<li><p><strong>Páginas, filas, columnas y pestañas (<em>tabs</em>)</strong>: Las páginas, filas y columnas se definen utilizando encabezados de Markdown (con atributos opcionales para controlar la altura, el ancho y otras propiedades). Las pestañas pueden usarse para dividir aún más el contenido de una fila o columna.</p></li>
+<li><p><strong>Tarjetas, barras laterales y barras de herramientas</strong>: Las tarjetas son contenedores para visualizaciones de datos como tablas, gráficos estadísticos, mapas y otras. Las barras laterales y barras de herramientas se utilizan para el ingreso de datos en tableros de control interactivos.</p></li>
+</ol>
+</section>
+<section id="configuración" class="level3" data-number="15.4.2">
+<h3 data-number="15.4.2" class="anchored" data-anchor-id="configuración"><span class="header-section-number">15.4.2</span> Configuración</h3>
+<p>Los tableros de control son arreglos de componentes que se utilizan para proporcionar navegación y presentar datos. A continuación, se describen los elementos que se utilizan para estructurar la navegación y el diseño de los tableros de control.</p>
+<section id="navegación" class="level4" data-number="15.4.2.1">
+<h4 data-number="15.4.2.1" class="anchored" data-anchor-id="navegación"><span class="header-section-number">15.4.2.1</span> Navegación</h4>
+<p>Todos los tableros de control tienen una barra de navegación que muestra el título y, opcionalmente, un logotipo, el nombre del autor e íconos con enlaces a redes sociales y otros sitios de interés. Los tableros de control con <a href="https://quarto.org/docs/dashboards/layout.html#pages">múltiples páginas</a> también contienen un enlace a cada página en la barra de navegación.</p>
+</section>
+<section id="organización" class="level4" data-number="15.4.2.2">
+<h4 data-number="15.4.2.2" class="anchored" data-anchor-id="organización"><span class="header-section-number">15.4.2.2</span> Organización</h4>
+<p>Dentro de una página, los componentes del tablero de control se organizan mediante conjuntos alternos de filas y columnas. Las filas y columnas, a su vez, se definen mediante encabezados de Markdown y celdas computacionales (bloques de código).</p>
+</section>
+<section id="páginas" class="level4" data-number="15.4.2.3">
+<h4 data-number="15.4.2.3" class="anchored" data-anchor-id="páginas"><span class="header-section-number">15.4.2.3</span> Páginas</h4>
+<p>Para introducir múltiples páginas, se utilizan encabezados de nivel 1 sobre los encabezados de nivel 2, los cuales se usan para definir filas y columnas. El texto de los encabezados de nivel 1 se usa para enlazar a las páginas en la barra de navegación.</p>
+</section>
+<section id="pestañas" class="level4" data-number="15.4.2.4">
+<h4 data-number="15.4.2.4" class="anchored" data-anchor-id="pestañas"><span class="header-section-number">15.4.2.4</span> Pestañas</h4>
+<p>Las pestañas (<em>tabs</em>) se utilizan para incluir múltiples vistas de datos o contenido de importancia secundaria sin que interfiera con la visualización principal. Las pestañas se crean añadiendo la clase <code>.tabset</code> a una fila o columna.</p>
+</section>
+<section id="tarjetas" class="level4" data-number="15.4.2.5">
+<h4 data-number="15.4.2.5" class="anchored" data-anchor-id="tarjetas"><span class="header-section-number">15.4.2.5</span> Tarjetas</h4>
+<p>Las tarjetas son la unidad fundamental de visualización en un tablero de control. Constituyen el contenido de las filas y las columnas.</p>
+<p>Para más información sobre la configuración de los tableros de control, se recomienda consultar <a href="https://quarto.org/docs/dashboards/layout.html">Dashboard Layout</a>.</p>
+</section>
+</section>
+</section>
+<section id="recursos-adicionales" class="level2" data-number="15.5">
+<h2 data-number="15.5" class="anchored" data-anchor-id="recursos-adicionales"><span class="header-section-number">15.5</span> Recursos adicionales</h2>
+<p><a href="https://www.youtube.com/watch?v=_VGJIPRGTy4">Quarto Dashboards | Charles Teague | Posit</a><br>
+<a href="https://quarto.org/docs/gallery/#dashboards">Ejemplos de tableros de control desarrollados con Quarto Dashboards</a></p>
 
 
+<div class="hidden" aria-hidden="true">
+<span class="glightbox-desc lightbox-desc-1">Figura&nbsp;15.1: Tablero de control desarrollado con Quarto Dashboards. Fuente: <a href="https://quarto.org/docs/dashboards/">Quarto Dashboards</a>.</span>
+</div>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -775,17 +984,42 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./index.html" class="pagination-link" aria-label="Bienvenida">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Bienvenida</span>
+      <a href="./parte-vi-visualizacion-avanzada.html" class="pagination-link" aria-label="VI - Visualización avanzada">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">VI - Visualización avanzada</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./parte-i-introduccion-programacion_computadoras_ciencia_datos.html" class="pagination-link" aria-label="I - Introducción a la programación de computadoras y a la ciencia de datos">
-        <span class="nav-page-text">I - Introducción a la programación de computadoras y a la ciencia de datos</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./parte-vii-evaluaciones.html" class="pagination-link" aria-label="Evaluaciones">
+        <span class="nav-page-text">Evaluaciones</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
 </div> <!-- /content -->
+<script>var lightboxQuarto = GLightbox({"descPosition":"bottom","closeEffect":"zoom","selector":".lightbox","loop":false,"openEffect":"zoom"});
+window.onload = () => {
+  lightboxQuarto.on('slide_before_load', (data) => {
+    const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+    const href = trigger.getAttribute('href');
+    if (href !== null) {
+      const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+      if (imgEl !== null) {
+        const srcAttr = imgEl.getAttribute("src");
+        if (srcAttr && srcAttr.startsWith("data:")) {
+          slideConfig.href = srcAttr;
+        }
+      }
+    } 
+  });
+
+  lightboxQuarto.on('slide_after_load', (data) => {
+    const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+    if (window.Quarto?.typesetMath) {
+      window.Quarto.typesetMath(slideNode);
+    }
+  });
+
+};
+          </script>
 
 
 

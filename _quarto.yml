@@ -33,6 +33,9 @@ book:
         - 12-operaciones-datos-atributos.qmd
         - 13-operaciones-datos-espaciales.qmd
         - 14-operaciones-datos-geometrias.qmd
+    - part: parte-vi-visualizacion-avanzada.qmd
+      chapters: 
+        - 15-tableros-control.qmd
     - part: parte-vii-evaluaciones.qmd
       chapters: 
         - examen-corto-01.qmd

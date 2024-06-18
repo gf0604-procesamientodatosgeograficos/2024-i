@@ -1,0 +1,3 @@
+# VI - Visualización avanzada {.unnumbered}
+
+[15 Tableros de control](15-tableros-control.qmd)  
