@@ -1148,7 +1148,7 @@
     "href": "parte-vii-evaluaciones.html#tareas",
     "title": "Evaluaciones",
     "section": "Tareas",
-    "text": "Tareas\nTarea 3 - Grupo 001\nTarea 3 - Grupo 002",
+    "text": "Tareas\nTarea 3 - Grupo 001\nTarea 3 - Grupo 002\nTarea 4 - Grupo 002",
     "crumbs": [
       "Evaluaciones"
     ]
@@ -1776,6 +1776,105 @@
     "crumbs": [
       "VI - Visualización avanzada",
       "<span class='chapter-number'>15</span>  <span class='chapter-title'>Tableros de control</span>"
+    ]
+  },
+  {
+    "objectID": "tarea-04-grupo-002.html",
+    "href": "tarea-04-grupo-002.html",
+    "title": "Tarea 4 - Grupo 002",
+    "section": "",
+    "text": "Fecha y hora límite de entrega\nMiércoles 26 de junio de 2024, 8:00 a.m.",
+    "crumbs": [
+      "Evaluaciones",
+      "Tarea 4 - Grupo 002"
+    ]
+  },
+  {
+    "objectID": "tarea-04-grupo-002.html#descripción-general",
+    "href": "tarea-04-grupo-002.html#descripción-general",
+    "title": "Tarea 4 - Grupo 002",
+    "section": "Descripción general",
+    "text": "Descripción general\nEsta tarea consiste en desarrollar un tablero de control con Quarto Dashboards que presente tablas, gráficos estadísticos y mapas sobre registros de presencia y especies de anfibios de Costa Rica. El tablero debe publicarse como una página web en GitHub Pages.",
+    "crumbs": [
+      "Evaluaciones",
+      "Tarea 4 - Grupo 002"
+    ]
+  },
+  {
+    "objectID": "tarea-04-grupo-002.html#objetivos",
+    "href": "tarea-04-grupo-002.html#objetivos",
+    "title": "Tarea 4 - Grupo 002",
+    "section": "Objetivos",
+    "text": "Objetivos\nCada estudiante debe mostrar que es capaz de:\n\nEscribir código fuente en el lenguaje de programación R y utilizar funciones de los paquetes DT, Tidyverse, Plotly, Leaflet y otros para leer datos, procesarlos y generar visualizaciones en forma de tablas, gráficos estadísticos y mapas.\nDesarrollar tableros de control con Quarto Dashboards que presenten las visualizaciones de datos en una forma organizada y atractiva para el usuario final.\nPublicar documentos Quarto como páginas web en GitHub Pages.\nAnalizar y corregir errores de programación.",
+    "crumbs": [
+      "Evaluaciones",
+      "Tarea 4 - Grupo 002"
+    ]
+  },
+  {
+    "objectID": "tarea-04-grupo-002.html#acerca-del-conjunto-de-datos",
+    "href": "tarea-04-grupo-002.html#acerca-del-conjunto-de-datos",
+    "title": "Tarea 4 - Grupo 002",
+    "section": "Acerca del conjunto de datos",
+    "text": "Acerca del conjunto de datos\nEl conjunto de datos de esta tarea consiste de 299 registros de pacientes que sufrieron insuficiencia cardíaca. Para cada paciente, se consideran 13 características clínicas (edad, sexo, si tenía anemia, si tenía diabetes, si fumaba y otras). Estos datos forman parte del artículo Chicco, D., Jurman, G. Machine learning can predict survival of patients with heart failure from serum creatinine and ejection fraction alone. BMC Med Inform Decis Mak 20, 16 (2020). Se recomienda leer el resumen (abstract) del artículo.\nEl archivo CSV con los datos está disponible en la dirección https://github.com/gf0604-procesamientodatosgeograficos/2024-i/blob/main/datos/bmc/heart_failure_clinical_records_dataset.csv.\nPara más información sobre las variables del conjunto de datos, su significado y sus unidades de medida, puede consultar Meanings, measurement units, and intervals of each feature of the dataset.\nNOTA: hay varias variables booleanas con valor 0 o 1. 0 significa falso (no) y 1 significa verdadero (sí). Por ejemplo, para anaemia un valor de 1 significa que el paciente sí tuvo anemia y un valor de 0 significa que no tuvo anemia. En el caso de sex, un 0 corresponde a una mujer y un 1 a un hombre.",
+    "crumbs": [
+      "Evaluaciones",
+      "Tarea 4 - Grupo 002"
+    ]
+  },
+  {
+    "objectID": "tarea-04-grupo-002.html#entregables",
+    "href": "tarea-04-grupo-002.html#entregables",
+    "title": "Tarea 4 - Grupo 002",
+    "section": "Entregables",
+    "text": "Entregables\nDebe entregar dos direcciones web:\n\nDirección de un repositorio en GitHub (ej. https://github.com/mfvargas/anfibios-costarica) con el código fuente y los datos. Específicamente, el repositorio debe contener:\n\nUn documento Quarto llamado index.qmd con el código en R y la sintaxis Markdown necesarios para generar un tablero de control con las salidas especificadas en la sección Desarrollo.\nUn documento llamado index.html generado a partir de index.qmd.\nLos tres archivos de datos.\nEl directorio index_files.\n\nDirección de un sitio web en GitHub Pages publicado a partir del repositorio GitHub del punto 1 de esta sección (ej. https://mfvargas.github.io/anfibios-costarica/).\n\nLa entrega debe realizarse a través de la plataforma Mediación Virtual.",
+    "crumbs": [
+      "Evaluaciones",
+      "Tarea 4 - Grupo 002"
+    ]
+  },
+  {
+    "objectID": "tarea-04-grupo-002.html#desarrollo",
+    "href": "tarea-04-grupo-002.html#desarrollo",
+    "title": "Tarea 4 - Grupo 002",
+    "section": "Desarrollo",
+    "text": "Desarrollo\nEl tablero de control desarrollado en Quarto Dashboards debe contener las siguientes visualizaciones de datos.\n\n1 - Tabla de cantidad de registros de presencia por categoría de Lista Roja\nDebe ser una tabla interactiva generada con el paquete DT con una fila por categoría y dos columnas:\n\nAbreviatura de la categoría (EX, EW, CR, etc.).\nCantidad de registros de presencia de especies en la categoría.\n\nLos encabezados de la tabla deben estar en español y ser significativos.\nSugerencias\n\nUna la columna iucnRedListCategory, del conjunto de datos de especies, al conjunto de datos de registros de presencia. Use una función de unión (join) no espacial y la columna species que ambos conjuntos de datos tienen en común.\nUse el argumento colnames de la función datatable() para especificar los encabezados de las columnas.\n\n\n\n2 - Gráfico de barras de cantidad de especies en categorías CR, EN y VU de la Lista Roja\nDebe contener una barra por cada categoría mencionada (solo esas categorías) y su longitud debe mostrar la cantidad de especies de anfibios en la categoría. Las barras deben estar ordenadas por longitud (de mayor a menor o de menor a mayor).\nEl gráfico deben programarse con ggplot2 y convertirse a plotly con la función ggplotly(). Debe tener:\n\nTítulo (puede asignarlo directamente en el gráfico o con la opción #| title del bloque de código).\nEtiquetas en los ejes x e y.\n\n\n\n3 - Mapa de riqueza de especies de anfibios en áreas de conservación\nDebe ser un mapa leaflet interactivo con las siguientes capas y controles:\n\nDos capas base de tipo tiles (teselas) (ej. OSM, Carto, ESRI).\nUna capa de áreas de conservación (polígonos) coloreada de acuerdo con la riqueza de especies de anfibios en cada área (i.e. un mapa de coropletas). Al hacer clic sobre un polígono, la ventana emergente debe mostrar el nombre del área y su riqueza de especies de anfibios.\nUna leyenda que muestre el significado de los colores usados en la capa de áreas de conservación.\nUn control de capas.\n\n\n\n4 Gráfico de barras de riqueza de especies de anfibios en áreas de conservación\nDebe contener una barra por cada área de conservación y su longitud debe mostrar su riqueza de especies de anfibios. Las barras deben estar ordenadas por longitud (de mayor a menor o de menor a mayor).\nEl gráfico deben programarse con ggplot2 y convertirse a plotly con la función ggplotly(). Debe tener:\n\nTítulo (puede asignarlo directamente en el gráfico o en la opción #| title del bloque de código).\nEtiquetas en los ejes x e y.",
+    "crumbs": [
+      "Evaluaciones",
+      "Tarea 4 - Grupo 002"
+    ]
+  },
+  {
+    "objectID": "tarea-04-grupo-002.html#calificación",
+    "href": "tarea-04-grupo-002.html#calificación",
+    "title": "Tarea 4 - Grupo 002",
+    "section": "Calificación",
+    "text": "Calificación\n\nPresentación general del tablero de control (organización, distribución de los componentes): 20%\nTabla: 15%\nPrimer gráfico: 20%\nSegundo gráfico: 20%\nMapa: 25%\n\nUtilice todos los recursos que considere necesarios para organizar los componentes en el tablero de control: filas, columnas, páginas, pestañas, etc. Puede colocar los componentes en el orden que considere apropiado.",
+    "crumbs": [
+      "Evaluaciones",
+      "Tarea 4 - Grupo 002"
+    ]
+  },
+  {
+    "objectID": "tarea-04-grupo-002.html#consideraciones-adicionales",
+    "href": "tarea-04-grupo-002.html#consideraciones-adicionales",
+    "title": "Tarea 4 - Grupo 002",
+    "section": "Consideraciones adicionales",
+    "text": "Consideraciones adicionales\n\nEsta tarea puede presentarse individualmente o en parejas. En este último caso, solo un estudiante debe presentar la tarea en Mediación Virtual y debe indicar ahí el nombre del otro estudiante.\nSi solo se entrega la dirección del repositorio en GitHub, y no el sitio publicado o este no es consistente con el código fuente del repositorio, se rebajará el 25% del valor de la tarea. RECOMENDACIÓN: genere el sitio web desde el inicio y actualícelo continuamente. No lo deje para última hora.\nNo se aceptarán tareas que se entreguen después de la fecha y hora límite.",
+    "crumbs": [
+      "Evaluaciones",
+      "Tarea 4 - Grupo 002"
+    ]
+  },
+  {
+    "objectID": "tarea-04-grupo-002.html#conjuntos-de-datos",
+    "href": "tarea-04-grupo-002.html#conjuntos-de-datos",
+    "title": "Tarea 4 - Grupo 002",
+    "section": "Conjuntos de datos",
+    "text": "Conjuntos de datos\nPara realizar esta tarea, debe utilizar tres conjuntos de datos (puede descargarlos en los enlaces):\n\nÁreas de conservación de Costa Rica\nEste archivo GPKG proviene de un geoservicio de tipo Web Feature Service (WFS) publicado por el Sistema Nacional de Áreas de Conservación (Sinac) (https://geos1pne.sirefor.go.cr/wfs?). Las geometrías se simplificaron para reducir el tamaño del archivo.\nRegistros de presencia de anfibios de Costa Rica.\nEste archivo CSV proviene de una consulta al portal de datos de la Infraestructura Mundial de Información en Biodiversidad (GBIF) (https://doi.org/10.15468/dl.4tqr9u). Se suprimieron las filas con identificaciones en niveles superiores a especie.\nEspecies de anfibios de Costa Rica.\nEste archivo CSV también proviene de una consulta al portal de datos de la Infraestructura Mundial de Información en Biodiversidad (GBIF) (https://doi.org/10.15468/dl.xwmakq). Se suprimieron las filas con taxones en niveles superiores a especie y se conservaron solo dos columnas de datos:\n\nspecies: nombre de la especie.\niucnRedListCategory: categoría de la especie en la Lista Roja de la UICN.\n\n\nLa Lista Roja de Especies Amenazadas de la Unión Internacional para la Conservación de la Naturaleza (UICN) es un inventario del estado de conservación de especies de animales y plantas a nivel mundial. La Lista Roja asigna a las especies una de las siguientes categorías:\n\nEX (Extinta)\nEW (Extinta en estado silvestre)\nCR (En peligro crítico de extinción)\nEN (En peligro de extinción)\nVU (Vulnerable)\nNT (Casi amenazada)\nLC (Preocupación menor)\nDD (Datos insuficientes)\nNE (No evaluada)",
+    "crumbs": [
+      "Evaluaciones",
+      "Tarea 4 - Grupo 002"
     ]
   }
 ]

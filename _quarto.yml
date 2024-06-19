@@ -45,6 +45,7 @@ book:
         - examen-corto-03-01.qmd
         - examen-corto-03-02.qmd
         - examen-corto-04.qmd
+        - tarea-04-grupo-002.qmd
 
 bibliography: referencias.bib
 csl: apa-6th-edition.csl
