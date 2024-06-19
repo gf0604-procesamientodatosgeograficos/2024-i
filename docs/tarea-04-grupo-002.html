@@ -406,9 +406,9 @@ ul.task-list li input[type="checkbox"] {
 <li><p><a href="https://github.com/gf0604-procesamientodatosgeograficos/2024-i/blob/main/datos/sinac/areas-conservacion.gpkg">Áreas de conservación de Costa Rica</a><br>
 Este archivo GPKG proviene de un geoservicio de tipo Web Feature Service (WFS) publicado por el Sistema Nacional de Áreas de Conservación (Sinac) (<code>https://geos1pne.sirefor.go.cr/wfs?</code>). Las geometrías se simplificaron para reducir el tamaño del archivo.</p></li>
 <li><p><a href="https://github.com/gf0604-procesamientodatosgeograficos/2024-i/blob/main/datos/gbif/registros-anfibios.csv">Registros de presencia de anfibios de Costa Rica</a>.<br>
-Este archivo CSV proviene de una consulta al portal de datos de la Infraestructura Mundial de Información en Biodiversidad (GBIF) (<code>https://doi.org/10.15468/dl.4tqr9u</code>). Se suprimieron las filas con identificaciones en niveles superiores a especie.</p></li>
+Este archivo CSV proviene de una consulta al portal de datos de la Infraestructura Mundial de Información en Biodiversidad (GBIF) (<code>https://doi.org/10.15468/dl.4tqr9u</code>). Contiene una fila por cada registro de presencia y atributos como el nombre de la especie (<code>species</code>) y las coordenadas geográficas del registro (<code>decimalLongitude</code>, <code>decimalLatitude</code>), entre otros. Se suprimieron las filas con identificaciones en niveles superiores a especie.</p></li>
 <li><p><a href="https://github.com/gf0604-procesamientodatosgeograficos/2024-i/blob/main/datos/gbif/especies-anfibios.csv">Especies de anfibios de Costa Rica</a>.<br>
-Este archivo CSV también proviene de una consulta al portal de datos de la Infraestructura Mundial de Información en Biodiversidad (GBIF) (<code>https://doi.org/10.15468/dl.xwmakq</code>). Se suprimieron las filas con taxones en niveles superiores a especie y se conservaron solo dos columnas de datos:</p>
+Este archivo CSV también proviene de una consulta al portal de datos de la Infraestructura Mundial de Información en Biodiversidad (GBIF) (<code>https://doi.org/10.15468/dl.xwmakq</code>). Contiene una fila por cada especie. Se suprimieron las filas con taxones en niveles superiores a especie y se conservaron solo dos columnas de datos:</p>
 <ul>
 <li><code>species</code>: nombre de la especie.</li>
 <li><code>iucnRedListCategory</code>: categoría de la especie en la Lista Roja de la UICN.</li>
@@ -473,7 +473,7 @@ Este archivo CSV también proviene de una consulta al portal de datos de la Infr
 <p>Debe ser un mapa leaflet interactivo con las siguientes capas y controles:</p>
 <ul>
 <li>Dos capas base de tipo <em>tiles</em> (teselas) (ej. OSM, Carto, ESRI).</li>
-<li>Una capa de áreas de conservación (polígonos) coloreada de acuerdo con la riqueza de especies de anfibios en cada área (i.e.&nbsp;un <a href="https://es.wikipedia.org/wiki/Mapa_coropl%C3%A9tico">mapa de coropletas</a>). Al hacer clic sobre un polígono, la ventana emergente debe mostrar el nombre del área y su riqueza de especies de anfibios.</li>
+<li>Una capa de áreas de conservación (polígonos) coloreada de acuerdo con la riqueza de especies (i.e.&nbsp;cantidad de especies) de anfibios en cada área (i.e.&nbsp;un <a href="https://es.wikipedia.org/wiki/Mapa_coropl%C3%A9tico">mapa de coropletas</a>). Al hacer clic sobre un polígono, la ventana emergente debe mostrar el nombre del área y la cantidad de especies.</li>
 <li>Una leyenda que muestre el significado de los colores usados en la capa de áreas de conservación.</li>
 <li>Un control de capas.</li>
 </ul>

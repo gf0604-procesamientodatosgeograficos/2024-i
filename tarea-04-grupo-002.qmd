@@ -21,10 +21,10 @@ Para realizar esta tarea, debe utilizar tres conjuntos de datos (puede descargar
 Este archivo GPKG proviene de un geoservicio de tipo Web Feature Service (WFS) publicado por el Sistema Nacional de Áreas de Conservación (Sinac) (`https://geos1pne.sirefor.go.cr/wfs?`). Las geometrías se simplificaron para reducir el tamaño del archivo.
 
 2. [Registros de presencia de anfibios de Costa Rica](https://github.com/gf0604-procesamientodatosgeograficos/2024-i/blob/main/datos/gbif/registros-anfibios.csv).  
-Este archivo CSV proviene de una consulta al portal de datos de la Infraestructura Mundial de Información en Biodiversidad (GBIF)  (`https://doi.org/10.15468/dl.4tqr9u`). Se suprimieron las filas con identificaciones en niveles superiores a especie.
+Este archivo CSV proviene de una consulta al portal de datos de la Infraestructura Mundial de Información en Biodiversidad (GBIF)  (`https://doi.org/10.15468/dl.4tqr9u`). Contiene una fila por cada registro de presencia y atributos como el nombre de la especie (`species`) y las coordenadas geográficas del registro (`decimalLongitude`, `decimalLatitude`), entre otros. Se suprimieron las filas con identificaciones en niveles superiores a especie.
 
 3. [Especies de anfibios de Costa Rica](https://github.com/gf0604-procesamientodatosgeograficos/2024-i/blob/main/datos/gbif/especies-anfibios.csv).  
-Este archivo CSV también proviene de una consulta al portal de datos de la Infraestructura Mundial de Información en Biodiversidad (GBIF) (`https://doi.org/10.15468/dl.xwmakq`). Se suprimieron las filas con taxones en niveles superiores a especie y se conservaron solo dos columnas de datos:
+Este archivo CSV también proviene de una consulta al portal de datos de la Infraestructura Mundial de Información en Biodiversidad (GBIF) (`https://doi.org/10.15468/dl.xwmakq`). Contiene una fila por cada especie. Se suprimieron las filas con taxones en niveles superiores a especie y se conservaron solo dos columnas de datos:
 
     - `species`: nombre de la especie.
     - `iucnRedListCategory`: categoría de la especie en la Lista Roja de la UICN.
@@ -82,7 +82,7 @@ El gráfico deben programarse con ggplot2 y convertirse a plotly con la función
 Debe ser un mapa leaflet interactivo con las siguientes capas y controles:
 
 - Dos capas base de tipo *tiles* (teselas) (ej. OSM, Carto, ESRI).
-- Una capa de áreas de conservación (polígonos) coloreada de acuerdo con la riqueza de especies de anfibios en cada área (i.e. un [mapa de coropletas](https://es.wikipedia.org/wiki/Mapa_coropl%C3%A9tico)). Al hacer clic sobre un polígono, la ventana emergente debe mostrar el nombre del área y su riqueza de especies de anfibios.
+- Una capa de áreas de conservación (polígonos) coloreada de acuerdo con la riqueza de especies (i.e. cantidad de especies) de anfibios en cada área (i.e. un [mapa de coropletas](https://es.wikipedia.org/wiki/Mapa_coropl%C3%A9tico)). Al hacer clic sobre un polígono, la ventana emergente debe mostrar el nombre del área y la cantidad de especies.
 - Una leyenda que muestre el significado de los colores usados en la capa de áreas de conservación.
 - Un control de capas.
 
