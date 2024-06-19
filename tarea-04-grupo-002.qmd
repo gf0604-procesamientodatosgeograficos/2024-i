@@ -4,7 +4,7 @@
 **Miércoles 26 de junio de 2024, 8:00 a.m.**
 
 ## Descripción general
-Esta tarea consiste en desarrollar un tablero de control con Quarto Dashboards que presente tablas, gráficos estadísticos y mapas sobre registros de presencia y especies de anfibios de Costa Rica. El tablero debe publicarse como una página web en GitHub Pages.
+Esta tarea consiste en desarrollar un tablero de control en [Quarto Dashboards](https://quarto.org/docs/dashboards/) que presente tablas, gráficos estadísticos y mapas sobre registros de presencia y especies de anfibios de Costa Rica. El tablero debe publicarse como un sitio web en GitHub Pages.
 
 ## Objetivos
 Cada estudiante debe mostrar que es capaz de:
@@ -61,13 +61,13 @@ El tablero de control desarrollado en Quarto Dashboards debe contener las siguie
 Debe ser una tabla interactiva generada con el paquete DT con una fila por categoría y dos columnas:
 
 - Abreviatura de la categoría (EX, EW, CR, etc.).
-- Cantidad de registros de presencia de especies en la categoría.
+- Cantidad de registros de presencia de especies de anfibios en la categoría.
 
 Los encabezados de la tabla deben estar en español y ser significativos. 
 
 **Sugerencias**  
 
-- Una la columna `iucnRedListCategory`, del conjunto de datos de especies, al conjunto de datos de registros de presencia. Use una función de unión (*join*) no espacial y la columna `species` que ambos conjuntos de datos tienen en común.
+- Una la columna `iucnRedListCategory`, del conjunto de datos de especies, al conjunto de datos de registros de presencia. Use una función de unión (*join*) no espacial, con la columna `species` que ambos conjuntos de datos tienen en común.
 - Use el argumento `colnames` de la función `datatable()` para especificar los encabezados de las columnas.
 
 ### 2 - Gráfico de barras de cantidad de especies en categorías CR, EN y VU de la Lista Roja
@@ -104,6 +104,7 @@ El gráfico deben programarse con ggplot2 y convertirse a plotly con la función
 Utilice todos los recursos que considere necesarios para organizar los componentes en el tablero de control: filas, columnas, páginas, pestañas, etc. Puede colocar los componentes en el orden que considere apropiado.
 
 ## Consideraciones adicionales
-1. Esta tarea puede presentarse individualmente o en parejas. En este último caso, solo un estudiante debe presentar la tarea en Mediación Virtual y debe indicar ahí el nombre del otro estudiante.
-2. Si solo se entrega la dirección del repositorio en GitHub, y no el sitio publicado o este no es consistente con el código fuente del repositorio, se rebajará el 25% del valor de la tarea. **RECOMENDACIÓN: genere el sitio web desde el inicio y actualícelo continuamente. No lo deje para última hora.**
+1. La tarea debe presentarse como un tablero de control desarrollado en [Quarto Dashboards](https://quarto.org/docs/dashboards/) y no como otro tipo de documento.
+2. Esta tarea puede presentarse individualmente o en parejas. En este último caso, solo un estudiante debe presentar la tarea en Mediación Virtual y debe indicar ahí el nombre del otro estudiante.
+3. Si solo se entrega la dirección del repositorio en GitHub, y no el sitio publicado o este no es consistente con el código fuente del repositorio, se rebajará el 25% del valor de la tarea. **RECOMENDACIÓN: genere el sitio web desde el inicio y actualícelo continuamente. No lo deje para última hora.**
 3. **No se aceptarán tareas que se entreguen después de la fecha y hora límite**.

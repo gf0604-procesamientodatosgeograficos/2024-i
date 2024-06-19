@@ -387,7 +387,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="descripción-general" class="level2">
 <h2 class="anchored" data-anchor-id="descripción-general">Descripción general</h2>
-<p>Esta tarea consiste en desarrollar un tablero de control con Quarto Dashboards que presente tablas, gráficos estadísticos y mapas sobre registros de presencia y especies de anfibios de Costa Rica. El tablero debe publicarse como una página web en GitHub Pages.</p>
+<p>Esta tarea consiste en desarrollar un tablero de control en <a href="https://quarto.org/docs/dashboards/">Quarto Dashboards</a> que presente tablas, gráficos estadísticos y mapas sobre registros de presencia y especies de anfibios de Costa Rica. El tablero debe publicarse como un sitio web en GitHub Pages.</p>
 </section>
 <section id="objetivos" class="level2">
 <h2 class="anchored" data-anchor-id="objetivos">Objetivos</h2>
@@ -450,12 +450,12 @@ Este archivo CSV también proviene de una consulta al portal de datos de la Infr
 <p>Debe ser una tabla interactiva generada con el paquete DT con una fila por categoría y dos columnas:</p>
 <ul>
 <li>Abreviatura de la categoría (EX, EW, CR, etc.).</li>
-<li>Cantidad de registros de presencia de especies en la categoría.</li>
+<li>Cantidad de registros de presencia de especies de anfibios en la categoría.</li>
 </ul>
 <p>Los encabezados de la tabla deben estar en español y ser significativos.</p>
 <p><strong>Sugerencias</strong></p>
 <ul>
-<li>Una la columna <code>iucnRedListCategory</code>, del conjunto de datos de especies, al conjunto de datos de registros de presencia. Use una función de unión (<em>join</em>) no espacial y la columna <code>species</code> que ambos conjuntos de datos tienen en común.</li>
+<li>Una la columna <code>iucnRedListCategory</code>, del conjunto de datos de especies, al conjunto de datos de registros de presencia. Use una función de unión (<em>join</em>) no espacial, con la columna <code>species</code> que ambos conjuntos de datos tienen en común.</li>
 <li>Use el argumento <code>colnames</code> de la función <code>datatable()</code> para especificar los encabezados de las columnas.</li>
 </ul>
 </section>
@@ -502,6 +502,7 @@ Este archivo CSV también proviene de una consulta al portal de datos de la Infr
 <section id="consideraciones-adicionales" class="level2">
 <h2 class="anchored" data-anchor-id="consideraciones-adicionales">Consideraciones adicionales</h2>
 <ol type="1">
+<li>La tarea debe presentarse como un tablero de control desarrollado en <a href="https://quarto.org/docs/dashboards/">Quarto Dashboards</a> y no como otro tipo de documento.</li>
 <li>Esta tarea puede presentarse individualmente o en parejas. En este último caso, solo un estudiante debe presentar la tarea en Mediación Virtual y debe indicar ahí el nombre del otro estudiante.</li>
 <li>Si solo se entrega la dirección del repositorio en GitHub, y no el sitio publicado o este no es consistente con el código fuente del repositorio, se rebajará el 25% del valor de la tarea. <strong>RECOMENDACIÓN: genere el sitio web desde el inicio y actualícelo continuamente. No lo deje para última hora.</strong></li>
 <li><strong>No se aceptarán tareas que se entreguen después de la fecha y hora límite</strong>.</li>
