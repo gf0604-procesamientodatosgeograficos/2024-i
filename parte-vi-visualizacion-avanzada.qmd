@@ -1,3 +1,4 @@
 # VI - Visualización avanzada {.unnumbered}
 
 [15 Tableros de control](15-tableros-control.qmd)  
+[16 shiny - desarrollo de aplicaciones web interactivas](16-shiny.qmd)  

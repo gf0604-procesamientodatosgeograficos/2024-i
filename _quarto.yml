@@ -36,6 +36,7 @@ book:
     - part: parte-vi-visualizacion-avanzada.qmd
       chapters: 
         - 15-tableros-control.qmd
+        - 16-shiny.qmd
     - part: parte-vii-evaluaciones.qmd
       chapters: 
         - examen-corto-01.qmd

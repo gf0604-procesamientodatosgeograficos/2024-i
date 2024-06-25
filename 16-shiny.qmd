@@ -1,0 +1,298 @@
+# shiny - desarrollo de aplicaciones web interactivas
+
+## Resumen
+Shiny es un paquete de R que facilita el desarrollo de aplicaciones web interactivas. Las aplicaciones shiny se componen de una interfaz de usuario y de un servidor. En la interfaz de usuario, este puede realizar operaciones como filtros, búsquedas y ordenamientos de datos, entre otras. El servidor se encarga de procesar los datos de acuerdo con los parámetros especificados y de retornar los resultados a la interfaz de usuario.
+
+Además de los bloques de código en R para la interfaz de usuario y el servidor, shiny proporciona bloques para compartir código y datos. También para personalizar la interfaz de usuario.
+
+Las funciones reactivas de shiny se ejecutan cada vez que el usuario cambia los controles de la interfaz, lo que permite a las aplicaciones shiny responder dinámicamente a las entradas del usuario.
+
+## Trabajo previo
+
+### Lecturas
+Quarto - Dashboards with Shiny for R. (s.f.). Quarto. Recuperado el 1 de marzo de 2024, de [https://quarto.org/docs/dashboards/interactivity/shiny-r.html](https://quarto.org/docs/dashboards/interactivity/shiny-r.html)
+
+### Instalación y carga de paquetes
+
+```{r}
+#| label: instalacion-paquetes
+#| eval: false
+#| warning: false
+#| message: false
+
+
+# Instalación de shiny
+install.packages("shiny")
+
+# Instalación de rsconnect
+install.packages("rsconnect")
+```
+
+```{r}
+#| label: carga-paquetes
+#| warning: false
+#| message: false
+
+
+# Carga de paquetes
+library(shiny)
+library(rsconnect)
+```
+
+
+## Introducción
+En una aplicación interactiva, el usuario puede configurar las salidas, usualmente mediante una interfaz que le permite realizar operaciones como filtros, búsquedas y ordenamientos, entre otras. [Shiny](https://shiny.posit.co/) es un paquete de R que facilita el desarrollo de este tipo de aplicaciones.
+
+Las aplicaciones shiny requieren un [servidor](https://www.rstudio.com/products/shiny/shiny-server/), el cual es un proceso que puede alojarse en cualquier computador habilitado para ejecutar código en R (o Python) como, por ejemplo, la estación de trabajo del programador (esta opción se usa principalmente para efectos de desarrollo y pruebas), un servidor ubicado en la red de una organización o un servidor en la nube (ej. [shinyapps.io](https://www.shinyapps.io/), [Posit Connect](https://posit.co/products/enterprise/connect/), [Posit Cloud](https://posit.co/products/cloud/cloud/)).
+
+Para ejemplos de aplicaciones shiny, puede visitar la siguiente [galería](https://shiny.rstudio.com/gallery/).
+
+## Arquitectura
+Una aplicación shiny tiene dos componentes principales:
+
+1. **Interfaz de usuario**: despliega controles de entrada y salida (*widgets*), los cuales eventualente convierte a [Lenguaje de Marcado de Hipertexto (HTML)](https://es.wikipedia.org/wiki/HTML).
+    - [**Widgets de entrada**](https://shiny.rstudio.com/gallery/widget-gallery.html): campos de texto, listas de selección, botones de radio, etc.
+    - **Widgets de salida**: tablas, gráficos, mapas, etc. Muchos de estos controles están incluídos en los paquetes que generan los diferentes tipos de salidas (ej. DT, plotly, leaflet).
+    
+2. **Servidor**: es un proceso que recibe las entradas y realiza el procesamiento necesario para generar las salidas y retornar los resultados a la interfaz de usuario.
+
+Para más información sobre la arquitectura de aplicaciones shiny, se recomienda leer [The Anatomy of a Shiny Application](https://www.r-bloggers.com/2021/04/the-anatomy-of-a-shiny-application/).
+
+## Ejemplo de aplicación básica
+El siguiente documento Quarto contiene una aplicación shiny con un tablero de control interactivo para el conjunto de datos [diamonds](https://ggplot2.tidyverse.org/reference/diamonds.html). Esta aplicación se incluye como ejemplo en [https://quarto.org/docs/dashboards/interactivity/shiny-r.html](https://quarto.org/docs/dashboards/interactivity/shiny-r.html). Puede acceder al ejecutable en [https://mfvargas.shinyapps.io/2024-i-tablero-interactivo-diamantes/](https://mfvargas.shinyapps.io/2024-i-tablero-interactivo-diamantes/).
+
+```` md
+---
+title: "Diamonds Explorer"
+author: "Barkamian Analytics"
+format: dashboard
+server: shiny
+---
+
+```{r}`r ''`
+#| context: setup
+library(ggplot2)
+dataset <- diamonds
+```
+
+# {.sidebar}
+
+```{r}`r ''`
+sliderInput('sampleSize', 'Sample Size', 
+            min=1, max=nrow(dataset),
+            value=min(1000, nrow(dataset)), 
+            step=500, round=0)
+br()
+checkboxInput('jitter', 'Jitter')
+checkboxInput('smooth', 'Smooth')
+```
+
+```{r}`r ''`
+selectInput('x', 'X', names(dataset)) 
+selectInput('y', 'Y', names(dataset), names(dataset)[[2]])
+selectInput('color', 'Color', c('None', names(dataset)))
+```
+
+```{r}`r ''`
+selectInput('facet_row', 'Facet Row',
+  c(None='.', names(diamonds[sapply(diamonds, is.factor)])))
+selectInput('facet_col', 'Facet Column',
+  c(None='.', names(diamonds[sapply(diamonds, is.factor)])))
+```
+
+# Plot
+
+```{r}`r ''`
+plotOutput('plot')
+```
+
+# Data
+
+```{r}`r ''`
+tableOutput('data')
+```
+
+```{r}`r ''`
+#| context: server
+
+dataset <- reactive({
+  diamonds[sample(nrow(diamonds), input$sampleSize),]
+})
+ 
+output$plot <- renderPlot({
+  
+  p <- ggplot(
+    dataset(), 
+    aes_string(x=input$x, y=input$y)) + geom_point()
+  
+  if (input$color != 'None')
+    p <- p + aes_string(color=input$color)
+  
+  facets <- paste(input$facet_row, '~', input$facet_col)
+  if (facets != '. ~ .')
+    p <- p + facet_grid(facets)
+  
+  if (input$jitter)
+    p <- p + geom_jitter()
+  if (input$smooth)
+    p <- p + geom_smooth()
+  
+  p
+  
+})
+
+output$data <- renderTable({
+  dataset()
+})
+```
+````
+
+Es de vital importancia comprender que el último bloque de código (con la opción `#| context: server`) se ejecuta en una sesión separada de R. Esto implica que no es posible, en principio, acceder desde ese bloque variables definidas en otros bloques, ni viceversa. Sin embargo, existen varias estrategias para compartir código, como las que se detallan en [Sharing Code](https://quarto.org/docs/interactive/shiny/execution.html#sharing-code) y que se detallan en secciones siguientes de este documento.
+
+Una forma en la que la interfaz de usuario y el servidor pueden comunicarse, es a través de las listas `input` y `output`. 
+
+- `input` contiene la lista de widgets de entrada (listas de selección, campos de entrada de texto, botones de radio, etc.). Cada uno de estos widgets tiene un `inputId` único. En el ejemplo, "sampleSize" es el inputId del widget tipo sliderInput. Se referencia como `input$sampleSize` en el bloque del servidor.
+- `output` es una lista de componentes que se crean o modifican en el servidor (tablas, gráficos, mapas, etc). y que luego se envían a la interfaz de usuario para su visualización. Para crear o modificar un elemento de `output`, se utiliza una función `render*`, y para mostrarlo en la interfaz de usuario, se utiliza una función `*Output`. En el ejemplo, `output$plot` es un gráfico que se crea con la función `renderPlot()` en función de los valores de los widgets de entrada.
+
+Nótese que hay diferencias importantes entre este documento y otros documentos Quarto:
+
+1. La opción `server: shiny`: en la sección YAML, la cual le indica a Quarto que debe iniciar un servidor Shiny.
+
+2. La opción `context: server`: en el último bloque de código, la cual indica que ese bloque debe ejecutarse en el servidor.
+
+Existen otros posibles valores de `context` para los bloques de código en aplicaciones shiny, los cuales permiten compartir código y datos.
+
+## Bloques para compartir código y datos
+Como puede apreciarse en el ejemplo anterior, las aplicaciones shiny pueden contener bloques de código que se ejecutan en tiempo de despliegue (*rendering*) de la interfaz de usuario y también bloques que se ejecutan en el servidor en respuesta a las acciones del usuario y a los cambios en los valores de entrada. Estos tipos de bloques se identifican respectivamente mediante las opciones `context: render` (valor por defecto de `context`) y `context: server`.
+
+Existen también otros tipos de bloques, los cuales permiten compartir código y datos.
+
+### `context: setup`
+El código de este tipo de bloques se ejecuta tanto en el contexto de la interfaz de usuario como del servidor. Puede usarse para operaciones que se ejecutan al inicio de una aplicación, como la carga de paquetes.
+
+```` md
+```{r}`r ''`
+#| label: inicio
+#| context: setup
+#| message: false
+
+# Carga de paquetes
+library(tidyverse)
+library(DT)
+library(sf)
+```
+````
+
+### `context: data`
+Se utiliza para cargar datos que deben compartirse entre todos los bloques de código. Por ejemplo:
+
+```` md
+```{r}`r ''`
+#| label: lectura-datos
+#| context: data
+
+# Lectura de archivo CSV
+felidos <-
+  st_read(
+    dsn = "felidos.csv",
+    options = c(
+      "X_POSSIBLE_NAMES=decimalLongitude",
+      "Y_POSSIBLE_NAMES=decimalLatitude"
+    ),
+    quiet = TRUE
+  )
+```
+````
+
+## Configuración de la interfaz de usuario
+
+### Barras laterales
+Las [barras laterales o *sidebars*](https://quarto.org/docs/dashboards/inputs.html#sidebars) se utilizan generalmente para colocar widgets de entrada. Para incluir una barra lateral, se agrega la clase `.sidebar` a un encabezado de nivel 2. Por ejemplo:
+
+```` md
+# {.sidebar}
+
+```{r}`r ''`
+sliderInput('sampleSize', 'Sample Size', 
+            min=1, max=nrow(dataset),
+            value=min(1000, nrow(dataset)), 
+            step=500, round=0)
+br()
+checkboxInput('jitter', 'Jitter')
+checkboxInput('smooth', 'Smooth')
+```
+
+```{r}`r ''`
+selectInput('x', 'X', names(dataset)) 
+selectInput('y', 'Y', names(dataset), names(dataset)[[2]])
+selectInput('color', 'Color', c('None', names(dataset)))
+```
+
+```{r}`r ''`
+selectInput('facet_row', 'Facet Row',
+  c(None='.', names(diamonds[sapply(diamonds, is.factor)])))
+selectInput('facet_col', 'Facet Column',
+  c(None='.', names(diamonds[sapply(diamonds, is.factor)])))
+```
+```` 
+
+Puede consultar sobre más recursos para configurar el tablero en [https://quarto.org/docs/dashboards/inputs.html](https://quarto.org/docs/dashboards/inputs.html).
+
+## Funciones reactivas
+Son funciones especiales que se ejecutan cada vez que cambia uno de los datos que utiliza como entrada, como un widget de la interfaz de usuario. En el siguiente bloque de código se define una función reactiva que utiliza el valor especificado por el usuario en una lista de selección para filtrar un conjunto de datos.
+
+```` md
+```{r}`r ''`
+# Función reactiva para filtrar los registros de presencia de félidos
+# de acuerdo con el valor de una lista de selección
+filtrar_felidos <- reactive({
+  # Valor inicial del objeto que va a retornarse
+  felidos_filtrados <- felidos
+  
+  if (input$especie != "Todas") {
+    felidos_filtrados <-
+      felidos_filtrados |>
+      filter(species == input$especie)
+  }
+
+  return(felidos_filtrados)
+})  
+```
+````
+
+Las funciones reactivas permiten a las aplicaciones shiny responder dinámicamente a las entradas del usuario. 
+
+## Ejercicios
+1. Ejecute en su computadora el código del tablero de control sobre diamantes mostrado anteriormente.
+    a. Cree un proyecto en RStudio.
+    b. Cree un documento Quarto. 
+    c. Copie en el nuevo documento el código de la aplicación.
+    d. Ejecute el documento con el botón `Run Document`.
+    
+2. Publique el tablero de control en shinyapps.io (puede consultar [Quarto - Running Documents](https://quarto.org/docs/interactive/shiny/running.html) y [How to Deploy R Shiny App for Free on Shinyapps.io](https://www.youtube.com/watch?v=2QstfyGX4ZU)).
+    a. Cree una cuenta en [shinyapps.io](https://www.shinyapps.io/).
+    b. Obtenga su *token* de autenticación de shinyapps.io en **Accounts - Tokens - Show- Show secret - Copy to clipboard**.
+    c. Ejecute la aplicación en su computadora y publíquela en shinyapps.io con el botón **Publish**. Elija la opción shinyapps.io e ingrese el *token* cuando se le solicite. Debe seleccionar todos los archivos requeridos para que su aplicación funciones (archivos .qmd, archivos .html, archivos de datos, etc).
+
+3. Ejecute en su computadora y luego publique en shinyapps.io la aplicación [Iris K-Means Clustering](https://quarto.org/docs/interactive/shiny/#custom-layout).
+
+4. Estudie el resto de los ejemplos en [Quarto - Shiny - Examples](https://quarto.org/docs/interactive/shiny/#examples).
+
+5. Cree una aplicación shiny para el conjunto de datos de [registros de presencia de félidos de Costa Rica](https://github.com/gf0604-procesamientodatosgeograficos/2024-i/blob/main/datos/gbif/felidos.csv), y publíquela en [shinyapps.io](https://www.shinyapps.io/), con los siguientes componentes:
+    a. Una lista de selección de especies.
+    b. Una tabla DT que muestre los registros de la especie seleccionada en la lista.
+    c. Un gráfico ggplot2-plotly de barras que muestre la cantidad de registros por mes de la especie seleccionada en la lista.
+    d. Un mapa leaflet que muestre la ubicación de los registros de la especie seleccionada en la lista.
+    
+Puede encontrar una solución parcial en [https://github.com/gf0604-procesamientodatosgeograficos/2024-i-tablero-interactivo-felidos](https://github.com/gf0604-procesamientodatosgeograficos/2024-i-tablero-interactivo-felidos).
+
+## Recursos de interés
+Quarto - Running Documents. (s. f.). Recuperado 20 de noviembre de 2022, de [https://quarto.org/docs/interactive/shiny/running.html](https://quarto.org/docs/interactive/shiny/running.html)
+
+Shiny. (s. f.). Recuperado 20 de noviembre de 2022, de [https://shiny.rstudio.com/](https://shiny.rstudio.com/)
+
+Shiny - Gallery. (s. f.). Recuperado 20 de noviembre de 2022, de [https://shiny.rstudio.com/gallery/](https://shiny.rstudio.com/gallery/)
+
+The Anatomy of a Shiny Application | R-bloggers. (2021). Recuperado 21 de noviembre de 2022, de [https://www.r-bloggers.com/2021/04/the-anatomy-of-a-shiny-application/](https://www.r-bloggers.com/2021/04/the-anatomy-of-a-shiny-application/)
+
+1littlecoder. (2020). How to Deploy R Shiny App for Free on Shinyapps.io. [https://www.youtube.com/watch?v=2QstfyGX4ZU](https://www.youtube.com/watch?v=2QstfyGX4ZU)
