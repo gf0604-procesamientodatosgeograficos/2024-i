@@ -469,7 +469,7 @@
     "href": "parte-vii-evaluaciones.html",
     "title": "Evaluaciones",
     "section": "",
-    "text": "Exámenes cortos\nExamen corto 1\nExamen corto 2\nExamen corto 3- grupo 001 Examen corto 3- grupo 002\nExamen corto 4",
+    "text": "Exámenes cortos\nExamen corto 1\nExamen corto 2\nExamen corto 3- grupo 001 Examen corto 3- grupo 002\nExamen corto 4\nExamen corto 5",
     "crumbs": [
       "Evaluaciones"
     ]
@@ -2084,6 +2084,39 @@
     "crumbs": [
       "VI - Visualización avanzada",
       "<span class='chapter-number'>16</span>  <span class='chapter-title'>shiny - desarrollo de aplicaciones web interactivas</span>"
+    ]
+  },
+  {
+    "objectID": "examen-corto-05.html",
+    "href": "examen-corto-05.html",
+    "title": "Examen corto 5",
+    "section": "",
+    "text": "Fecha",
+    "crumbs": [
+      "Evaluaciones",
+      "Examen corto 5"
+    ]
+  },
+  {
+    "objectID": "examen-corto-05.html#fecha",
+    "href": "examen-corto-05.html#fecha",
+    "title": "Examen corto 5",
+    "section": "",
+    "text": "Grupo 001: jueves 4 de julio de 2024\nGrupo 002: miércoles 3 de julio de 2024",
+    "crumbs": [
+      "Evaluaciones",
+      "Examen corto 5"
+    ]
+  },
+  {
+    "objectID": "examen-corto-05.html#temas-a-evaluar",
+    "href": "examen-corto-05.html#temas-a-evaluar",
+    "title": "Examen corto 5",
+    "section": "Temas a evaluar",
+    "text": "Temas a evaluar\n15 Tableros de control\n16 shiny - desarrollo de aplicaciones web interactivas",
+    "crumbs": [
+      "Evaluaciones",
+      "Examen corto 5"
     ]
   }
 ]

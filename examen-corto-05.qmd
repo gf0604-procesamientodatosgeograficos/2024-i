@@ -1,0 +1,9 @@
+# Examen corto 5 {.unnumbered}
+
+## Fecha {.unnumbered}
+- **Grupo 001**: jueves 4 de julio de 2024
+- **Grupo 002**: miércoles 3 de julio de 2024
+
+## Temas a evaluar {.unnumbered}
+[15 Tableros de control](https://gf0604-procesamientodatosgeograficos.github.io/2024-i/15-tableros-control.html)  
+[16 shiny - desarrollo de aplicaciones web interactivas](https://gf0604-procesamientodatosgeograficos.github.io/2024-i/16-shiny.html)  
