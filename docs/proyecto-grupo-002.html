@@ -409,7 +409,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="descripción-general" class="level2">
 <h2 class="anchored" data-anchor-id="descripción-general">Descripción general</h2>
-<p>Este proyecto consiste en desarrollar un tablero de control interactivo con el lenguaje de programación R, el paquete shiny y el sistema de publicación técnica y científica Quarto. El tablero incluirá un conjunto de controles (<em>widgets</em>) de entrada que le permitirán al usuario especificar filtros en datos de anfibios de la familia <em>Bufonidae</em> de Costa Rica, para generar visualizaciones como tablas, gráficos estadísticos y mapas, de acuerdo con los criterios especificados en los filtros. La aplicación se publicará en shinyapps.io.</p>
+<p>Este proyecto consiste en desarrollar un tablero de control interactivo con el lenguaje de programación R, el paquete shiny y el sistema de publicación técnica y científica Quarto. El tablero incluirá un conjunto de controles (<em>widgets</em>) de entrada que le permitirán al usuario especificar filtros en registros de presencia de anfibios de la familia <a href="https://es.wikipedia.org/wiki/Bufonidae"><em>Bufonidae</em></a> de Costa Rica, para así generar visualizaciones como tablas, gráficos estadísticos y mapas, de acuerdo con los criterios especificados en los filtros. La aplicación se publicará en <a href="https://www.shinyapps.io/">https://www.shinyapps.io/</a>.</p>
 </section>
 <section id="objetivos" class="level2">
 <h2 class="anchored" data-anchor-id="objetivos">Objetivos</h2>
@@ -428,19 +428,15 @@ ul.task-list li input[type="checkbox"] {
 <ol type="1">
 <li><p><a href="https://github.com/gf0604-procesamientodatosgeograficos/2024-i/blob/main/datos/sinac/areas-conservacion.gpkg">Áreas de conservación de Costa Rica</a><br>
 Este archivo GPKG proviene de un geoservicio de tipo Web Feature Service (WFS) publicado por el Sistema Nacional de Áreas de Conservación (Sinac) (<code>https://geos1pne.sirefor.go.cr/wfs?</code>). Las geometrías se simplificaron para reducir el tamaño del archivo.</p></li>
-<li><p><a href="https://github.com/gf0604-procesamientodatosgeograficos/2024-i/blob/main/datos/gbif/registros-anfibios.csv">Registros de presencia de anfibios de Costa Rica</a>.<br>
+<li><p><a href="https://github.com/gf0604-procesamientodatosgeograficos/2024-i/blob/main/datos/gbif/registros-bufonidae.csv">Registros de presencia de <em>Bufonidae</em> de Costa Rica</a>.<br>
 Este archivo CSV proviene de una consulta al portal de datos de la Infraestructura Mundial de Información en Biodiversidad (GBIF) (<code>https://doi.org/10.15468/dl.4tqr9u</code>). Contiene una fila por cada registro de presencia y atributos como el nombre de la especie (<code>species</code>) y las coordenadas geográficas del registro (<code>decimalLongitude</code>, <code>decimalLatitude</code>), entre otros. Se suprimieron las filas con identificaciones en niveles superiores a especie.</p></li>
-</ol>
-<p><strong>IMPORTANTE: debe filtrar este conjunto de datos y trabajar solo con los registros de presencia de la familia (<code>family</code>) <a href="https://es.wikipedia.org/wiki/Bufonidae"><em>Bufonidae</em></a></strong></p>
-<ol start="3" type="1">
 <li><p><a href="https://github.com/gf0604-procesamientodatosgeograficos/2024-i/blob/main/datos/gbif/especies-anfibios.csv">Especies de anfibios de Costa Rica</a>.<br>
-Este archivo CSV también proviene de una consulta al portal de datos de la Infraestructura Mundial de Información en Biodiversidad (GBIF) (<code>https://doi.org/10.15468/dl.xwmakq</code>). Contiene una fila por cada especie. Se suprimieron las filas con taxones en niveles superiores a especie y se conservaron solo dos columnas de datos:</p>
+Este archivo CSV también proviene de una consulta al portal de datos de la Infraestructura Mundial de Información en Biodiversidad (GBIF) (<code>https://doi.org/10.15468/dl.xwmakq</code>). Contiene una fila por cada especie de anfibios (incluyendo las de la familia <em>Bufonidae</em>). Se suprimieron las filas con taxones en niveles superiores a especie y se conservaron solo dos columnas de datos:</p>
 <ul>
 <li><code>species</code>: nombre de la especie.</li>
 <li><code>iucnRedListCategory</code>: categoría de la especie en la Lista Roja de la UICN.</li>
 </ul></li>
 </ol>
-<p><strong>IMPORTANTE: debe filtrar este conjunto de datos y trabajar solo con las especies de la familia (<code>family</code>) <a href="https://es.wikipedia.org/wiki/Bufonidae"><em>Bufonidae</em></a></strong></p>
 <p>La <a href="https://www.iucnredlist.org/">Lista Roja de Especies Amenazadas de la Unión Internacional para la Conservación de la Naturaleza (UICN)</a> es un inventario del estado de conservación de especies de animales y plantas a nivel mundial. La Lista Roja asigna a las especies una de las siguientes categorías:</p>
 <ul>
 <li>EX (Extinta)</li>
@@ -458,14 +454,14 @@ Este archivo CSV también proviene de una consulta al portal de datos de la Infr
 <h2 class="anchored" data-anchor-id="entregables">Entregables</h2>
 <p>Debe entregar dos direcciones web:</p>
 <ol type="1">
-<li>Dirección de un repositorio en GitHub (ej. https://github.com/mfvargas/tablero-anfibios-costarica) con el código fuente y los datos. Específicamente, el repositorio debe contener:
+<li>Dirección de un repositorio en GitHub (ej. https://github.com/mfvargas/tablero-bufonidae-costarica) con el código fuente y los datos. Específicamente, el repositorio debe contener:
 <ol type="a">
-<li>Un documento Quarto llamado <code>index.qmd</code> con el código en R y la sintaxis Markdown necesarios para generar un tablero de control con las salidas especificadas en la sección Desarrollo.</li>
+<li>Un documento Quarto llamado <code>index.qmd</code> con el código en R y la sintaxis Markdown necesarios para generar un tablero de control con los controles de entrada y las salidas especificadas en la sección Desarrollo.</li>
 <li>Un documento llamado <code>index.html</code> generado a partir de <code>index.qmd</code>.</li>
 <li>Los tres archivos de datos.</li>
 <li>El directorio <code>index_files</code>.</li>
 </ol></li>
-<li>Dirección de la aplicación publicada en shinyapps.io (ej. https://mfvargas.shinyapps.io/tablero-anfibios-costarica/).</li>
+<li>Dirección de la aplicación publicada en shinyapps.io (ej. https://mfvargas.shinyapps.io/tablero-bufonidae-costarica/).</li>
 </ol>
 <p>La entrega debe realizarse a través de la plataforma Mediación Virtual.</p>
 </section>
@@ -473,23 +469,23 @@ Este archivo CSV también proviene de una consulta al portal de datos de la Infr
 <h2 class="anchored" data-anchor-id="desarrollo">Desarrollo</h2>
 <p>El tablero de control debe contener:</p>
 <ul>
-<li>Un conjunto de controles (<em>widgets</em>) de entrada para especificar filtros de datos.</li>
+<li>Un conjunto de controles de entrada para especificar filtros de datos.</li>
 <li>Un conjunto de salidas en formato de tablas, gráficos estadísticos y mapas.</li>
 </ul>
 <section id="controles-de-entrada" class="level3">
 <h3 class="anchored" data-anchor-id="controles-de-entrada">Controles de entrada</h3>
-<p>Los <em>widgets</em> de entrada deben colocarse en una barra lateral. Debe incluir los siguientes <em>widgets</em> en el tablero de control:</p>
+<p>Deben incluirse los siguientes controles de entrada y colocarse en una barra lateral.</p>
 <section id="lista-de-selección-selectinput-de-especies" class="level4">
 <h4 class="anchored" data-anchor-id="lista-de-selección-selectinput-de-especies">Lista de selección (<a href="https://shiny.posit.co/r/reference/shiny/latest/selectinput">selectInput()</a>) de especies</h4>
-<p>Permite especificar un filtro por una especie: las tablas, gráficos y mapas de salida mostrarán la información correspondiente a los registros de presencia de esa especie.</p>
+<p>Permite especificar un filtro por una especie: las tablas, gráficos y mapas de salida mostrarán la información correspondiente a los registros de presencia de la especie seleccionada. Incluya en la lista una opción con valor “Todas” para considerar todas las especies y especifíquela como selección inicial.</p>
 </section>
 <section id="lista-de-selección-selectinput-de-categorías-de-la-lista-roja-de-la-uicn" class="level4">
 <h4 class="anchored" data-anchor-id="lista-de-selección-selectinput-de-categorías-de-la-lista-roja-de-la-uicn">Lista de selección (<a href="https://shiny.posit.co/r/reference/shiny/latest/selectinput">selectInput()</a>) de categorías de la Lista Roja de la UICN</h4>
-<p>Permite especificar un filtro por una categoría: las tablas, gráficos y mapas de salida mostrarán la información correspondiente a los registros de presencia de esa especie.</p>
+<p>Permite especificar un filtro por una categoría de la Lista Roja: las tablas, gráficos y mapas de salida mostrarán la información correspondiente a los registros de presencia de especies de la categoría seleccionada. Incluya en la lista una opción con valor “Todas” para considerar todas las categorías y especifíquela como selección inicial.</p>
 </section>
 <section id="lista-de-selección-selectinput-de-áreas-de-conservación" class="level4">
 <h4 class="anchored" data-anchor-id="lista-de-selección-selectinput-de-áreas-de-conservación">Lista de selección (<a href="https://shiny.posit.co/r/reference/shiny/latest/selectinput">selectInput()</a>) de áreas de conservación</h4>
-<p>Permite especificar un filtro por una categoría: las tablas, gráficos y mapas de salida mostrarán la información correspondiente a los registros de presencia de esa área de conservación.</p>
+<p>Permite especificar un filtro por un área de conservación: las tablas, gráficos y mapas de salida mostrarán la información correspondiente a los registros de presencia ubicados en esa área de conservación. Incluya en la lista una opción con valor “Todas” para considerar todas las áreas de conservación y especifíquela como selección inicial.</p>
 </section>
 <section id="deslizador-de-rango-slider-range-sliderinput-para-selección-de-meses" class="level4">
 <h4 class="anchored" data-anchor-id="deslizador-de-rango-slider-range-sliderinput-para-selección-de-meses">Deslizador de rango (<em>slider range</em>, <a href="https://shiny.posit.co/r/reference/shiny/latest/sliderinput">sliderInput()</a>) para selección de meses</h4>
@@ -516,17 +512,13 @@ Este archivo CSV también proviene de una consulta al portal de datos de la Infr
 <ul>
 <li>Dos capas base de tipo <em>tiles</em> (teselas) (ej. OSM, Stamen, ESRI).</li>
 <li>Una capa de polígonos de áreas de conservación. Al hacer clic sobre un polígono, la ventana emergente debe mostrar el nombre del área de conservación.</li>
-<li>Una capa de puntos de registros de presencia. Al hacer clic sobre un punto, la ventana emergente debe mostrar la especie, la categoría en Lista Roja y el área de conservación en la que se ubica el registro.</li>
+<li>Una capa de puntos de registros de presencia. Al hacer clic sobre un punto, la ventana emergente debe mostrar la especie, la categoría en Lista Roja de la especie, el área de conservación en la que se ubica el registro y la fecha del registro.</li>
 <li>Un control de capas.</li>
 </ul>
 </section>
 <section id="gráfico-de-barras-de-cantidad-de-registros-de-presencia-en-áreas-de-conservación" class="level4">
 <h4 class="anchored" data-anchor-id="gráfico-de-barras-de-cantidad-de-registros-de-presencia-en-áreas-de-conservación">Gráfico de barras de cantidad de registros de presencia en áreas de conservación</h4>
-<p>Este gráfico muestra los mismos datos que la tabla. Debe contener una barra por cada área de conservación y su longitud debe mostrar la cantidad de registros de presencia en esa área.</p>
-<ul>
-<li>Las barras deben estar ordenadas por longitud (de mayor a menor o de menor a mayor).</li>
-<li>Al colocar el ratón sobre una barra, la ventana emergente debe mostrar el nombre de la región socioeconómica y la cantidad de registros de presencia.</li>
-</ul>
+<p>Este gráfico debe contener una barra por cada área de conservación y su longitud debe mostrar la cantidad de registros de presencia en esa área. Las barras deben estar ordenadas por longitud (de mayor a menor o de menor a mayor.</p>
 <p>El gráfico deben programarse con ggplot2 y convertirse a plotly con la función <code>ggplotly()</code>. Debe tener:</p>
 <ul>
 <li>Título (puede asignarlo directamente en el gráfico o en la opción #| title del bloque de código).</li>

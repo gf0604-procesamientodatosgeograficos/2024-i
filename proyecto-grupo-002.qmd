@@ -4,7 +4,7 @@
 **Martes 9 de julio de 2024, 12:00 p.m. (mediodía)**
 
 ## Descripción general
-Este proyecto consiste en desarrollar un tablero de control interactivo con el lenguaje de programación R, el paquete shiny y el sistema de publicación técnica y científica Quarto. El tablero incluirá un conjunto de controles (*widgets*) de entrada que le permitirán al usuario especificar filtros en datos de anfibios de la familia *Bufonidae* de Costa Rica, para generar visualizaciones como tablas, gráficos estadísticos y mapas, de acuerdo con los criterios especificados en los filtros. La aplicación se publicará en shinyapps.io.
+Este proyecto consiste en desarrollar un tablero de control interactivo con el lenguaje de programación R, el paquete shiny y el sistema de publicación técnica y científica Quarto. El tablero incluirá un conjunto de controles (*widgets*) de entrada que le permitirán al usuario especificar filtros en registros de presencia de anfibios de la familia [*Bufonidae*](https://es.wikipedia.org/wiki/Bufonidae) de Costa Rica, para así generar visualizaciones como tablas, gráficos estadísticos y mapas, de acuerdo con los criterios especificados en los filtros. La aplicación se publicará en [https://www.shinyapps.io/](https://www.shinyapps.io/).
 
 ## Objetivos
 Cada estudiante debe mostrar que es capaz de:
@@ -21,19 +21,15 @@ Para realizar esta tarea, debe utilizar datos de tres archivos (puede descargarl
 1. [Áreas de conservación de Costa Rica](https://github.com/gf0604-procesamientodatosgeograficos/2024-i/blob/main/datos/sinac/areas-conservacion.gpkg)  
 Este archivo GPKG proviene de un geoservicio de tipo Web Feature Service (WFS) publicado por el Sistema Nacional de Áreas de Conservación (Sinac) (`https://geos1pne.sirefor.go.cr/wfs?`). Las geometrías se simplificaron para reducir el tamaño del archivo.
 
-2. [Registros de presencia de anfibios de Costa Rica](https://github.com/gf0604-procesamientodatosgeograficos/2024-i/blob/main/datos/gbif/registros-anfibios.csv).  
+2. [Registros de presencia de *Bufonidae* de Costa Rica](https://github.com/gf0604-procesamientodatosgeograficos/2024-i/blob/main/datos/gbif/registros-bufonidae.csv).  
 Este archivo CSV proviene de una consulta al portal de datos de la Infraestructura Mundial de Información en Biodiversidad (GBIF)  (`https://doi.org/10.15468/dl.4tqr9u`). Contiene una fila por cada registro de presencia y atributos como el nombre de la especie (`species`) y las coordenadas geográficas del registro (`decimalLongitude`, `decimalLatitude`), entre otros. Se suprimieron las filas con identificaciones en niveles superiores a especie.
 
-**IMPORTANTE: debe filtrar este conjunto de datos y trabajar solo con los registros de presencia de la familia (`family`) [_Bufonidae_](https://es.wikipedia.org/wiki/Bufonidae)**
-
 3. [Especies de anfibios de Costa Rica](https://github.com/gf0604-procesamientodatosgeograficos/2024-i/blob/main/datos/gbif/especies-anfibios.csv).  
-Este archivo CSV también proviene de una consulta al portal de datos de la Infraestructura Mundial de Información en Biodiversidad (GBIF) (`https://doi.org/10.15468/dl.xwmakq`). Contiene una fila por cada especie. Se suprimieron las filas con taxones en niveles superiores a especie y se conservaron solo dos columnas de datos:
+Este archivo CSV también proviene de una consulta al portal de datos de la Infraestructura Mundial de Información en Biodiversidad (GBIF) (`https://doi.org/10.15468/dl.xwmakq`). Contiene una fila por cada especie de anfibios (incluyendo las de la familia *Bufonidae*). Se suprimieron las filas con taxones en niveles superiores a especie y se conservaron solo dos columnas de datos:
 
     - `species`: nombre de la especie.
     - `iucnRedListCategory`: categoría de la especie en la Lista Roja de la UICN.
     
-**IMPORTANTE: debe filtrar este conjunto de datos y trabajar solo con las especies de la familia (`family`) [_Bufonidae_](https://es.wikipedia.org/wiki/Bufonidae)**
-
 La [Lista Roja de Especies Amenazadas de la Unión Internacional para la Conservación de la Naturaleza (UICN)](https://www.iucnredlist.org/) es un inventario del estado de conservación de especies de animales y plantas a nivel mundial. La Lista Roja asigna a las especies una de las siguientes categorías:
 
 - EX (Extinta)
@@ -49,33 +45,33 @@ La [Lista Roja de Especies Amenazadas de la Unión Internacional para la Conserv
 ## Entregables
 Debe entregar dos direcciones web:
 
-1.  Dirección de un repositorio en GitHub (ej. https://github.com/mfvargas/tablero-anfibios-costarica) con el código fuente y los datos. Específicamente, el repositorio debe contener:
-    a. Un documento Quarto llamado `index.qmd` con el código en R y la sintaxis Markdown necesarios para generar un tablero de control con las salidas especificadas en la sección Desarrollo.
+1.  Dirección de un repositorio en GitHub (ej. https://github.com/mfvargas/tablero-bufonidae-costarica) con el código fuente y los datos. Específicamente, el repositorio debe contener:
+    a. Un documento Quarto llamado `index.qmd` con el código en R y la sintaxis Markdown necesarios para generar un tablero de control con los controles de entrada y las salidas especificadas en la sección Desarrollo.
     b. Un documento llamado `index.html` generado a partir de `index.qmd`.
     c. Los tres archivos de datos.
     d. El directorio `index_files`.    
     
-2. Dirección de la aplicación publicada en shinyapps.io (ej. https://mfvargas.shinyapps.io/tablero-anfibios-costarica/).
+2. Dirección de la aplicación publicada en shinyapps.io (ej. https://mfvargas.shinyapps.io/tablero-bufonidae-costarica/).
 
 La entrega debe realizarse a través de la plataforma Mediación Virtual.
 
 ## Desarrollo
 El tablero de control debe contener:
 
-- Un conjunto de controles (*widgets*) de entrada para especificar filtros de datos.
+- Un conjunto de controles de entrada para especificar filtros de datos.
 - Un conjunto de salidas en formato de tablas, gráficos estadísticos y mapas.
 
 ### Controles de entrada
-Los *widgets* de entrada deben colocarse en una barra lateral. Debe incluir los siguientes *widgets* en el tablero de control:
+Deben incluirse los siguientes controles de entrada y colocarse en una barra lateral.
 
 #### Lista de selección ([selectInput()](https://shiny.posit.co/r/reference/shiny/latest/selectinput)) de especies 
-Permite especificar un filtro por una especie: las tablas, gráficos y mapas de salida mostrarán la información correspondiente a los registros de presencia de esa especie.
+Permite especificar un filtro por una especie: las tablas, gráficos y mapas de salida mostrarán la información correspondiente a los registros de presencia de la especie seleccionada. Incluya en la lista una opción con valor "Todas" para considerar todas las especies y especifíquela como selección inicial.
 
 #### Lista de selección ([selectInput()](https://shiny.posit.co/r/reference/shiny/latest/selectinput)) de categorías de la Lista Roja de la UICN 
-Permite especificar un filtro por una categoría: las tablas, gráficos y mapas de salida mostrarán la información correspondiente a los registros de presencia de esa especie.
+Permite especificar un filtro por una categoría de la Lista Roja: las tablas, gráficos y mapas de salida mostrarán la información correspondiente a los registros de presencia de especies de la categoría seleccionada. Incluya en la lista una opción con valor "Todas" para considerar todas las categorías y especifíquela como selección inicial.
 
 #### Lista de selección ([selectInput()](https://shiny.posit.co/r/reference/shiny/latest/selectinput)) de áreas de conservación 
-Permite especificar un filtro por una categoría: las tablas, gráficos y mapas de salida mostrarán la información correspondiente a los registros de presencia de esa área de conservación.
+Permite especificar un filtro por un área de conservación: las tablas, gráficos y mapas de salida mostrarán la información correspondiente a los registros de presencia ubicados en esa área de conservación. Incluya en la lista una opción con valor "Todas" para considerar todas las áreas de conservación y especifíquela como selección inicial.
 
 #### Deslizador de rango (*slider range*, [sliderInput()](https://shiny.posit.co/r/reference/shiny/latest/sliderinput)) para selección de meses 
 Permite especificar un filtro por un rango de meses (ej. 1 - 12, 3 - 6): las tablas, gráficos y mapas de salida mostrarán la información correspondiente a los registros de presencia observados entre esos meses.
@@ -99,14 +95,11 @@ Mapa leaflet interactivo con las siguientes capas y controles:
 
 - Dos capas base de tipo *tiles* (teselas) (ej. OSM, Stamen, ESRI).
 - Una capa de polígonos de áreas de conservación. Al hacer clic sobre un polígono, la ventana emergente debe mostrar el nombre del área de conservación.
-- Una capa de puntos de registros de presencia. Al hacer clic sobre un punto, la ventana emergente debe mostrar la especie, la categoría en Lista Roja y el área de conservación en la que se ubica el registro.
+- Una capa de puntos de registros de presencia. Al hacer clic sobre un punto, la ventana emergente debe mostrar la especie, la categoría en Lista Roja de la especie, el área de conservación en la que se ubica el registro y la fecha del registro.
 - Un control de capas.
 
 #### Gráfico de barras de cantidad de registros de presencia en áreas de conservación
-Este gráfico muestra los mismos datos que la tabla. Debe contener una barra por cada área de conservación y su longitud debe mostrar la cantidad de registros de presencia en esa área.
-
-- Las barras deben estar ordenadas por longitud (de mayor a menor o de menor a mayor).
-- Al colocar el ratón sobre una barra, la ventana emergente debe mostrar el nombre de la región socioeconómica y la cantidad de registros de presencia.
+Este gráfico debe contener una barra por cada área de conservación y su longitud debe mostrar la cantidad de registros de presencia en esa área. Las barras deben estar ordenadas por longitud (de mayor a menor o de menor a mayor.
 
 El gráfico deben programarse con ggplot2 y convertirse a plotly con la función `ggplotly()`. Debe tener:
 
