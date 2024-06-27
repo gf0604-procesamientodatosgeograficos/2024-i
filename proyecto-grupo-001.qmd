@@ -1,7 +1,7 @@
 # Proyecto final - Grupo 001 {.unnumbered}
 
 ## Fecha y hora límite de entrega
-**Miércoles 10 de julio de 2024, 12:00 p.m. (mediodía)**
+**Martes 9 de julio de 2024, 12:00 p.m. (mediodía)**
 
 ## Descripción general
 Este proyecto consiste en desarrollar un tablero de control interactivo con el lenguaje de programación R, el paquete shiny y el sistema de publicación técnica y científica Quarto. El tablero incluirá un conjunto de controles (*widgets*) de entrada que le permitirán al usuario especificar filtros en registros de presencia de reptiles de la familia [*Iguanidae*](https://es.wikipedia.org/wiki/Iguanidae) de Costa Rica, para así generar visualizaciones como tablas, gráficos estadísticos y mapas, de acuerdo con los criterios especificados en los filtros. La aplicación se publicará en [https://www.shinyapps.io/](https://www.shinyapps.io/).
