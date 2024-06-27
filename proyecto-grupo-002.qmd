@@ -111,7 +111,7 @@ El gráfico deben programarse con ggplot2 y convertirse a plotly con la función
 - Presentación general del tablero de control (organización, distribución de los componentes): 20%
 - Lista de selección de especies: 5%
 - Lista de selección de categorías de la Lista Roja: 10%
-- Lista de selección áreas de conservación: 10%
+- Lista de selección de áreas de conservación: 10%
 - Deslizador de rango para selección de meses: 10%
 - Mapa: 15%
 - Tabla: 15%
