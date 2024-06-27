@@ -2124,7 +2124,7 @@
     "href": "parte-vii-evaluaciones.html#proyecto-final",
     "title": "Evaluaciones",
     "section": "Proyecto final",
-    "text": "Proyecto final\nProyecto - Grupo 002",
+    "text": "Proyecto final\nProyecto - Grupo 001\nProyecto - Grupo 002",
     "crumbs": [
       "Evaluaciones"
     ]
@@ -2215,6 +2215,94 @@
     "crumbs": [
       "Evaluaciones",
       "Proyecto final - Grupo 002"
+    ]
+  },
+  {
+    "objectID": "proyecto-grupo-001.html",
+    "href": "proyecto-grupo-001.html",
+    "title": "Proyecto final - Grupo 001",
+    "section": "",
+    "text": "Fecha y hora límite de entrega\nMiércoles 10 de julio de 2024, 12:00 p.m. (mediodía)",
+    "crumbs": [
+      "Evaluaciones",
+      "Proyecto final - Grupo 001"
+    ]
+  },
+  {
+    "objectID": "proyecto-grupo-001.html#descripción-general",
+    "href": "proyecto-grupo-001.html#descripción-general",
+    "title": "Proyecto final - Grupo 001",
+    "section": "Descripción general",
+    "text": "Descripción general\nEste proyecto consiste en desarrollar un tablero de control interactivo con el lenguaje de programación R, el paquete shiny y el sistema de publicación técnica y científica Quarto. El tablero incluirá un conjunto de controles (widgets) de entrada que le permitirán al usuario especificar filtros en registros de presencia de reptiles de la familia Iguanidae de Costa Rica, para así generar visualizaciones como tablas, gráficos estadísticos y mapas, de acuerdo con los criterios especificados en los filtros. La aplicación se publicará en https://www.shinyapps.io/.",
+    "crumbs": [
+      "Evaluaciones",
+      "Proyecto final - Grupo 001"
+    ]
+  },
+  {
+    "objectID": "proyecto-grupo-001.html#objetivos",
+    "href": "proyecto-grupo-001.html#objetivos",
+    "title": "Proyecto final - Grupo 001",
+    "section": "Objetivos",
+    "text": "Objetivos\nCada estudiante debe mostrar que es capaz de:\n\nEscribir código fuente en el lenguaje de programación R y utilizar funciones de los paquetes DT, tidyverse, plotly, sf, leaflet y otros para leer datos (espaciales y no espaciales), procesarlos y generar visualizaciones en forma de tablas, gráficos estadísticos y mapas.\nDesarrollar tableros de control con Quarto Dashboards que presenten las visualizaciones de datos en una forma organizada y atractiva para el usuario final.\nDesarrollar aplicaciones web interactivas con el paquete shiny de R.\nPublicar aplicaciones shiny en la plataforma shinyapps.io.\nAnalizar y corregir errores de programación.",
+    "crumbs": [
+      "Evaluaciones",
+      "Proyecto final - Grupo 001"
+    ]
+  },
+  {
+    "objectID": "proyecto-grupo-001.html#conjuntos-de-datos",
+    "href": "proyecto-grupo-001.html#conjuntos-de-datos",
+    "title": "Proyecto final - Grupo 001",
+    "section": "Conjuntos de datos",
+    "text": "Conjuntos de datos\nPara realizar esta tarea, debe utilizar datos de tres archivos (puede descargarlos en los enlaces):\n\nRegiones socioeconómicas de Costa Rica\nEste conjunto de datos está contenido en el Atlas Digital de Costa Rica 2014 y fue facilitado por el Ministerio de Planificación (Mideplán). Los nombres de las regiones se actualizaron a la versión más reciente. Las geometrías se simplificaron para reducir el tamaño del archivo.\nRegistros de presencia de Iguanidae de Costa Rica.\nEste archivo CSV proviene de una consulta al portal de datos de la Infraestructura Mundial de Información en Biodiversidad (GBIF) (https://doi.org/10.15468/dl.7526ez). Contiene una fila por cada registro de presencia y atributos como el nombre de la especie (species) y las coordenadas geográficas del registro (decimalLongitude, decimalLatitude), entre otros. Se suprimieron las filas con identificaciones en niveles superiores a especie.\nEspecies de reptiles de Costa Rica.\nEste archivo CSV también proviene de una consulta al portal de datos de la Infraestructura Mundial de Información en Biodiversidad (GBIF) (https://doi.org/10.15468/dl.845zca). Contiene una fila por cada especie (incluyendo las de la familia Iguanidae). Se suprimieron las filas con taxones en niveles superiores a especie y se conservaron solo dos columnas de datos:\n\nspecies: nombre de la especie.\niucnRedListCategory: categoría de la especie en la Lista Roja de la UICN.\n\n\nLa Lista Roja de Especies Amenazadas de la Unión Internacional para la Conservación de la Naturaleza (UICN) es un inventario del estado de conservación de especies de animales y plantas a nivel mundial. La Lista Roja asigna a las especies una de las siguientes categorías:\n\nEX (Extinta)\nEW (Extinta en estado silvestre)\nCR (En peligro crítico de extinción)\nEN (En peligro de extinción)\nVU (Vulnerable)\nNT (Casi amenazada)\nLC (Preocupación menor)\nDD (Datos insuficientes)\nNE (No evaluada)",
+    "crumbs": [
+      "Evaluaciones",
+      "Proyecto final - Grupo 001"
+    ]
+  },
+  {
+    "objectID": "proyecto-grupo-001.html#entregables",
+    "href": "proyecto-grupo-001.html#entregables",
+    "title": "Proyecto final - Grupo 001",
+    "section": "Entregables",
+    "text": "Entregables\nDebe entregar dos direcciones web:\n\nDirección de un repositorio en GitHub (ej. https://github.com/mfvargas/tablero-bufonidae-costarica) con el código fuente y los datos. Específicamente, el repositorio debe contener:\n\nUn documento Quarto llamado index.qmd con el código en R y la sintaxis Markdown necesarios para generar un tablero de control con los controles de entrada y las salidas especificadas en la sección Desarrollo.\nUn documento llamado index.html generado a partir de index.qmd.\nLos tres archivos de datos.\nEl directorio index_files.\n\nDirección de la aplicación publicada en shinyapps.io (ej. https://mfvargas.shinyapps.io/tablero-bufonidae-costarica/).\n\nLa entrega debe realizarse a través de la plataforma Mediación Virtual.",
+    "crumbs": [
+      "Evaluaciones",
+      "Proyecto final - Grupo 001"
+    ]
+  },
+  {
+    "objectID": "proyecto-grupo-001.html#desarrollo",
+    "href": "proyecto-grupo-001.html#desarrollo",
+    "title": "Proyecto final - Grupo 001",
+    "section": "Desarrollo",
+    "text": "Desarrollo\nEl tablero de control debe contener:\n\nUn conjunto de controles de entrada para especificar filtros de datos.\nUn conjunto de salidas en formato de tablas, gráficos estadísticos y mapas.\n\n\nControles de entrada\nDeben incluirse los siguientes controles de entrada y colocarse en una barra lateral.\n\nLista de selección (selectInput()) de especies\nPermite especificar un filtro por una especie: las tablas, gráficos y mapas de salida mostrarán la información correspondiente a los registros de presencia de la especie seleccionada. Incluya en la lista una opción con valor “Todas” para considerar todas las especies y especifíquela como selección inicial.\n\n\nLista de selección (selectInput()) de categorías de la Lista Roja de la UICN\nPermite especificar un filtro por una categoría de la Lista Roja: las tablas, gráficos y mapas de salida mostrarán la información correspondiente a los registros de presencia de especies de la categoría seleccionada. Incluya en la lista una opción con valor “Todas” para considerar todas las categorías y especifíquela como selección inicial.\n\n\nLista de selección (selectInput()) de regiones socioeconómicas\nPermite especificar un filtro por una región socioeconómica: las tablas, gráficos y mapas de salida mostrarán la información correspondiente a los registros de presencia ubicados en esa región. Incluya en la lista una opción con valor “Todas” para considerar todas las regiones y especifíquela como selección inicial.\n\n\nDeslizador de rango (slider range, sliderInput()) para selección de años\nPermite especificar un filtro por un rango de años (ej. 1990 - 1995, 2000 - 2010): las tablas, gráficos y mapas de salida mostrarán la información correspondiente a los registros de presencia observados entre esos años. Revise los datos para determinar cuales son el año mínimo y el año máximo que pueden ser seleccionados.\nPuede ver ejemplos de programación con widgets en https://shiny.posit.co/r/gallery/widgets/widget-gallery/.\n\n\n\nSalidas\n\nTabla de registros de presencia\nTabla DT con las siguientes columnas:\n\nEspecie\nCategoría en la Lista Roja\nRegión socioeconómica\nFecha (columna eventDate)\n\nLos encabezados de la tabla deben estar en español y ser significativos. Sugerencia: use el argumento colnames de la función datatable() para especificar los encabezados de las columnas.\n\n\nMapa de registros de presencia y regiones socioeconómicas\nMapa leaflet interactivo con las siguientes capas y controles:\n\nDos capas base de tipo tiles (teselas) (ej. OSM, Stamen, ESRI).\nUna capa de polígonos de regiones socioeconómicas. Al hacer clic sobre un polígono, la ventana emergente debe mostrar el nombre de la región socioeconómica.\nUna capa de puntos de registros de presencia. Al hacer clic sobre un punto, la ventana emergente debe mostrar la especie, la categoría en Lista Roja de la especie, la región socioeconómica en la que se ubica el registro y la fecha del registro.\nUn control de capas.\n\n\n\nGráfico de barras de cantidad de registros de presencia en regiones socioeconómicas\nEste gráfico debe contener una barra por cada región socioeconómica y su longitud debe mostrar la cantidad de registros de presencia en esa región Las barras deben estar ordenadas por longitud (de mayor a menor o de menor a mayor.\nEl gráfico deben programarse con ggplot2 y convertirse a plotly con la función ggplotly(). Debe tener:\n\nTítulo (puede asignarlo directamente en el gráfico o en la opción #| title del bloque de código).\nEtiquetas en los ejes x e y.",
+    "crumbs": [
+      "Evaluaciones",
+      "Proyecto final - Grupo 001"
+    ]
+  },
+  {
+    "objectID": "proyecto-grupo-001.html#calificación",
+    "href": "proyecto-grupo-001.html#calificación",
+    "title": "Proyecto final - Grupo 001",
+    "section": "Calificación",
+    "text": "Calificación\n\nPresentación general del tablero de control (organización, distribución de los componentes): 20%\nLista de selección de especies: 5%\nLista de selección de categorías de la Lista Roja: 10%\nLista de selección de regiones socioeconómicas: 10%\nDeslizador de rango para selección de años: 10%\nMapa: 15%\nTabla: 15%\nGráfico: 15%",
+    "crumbs": [
+      "Evaluaciones",
+      "Proyecto final - Grupo 001"
+    ]
+  },
+  {
+    "objectID": "proyecto-grupo-001.html#consideraciones-adicionales",
+    "href": "proyecto-grupo-001.html#consideraciones-adicionales",
+    "title": "Proyecto final - Grupo 001",
+    "section": "Consideraciones adicionales",
+    "text": "Consideraciones adicionales\n\nLa tarea debe presentarse como un tablero de control desarrollado en Quarto Dashboards y en shiny (https://shiny.posit.co/). No como otro tipo de documento.\nEsta tarea puede presentarse individualmente o en parejas. En este último caso, solo un estudiante debe presentar la tarea en Mediación Virtual y debe indicar ahí el nombre del otro estudiante.\nSi solo se entrega la dirección del repositorio en GitHub, y no la aplicación publicada en shinyapps.io, o esta no es consistente con el código fuente del repositorio, se rebajará el 25% del valor de la tarea. RECOMENDACIÓN: genere la aplicación desde el inicio y actualícela continuamente. No la deje para última hora.\nNo se aceptarán tareas que se entreguen después de la fecha y hora límite.",
+    "crumbs": [
+      "Evaluaciones",
+      "Proyecto final - Grupo 001"
     ]
   }
 ]

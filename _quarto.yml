@@ -49,6 +49,7 @@ book:
         - tarea-04-grupo-001.qmd
         - tarea-04-grupo-002.qmd
         - examen-corto-05.qmd
+        - proyecto-grupo-001.qmd
         - proyecto-grupo-002.qmd
 
 bibliography: referencias.bib

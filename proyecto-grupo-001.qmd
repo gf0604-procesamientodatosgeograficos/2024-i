@@ -1,0 +1,124 @@
+# Proyecto final - Grupo 001 {.unnumbered}
+
+## Fecha y hora límite de entrega
+**Miércoles 10 de julio de 2024, 12:00 p.m. (mediodía)**
+
+## Descripción general
+Este proyecto consiste en desarrollar un tablero de control interactivo con el lenguaje de programación R, el paquete shiny y el sistema de publicación técnica y científica Quarto. El tablero incluirá un conjunto de controles (*widgets*) de entrada que le permitirán al usuario especificar filtros en registros de presencia de reptiles de la familia [*Iguanidae*](https://es.wikipedia.org/wiki/Iguanidae) de Costa Rica, para así generar visualizaciones como tablas, gráficos estadísticos y mapas, de acuerdo con los criterios especificados en los filtros. La aplicación se publicará en [https://www.shinyapps.io/](https://www.shinyapps.io/).
+
+## Objetivos
+Cada estudiante debe mostrar que es capaz de:
+
+1. Escribir código fuente en el lenguaje de programación R y utilizar funciones de los paquetes DT, tidyverse, plotly, sf, leaflet y otros para leer datos (espaciales y no espaciales), procesarlos y generar visualizaciones en forma de tablas, gráficos estadísticos y mapas.
+2. Desarrollar tableros de control con Quarto Dashboards que presenten las visualizaciones de datos en una forma organizada y atractiva para el usuario final.
+3. Desarrollar aplicaciones web interactivas con el paquete shiny de R.
+4. Publicar aplicaciones shiny en la plataforma shinyapps.io.
+5. Analizar y corregir errores de programación.
+
+## Conjuntos de datos
+Para realizar esta tarea, debe utilizar datos de tres archivos (puede descargarlos en los enlaces):
+
+1. [Regiones socioeconómicas de Costa Rica](https://github.com/gf0604-procesamientodatosgeograficos/2024-i/blob/main/datos/mideplan/regiones-socioeconomicas.gpkg)  
+Este conjunto de datos está contenido en el [Atlas Digital de Costa Rica 2014](https://repositoriotec.tec.ac.cr/handle/2238/6749?show=full) y fue facilitado por el Ministerio de Planificación (Mideplán). Los nombres de las regiones se actualizaron a la [versión más reciente](https://documentos.mideplan.go.cr/share/s/eZ8HYuxgTl6xCHx3ZAEBrg). Las geometrías se simplificaron para reducir el tamaño del archivo.
+
+2. [Registros de presencia de *Iguanidae* de Costa Rica](https://github.com/gf0604-procesamientodatosgeograficos/2024-i/blob/main/datos/gbif/registros-iguanidae.csv).  
+Este archivo CSV proviene de una consulta al portal de datos de la Infraestructura Mundial de Información en Biodiversidad (GBIF)  (`https://doi.org/10.15468/dl.7526ez`). Contiene una fila por cada registro de presencia y atributos como el nombre de la especie (`species`) y las coordenadas geográficas del registro (`decimalLongitude`, `decimalLatitude`), entre otros. Se suprimieron las filas con identificaciones en niveles superiores a especie.
+
+3. [Especies de reptiles de Costa Rica](https://github.com/gf0604-procesamientodatosgeograficos/2024-i/blob/main/datos/gbif/especies-reptiles.csv).  
+Este archivo CSV también proviene de una consulta al portal de datos de la Infraestructura Mundial de Información en Biodiversidad (GBIF) (`https://doi.org/10.15468/dl.845zca`). Contiene una fila por cada especie (incluyendo las de la familia *Iguanidae*). Se suprimieron las filas con taxones en niveles superiores a especie y se conservaron solo dos columnas de datos:
+
+    - `species`: nombre de la especie.
+    - `iucnRedListCategory`: categoría de la especie en la Lista Roja de la UICN.
+    
+La [Lista Roja de Especies Amenazadas de la Unión Internacional para la Conservación de la Naturaleza (UICN)](https://www.iucnredlist.org/) es un inventario del estado de conservación de especies de animales y plantas a nivel mundial. La Lista Roja asigna a las especies una de las siguientes categorías:
+
+- EX (Extinta)
+- EW (Extinta en estado silvestre)
+- CR (En peligro crítico de extinción)
+- EN (En peligro de extinción)
+- VU (Vulnerable)
+- NT (Casi amenazada)
+- LC (Preocupación menor)
+- DD (Datos insuficientes)
+- NE (No evaluada)
+
+## Entregables
+Debe entregar dos direcciones web:
+
+1.  Dirección de un repositorio en GitHub (ej. https://github.com/mfvargas/tablero-bufonidae-costarica) con el código fuente y los datos. Específicamente, el repositorio debe contener:
+    a. Un documento Quarto llamado `index.qmd` con el código en R y la sintaxis Markdown necesarios para generar un tablero de control con los controles de entrada y las salidas especificadas en la sección Desarrollo.
+    b. Un documento llamado `index.html` generado a partir de `index.qmd`.
+    c. Los tres archivos de datos.
+    d. El directorio `index_files`.    
+    
+2. Dirección de la aplicación publicada en shinyapps.io (ej. https://mfvargas.shinyapps.io/tablero-bufonidae-costarica/).
+
+La entrega debe realizarse a través de la plataforma Mediación Virtual.
+
+## Desarrollo
+El tablero de control debe contener:
+
+- Un conjunto de controles de entrada para especificar filtros de datos.
+- Un conjunto de salidas en formato de tablas, gráficos estadísticos y mapas.
+
+### Controles de entrada
+Deben incluirse los siguientes controles de entrada y colocarse en una barra lateral.
+
+#### Lista de selección ([selectInput()](https://shiny.posit.co/r/reference/shiny/latest/selectinput)) de especies 
+Permite especificar un filtro por una especie: las tablas, gráficos y mapas de salida mostrarán la información correspondiente a los registros de presencia de la especie seleccionada. Incluya en la lista una opción con valor "Todas" para considerar todas las especies y especifíquela como selección inicial.
+
+#### Lista de selección ([selectInput()](https://shiny.posit.co/r/reference/shiny/latest/selectinput)) de categorías de la Lista Roja de la UICN 
+Permite especificar un filtro por una categoría de la Lista Roja: las tablas, gráficos y mapas de salida mostrarán la información correspondiente a los registros de presencia de especies de la categoría seleccionada. Incluya en la lista una opción con valor "Todas" para considerar todas las categorías y especifíquela como selección inicial.
+
+#### Lista de selección ([selectInput()](https://shiny.posit.co/r/reference/shiny/latest/selectinput)) de regiones socioeconómicas 
+Permite especificar un filtro por una región socioeconómica: las tablas, gráficos y mapas de salida mostrarán la información correspondiente a los registros de presencia ubicados en esa región. Incluya en la lista una opción con valor "Todas" para considerar todas las regiones y especifíquela como selección inicial.
+
+#### Deslizador de rango (*slider range*, [sliderInput()](https://shiny.posit.co/r/reference/shiny/latest/sliderinput)) para selección de años 
+Permite especificar un filtro por un rango de años (ej. 1990 - 1995, 2000 - 2010): las tablas, gráficos y mapas de salida mostrarán la información correspondiente a los registros de presencia observados entre esos años. Revise los datos para determinar cuales son el año mínimo y el año máximo que pueden ser seleccionados.
+
+Puede ver ejemplos de programación con *widgets* en [https://shiny.posit.co/r/gallery/widgets/widget-gallery/](https://shiny.posit.co/r/gallery/widgets/widget-gallery/).
+
+### Salidas
+
+#### Tabla de registros de presencia
+Tabla DT con las siguientes columnas:
+
+- Especie
+- Categoría en la Lista Roja
+- Región socioeconómica
+- Fecha (columna `eventDate`)
+
+Los encabezados de la tabla deben estar en español y ser significativos. Sugerencia: use el argumento `colnames` de la función `datatable()` para especificar los encabezados de las columnas.
+
+#### Mapa de registros de presencia y regiones socioeconómicas
+Mapa leaflet interactivo con las siguientes capas y controles:
+
+- Dos capas base de tipo *tiles* (teselas) (ej. OSM, Stamen, ESRI).
+- Una capa de polígonos de regiones socioeconómicas. Al hacer clic sobre un polígono, la ventana emergente debe mostrar el nombre de la región socioeconómica.
+- Una capa de puntos de registros de presencia. Al hacer clic sobre un punto, la ventana emergente debe mostrar la especie, la categoría en Lista Roja de la especie, la región socioeconómica en la que se ubica el registro y la fecha del registro.
+- Un control de capas.
+
+#### Gráfico de barras de cantidad de registros de presencia en regiones socioeconómicas
+Este gráfico debe contener una barra por cada región socioeconómica y su longitud debe mostrar la cantidad de registros de presencia en esa región Las barras deben estar ordenadas por longitud (de mayor a menor o de menor a mayor.
+
+El gráfico deben programarse con ggplot2 y convertirse a plotly con la función `ggplotly()`. Debe tener:
+
+- Título (puede asignarlo directamente en el gráfico o en la opción #| title del bloque de código).
+- Etiquetas en los ejes x e y.
+
+
+## Calificación
+- Presentación general del tablero de control (organización, distribución de los componentes): 20%
+- Lista de selección de especies: 5%
+- Lista de selección de categorías de la Lista Roja: 10%
+- Lista de selección de regiones socioeconómicas: 10%
+- Deslizador de rango para selección de años: 10%
+- Mapa: 15%
+- Tabla: 15%
+- Gráfico: 15%
+
+## Consideraciones adicionales
+1. La tarea debe presentarse como un tablero de control desarrollado en [Quarto Dashboards](https://quarto.org/docs/dashboards/) y en shiny (https://shiny.posit.co/).  No como otro tipo de documento.
+2. Esta tarea puede presentarse individualmente o en parejas. En este último caso, solo un estudiante debe presentar la tarea en Mediación Virtual y debe indicar ahí el nombre del otro estudiante.
+3. Si solo se entrega la dirección del repositorio en GitHub, y no la aplicación publicada en shinyapps.io, o esta no es consistente con el código fuente del repositorio, se rebajará el 25% del valor de la tarea. **RECOMENDACIÓN: genere la aplicación desde el inicio y actualícela continuamente. No la deje para última hora.**
+3. **No se aceptarán tareas que se entreguen después de la fecha y hora límite**.

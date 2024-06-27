@@ -15,4 +15,5 @@
 [Tarea 4 - Grupo 002](tarea-04-grupo-002.qmd)  
 
 ## Proyecto final {.unnumbered}
+[Proyecto - Grupo 001](proyecto-grupo-001.qmd)  
 [Proyecto - Grupo 002](proyecto-grupo-002.qmd)  
