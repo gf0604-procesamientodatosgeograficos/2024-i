@@ -1,0 +1,29 @@
+# Tarea 4 - Grupo 002 - Pregunta adicional opcional {.unnumbered}
+
+## Fecha y hora límite de entrega
+**Lunes 8 de julio de 2024 12:00 p.m. (mediodía)**
+
+
+## Descripción
+Esta es una pregunta **adicional** y **opcional** a la tarea 4. Todos los estudiantes que entregaron la tarea 4, ya sea de forma individual o en parejas, pueden entregar esta pregunta también. Si se contesta correctamente, sumará un 25% a la nota obtenida.
+
+La pregunta consiste en desarrollar un tablero de control en Quarto Dashboards con un único componente: un mapa de riqueza de especies amenazadas (categorías CR, EN y VU de la Lista Roja) del orden [*Anura*](https://es.wikipedia.org/wiki/Anura) (sapos y ranas) en áreas de conservación de Costa Rica. Como se ha explicado en clase y en la tarea 4, la riqueza de especies es la cantidad de especies presentes en cada área de conservación. Debe desarrollar un mapa interactivo del paquete Leaflet con las siguientes capas y controles (entre paréntesis se muestra el valor de cada componente):
+
+- (5%) Dos capas base de tipo *tiles* (teselas) (ej. OSM, Carto, ESRI).
+- (80%) Una capa de áreas de conservación (polígonos) coloreada de acuerdo con la riqueza de especies amenazadas (categorías CR, EN y VU) de *Anura* en cada área. 
+- (5%) Ventana emergente que se despliegue al hacer clic sobre un polígono y que muestre el nombre del área y su riqueza de especies.
+- (5%) Una leyenda que muestre el significado de los colores usados en la capa de áreas de conservación.
+- (5%) Un control de capas.
+
+## Datos a utilizar
+1. [Áreas de conservación de Costa Rica](https://github.com/gf0604-procesamientodatosgeograficos/2024-i/blob/main/datos/sinac/areas-conservacion.gpkg)  
+
+2. [Registros de presencia de anfibios de Costa Rica](https://github.com/gf0604-procesamientodatosgeograficos/2024-i/blob/main/datos/gbif/registros-anfibios.csv).  
+
+3. [Especies de anfibios de Costa Rica](https://github.com/gf0604-procesamientodatosgeograficos/2024-i/blob/main/datos/gbif/especies-anfibios.csv).  
+
+## Entregables
+Debe entregar la dirección del repositorio con el código fuente y los datos (puede omitir el archivo CSV de registros de presencia) y la dirección del sitio publicado en GitHub Pages. **Para que el trabajo sea aceptado, debe proporcionar ambos enlaces**. Deben ser enlaces separados de los que entregó en la tarea 4. **NO DEBE MODIFICAR LO QUE ENTREGÓ EN LA TAREA 4**.
+
+Envíe ambos enlaces a la dirección de correo del profesor: `manuel.vargas_d@ucr.ac.cr` antes de la fecha y hora límite.
+
