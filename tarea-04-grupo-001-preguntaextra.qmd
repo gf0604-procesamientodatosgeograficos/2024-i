@@ -1,0 +1,29 @@
+# Tarea 4 - Grupo 001 - Pregunta adicional opcional {.unnumbered}
+
+## Fecha y hora límite de entrega
+**Lunes 8 de julio de 2024 12:00 p.m. (mediodía)**
+
+
+## Descripción
+Esta es una pregunta **adicional** y **opcional** a la tarea 4. Todos los estudiantes que entregaron la tarea 4, ya sea de forma individual o en parejas, pueden entregar esta pregunta también. Si se contesta correctamente, sumará un 25% a la nota obtenida.
+
+La pregunta consiste en desarrollar un tablero de control en Quarto Dashboards con un único componente: un mapa de riqueza de especies de preocupación menor (categoría LC en la Lista Roja) de la clase [*Squamata*](https://es.wikipedia.org/wiki/Squamata) (lagartos y serpientes) en regiones socioeconómicas de Costa Rica. Como se ha explicado en clase y en la tarea 4, la riqueza de especies es la cantidad de especies presentes en cada región socioeconómica. Debe desarrollar un mapa interactivo del paquete Leaflet con las siguientes capas y controles (entre paréntesis se muestra el valor de cada componente):
+
+- (5%) Dos capas base de tipo *tiles* (teselas) (ej. OSM, Carto, ESRI).
+- (80%) Una capa de regiones socioeconómicas (polígonos) coloreada de acuerdo con la riqueza de especies de preocupación menor (categoría LC) de *Squamata* en cada región. 
+- (5%) Ventana emergente que se despliegue al hacer clic sobre un polígono y que muestre el nombre de la región y su riqueza de especies.
+- (5%) Una leyenda que muestre el significado de los colores usados en la capa de regiones socioeconómicas.
+- (5%) Un control de capas.
+
+## Datos a utilizar
+1. [Regiones socioeconómicas de Costa Rica](https://github.com/gf0604-procesamientodatosgeograficos/2024-i/blob/main/datos/mideplan/regiones-socioeconomicas.gpkg)  
+
+2. [Registros de presencia de reptiles de Costa Rica](https://github.com/gf0604-procesamientodatosgeograficos/2024-i/blob/main/datos/gbif/registros-reptiles.csv)  
+
+3. [Especies de reptiles de Costa Rica](https://github.com/gf0604-procesamientodatosgeograficos/2024-i/blob/main/datos/gbif/especies-reptiles.csv)
+
+## Entregables
+Debe entregar la dirección del repositorio con el código fuente y los datos (puede omitir el archivo CSV de registros de presencia) y la dirección del sitio publicado en GitHub Pages. **Para que el trabajo sea aceptado, debe proporcionar ambos enlaces**. Deben ser enlaces separados de los que entregó en la tarea 4. **NO DEBE MODIFICAR LO QUE ENTREGÓ EN LA TAREA 4**.
+
+Envíe ambos enlaces a la dirección de correo del profesor: `manuel.vargas_d@ucr.ac.cr` antes de la fecha y hora límite.
+

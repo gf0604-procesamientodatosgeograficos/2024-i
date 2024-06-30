@@ -13,6 +13,7 @@
 [Tarea 3 - Grupo 002](tarea-03-grupo-002.qmd)  
 [Tarea 4 - Grupo 001](tarea-04-grupo-001.qmd)  
 [Tarea 4 - Grupo 002](tarea-04-grupo-002.qmd)  
+[Tarea 4 - Grupo 001 - Pregunta adicional opcional](tarea-04-grupo-001-preguntaextra.qmd)  
 [Tarea 4 - Grupo 002 - Pregunta adicional opcional](tarea-04-grupo-002-preguntaextra.qmd)  
 
 ## Proyecto final {.unnumbered}

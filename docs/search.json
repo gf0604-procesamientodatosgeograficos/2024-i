@@ -1148,7 +1148,7 @@
     "href": "parte-vii-evaluaciones.html#tareas",
     "title": "Evaluaciones",
     "section": "Tareas",
-    "text": "Tareas\nTarea 3 - Grupo 001\nTarea 3 - Grupo 002\nTarea 4 - Grupo 001\nTarea 4 - Grupo 002\nTarea 4 - Grupo 002 - Pregunta adicional opcional",
+    "text": "Tareas\nTarea 3 - Grupo 001\nTarea 3 - Grupo 002\nTarea 4 - Grupo 001\nTarea 4 - Grupo 002\nTarea 4 - Grupo 001 - Pregunta adicional opcional\nTarea 4 - Grupo 002 - Pregunta adicional opcional",
     "crumbs": [
       "Evaluaciones"
     ]
@@ -2347,6 +2347,50 @@
     "crumbs": [
       "Evaluaciones",
       "Tarea 4 - Grupo 002 - Pregunta adicional opcional"
+    ]
+  },
+  {
+    "objectID": "tarea-04-grupo-001-preguntaextra.html",
+    "href": "tarea-04-grupo-001-preguntaextra.html",
+    "title": "Tarea 4 - Grupo 001 - Pregunta adicional opcional",
+    "section": "",
+    "text": "Fecha y hora límite de entrega\nLunes 8 de julio de 2024 12:00 p.m. (mediodía)",
+    "crumbs": [
+      "Evaluaciones",
+      "Tarea 4 - Grupo 001 - Pregunta adicional opcional"
+    ]
+  },
+  {
+    "objectID": "tarea-04-grupo-001-preguntaextra.html#descripción",
+    "href": "tarea-04-grupo-001-preguntaextra.html#descripción",
+    "title": "Tarea 4 - Grupo 001 - Pregunta adicional opcional",
+    "section": "Descripción",
+    "text": "Descripción\nEsta es una pregunta adicional y opcional a la tarea 4. Todos los estudiantes que entregaron la tarea 4, ya sea de forma individual o en parejas, pueden entregar esta pregunta también. Si se contesta correctamente, sumará un 25% a la nota obtenida.\nLa pregunta consiste en desarrollar un tablero de control en Quarto Dashboards con un único componente: un mapa de riqueza de especies de preocupación menor (categoría LC en la Lista Roja) de la clase Squamata (lagartos y serpientes) en regiones socioeconómicas de Costa Rica. Como se ha explicado en clase y en la tarea 4, la riqueza de especies es la cantidad de especies presentes en cada región socioeconómica. Debe desarrollar un mapa interactivo del paquete Leaflet con las siguientes capas y controles (entre paréntesis se muestra el valor de cada componente):\n\n(5%) Dos capas base de tipo tiles (teselas) (ej. OSM, Carto, ESRI).\n(80%) Una capa de regiones socioeconómicas (polígonos) coloreada de acuerdo con la riqueza de especies de preocupación menor (categoría LC) de Squamata en cada región.\n(5%) Ventana emergente que se despliegue al hacer clic sobre un polígono y que muestre el nombre de la región y su riqueza de especies.\n(5%) Una leyenda que muestre el significado de los colores usados en la capa de regiones socioeconómicas.\n(5%) Un control de capas.",
+    "crumbs": [
+      "Evaluaciones",
+      "Tarea 4 - Grupo 001 - Pregunta adicional opcional"
+    ]
+  },
+  {
+    "objectID": "tarea-04-grupo-001-preguntaextra.html#datos-a-utilizar",
+    "href": "tarea-04-grupo-001-preguntaextra.html#datos-a-utilizar",
+    "title": "Tarea 4 - Grupo 001 - Pregunta adicional opcional",
+    "section": "Datos a utilizar",
+    "text": "Datos a utilizar\n\nRegiones socioeconómicas de Costa Rica\nRegistros de presencia de reptiles de Costa Rica\nEspecies de reptiles de Costa Rica",
+    "crumbs": [
+      "Evaluaciones",
+      "Tarea 4 - Grupo 001 - Pregunta adicional opcional"
+    ]
+  },
+  {
+    "objectID": "tarea-04-grupo-001-preguntaextra.html#entregables",
+    "href": "tarea-04-grupo-001-preguntaextra.html#entregables",
+    "title": "Tarea 4 - Grupo 001 - Pregunta adicional opcional",
+    "section": "Entregables",
+    "text": "Entregables\nDebe entregar la dirección del repositorio con el código fuente y los datos (puede omitir el archivo CSV de registros de presencia) y la dirección del sitio publicado en GitHub Pages. Para que el trabajo sea aceptado, debe proporcionar ambos enlaces. Deben ser enlaces separados de los que entregó en la tarea 4. NO DEBE MODIFICAR LO QUE ENTREGÓ EN LA TAREA 4.\nEnvíe ambos enlaces a la dirección de correo del profesor: manuel.vargas_d@ucr.ac.cr antes de la fecha y hora límite.",
+    "crumbs": [
+      "Evaluaciones",
+      "Tarea 4 - Grupo 001 - Pregunta adicional opcional"
     ]
   }
 ]
