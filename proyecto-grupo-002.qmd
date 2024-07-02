@@ -122,3 +122,5 @@ El gráfico deben programarse con ggplot2 y convertirse a plotly con la función
 2. Esta tarea puede presentarse individualmente o en parejas. En este último caso, solo un estudiante debe presentar la tarea en Mediación Virtual y debe indicar ahí el nombre del otro estudiante.
 3. Si solo se entrega la dirección del repositorio en GitHub, y no la aplicación publicada en shinyapps.io, o esta no es consistente con el código fuente del repositorio, se rebajará el 25% del valor de la tarea. **RECOMENDACIÓN: genere la aplicación desde el inicio y actualícela continuamente. No la deje para última hora.**
 3. **No se aceptarán tareas que se entreguen después de la fecha y hora límite**.
+
+**Puede encontrar un ejemplo orientador de un tablero de control similar al que tiene que desarrollar en [https://github.com/gf0604-procesamientodatosgeograficos/2024-i-tablero-interactivo-ejemplo](https://github.com/gf0604-procesamientodatosgeograficos/2024-i-tablero-interactivo-ejemplo).**
